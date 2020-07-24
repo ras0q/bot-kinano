@@ -4,15 +4,8 @@ module.exports = robot => {
         res.reply("huga");
     });
 };
-robot.respond(/もちもち$/i, reply => {
-    let https = require('https');
-    const URL = 'https://gentle-beach-41247.herokuapp.com/fukuokadam';
-    https.get(URL, (res) => {
-        res.on('data', (d) => {
-            console.log(d);
-            reply.reply((new TextDecoder).decode(d));
+module.exports = yanne => {
+    robot.respond(/やんね！$/i, res => {
+        res.reply("やんね！");
     });
-    }).on('error', (e) => {
-    reply.reply(e);
-});
-});
+};
