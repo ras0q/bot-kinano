@@ -3,16 +3,12 @@ module.exports = robot => {
     robot.respond(/hoge$/i, res => {
         res.reply("huga");
     });
-};
 
-module.exports = yanne => {
-    yanne.respond(/やんね！$/i, res => {
+    robot.respond(/やんね！$/i, res => {
         res.reply("やんね！");
     });
-};
 
-module.exports = mochi => {
-    mochi.respond(/もちもち$/i, res => {
+    robot.respond(/もちもち$/i, res => {
         res.reply("きなこもち～～～～～！");
     });
 };
