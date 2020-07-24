@@ -4,8 +4,15 @@ module.exports = robot => {
         res.reply("huga");
     });
 };
+
 module.exports = yanne => {
-    robot.respond(/やんね！$/i, res => {
+    yanne.respond(/やんね！$/i, res => {
         res.reply("やんね！");
+    });
+};
+
+module.exports = mochi => {
+    mochi.respond(/もちもち$/i, res => {
+        res.reply("きなこもち～～～～～！");
     });
 };
