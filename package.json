@@ -1,0 +1,14 @@
+{
+  "name": "Rasbot",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Ras",
+  "description": "This is Ras's bot.",
+  "dependencies": {
+    "hubot": "^3.3.2",
+    "hubot-traq": "^1.5.4"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
