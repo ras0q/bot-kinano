@@ -12,7 +12,7 @@ module.exports = robot => {
         res.reply("きなこもち～～～～～！");
     });
     robot.respond(/きなこもち$/i, res => {
-        res.reply(":kinako.ex-large:");
+        res.send(":kinako.ex-large:");
     });
     robot.respond(/できること$/i, res => {
         res.reply(":null:");
