@@ -1,4 +1,7 @@
 module.exports = robot => {
+    robot.hear(/.+/, res => {
+        const { message } = res.message;
+        const { user, plainText } = message;
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
     robot.respond(/.*hoge.*$/i, res => {
         res.reply("huga");
