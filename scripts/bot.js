@@ -11,4 +11,7 @@ module.exports = robot => {
     robot.respond(/もちもち$/i, res => {
         res.reply("きなこもち～～～～～！");
     });
+    robot.respond(/できること$/i, res => {
+        res.reply(":null:");
+    });
 };
