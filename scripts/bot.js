@@ -24,7 +24,7 @@ module.exports = robot => {
 
 // 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
     robot.hear(/.*もふもふ.*$/i, res => {
-        res.send("もちもち～:blobenjoy:");
+        res.send("もふもふ～:blobenjoy:");
     });
 
     robot.hear(/.*もちもち.*$/i, res => {
