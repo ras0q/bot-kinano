@@ -22,7 +22,7 @@ module.exports = robot => {
         res.send("[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)");
     });
 
-
+    // 監視対象チャンネルで"もふもふ"を受け取ったら"もふもふ～"を返す
     robot.hear(/.*もふもふ.*$/i, res => {
         res.send("もふもふ～");
     });
