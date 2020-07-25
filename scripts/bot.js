@@ -1,6 +1,6 @@
-const README = require("./src/readme").README;
+import { README } from "../src/readme";
 
-module.exports = robot => {
+export default robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
     robot.respond(/.*hoge.*$/i, res => {
         res.reply("huga");
