@@ -39,6 +39,12 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
+    robot.hear(/.*count this.*$/i, res => {
+        res.send("|Channel|Messages count|
+        |-|-|
+        |!{"type":"channel","raw":"#gps/times/Ras","id":"f58c72a4-14f0-423c-9259-dbb4a90ca35f"}|300|");
+    });
+
     // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
     // robot.hear(/.*やんね.*$/i, res => {
     //     res.send(
