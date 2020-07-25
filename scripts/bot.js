@@ -20,17 +20,15 @@ module.exports = robot => {
 
 
     robot.hear(/.*もふもふ.*$/i, res => {
-        // const ID = res.message.message.channelId;
-        // if(ID == "f58c72a4-14f0-423c-9259-dbb4a90ca35f"||ID == "159b8151-3f51-4c2d-857c-032aa4cc78e5"){
-            res.send("もちもち～:blobenjoy:");
-        // }
+        res.send("もちもち～:blobenjoy:");
     });
 
-    robot.hear(/.*おやすみ.*$/i, res => {
-        const ID = res.message.message.channelId;
-        if(ID == "f58c72a4-14f0-423c-9259-dbb4a90ca35f"||ID == "159b8151-3f51-4c2d-857c-032aa4cc78e5"){
-            res.send("おやすみやんね～:zzz:");
-        }
+    robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
+        res.send("おやすみやんね～:zzz:");
+    });
+    
+    robot.hear(/.*(おは|ohagoza|ohasta).*$/i, res => {
+        res.send("おはようやんね～");
     });
 
     robot.respond(/できること$/i, res => {
