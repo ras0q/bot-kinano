@@ -22,33 +22,34 @@ module.exports = robot => {
         res.send("[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)");
     });
 
-    // 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
-    robot.hear(messages, res => {
-        if(messages == /.*(らす|Ras).*$/i){
-            res.send("えへへ");
-        }
-        else if(messages == /.*(おは|ohagoza|ohasta).*$/i){
-            res.send("おはようやんね～");
-        }
-        else if(messages == /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i){
-            res.send("おやすみやんね～:zzz:");
-        }
-        else if(messages == /.*もちもち.*$/i){
-            res.send("もちもち:blobenjoy:");
-        }
-        else if(messages == /.*もふもふ.*$/i){
-            res.send("もふもふ～");
-        }
-        else if(messages == /.*おい.*$/i){
-            res.send("おい！");
-        }
-        else if(messages == /.*(かあ|か～).*$/i){
-            res.send("いいぞいいぞ");
-        }
-        else if(messages == /.*うまうま.*$/i){
-            res.send("むしゃむしゃ");
-        }
-        });
+    // // 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
+    // robot.hear(messages, res => {
+    //     if(messages == /.*(らす|Ras).*$/i){
+    //         res.send("えへへ");
+    //     }
+    //     else if(messages == /.*(おは|ohagoza|ohasta).*$/i){
+    //         res.send("おはようやんね～");
+    //     }
+    //     else if(messages == /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i){
+    //         res.send("おやすみやんね～:zzz:");
+    //     }
+    //     else if(messages == /.*もちもち.*$/i){
+    //         res.send("もちもち:blobenjoy:");
+    //     }
+    //     else if(messages == /.*もふもふ.*$/i){
+    //         res.send("もふもふ～");
+    //     }
+    //     else if(messages == /.*おい.*$/i){
+    //         res.send("おい！");
+    //     }
+    //     else if(messages == /.*(かあ|か～).*$/i){
+    //         res.send("いいぞいいぞ");
+    //     }
+    //     else if(messages == /.*うまうま.*$/i){
+    //         res.send("むしゃむしゃ");
+    //     }
+    //     });
+
     // robot.hear(/.*もふもふ.*$/i, res => {
     //     res.send("もふもふ～");
     // });
