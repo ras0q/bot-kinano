@@ -18,18 +18,13 @@ module.exports = robot => {
         res.send(":kinako.ex-large:");
     });
 
-
-    robot.hear(/.*もふもふ.*$/i, res => {
-        res.send("もちもち～:blobenjoy:");
+    robot.respond(/できること$/i, res => {
+        res.reply("[](https://wiki.trap.jp/bot/kinano)");
     });
 
-    robot.hear(/.*やんね.*$/i, res => {
-        res.send(
-            {
-                type: "stamp",
-                name: "yannne"
-            }
-        );
+// 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
+    robot.hear(/.*もふもふ.*$/i, res => {
+        res.send("もちもち～:blobenjoy:");
     });
 
     robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
@@ -40,9 +35,25 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
-    robot.respond(/できること$/i, res => {
-        res.reply("[](https://wiki.trap.jp/bot/kinano)");
+    // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
+    robot.hear(/.*やんね.*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "yannne"
+            }
+        );
     });
+
+    robot.hear(/.(*きなこ|きなの|黄名子).*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "mochimochi_kinakomochi"
+            }
+        );
+    });
+
 
     // robot.respond(/できること$/i, res => {
     //     const commands = [
