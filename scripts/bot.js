@@ -19,11 +19,15 @@ module.exports = robot => {
     });
 
     robot.respond(/できること$/i, res => {
-        res.reply("[](https://wiki.trap.jp/bot/kinano)");
+        res.send("[きなのはなんでもできるやんね](https://wiki.trap.jp/bot/kinano)");
     });
 
 // 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
     robot.hear(/.*もふもふ.*$/i, res => {
+        res.send("もちもち～:blobenjoy:");
+    });
+
+    robot.hear(/.*もちもち.*$/i, res => {
         res.send("もちもち～:blobenjoy:");
     });
 
