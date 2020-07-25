@@ -63,6 +63,14 @@ module.exports = robot => {
             {
                 type: "stamp",
                 name: "yannne"
+            },
+            {
+                type: "stamp",
+                name: "gao-"
+            },
+            {
+                type: "stamp",
+                name: "mochimochi_kinakomochi"
             }
         );
     });
@@ -72,6 +80,15 @@ module.exports = robot => {
             {
                 type: "stamp",
                 name: "mochimochi_kinakomochi"
+            }
+        );
+    });
+
+    robot.hear(/.*黄.*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "yellow"
             }
         );
     });
