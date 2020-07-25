@@ -23,6 +23,15 @@ module.exports = robot => {
         res.send("もちもち～:blobenjoy:");
     });
 
+    robot.hear(/.*やんね.*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "yannne"
+            }
+        );
+    });
+
     robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
         res.send("おやすみやんね～:zzz:");
     });
@@ -31,27 +40,27 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
-    // robot.respond(/できること$/i, res => {
-    //     res.reply(README);
-    // });
-
     robot.respond(/できること$/i, res => {
-        const commands = [
-            `
-
-# できること:gao-:
-
-きなのはなんでもできるやんね！
-    - ``@BOT_kinano やんね`` で ``@username やんね！`` をかえすやんね！やんねは正義やんね！:yannne:
-    - ``@BOT_kinano もちもち`` で ``@username きなこもち～～～～～！`` をかえすやんね！おもちをたべるやんね！:yannne:
-    - ``@BOT_kinano きなこもち`` でスタンプをかえすやんね！きなのは可愛いやんね！:yannne:"
-
-    
-    きなのはカンペキだけど不具合・要望があったら[#gps/times/Ras](https://q.trap.jp/channels/gps/times/Ras)でお願いやんね！:yannne:
-    最終更新日:2020/07/25
-
-    `
-        ]
-        res.send(...commands);
+        res.reply("[](https://wiki.trap.jp/bot/kinano)");
     });
+
+    // robot.respond(/できること$/i, res => {
+    //     const commands = [
+    //         `
+    //         # できること:gao-:
+
+    //         きなのはなんでもできるやんね！
+    //             - ``@BOT_kinano やんね`` : ``@username やんね！`` をかえすやんね！やんねは正義やんね！:yannne:
+    //             - ``@BOT_kinano もちもち`` : ``@username きなこもち～～～～～！`` をかえすやんね！おもちをたべるやんね！:yannne:
+    //             - ``@BOT_kinano きなこもち`` : スタンプをかえすやんね！きなのは可愛いやんね！:yannne:"
+
+                
+    //             きなのはカンペキだけど不具合・要望があったら[#gps/times/Ras](https://q.trap.jp/channels/gps/times/Ras)でお願いやんね！:yannne:
+    //             最終更新日:2020/07/25
+
+    //         `
+    //     ]
+
+    //     res.reply(...commands);
+    // });
 };
