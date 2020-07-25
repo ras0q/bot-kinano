@@ -103,24 +103,28 @@ module.exports = robot => {
         );
     });
 
-    robot.hear(/.*寝.*$/i, res => {
-        if(res.message.message.user.id == "f58c72a4-14f0-423c-9259-dbb4a90ca35f"){
-            res.send(
-                {
-                    type: "stamp",
-                    name: "oyasumi"
-                }
-            );
-        }
-        else {
-            res.send(
-                {
-                    type: "stamp",
-                    name: "amae"
-                }
-            );
-        }
+    robot.hear(/.*id.*$/i, res => {
+        res.send(res.message.message.user.id);
     });
+
+    // robot.hear(/.*寝.*$/i, res => {
+    //     if(res.message.message.user.id == "f58c72a4-14f0-423c-9259-dbb4a90ca35f"){
+    //         res.send(
+    //             {
+    //                 type: "stamp",
+    //                 name: "oyasumi"
+    //             }
+    //         );
+    //     }
+    //     else {
+    //         res.send(
+    //             {
+    //                 type: "stamp",
+    //                 name: "amae"
+    //             }
+    //         );
+    //     }
+    // });
 
 
     // 以下やりたいこと
