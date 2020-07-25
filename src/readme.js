@@ -13,5 +13,4 @@ let README = `
 
     `
 
-const _README = README;
-export { _README as README };
+exports.README = README;
