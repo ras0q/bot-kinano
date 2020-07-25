@@ -31,7 +31,7 @@ module.exports = robot => {
         res.send("もちもち～:blobenjoy:");
     });
 
-    robot.hear(/おい$/i, res => {
+    robot.hear(/.*おい.*$/i, res => {
         res.send("おい！");
     });
 
