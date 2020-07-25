@@ -67,14 +67,14 @@ module.exports = robot => {
         );
     });
 
-    // robot.hear(/.*(きなこ|きなの|黄名子).*$/i, res => {
-    //     res.send(
-    //         {
-    //             type: "stamp",
-    //             name: "mochimochi_kinakomochi"
-    //         }
-    //     );
-    // });
+    robot.hear(/.*(きなこ|きなの|黄名子).*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "mochimochi_kinakomochi"
+            }
+        );
+    });
 
 
     // robot.respond(/できること$/i, res => {
