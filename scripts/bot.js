@@ -84,7 +84,7 @@ module.exports = robot => {
         );
     });
 
-    robot.hear(/.*黄.*$/i, res => {
+    robot.hear(/.*(黄|yellow).*$/i, res => {
         res.send(
             {
                 type: "stamp",
