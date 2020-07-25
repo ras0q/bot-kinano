@@ -1,4 +1,4 @@
-const README = require("../src/readme").README;
+// const README = require("../src/readme").README;
 
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
@@ -31,8 +31,8 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
-    robot.respond(/できること$/i, res => {
-        res.reply(README);
-    });
+    // robot.respond(/できること$/i, res => {
+    //     res.reply(README);
+    // });
 
 };
