@@ -31,6 +31,10 @@ module.exports = robot => {
         res.send("もちもち～:blobenjoy:");
     });
 
+    robot.hear(/おい$/i, res => {
+        res.send("おい！");
+    });
+
     robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
         res.send("おやすみやんね～:zzz:");
     });
