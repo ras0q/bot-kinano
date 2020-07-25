@@ -76,6 +76,16 @@ module.exports = robot => {
         );
     });
 
+    
+    robot.hear(/.*(らす|Ras).*$/i, res => {
+        res.send(
+            {
+                type: "stamp",
+                name: "rascal"
+            }
+        );
+    });
+
 
     // robot.respond(/できること$/i, res => {
     //     const commands = [
