@@ -1,5 +1,5 @@
 // const README = require("../src/readme").README;
-let mohu = ["もふもふ～","なにそれ","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:"]
+let mohu = ["もふもふ～","なにそれ","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:","もちもち～きなこもち！！！:kinako.ex-large:"]
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
