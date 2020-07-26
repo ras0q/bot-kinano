@@ -7,6 +7,11 @@ module.exports = robot => {
         res.reply("huga");
     });
 
+    
+    robot.respond(/.*いらっしゃい.*$/i, res => {
+        res.reply("おいす～");
+    });
+
     robot.respond(/.*やんね.*$/i, res => {
         res.reply("やんね！");
     });
