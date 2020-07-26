@@ -2,10 +2,6 @@
 
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
-    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
-        res.send("言いすぎやんね！！！:gao-.ex-large::anger.wiggle:");
-        // break;
-    });
 
     robot.respond(/.*hoge.*$/i, res => {
         res.reply("huga");
@@ -31,6 +27,12 @@ module.exports = robot => {
     // robot.hear(/.*id.*$/i, res => {
     //     res.send(res.message.message.user.id);
     // });
+
+    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
+        setTimeout(() => {
+            res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
+        },1000);
+    });
 
     robot.hear(/.*もふもふ.*$/i, res => {
         res.send("もふもふ～");
