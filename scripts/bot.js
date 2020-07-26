@@ -1,5 +1,5 @@
 // const README = require("../src/readme").README;
-let mohu = ["もふもふ～","なにそれ","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:","もちもち～きなこもち！！！:kinako.ex-large:"]
+let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
@@ -40,7 +40,7 @@ module.exports = robot => {
     });
 
     robot.hear(/.*もふもふ.*$/i, res => {
-        let i = Math.floor( Math.random() * 5 );
+        let i = Math.floor( Math.random() * 9 );
         res.send(mohu[i]);
     });
 
