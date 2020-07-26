@@ -110,19 +110,7 @@ module.exports = robot => {
 
     robot.hear(/.*id.*$/i, res => {
         res.send(res.message.message.user.id);
-    });
-
-    
-    robot.hear(/.* .*$/i, res => {
-        if(res.message.message.user.id == "81bbc211-65aa-4a45-8c56-e0b78d25f9e5"){
-            res.send(
-                {
-                    type: "stamp",
-                    name: "tasukete"
-                }
-            );
-        }
-    });
+    });b
 
     robot.hear(/.*寝.*$/i, res => {
         if(res.message.message.user.id == "0fa5d740-0841-4b88-b7c8-34a68774c784"){
