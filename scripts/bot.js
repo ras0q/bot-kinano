@@ -1,5 +1,5 @@
 // const README = require("../src/readme").README;
-
+let mohu = ["もふもふ～","なにそれ","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:"]
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
@@ -40,7 +40,9 @@ module.exports = robot => {
     });
 
     robot.hear(/.*もふもふ.*$/i, res => {
-        res.send("もふもふ～");
+        let i = Math.floor( Math.random() * 5 );
+		res.reply(mofumofu[i]);
+        res.send("mohu[i]");
     });
 
     robot.hear(/.*もちもち.*$/i, res => {
