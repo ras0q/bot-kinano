@@ -2,6 +2,11 @@
 
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
+    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
+        res.send("言いすぎやんね！！！:gao-.ex-large::anger.wiggle:");
+        break;
+    });
+
     robot.respond(/.*hoge.*$/i, res => {
         res.reply("huga");
     });
@@ -63,9 +68,7 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
-    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
-        res.send("言いすぎやんね！！！:gao-.ex-large::anger.wiggle:");
-    });
+
 
 
     // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
