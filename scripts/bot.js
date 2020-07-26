@@ -41,8 +41,7 @@ module.exports = robot => {
 
     robot.hear(/.*もふもふ.*$/i, res => {
         let i = Math.floor( Math.random() * 5 );
-		res.reply(mofumofu[i]);
-        res.send("mohu[i]");
+        res.send(mohu[i]);
     });
 
     robot.hear(/.*もちもち.*$/i, res => {
