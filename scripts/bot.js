@@ -23,6 +23,10 @@ module.exports = robot => {
     });
 
     // 監視対象チャンネルで"もふもふ"を受け取ったら"もふもふ～"を返す
+    // robot.hear(/.*id.*$/i, res => {
+    //     res.send(res.message.message.user.id);
+    // });
+
     robot.hear(/.*もふもふ.*$/i, res => {
         res.send("もふもふ～");
     });
@@ -59,10 +63,13 @@ module.exports = robot => {
         res.send("おはようやんね～");
     });
 
+    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
+        res.send("言いすぎやんね！！！:gao-.ex-large::anger.wiggle:");
+    });
 
 
     // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
-    robot.hear(/.*やんね.*$/i, res => {
+    robot.hear(/.*(やんね|きなこ|きなの|黄名子).*$/i, res => {
         res.send(
             {
                 type: "stamp",
@@ -75,15 +82,10 @@ module.exports = robot => {
             {
                 type: "stamp",
                 name: "mochimochi_kinakomochi"
-            }
-        );
-    });
-
-    robot.hear(/.*(きなこ|きなの|黄名子).*$/i, res => {
-        res.send(
+            },
             {
                 type: "stamp",
-                name: "mochimochi_kinakomochi"
+                name: "kinano"
             }
         );
     });
@@ -108,9 +110,7 @@ module.exports = robot => {
     });
     
 
-    robot.hear(/.*id.*$/i, res => {
-        res.send(res.message.message.user.id);
-    });
+
 
     robot.hear(/.*寝.*$/i, res => {
         if(res.message.message.user.id == "0fa5d740-0841-4b88-b7c8-34a68774c784"){
