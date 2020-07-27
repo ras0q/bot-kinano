@@ -9,7 +9,7 @@ module.exports = robot => {
 
     
     robot.respond(/.*いらっしゃい.*$/i, res => {
-        res.reply("おいす～");
+        res.reply("おいす～(まだできないので``@Ras いらっしゃい``してください)");
     });
 
     robot.respond(/.*やんね.*$/i, res => {
