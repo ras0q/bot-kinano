@@ -41,7 +41,7 @@ module.exports = robot => {
 
     robot.hear(/.*もふもふ.*$/i, res => {
         let i = Math.floor( Math.random() * 9 );
-        res.send(mohu[i]);
+        res.reply(mohu[i]);
     });
 
     robot.hear(/.*もちもち.*$/i, res => {
@@ -80,7 +80,7 @@ module.exports = robot => {
 
 
     // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
-    robot.hear(/.*(やんね|きなこ|きなの|黄名子).*$/i, res => {
+    robot.hear(/.*(やんね|きなこ|きなの|黄名子|yannne).*$/i, res => {
         res.send(
             {
                 type: "stamp",
