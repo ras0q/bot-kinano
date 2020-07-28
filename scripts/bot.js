@@ -1,18 +1,22 @@
-// const README = require("../src/readme").README;
-
-// //デプロイ時message
-// let deplymessage = "デプロイ完了やんね！";
-// module.exports = robot => {
-//     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
-// }	
-
-let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課題やって","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
-let messages = [
+let responds = [
+    /.*hoge.*$/i,
+    /.*いらっしゃい.*$/i,
+    /.*もちもち.*$/i,
+    /できること$/i
+];
+let replys = [
+    "huga",
+    "おいす～(まだできないので``@Ras いらっしゃい``してね)",
+    "きなこもち～～～～～！",
+    "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
+];
+let hears = [
     /.*(もふもち|もちもふ).*$/i,
     /.*(らす|Ras).*$/i,
     /.*(おは|ohagoza|ohasta).*$/i,
     /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i,
     /.*もちもち.*$/i,
+    /.*きなこ.*$/i,
     /.*やんね.*$/i,
     /.*おい.*$/i,
     /.*(かあ|か～).*$/i,
@@ -20,12 +24,13 @@ let messages = [
     /.*(言ってる|いってる).*$/i,
     /.*なってる.*$/i
 ];
-let sendings = [
+let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
     "えへへ",
     "おはようやんね～",
     "おやすみやんね～:zzz:",
     "もちもち～:blobenjoy:",
+    ":kinako.ex-large:",
     "やんね！",
     "おい！",
     "いいぞいいぞ",
@@ -33,180 +38,82 @@ let sendings = [
     "いうな！",
     ":koreni_natteru.ex-large:"
 ];
+let mohus = [
+    "なにそれ",
+    "なにそれ",
+    "なにそれ",
+    "もふもふ～",
+    "課題やって",
+    "もふもふ～:blob_pyon:",
+    "きなこもち！！！:kinako.ex-large:",
+    {type: "stamp",name: "hi"},
+    {type: "stamp",name: "hi_UD"}
+];
+let STAMPhears = [
+    /.*(やんね|きなこ|きなの|黄名子|yannne).*$/i,
+    /.*(黄|yellow).*$/i,
+    /.*(らす|Ras).*$/i
+];
+let STAMPsends = [
+    "yannne",
+    "yellow",
+    "rascal"
+];
+sleeps = [
+    "oyasumi",
+    "osuyami",
+    "poyasimi",
+    "oyasuta",
+    "suya",
+    "guaaa",
+    "ha",
+    "ha-kireta",
+    "amae"
+]
+
 module.exports = robot => {
-    // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
-    robot.respond(/.*hoge.*$/i, res => {
-        res.reply("huga");
-    });
-
-    
-    robot.respond(/.*いらっしゃい.*$/i, res => {
-        res.reply("おいす～(まだできないので``@Ras いらっしゃい``してね)");
-    });
-
-    robot.respond(/.*もちもち.*$/i, res => {
-        res.reply("きなこもち～～～～～！");
-    });
-
-    robot.respond(/.*きなこ.*$/i, res => {
-        res.send(":kinako.ex-large:");
-    });
-
-    robot.respond(/できること$/i, res => {
-        res.send("[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)");
-    });
-
-    // 監視対象チャンネルで"もふもふ"を受け取ったら"もふもふ～"を返す
-    // robot.hear(/.*id.*$/i, res => {
-    //     res.send(res.message.message.user.id);
-    // });
-
-    robot.hear(/.*もふもふ.*$/i, res => {
-        let i = Math.floor( Math.random() * 9 );
-        res.reply(mohu[i]);
-    });
-
-    for(let i = 0;i < messages.length;i++){
-        robot.hear(messages[i], res => {
-            res.send(sendings[i]);
+    //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
+    for(let i = 0;i < responds.length;i++){
+        robot.respond(responds[i], res => {
+            res.reply(replys[i]);
         });
-        break;
     }
 
+    //監視対象チャンネルでhears[i]を受け取ったらsends[i]を返す
+    for(let i = 0;i < hears.length;i++){
+        robot.hear(hears[i], res => {
+            res.send(sends[i]);
+        });
+    }
 
-    // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
-    robot.hear(/.*(やんね|きなこ|きなの|黄名子|yannne).*$/i, res => {
-        res.send(
-            {
-                type: "stamp",
-                name: "yannne"
-            },
-            {
-                type: "stamp",
-                name: "gao-"
-            },
-            {
-                type: "stamp",
-                name: "mochimochi_kinakomochi"
-            },
-            {
-                type: "stamp",
-                name: "kinano"
-            }
-        );
+    //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
+    robot.hear(/.*もふもふ.*$/i, res => {
+        let i = Math.floor( Math.random() * mohus.length );
+        res.reply(mohus[i]);
     });
 
-    robot.hear(/.*(黄|yellow).*$/i, res => {
-        res.send(
-            {
-                type: "stamp",
-                name: "yellow"
-            }
-        );
-    });
+    // // 監視対象チャンネルでSTAMPhears[i]を受け取ったらSTAMPsends[i]のスタンプを押す
+    for(let i = 0;i < hears.length;i++){
+        robot.hear(STAMPhears[i], res => {
+            res.send(
+                {
+                    types: "stamp",
+                    name: STAMPsends[i]
+                }
+            );
+        });
+    }
 
-    
-    robot.hear(/.*(らす|Ras).*$/i, res => {
-        res.send(
-            {
-                type: "stamp",
-                name: "rascal"
-            }
-        );
-    });
-    
-
-
-
+    //監視対象チャンネルで"寝"を受け取ったらsleepsからランダムで返す
     robot.hear(/.*寝.*$/i, res => {
-        if(res.message.message.user.id == "0fa5d740-0841-4b88-b7c8-34a68774c784"){
-            res.send(
-                {
-                    type: "stamp",
-                    name: "oyasumi"
-                }
-            );
-        }
-        else {
-            res.send(
-                {
-                    type: "stamp",
-                    name: "amae"
-                }
-            );
-        }
+        let i = Math.floor( Math.random() * sleeps.length );
+        res.send(
+            {
+                type: "stamp",
+                name: sleeps[i]
+            }
+        );
     });
-
-
-    // 以下やりたいこと
-
-    // robot.respond(/できること$/i, res => {
-    //     const commands = [
-    //         `
-    //         # できること:gao-:
-
-    //         きなのはなんでもできるやんね！
-    //             - ``@BOT_kinano やんね`` : ``@username やんね！`` をかえすやんね！やんねは正義やんね！:yannne:
-    //             - ``@BOT_kinano もちもち`` : ``@username きなこもち～～～～～！`` をかえすやんね！おもちをたべるやんね！:yannne:
-    //             - ``@BOT_kinano きなこもち`` : スタンプをかえすやんね！きなのは可愛いやんね！:yannne:"
-
-                
-    //             きなのはカンペキだけど不具合・要望があったら[#gps/times/Ras](https://q.trap.jp/channels/gps/times/Ras)でお願いやんね！:yannne:
-    //             最終更新日:2020/07/25
-
-    //         `
-    //     ]
-
-    //     res.reply(...commands);
-    // });
-
-
-
-        // robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
-    //     setTimeout(() => {
-    //         res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
-    //     },1000);
-    // });
-
-    // robot.hear(/.*もちもち.*$/i, res => {
-    //     res.send("もちもち～:blobenjoy:");
-    // });
-
-    // robot.hear(/.*やんね.*$/i, res => {
-    //     res.send("やんね！");
-    // });
-
-    // robot.hear(/.*おい.*$/i, res => {
-    //     res.send("おい！");
-    // });
-
-    //     robot.hear(/.*(かあ|か～).*$/i, res => {
-    //     res.send("いいぞいいぞ");
-    // });
-
-    // robot.hear(/.*うまうま.*$/i, res => {
-    //     res.send("むしゃむしゃ");
-    // });
-
-    // robot.hear(/.*(言ってる|いってる).*$/i, res => {
-    //     res.send("いうな！");
-    // });
-
-    //     robot.hear(/.*なってる.*$/i, res => {
-    //     res.send("なるな！");
-    // });
-    
-    // robot.hear(/.*(Ras|らす).*$/i, res => {
-    //     res.send("えへへ");
-    // });
-
-    // robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
-    //     res.send("おやすみやんね～:zzz:");
-    // });
-    
-    // robot.hear(/.*(おは|ohagoza|ohasta).*$/i, res => {
-    //     res.send("おはようやんね～");
-    // });
 
 };
