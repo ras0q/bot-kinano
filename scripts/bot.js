@@ -1,9 +1,8 @@
 // const README = require("../src/readme").README;
 
 //デプロイ時message
+let deplymessage = "デプロイ完了やんね！";
 module.exports = robot => {
-    deplymessage = "デプロイが完了したやんね！";
-    robot.send({userID: "0fa5d740-0841-4b88-b7c8-34a68774c784"},deplymessage);
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 }	
 
@@ -11,32 +10,31 @@ let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課�
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
-    robot.hear(/.*hoge.*$/i, res => {
+    robot.respond(/.*hoge.*$/i, res => {
         res.reply("huga");
     });
 
     
-    robot.hear(/.*いらっしゃい.*$/i, res => {
+    robot.respond(/.*いらっしゃい.*$/i, res => {
         res.reply("おいす～(まだできないので``@Ras いらっしゃい``してね)");
     });
 
-    robot.hear(/.*もちもち.*$/i, res => {
+    robot.respond(/.*もちもち.*$/i, res => {
         res.reply("きなこもち～～～～～！");
     });
 
-    robot.hear(/.*きなこ.*$/i, res => {
+    robot.respond(/.*きなこ.*$/i, res => {
         res.send(":kinako.ex-large:");
     });
 
-    robot.hear(/できること$/i, res => {
+    robot.respond(/できること$/i, res => {
         res.send("[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)");
     });
 
     // 監視対象チャンネルで"もふもふ"を受け取ったら"もふもふ～"を返す
-    robot.hear(/.*id.*$/i, res => {
-        res.send(res.message.message.user.id);
-    });
-
+    // robot.hear(/.*id.*$/i, res => {
+    //     res.send(res.message.message.user.id);
+    // });
 
     robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
         setTimeout(() => {
@@ -155,11 +153,11 @@ module.exports = robot => {
             );
         }
     });
-};
+
 
     // 以下やりたいこと
 
-    // robot.hear(/できること$/i, res => {
+    // robot.respond(/できること$/i, res => {
     //     const commands = [
     //         `
     //         # できること:gao-:
@@ -207,20 +205,4 @@ module.exports = robot => {
     //         res.send("むしゃむしゃ");
     //     }
     //     });
-// robot.hear(x, res => {
-//     if(x == /.*もふもふ.*$/i) {
-//             let i = Math.floor( Math.random() * 9 );
-//             res.reply(mohu[i]);
-//         }
-//     else if(x == /.*(もふもち|もちもふ).*$/i) res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
-//     else if(x == /.*もちもち.*$/i) res.send("もちもち～:blobenjoy:");
-//     else if(x == /.*やんね.*$/i) res.send("やんね！");
-//     else if(x == /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i) res.send("おやすみやんね～:zzz:");
-//     else if(x == /.*(おは|ohagoza|ohasta).*$/i) res.send("おはようやんね～");
-//     else if(x == /.*おい.*$/i) res.send("おい！");
-//     else if(x == /.*(か～|かあ).*$/i) res.send("いいぞいいぞ");
-//     else if(x == /.*うまうま.*$/i) res.send("むしゃむしゃ");
-//     else if(x == /.*(言ってる|いってる).*$/i) res.send("いうな！");
-//     else if(x == /.*なってる.*$/i) res.send("なるな！");
-//     else if(x == /.*(らす|Ras).*$/i) res.send("えへへ");
-// });
+};
