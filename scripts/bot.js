@@ -7,6 +7,32 @@ module.exports = robot => {
 }	
 
 let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課題やって","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
+let messages = [
+    /.*(もふもち|もちもふ).*$/i,
+    /.*(らす|Ras).*$/i,
+    /.*(おは|ohagoza|ohasta).*$/i,
+    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i,
+    /.*もちもち.*$/i,
+    /.*やんね.*$/i,
+    /.*おい.*$/i,
+    /.*(かあ|か～).*$/i,
+    /.*うまうま.*$/i,
+    /.*(言ってる|いってる).*$/i,
+    /.*なってる.*$/i
+];
+let sendings = [
+    "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
+    "えへへ",
+    "おはようやんね～",
+    "おやすみやんね～:zzz:",
+    "もちもち～:blobenjoy:",
+    "やんね！",
+    "おい！",
+    "いいぞいいぞ",
+    "むしゃむしゃ",
+    "いうな！",
+    ":koreni_natteru.ex-large:"
+];
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
@@ -36,58 +62,19 @@ module.exports = robot => {
     //     res.send(res.message.message.user.id);
     // });
 
-    robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
-        setTimeout(() => {
-            res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
-        },1000);
-    });
-
     robot.hear(/.*もふもふ.*$/i, res => {
         let i = Math.floor( Math.random() * 9 );
         res.reply(mohu[i]);
     });
 
-    robot.hear(/.*もちもち.*$/i, res => {
-        res.send("もちもち～:blobenjoy:");
+    robot.hear(x, res => {
+        for(let i = 0;i < messages.length;i++){
+            if(x == messages[i]){
+                res.send(sendings[i]);
+                break;
+            }
+        }
     });
-
-    
-    robot.hear(/.*やんね.*$/i, res => {
-        res.hear("やんね！");
-    });
-
-    robot.hear(/.*おい.*$/i, res => {
-        res.send("おい！");
-    });
-
-        robot.hear(/.*(かあ|か～).*$/i, res => {
-        res.send("いいぞいいぞ");
-    });
-
-    robot.hear(/.*うまうま.*$/i, res => {
-        res.send("むしゃむしゃ");
-    });
-
-    robot.hear(/.*(言ってる|いってる).*$/i, res => {
-        res.send("いうな！");
-    });
-
-        robot.hear(/.*なってる.*$/i, res => {
-        res.send("なるな！");
-    });
-    
-    robot.hear(/.*(Ras|らす).*$/i, res => {
-        res.send("えへへ");
-    });
-
-    robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
-        res.send("おやすみやんね～:zzz:");
-    });
-    
-    robot.hear(/.*(おは|ohagoza|ohasta).*$/i, res => {
-        res.send("おはようやんね～");
-    });
-
 
 
 
@@ -177,32 +164,52 @@ module.exports = robot => {
     //     res.reply(...commands);
     // });
 
+
+
+        // robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
+    //     setTimeout(() => {
+    //         res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
+    //     },1000);
+    // });
+
+    // robot.hear(/.*もちもち.*$/i, res => {
+    //     res.send("もちもち～:blobenjoy:");
+    // });
+
+    // robot.hear(/.*やんね.*$/i, res => {
+    //     res.send("やんね！");
+    // });
+
+    // robot.hear(/.*おい.*$/i, res => {
+    //     res.send("おい！");
+    // });
+
+    //     robot.hear(/.*(かあ|か～).*$/i, res => {
+    //     res.send("いいぞいいぞ");
+    // });
+
+    // robot.hear(/.*うまうま.*$/i, res => {
+    //     res.send("むしゃむしゃ");
+    // });
+
+    // robot.hear(/.*(言ってる|いってる).*$/i, res => {
+    //     res.send("いうな！");
+    // });
+
+    //     robot.hear(/.*なってる.*$/i, res => {
+    //     res.send("なるな！");
+    // });
     
-    // // 監視対象チャンネルで"もふもふ"を受け取ったら"もちもち～"を返す
-    // robot.hear(messages, res => {
-    //     if(messages == /.*(らす|Ras).*$/i){
-    //         res.send("えへへ");
-    //     }
-    //     else if(messages == /.*(おは|ohagoza|ohasta).*$/i){
-    //         res.send("おはようやんね～");
-    //     }
-    //     else if(messages == /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i){
-    //         res.send("おやすみやんね～:zzz:");
-    //     }
-    //     else if(messages == /.*もちもち.*$/i){
-    //         res.send("もちもち:blobenjoy:");
-    //     }
-    //     else if(messages == /.*もふもふ.*$/i){
-    //         res.send("もふもふ～");
-    //     }
-    //     else if(messages == /.*おい.*$/i){
-    //         res.send("おい！");
-    //     }
-    //     else if(messages == /.*(かあ|か～).*$/i){
-    //         res.send("いいぞいいぞ");
-    //     }
-    //     else if(messages == /.*うまうま.*$/i){
-    //         res.send("むしゃむしゃ");
-    //     }
-    //     });
+    // robot.hear(/.*(Ras|らす).*$/i, res => {
+    //     res.send("えへへ");
+    // });
+
+    // robot.hear(/.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i, res => {
+    //     res.send("おやすみやんね～:zzz:");
+    // });
+    
+    // robot.hear(/.*(おは|ohagoza|ohasta).*$/i, res => {
+    //     res.send("おはようやんね～");
+    // });
+
 };
