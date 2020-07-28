@@ -22,7 +22,9 @@ let hears = [
     /.*(かあ|か～).*$/i,
     /.*うまうま.*$/i,
     /.*(言ってる|いってる).*$/i,
-    /.*なってる.*$/i
+    /.*なってる.*$/i,
+    /.*(死ぬ|:si).*$/i
+
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
@@ -36,7 +38,8 @@ let sends = [
     "いいぞいいぞ",
     "むしゃむしゃ",
     "いうな！",
-    ":koreni_natteru.ex-large:"
+    ":koreni_natteru.ex-large:",
+    "死ぬな！"
 ];
 let mohus = [
     "なにそれ",
@@ -69,7 +72,7 @@ sleeps = [
     "ha",
     "ha-kireta",
     "amae"
-]
+];
 
 module.exports = robot => {
 
