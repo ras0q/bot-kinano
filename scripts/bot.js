@@ -66,7 +66,7 @@ let STAMPsends = [
 ];
 sleeps = [
     "oyasumi",
-    "osuyami",
+    "osumiya",
     "poyasimi",
     "oyasuta",
     "suya",
