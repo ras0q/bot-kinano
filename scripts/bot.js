@@ -101,7 +101,7 @@ module.exports = robot => {
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる.*$/i, res => {
         let i = Math.floor( Math.random() * natterus.length );
-        res.reply(nattterus[i]);
+        res.reply(natterus[i]);
     });
 
     // // 監視対象チャンネルでSTAMPhears[i]を受け取ったらSTAMPsends[i]のスタンプを押す
