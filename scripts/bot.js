@@ -22,7 +22,6 @@ let hears = [
     /.*(かあ|か～).*$/i,
     /.*うまうま.*$/i,
     /.*(言ってる|いってる).*$/i,
-    /.*なってる.*$/i,
     /.*(死ぬ|:si).*$/i
 ];
 let sends = [
@@ -37,7 +36,6 @@ let sends = [
     "いいぞいいぞ",
     "むしゃむしゃ",
     "いうな！",
-    ":koreni_natteru.ex-large:",
     "死ぬな！"
 ];
 let mohus = [
@@ -51,6 +49,11 @@ let mohus = [
     {type: "stamp",name: "hi"},
     {type: "stamp",name: "hi_UD"}
 ];
+let natterus = [
+    ":yaya::koreni_natteru.large:",
+    ":koreni_natteru.ex-large:",
+    "なるな！"
+]
 let STAMPhears = [
     /.*(やんね|きなこ|きなの|黄名子|yannne).*$/i,
     /.*(黄|yellow).*$/i,
@@ -93,6 +96,12 @@ module.exports = robot => {
     robot.hear(/.*もふもふ.*$/i, res => {
         let i = Math.floor( Math.random() * mohus.length );
         res.reply(mohus[i]);
+    });
+    
+    //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
+    robot.hear(/.*なってる.*$/i, res => {
+        let i = Math.floor( Math.random() * natterus.length );
+        res.reply(nattterus[i]);
     });
 
     // // 監視対象チャンネルでSTAMPhears[i]を受け取ったらSTAMPsends[i]のスタンプを押す
