@@ -71,6 +71,7 @@ module.exports = robot => {
         robot.hear(messages[i], res => {
             res.send(sendings[i]);
         });
+        break;
     }
 
 
