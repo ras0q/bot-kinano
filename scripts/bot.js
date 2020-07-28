@@ -1,4 +1,12 @@
 // const README = require("../src/readme").README;
+
+//デプロイ時message
+module.exports = robot => {
+    deplymessage = "デプロイが完了したやんね！";
+    robot.send({userID: "0fa5d740-0841-4b88-b7c8-34a68774c784"},deplymessage);
+    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+}	
+
 let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課題やって","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
