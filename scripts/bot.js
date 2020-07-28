@@ -1,10 +1,10 @@
 // const README = require("../src/readme").README;
 
-//デプロイ時message
-let deplymessage = "デプロイ完了やんね！";
-module.exports = robot => {
-    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
-}	
+// //デプロイ時message
+// let deplymessage = "デプロイ完了やんね！";
+// module.exports = robot => {
+//     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+// }	
 
 let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課題やって","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
 let messages = [
@@ -67,15 +67,11 @@ module.exports = robot => {
         res.reply(mohu[i]);
     });
 
-    robot.hear(x, res => {
-        for(let i = 0;i < messages.length;i++){
-            if(x == messages[i]){
-                res.send(sendings[i]);
-                break;
-            }
-        }
-    });
-
+    for(let i = 0;i < messages.length;i++){
+        robot.hear(x, res => {
+            res.send(sendings[i]);
+        });
+    }
 
 
     // // 監視対象チャンネルで"やんね"を受け取ったらスタンプを押す
