@@ -30,21 +30,21 @@ module.exports = robot => {
     // });
 
     robot.hear(x, res => {
-        if(x = /.*もふもふ.*$/i) {
+        if(x == /.*もふもふ.*$/i) {
                 let i = Math.floor( Math.random() * 9 );
                 res.reply(mohu[i]);
             }
         else if(x == /.*(もふもち|もちもふ).*$/i) res.send("言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:");
         else if(x == /.*もちもち.*$/i) res.send("もちもち～:blobenjoy:");
-        else if(x = /.*やんね.*$/i) res.send("やんね！");
-        else if(x = /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i) res.send("おやすみやんね～:zzz:");
-        else if(x = /.*(おは|ohagoza|ohasta).*$/i) res.send("おはようやんね～");
-        else if(x = /.*おい.*$/i) res.send("おい！");
-        else if(x = /.*(か～|かあ).*$/i) res.send("いいぞいいぞ");
-        else if(x = /.*うまうま.*$/i) res.send("むしゃむしゃ");
-        else if(x = /.*(言ってる|いってる).*$/i) res.send("いうな！");
-        else if(x = /.*なってる.*$/i) res.send("なるな！");
-        else if(x = /.*(らす|Ras).*$/i) res.send("えへへ");
+        else if(x == /.*やんね.*$/i) res.send("やんね！");
+        else if(x == /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i) res.send("おやすみやんね～:zzz:");
+        else if(x == /.*(おは|ohagoza|ohasta).*$/i) res.send("おはようやんね～");
+        else if(x == /.*おい.*$/i) res.send("おい！");
+        else if(x == /.*(か～|かあ).*$/i) res.send("いいぞいいぞ");
+        else if(x == /.*うまうま.*$/i) res.send("むしゃむしゃ");
+        else if(x == /.*(言ってる|いってる).*$/i) res.send("いうな！");
+        else if(x == /.*なってる.*$/i) res.send("なるな！");
+        else if(x == /.*(らす|Ras).*$/i) res.send("えへへ");
     });
 
     // robot.hear(/.*(もふもち|もちもふ).*$/i, res => {
