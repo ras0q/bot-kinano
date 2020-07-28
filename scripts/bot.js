@@ -24,7 +24,6 @@ let hears = [
     /.*(言ってる|いってる).*$/i,
     /.*なってる.*$/i,
     /.*(死ぬ|:si).*$/i
-
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
