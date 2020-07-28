@@ -68,7 +68,7 @@ module.exports = robot => {
     });
 
     for(let i = 0;i < messages.length;i++){
-        robot.hear(x, res => {
+        robot.hear(messages[i], res => {
             res.send(sendings[i]);
         });
     }
