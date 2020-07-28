@@ -1,5 +1,5 @@
 // const README = require("../src/readme").README;
-let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","もふもふしてる場合か？課題をやれ","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
+let mohu = ["なにそれ","なにそれ","なにそれ","もふもふ～","課題やって","もふもふ～:blob_pyon:","きなこもち！！！:kinako.ex-large:",{type: "stamp",name: "hi"},{type: "stamp",name: "hi"}]
 module.exports = robot => {
     // "@botName hoge"を受け取ったら"@senderName fuga"を送り返す
 
@@ -9,11 +9,7 @@ module.exports = robot => {
 
     
     robot.respond(/.*いらっしゃい.*$/i, res => {
-        res.reply("おいす～(まだできないので``@Ras いらっしゃい``してください)");
-    });
-
-    robot.respond(/.*やんね.*$/i, res => {
-        res.reply("やんね！");
+        res.reply("おいす～(まだできないので``@Ras いらっしゃい``してね)");
     });
 
     robot.respond(/.*もちもち.*$/i, res => {
@@ -48,6 +44,11 @@ module.exports = robot => {
         res.send("もちもち～:blobenjoy:");
     });
 
+    
+    robot.hear(/.*やんね.*$/i, res => {
+        res.hear("やんね！");
+    });
+
     robot.hear(/.*おい.*$/i, res => {
         res.send("おい！");
     });
@@ -62,6 +63,10 @@ module.exports = robot => {
 
     robot.hear(/.*(言ってる|いってる).*$/i, res => {
         res.send("いうな！");
+    });
+
+        robot.hear(/.*なってる.*$/i, res => {
+        res.send("なるな！");
     });
     
     robot.hear(/.*(Ras|らす).*$/i, res => {
