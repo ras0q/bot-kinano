@@ -11,18 +11,18 @@ let replys = [
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
 let hears = [
-    /.*(もふもち|もちもふ).*$/i,
-    /.*(らす|Ras).*$/i,
-    /.*(おは|ohagoza|ohasta).*$/i,
-    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi)$/i,
-    /.*もちもち.*$/i,
-    /.*きなこ.*$/i,
-    /.*やんね.*$/i,
-    /.*おい.*$/i,
-    /.*(かあ|か～).*$/i,
-    /.*うまうま.*$/i,
+    /.*(もふもち|もちもふ).*/i,
+    /.*(らす|Ras).*/i,
+    /.*(おは|ohagoza|ohasta).*/i,
+    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*/i,
+    /.*もちもち.*/i,
+    /.*きなこ.*/i,
+    /.*やんね.*/i,
+    /.*おい.*/i,
+    /.*(かあ|か～).*/i,
+    /.*うまうま.*/i,
     /.*(言ってる|いってる)$/i,
-    /.*(死ぬ|:si).*$/i
+    /.*(死ぬ|:si).*/i
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
@@ -55,9 +55,9 @@ let natterus = [
     "なるな！"
 ]
 let STAMPhears = [
-    /.*(やんね|きなこ|きなの|黄名子|yannne).*$/i,
-    /.*(黄|yellow).*$/i,
-    /.*(らす|Ras).*$/i
+    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
+    /.*(黄|yellow).*/i,
+    /.*(らす|Ras).*/i
 ];
 let STAMPsends = [
     "yannne",
@@ -93,7 +93,7 @@ module.exports = robot => {
     }
 
     //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
-    robot.hear(/.*もふもふ.*$/i, res => {
+    robot.hear(/.*もふもふ.*/i, res => {
         let i = Math.floor( Math.random() * mohus.length );
         res.reply(mohus[i]);
     });
@@ -117,7 +117,7 @@ module.exports = robot => {
     }
 
     //監視対象チャンネルで"寝"を受け取ったらsleepsからランダムで返す
-    robot.hear(/.*寝.*$/i, res => {
+    robot.hear(/.*寝.*/i, res => {
         let i = Math.floor( Math.random() * sleeps.length );
         res.send(
             {
