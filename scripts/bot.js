@@ -105,7 +105,11 @@ module.exports = robot => {
     //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
     robot.hear(/.*もふもふ.*/i, res => {
         let i = Math.floor( Math.random() * mohus.length );
-        res.reply(mohus[i]);
+        const {message} = res.message;
+        const {user} = message;
+        // const channelId = res.message.message.channelId;
+        if(user.bot) return;
+        else res.reply(mohus[i]);
     });
     
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
