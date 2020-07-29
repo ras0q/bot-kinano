@@ -43,13 +43,13 @@ let sends = [
 let mohus = [
     "なにそれ",
     "なにそれ",
-    "なにそれ",
     "もふもふ～",
     "課題やって",
     "もふもふ～:blob_pyon:",
+    "もふもふ！:blobmaracas:",
     "きなこもち！！！:kinako.ex-large:",
-    {type: "stamp",name: "hi"},
-    {type: "stamp",name: "hi_UD"}
+    "はい。",
+    ":hi_UD.ex-large:"
 ];
 let natterus = [
     ":yaya::koreni_natteru.large:",
