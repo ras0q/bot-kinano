@@ -1,3 +1,5 @@
+const { User } = require("hubot");
+
 let responds = [
     /.*hoge.*$/i,
     /.*いらっしゃい.*$/i,
@@ -88,7 +90,11 @@ module.exports = robot => {
     //監視対象チャンネルでhears[i]を受け取ったらsends[i]を返す
     for(let i = 0;i < hears.length;i++){
         robot.hear(hears[i], res => {
-            res.send(sends[i]);
+            const {message} = res.message;
+            const {user} = message;
+            // const channelId = res.message.message.channelId;
+            if(user.bot) return;
+            else res.send(sends[i]);
         });
     }
 
