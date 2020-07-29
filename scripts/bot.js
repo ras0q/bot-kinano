@@ -14,14 +14,14 @@ let hears = [
     /.*(もふもち|もちもふ).*$/i,
     /.*(らす|Ras).*$/i,
     /.*(おは|ohagoza|ohasta).*$/i,
-    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*$/i,
+    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi)$/i,
     /.*もちもち.*$/i,
     /.*きなこ.*$/i,
     /.*やんね.*$/i,
     /.*おい.*$/i,
     /.*(かあ|か～).*$/i,
     /.*うまうま.*$/i,
-    /.*(言ってる|いってる).*$/i,
+    /.*(言ってる|いってる)$/i,
     /.*(死ぬ|:si).*$/i
 ];
 let sends = [
@@ -99,7 +99,7 @@ module.exports = robot => {
     });
     
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
-    robot.hear(/.*なってる.*$/i, res => {
+    robot.hear(/.*なってる$/i, res => {
         let i = Math.floor( Math.random() * natterus.length );
         res.reply(natterus[i]);
     });
