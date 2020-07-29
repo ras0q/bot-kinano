@@ -83,7 +83,11 @@ module.exports = robot => {
     //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
-            res.reply(replys[i]);
+            const {message} = res.message;
+            const {user} = message;
+            // const channelId = res.message.message.channelId;
+            if(user.bot) return;
+            else res.reply(replys[i]);
         });
     }
 
