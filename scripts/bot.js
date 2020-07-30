@@ -123,7 +123,7 @@ module.exports = robot => {
         robot.hear(STAMPhears[i], res => {
             res.send(
                 {
-                    types: "stamp",
+                    type: "stamp",
                     name: STAMPsends[i]
                 }
             );
@@ -145,25 +145,25 @@ module.exports = robot => {
     robot.hear(/.*(おいす|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
         res.send(
             {
-                types: "stamp",
+                type: "stamp",
                 name: ":oisu-1:"
             }
         );
         res.send(
             {
-                types: "stamp",
+                type: "stamp",
                 name: ":oisu-2:"
             }
         );
         res.send(
             {
-                types: "stamp",
+                type: "stamp",
                 name: ":oisu-3:"
             }
         );
         res.send(
             {
-                types: "stamp",
+                type: "stamp",
                 name: ":oisu-4yoko:"
             }
         );
