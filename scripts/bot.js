@@ -93,10 +93,12 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            if(user.bot) return;
-            else setTimeout(() => {
-                res.reply(replys[i]);
-            },500);
+            if(user.bot)
+                return;
+            else 
+                setTimeout(() => {
+                    res.reply(replys[i]);
+                },500);
         });
     }
 
@@ -106,15 +108,16 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            if(user.bot) return;
-            else if(i == 0) {
+            if(user.bot)
+                return;
+            else if(i === 0) 
+                setTimeout(() => {
+                    res.send(sends[0]);
+                },1000);
+            else 
                 setTimeout(() => {
                     res.send(sends[i]);
-                },1000)
-            }
-            else setTimeout(() => {
-                res.send(sends[i]);
-            },500);
+                },500);
         });
     }
 
@@ -124,10 +127,12 @@ module.exports = robot => {
         const {message} = res.message;
         const {user} = message;
         // const channelId = res.message.message.channelId;
-        if(user.bot) return;
-        else setTimeout(() => {
-            res.reply(mohus[i]);
-        },500);
+        if(user.bot)
+            return;
+        else 
+            setTimeout(() => {
+                res.reply(mohus[i]);
+            },500);
     });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
