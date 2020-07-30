@@ -112,7 +112,6 @@ module.exports = robot => {
         else res.reply(mohus[i]);
     });
 
-    
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/i, res => {
         let i = Math.floor( Math.random() * natterus.length );
@@ -143,7 +142,7 @@ module.exports = robot => {
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
-    robot.hear(STAMPhears[i], res => {
+    robot.hear(/.*(おいす|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
         res.send(
             {
                 types: "stamp",
