@@ -146,25 +146,25 @@ module.exports = robot => {
         res.send(
             {
                 type: "stamp",
-                name: ":oisu-1:"
+                name: "oisu-1"
             }
         );
         res.send(
             {
                 type: "stamp",
-                name: ":oisu-2:"
+                name: "oisu-2"
             }
         );
         res.send(
             {
                 type: "stamp",
-                name: ":oisu-3:"
+                name: "oisu-3"
             }
         );
         res.send(
             {
                 type: "stamp",
-                name: ":oisu-4yoko:"
+                name: "oisu-4yoko"
             }
         );
     });
