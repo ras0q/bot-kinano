@@ -109,7 +109,7 @@ module.exports = robot => {
             if(user.bot) return;
             else if(i == 0) {
                 setTimeout(() => {
-                    res.send(send[i]);
+                    res.send(sends[i]);
                 },1000)
             }
             else setTimeout(() => {
