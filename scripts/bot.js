@@ -93,9 +93,9 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            setTimeout(() => {
-                if(user.bot) return;
-                else res.reply(replys[i]);
+            if(user.bot) return;
+            else setTimeout(() => {
+                res.reply(replys[i]);
             },500);
         });
     }
@@ -106,9 +106,14 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            setTimeout(() => {
-                if(user.bot) return;
-                else res.send(sends[i]);
+            if(user.bot) return;
+            else if(i == 0) {
+                setTimeout(() => {
+                    res.send(send[i]);
+                },1000)
+            }
+            else setTimeout(() => {
+                res.send(sends[i]);
             },500);
         });
     }
@@ -119,9 +124,9 @@ module.exports = robot => {
         const {message} = res.message;
         const {user} = message;
         // const channelId = res.message.message.channelId;
-        setTimeout(() => {
-            if(user.bot) return;
-            else res.reply(mohus[i]);
+        if(user.bot) return;
+        else setTimeout(() => {
+            res.reply(mohus[i]);
         },500);
     });
 
