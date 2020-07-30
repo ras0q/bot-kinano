@@ -24,7 +24,8 @@ let hears = [
     /.*(かあ|か～).*/i,
     /.*うまうま.*/i,
     /.*(言ってる|いってる)$/i,
-    /.*(死ぬ|:si).*/i
+    /.*(死ぬ|:si).*/i,
+    /.*(おなか).*/i
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
@@ -38,7 +39,8 @@ let sends = [
     "いいぞいいぞ",
     "むしゃむしゃ",
     "いうな！",
-    "死ぬな！"
+    "死ぬな！",
+    "ぽんぽん！"
 ];
 let mohus = [
     "なにそれ",
@@ -71,7 +73,7 @@ let STAMPsends = [
     "kinako",
     "mochimochi_kinakomochi",
     "yellow",
-    "rascal"
+    "rasc,l"
 ];
 sleeps = [
     "oyasumi",
