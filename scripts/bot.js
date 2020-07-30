@@ -89,6 +89,10 @@ sleeps = [
 
 module.exports = robot => {
 
+    //起動時メッセージ
+    deplymessage = "でぷろい完了やんね～";
+    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+
     //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
