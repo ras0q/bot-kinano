@@ -44,12 +44,12 @@ let mohus = [
     "なにそれ",
     "なにそれ",
     "もふもふ～",
-    "課題やって",
-    "もふもふ～:blob_pyon:",
-    "もふもふ！:blobmaracas:",
-    "きなこもち！！！:kinako.ex-large:",
-    "はい。",
-    ":hi_UD.ex-large:"
+    "もふもふ",
+    "ふがふが",
+    "がりがり",
+    "ぽたぽた",
+    "ほぶほぶ",
+    "あわあわ"
 ];
 let natterus = [
     ":yaya::koreni_natteru.large:",
@@ -70,7 +70,7 @@ sleeps = [
     "oyasumi",
     "osumiya",
     "poyasimi",
-    "oyasuta",
+    "oyasta",
     "suya",
     "guaaa",
     "ha",
@@ -111,6 +111,7 @@ module.exports = robot => {
         if(user.bot) return;
         else res.reply(mohus[i]);
     });
+
     
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/i, res => {
@@ -137,6 +138,34 @@ module.exports = robot => {
             {
                 type: "stamp",
                 name: sleeps[i]
+            }
+        );
+    });
+
+        //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
+    robot.hear(STAMPhears[i], res => {
+        res.send(
+            {
+                types: "stamp",
+                name: ":oisu-1:"
+            }
+        );
+        res.send(
+            {
+                types: "stamp",
+                name: ":oisu-2:"
+            }
+        );
+        res.send(
+            {
+                types: "stamp",
+                name: ":oisu-3:"
+            }
+        );
+        res.send(
+            {
+                types: "stamp",
+                name: ":oisu-4yoko:"
             }
         );
     });
