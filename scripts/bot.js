@@ -2,9 +2,9 @@ const { User } = require("hubot");
 
 let responds = [
     /.*hoge.*$/i,
-    /.*いらっしゃい.*$/i,
+    /.*(いらっしゃい|join).*$/i,
     /.*もちもち.*$/i,
-    /できること$/i
+    /(できること|help)$/i
 ];
 let replys = [
     "huga",
@@ -49,7 +49,8 @@ let mohus = [
     "がりがり",
     "ぽたぽた",
     "ほぶほぶ",
-    "あわあわ"
+    "あわあわ",
+    "きなきな"
 ];
 let natterus = [
     ":yaya::koreni_natteru.large:",
@@ -58,11 +59,17 @@ let natterus = [
 ]
 let STAMPhears = [
     /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
+    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
+    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
+    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
     /.*(黄|yellow).*/i,
     /.*(らす|Ras).*/i
 ];
 let STAMPsends = [
     "yannne",
+    "gao-",
+    "kinako",
+    "mochimochi_kinakomochi",
     "yellow",
     "rascal"
 ];
@@ -86,8 +93,10 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            if(user.bot) return;
-            else res.reply(replys[i]);
+            setTimeout(() => {
+                if(user.bot) return;
+                else res.reply(replys[i]);
+            },500);
         });
     }
 
@@ -97,8 +106,10 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             // const channelId = res.message.message.channelId;
-            if(user.bot) return;
-            else res.send(sends[i]);
+            setTimeout(() => {
+                if(user.bot) return;
+                else res.send(sends[i]);
+            },500);
         });
     }
 
@@ -108,14 +119,18 @@ module.exports = robot => {
         const {message} = res.message;
         const {user} = message;
         // const channelId = res.message.message.channelId;
-        if(user.bot) return;
-        else res.reply(mohus[i]);
+        setTimeout(() => {
+            if(user.bot) return;
+            else res.reply(mohus[i]);
+        },500);
     });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/i, res => {
         let i = Math.floor( Math.random() * natterus.length );
-        res.reply(natterus[i]);
+        setTimeout(() => {
+            res.reply(natterus[i]);
+        },500);
     });
 
     // // 監視対象チャンネルでSTAMPhears[i]を受け取ったらSTAMPsends[i]のスタンプを押す
@@ -130,7 +145,7 @@ module.exports = robot => {
         });
     }
 
-    //監視対象チャンネルで"寝"を受け取ったらsleepsからランダムで返す
+    //監視対象チャンネルで"寝"を受け取ったらsleepsからランダムでスタンプを返す
     robot.hear(/.*寝.*/i, res => {
         let i = Math.floor( Math.random() * sleeps.length );
         res.send(
