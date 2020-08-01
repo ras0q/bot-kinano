@@ -1,39 +1,37 @@
 const { User } = require("hubot");
 
 let responds = [
-    /.*hoge.*$/i,
-    /.*(いらっしゃい|join).*$/i,
-    /.*もちもち.*$/i,
-    /(できること|help)$/i
+    /.*hoge.*/i,
+    /.*(いらっしゃい|join).*/i,
+    /.*もちもち.*/,
+    /(できること|help)/i
 ];
 let replys = [
     "huga",
-    "おいす～(まだできないので``@Ras いらっしゃい``してね)",
+    "仕事して" + !{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"},
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
 let hears = [
-    /.*(もふもち|もちもふ).*/i,
+    /.*(もふもち|もちもふ).*/,
     /.*(らす|Ras).*/i,
-    /.*(おは|ohagoza|ohasta).*/i,
-    /.*(おやすみ|oyasumi|osumiya|oyasuta|poyasimi).*/i,
-    /.*もちもち.*/i,
-    /.*きなこ.*/i,
-    /.*やんね.*/i,
-    /.*おい(?!す).*/i,
-    /.*(かあ|か～).*/i,
-    /.*うまうま.*/i,
-    /.*(言ってる|いってる)$/i,
-    /.*(死ぬ|:si).*/i,
-    /.*(おなか).*/i
+    /.*もちもち.*/,
+    /.*きなこ.*/,
+    /.*きなの.*/,
+    /.*やんね.*/,
+    /.*おい(?!す).*/,
+    /.*(か[あ～]|[っう]かな)$/,
+    /.*うまうま.*/,
+    /.*[い言云]ってる$/,
+    /.*(死|:si\..*:).*/,
+    /.*(おなか).*/
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
     "えへへ",
-    "おはようやんね～",
-    "おやすみやんね～:zzz:",
     "もちもち～:blobenjoy:",
     ":kinako.ex-large:",
+    ":kinano.ex-large.pyon:",
     "やんね！",
     "おい！",
     "いいぞいいぞ",
@@ -52,7 +50,8 @@ let mohus = [
     "ぽたぽた",
     "ほぶほぶ",
     "あわあわ",
-    "きなきな"
+    "きなきな",
+    "ひばひば"
 ];
 let natterus = [
     ":yaya::koreni_natteru.large:",
@@ -60,12 +59,13 @@ let natterus = [
     "なるな！"
 ]
 let STAMPhears = [
-    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
-    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
-    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
-    /.*(やんね|きなこ|きなの|黄名子|yannne).*/i,
+    /.*(やんね|きな[この]|黄名子|yannne).*/i,
+    /.*(やんね|きな[この]|黄名子|yannne).*/i,
+    /.*(やんね|きな[この]|黄名子|yannne).*/i,
+    /.*(やんね|きな[この]|黄名子|yannne).*/i,
     /.*(黄|yellow).*/i,
-    /.*(らす|Ras).*/i
+    /.*(らす|Ras).*/i,
+    /.*(おは|ohagoza|ohasta).*/i,
 ];
 let STAMPsends = [
     "yannne",
@@ -73,7 +73,8 @@ let STAMPsends = [
     "kinako",
     "mochimochi_kinakomochi",
     "yellow",
-    "rasc,l"
+    "rascal",
+    "ohagoza"
 ];
 sleeps = [
     "oyasumi",
@@ -83,14 +84,13 @@ sleeps = [
     "suya",
     "guaaa",
     "ha",
-    "ha-kireta",
-    "amae"
+    "ha-kireta"
 ];
 
 module.exports = robot => {
 
     //起動時メッセージ
-    deplymessage = "でぷろい完了やんね～";
+    deplymessage = "きなの、成長した気がするやんね、、、？";
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
     //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
@@ -128,7 +128,7 @@ module.exports = robot => {
     }
 
     //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
-    robot.hear(/.*もふもふ.*/i, res => {
+    robot.hear(/.*もふもふ.*/, res => {
         let i = Math.floor( Math.random() * mohus.length );
         const {message} = res.message;
         const {user} = message;
@@ -142,7 +142,7 @@ module.exports = robot => {
     });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
-    robot.hear(/.*なってる$/i, res => {
+    robot.hear(/.*なってる$/, res => {
         let i = Math.floor( Math.random() * natterus.length );
         setTimeout(() => {
             res.reply(natterus[i]);
@@ -162,7 +162,7 @@ module.exports = robot => {
     }
 
     //監視対象チャンネルで"寝"を受け取ったらsleepsからランダムでスタンプを返す
-    robot.hear(/.*寝.*/i, res => {
+    robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
         let i = Math.floor( Math.random() * sleeps.length );
         res.send(
             {
