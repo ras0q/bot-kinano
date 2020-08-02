@@ -2,20 +2,18 @@ const { User } = require("hubot");
 
 let responds = [
     /.*hoge.*/i,
-    /(いらっしゃい|join)/i,
-    /(ばいばい|バイバイ|bye)/i,
     /.*もちもち.*/,
     /(できること|help)/i
 ];
 let replys = [
     "huga",
-    "仕事して ＠Ras",
-    ":u.ex-large.ascension::u.large.ascension::u.ascension::u.small.ascension:・・・ @Ras" ,
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
 let hears = [
     /.*(もふもち|もちもふ).*/,
+    /(いらっしゃい|join)/i,
+    /(ばいばい|バイバイ|bye)/i,
     /.*(らす|Ras).*/i,
     /.*もちもち.*/,
     /.*きなこ.*/,
@@ -30,6 +28,8 @@ let hears = [
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
+    '!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"} 仕事して',
+    '!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}:u::u.small:・・・仕事して'  ,
     "えへへ",
     "もちもち～:blobenjoy:",
     ":kinako.ex-large:",
@@ -92,20 +92,8 @@ sleeps = [
 module.exports = robot => {
 
     //起動時メッセージ
-    deplymessage = "きなの、成長した気がするやんね、、、？";
+    deplymessage = ":@BOT_kinano.rotate.rotate::loading::@BOT_kinano.rotate.rotate:";
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
-
-    robot.hear(/.*/, res => {
-        if(res.message.message.userId == "0fa5d740-0841-4b88-b7c8-34a68774c784")
-            setTimeout(() => {
-                res.send(
-                    {
-                        type: "stamp",
-                        name: "rascal"
-                    }
-                );
-            },500);
-    });
 
     //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
     for(let i = 0;i < responds.length;i++){
