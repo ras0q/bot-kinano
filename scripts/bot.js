@@ -12,8 +12,8 @@ let replys = [
 ];
 let hears = [
     /.*(もふもち|もちもふ).*/,
-    /(いらっしゃい|join)/i,
-    /(ばいばい|バイバイ|bye)/i,
+    /(いらっしゃい|join)$/i,
+    /(ばいばい|バイバイ|bye)$/i,
     /.*(らす|Ras).*/i,
     /.*もちもち.*/,
     /.*きなこ.*/,
@@ -28,8 +28,8 @@ let hears = [
 ];
 let sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
-    '!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"} 仕事して',
-    '!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}:u::u.small:・・・仕事して'  ,
+    ':oisu-1::oisu-2::oisu-3::oisu-4yoko: \n!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}',
+    '本当によろしいですか？よろしい場合は:one:を、やめられる場合は:two:を押してください。やめられる場合は:two.ex-large:を押してください。\n!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}'  ,
     "えへへ",
     "もちもち～:blobenjoy:",
     ":kinako.ex-large:",
