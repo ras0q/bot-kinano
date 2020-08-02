@@ -2,13 +2,15 @@ const { User } = require("hubot");
 
 let responds = [
     /.*hoge.*/i,
-    /.*(いらっしゃい|join).*/i,
+    /(いらっしゃい|join)/i,
+    /(ばいばい|バイバイ|bye)/i,
     /.*もちもち.*/,
     /(できること|help)/i
 ];
 let replys = [
     "huga",
     "仕事して" + !{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"},
+    ":u.ex-large.ascension::u.large.ascension::u.ascension::u.small.ascension:" + !{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"},
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
