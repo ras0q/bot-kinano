@@ -20,10 +20,10 @@ let hears = [
     /.*きなの.*/,
     /.*やんね.*/,
     /.*おい(?!す).*/,
-    /.*(か[あ～]|[っう]かな|[やす]るぞ)$/,
+    /.*(か[あ～]|[っう]かな|[やす]るぞ).*/, //後方一致どうしよう
     /.*うまうま.*/,
     /.*[い言云]ってる$/,
-    /.*(死|:si\..*:).*/,
+    /.*(死|:si.*:).*/,
     /.*(おなか).*/
 ];
 let sends = [
@@ -92,7 +92,7 @@ sleeps = [
 module.exports = robot => {
 
     //起動時メッセージ
-    deplymessage = ":@BOT_kinano.rotate.rotate::loading::@BOT_kinano.rotate.rotate:";
+    deplymessage = ":kinano.ex-large.pyon:";
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
     //メンション付きでresponds[i]を受け取ったらメンション付きでreplys[i]を返す
