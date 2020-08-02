@@ -9,8 +9,8 @@ let responds = [
 ];
 let replys = [
     "huga",
-    "仕事して" + !{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"},
-    ":u.ex-large.ascension::u.large.ascension::u.ascension::u.small.ascension:" + !{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"},
+    "仕事して ＠Ras",
+    ":u.ex-large.ascension::u.large.ascension::u.ascension::u.small.ascension:・・・ @Ras" ,
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
