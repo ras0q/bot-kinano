@@ -129,19 +129,29 @@ module.exports = robot => {
         });
     }
 
-    //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
-    robot.hear(/.*もふもふ.*/, res => {
-        let i = Math.floor( Math.random() * mohus.length );
-        const {message} = res.message;
-        const {user} = message;
-        // const channelId = res.message.message.channelId;
-        if(user.bot)
-            return;
-        else 
-            setTimeout(() => {
-                res.reply(mohus[i]);
-            },500);
-    });
+    // //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
+    // robot.hear(/.*もふもふ.*/, res => {
+    //     let i = Math.floor( Math.random() * mohus.length );
+    //     const {message} = res.message;
+    //     const {user} = message;
+    //     // const channelId = res.message.message.channelId;
+    //     if(user.bot)
+    //         return;
+    //     else 
+    //         setTimeout(() => {
+    //             res.reply(mohus[i]);
+    //         },500);
+    // });
+
+        //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
+        robot.hear(/.*もふもふ.*/, res => {
+            if(user.bot)
+                return;
+            else 
+                setTimeout(() => {
+                    res.reply(/([あ - ん]{2}){2}/);
+                },500);
+        });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {
