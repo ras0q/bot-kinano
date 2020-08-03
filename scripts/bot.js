@@ -143,13 +143,17 @@ module.exports = robot => {
     //         },500);
     // });
 
-        //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
+        //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
+        //正規表現使って簡潔に書きたい
+        let hira = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゐゆゑよわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"
         robot.hear(/.*もふもふ.*/, res => {
             if(user.bot)
                 return;
             else 
                 setTimeout(() => {
-                    res.reply(/randam:(([あ - ん]{2}){2})/);
+                    let i = Math.floor ( Math.random()* hira.length) ;
+                    let j = Math.floor ( Math.random()* hira.length) ;
+                    res.reply(hira[i] + hira[j] + hira[i] + hira[j]);
                 },500);
         });
 
