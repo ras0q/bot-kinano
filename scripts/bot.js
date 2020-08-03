@@ -149,7 +149,7 @@ module.exports = robot => {
                 return;
             else 
                 setTimeout(() => {
-                    res.reply(/([あ - ん]{2}){2}/);
+                    res.reply(/randam:(([あ - ん]{2}){2})/);
                 },500);
         });
 
