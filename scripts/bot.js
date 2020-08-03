@@ -149,12 +149,13 @@ module.exports = robot => {
         robot.hear(/.*もふもふ.*/, res => {
             if(user.bot)
                 return;
-            else 
+            else {
+                let i = Math.floor ( Math.random()* hira.length) ;
+                let j = Math.floor ( Math.random()* hira.length) ;
                 setTimeout(() => {
-                    let i = Math.floor ( Math.random()* hira.length) ;
-                    let j = Math.floor ( Math.random()* hira.length) ;
                     res.reply(hira[i] + hira[j] + hira[i] + hira[j]);
                 },500);
+            }
         });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
