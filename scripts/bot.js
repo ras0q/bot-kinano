@@ -129,20 +129,20 @@ module.exports = robot => {
         });
     }
 
-    // //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
-    // robot.hear(/.*もふもふ.*/, res => {
-    //     let i = Math.floor( Math.random() * mohus.length );
-    //     const {message} = res.message;
-    //     const {user} = message;
-    //     // const channelId = res.message.message.channelId;
-    //     if(user.bot)
-    //         return;
-    //     else 
-    //         setTimeout(() => {
-    //             res.reply(mohus[i]);
-    //         },500);
-    // });
-
+    //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
+    robot.hear(/.*もふもふ.*/, res => {
+        let i = Math.floor( Math.random() * mohus.length );
+        const {message} = res.message;
+        const {user} = message;
+        // const channelId = res.message.message.channelId;
+        if(user.bot)
+            return;
+        else 
+            setTimeout(() => {
+                res.reply(mohus[i]);
+            },500);
+    });
+// 
         //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
         //正規表現使って簡潔に書きたい
         let hira = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゐゆゑよわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"
