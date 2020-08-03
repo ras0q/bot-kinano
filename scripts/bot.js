@@ -150,10 +150,9 @@ module.exports = robot => {
             if(user.bot)
                 return;
             else {
-                let i = Math.floor ( Math.random()* hira.length) ;
-                let j = Math.floor ( Math.random()* hira.length) ;
+                let Reply = String_random(/[あ-ん]{2}/); 
                 setTimeout(() => {
-                    res.reply(hira[i] + hira[j] + hira[i] + hira[j]);
+                    res.reply(Reply + Reply);
                 },500);
             }
         });
