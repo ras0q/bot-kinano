@@ -43,6 +43,7 @@ let sends = [
     "ぽんぽん！"
 ];
 let hira = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゐゆゑよわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"
+let r = "";
 let mohus = [
     "なにそれ",
     "なにそれ",
@@ -150,7 +151,6 @@ module.exports = robot => {
             if(user.bot)
                 return;
             else {
-                let r = "";
                 for(let i = 0; i < 2; i++){
                     r += hira[Math.floor(Math.random()*hira.length)];
                 }
