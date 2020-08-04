@@ -149,6 +149,8 @@ module.exports = robot => {
         //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
         //正規表現使って簡潔に書きたい
         robot.hear(/.*もふもふ.*/, res => {
+            const {message} = res.message;
+            const {user} = message;
             if(user.bot)
                 return;
             else {
