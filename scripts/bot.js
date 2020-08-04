@@ -42,21 +42,7 @@ let sends = [
     "死ぬな！",
     "ぽんぽん！"
 ];
-let hira =  ["あ", "い", "う", "え", "お", "か", "が", "き", "ぎ", "く", "ぐ", "け", "げ", "こ", "ご", "さ", "ざ", "し", "じ", "す", "ず", "せ", "ぜ", "そ", "ぞ", "た", "だ", "ち", "ぢ", "っ", "つ", "づ", "て", "で", "と", "ど", "な", "に", "ぬ", "ね", "の", "は", "ば", "ぱ", "ひ", "び", "ぴ", "ふ", "ぶ", "ぷ", "へ", "べ", "ぺ", "ほ", "ぼ", "ぽ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "ゎ", "わ", "ゐ", "ゑ", "を", "ん"] 
-//小文字は「っ」のみ使用
-let mohus = [
-    "なにそれ",
-    "なにそれ",
-    "もふもふ～",
-    "もふもふ",
-    "ふがふが",
-    "がりがり",
-    "ぽたぽた",
-    "ほぶほぶ",
-    "あわあわ",
-    "きなきな",
-    "ひばひば"
-];
+let hira =  ["ぁ", "あ", "ぃ", "い", "ぅ", "う", "ぇ", "え", "ぉ", "お", "か", "が", "き", "ぎ", "く", "ぐ", "け", "げ", "こ", "ご", "さ", "ざ", "し", "じ", "す", "ず", "せ", "ぜ", "そ", "ぞ", "た", "だ", "ち", "ぢ", "っ", "つ", "づ", "て", "で", "と", "ど", "な", "に", "ぬ", "ね", "の", "は", "ば", "ぱ", "ひ", "び", "ぴ", "ふ", "ぶ", "ぷ", "へ", "べ", "ぺ", "ほ", "ぼ", "ぽ", "ま", "み", "む", "め", "も", "ゃ", "や", "ゅ", "ゆ", "ょ", "よ", "ら", "り", "る", "れ", "ろ", "ゎ", "わ", "ゐ", "ゑ", "を", "ん"];
 let natterus = [
     ":yaya::koreni_natteru.large:",
     ":koreni_natteru.ex-large:",
@@ -131,20 +117,6 @@ module.exports = robot => {
         });
     }
 
-    // //監視対象チャンネルで"もふもふ"を受け取ったらmohusからランダムで返す
-    // robot.hear(/.*もふもふ.*/, res => {
-    //     let i = Math.floor( Math.random() * mohus.length );
-    //     const {message} = res.message;
-    //     const {user} = message;
-    //     // const channelId = res.message.message.channelId;
-    //     if(user.bot)
-    //         return;
-    //     else 
-    //         setTimeout(() => {
-    //             res.reply(mohus[i]);
-    //         },500);
-    // });
-
         //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
         //正規表現使って簡潔に書きたい
         robot.hear(/.*もふもふ.*/, res => {
@@ -165,10 +137,16 @@ module.exports = robot => {
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {
-        let i = Math.floor( Math.random() * natterus.length );
-        setTimeout(() => {
-            res.reply(natterus[i]);
-        },500);
+        const {message} = res.message;
+        const {user} = message;
+        if(user.bot)
+            return;
+        else {
+            let i = Math.floor( Math.random() * natterus.length );
+            setTimeout(() => {
+                res.reply(natterus[i]);
+            },500);
+        }
     });
 
     // // 監視対象チャンネルでSTAMPhears[i]を受け取ったらSTAMPsends[i]のスタンプを押す
