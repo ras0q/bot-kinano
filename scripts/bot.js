@@ -142,20 +142,20 @@ module.exports = robot => {
                 res.reply(mohus[i]);
             },500);
     });
-// 
-        // //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
-        // //正規表現使って簡潔に書きたい
+
+        //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
+        //正規表現使って簡潔に書きたい
         // let hira = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゐゆゑよわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"
-        // robot.hear(/.*もふもふ.*/, res => {
-        //     if(user.bot)
-        //         return;
-        //     else {
-        //         let Reply = String_random(/[あ-ん]{2}/); 
-        //         setTimeout(() => {
-        //             res.reply(Reply + Reply);
-        //         },500);
-        //     }
-        // });
+        robot.hear(/.*もふもふ.*/, res => {
+            if(user.bot)
+                return;
+            else {
+                let Reply = String_random(/[ぁ-ん]{2}/); 
+                setTimeout(() => {
+                    res.reply(Reply + Reply);
+                },500);
+            }
+        });
 
     //監視対象チャンネルで"なってる"を受け取ったらnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {

@@ -98,14 +98,15 @@ function String_random (pattern) {
 	var UPPERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 	var LOWERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 	var DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+	var HIRAS  = ["ぁ", "あ", "ぃ", "い", "ぅ", "う", "ぇ", "え", "ぉ", "お", "か", "が", "き", "ぎ", "く", "ぐ", "け", "げ", "こ", "ご", "さ", "ざ", "し", "じ", "す", "ず", "せ", "ぜ", "そ", "ぞ", "た", "だ", "ち", "ぢ", "っ", "つ", "づ", "て", "で", "と", "ど", "な", "に", "ぬ", "ね", "の", "は", "ば", "ぱ", "ひ", "び", "ぴ", "ふ", "ぶ", "ぷ", "へ", "べ", "ぺ", "ほ", "ぼ", "ぽ", "ま", "み", "む", "め", "も", "ゃ", "や", "ゅ", "ゆ", "ょ", "よ", "ら", "り", "る", "れ", "ろ", "ゎ", "わ", "ゐ", "ゑ", "を", "ん"];
 	var SPACES = [" ", "\n", "\t"];
 	var OTHERS = ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "`", "{", "|", "}", "~"];
-	var ALL    = [].concat(UPPERS, LOWERS, DIGITS, " ", OTHERS, ["_"]);
+	var ALL    = [].concat(UPPERS, LOWERS, DIGITS, HIRAS,  " ", OTHERS, ["_"]);
 
 	var CLASSES = {
 		'd' : DIGITS,
 		'D' : [].concat(UPPERS, LOWERS, SPACES, OTHERS, ['_']),
-		'w' : [].concat(UPPERS, LOWERS, DIGITS, ['_']),
+		'w' : [].concat(UPPERS, LOWERS, DIGITS, HIRAS,  ['_']),
 		'W' : [].concat(SPACES, OTHERS),
 		't' : [ '\t' ],
 		'n' : [ '\n' ],
@@ -113,7 +114,7 @@ function String_random (pattern) {
 		'f' : [ '\u000C' ],
 		'r' : [ '\r' ],
 		's' : SPACES,
-		'S' : [].concat(UPPERS, LOWERS, DIGITS, OTHERS, ['_']),
+		'S' : [].concat(UPPERS, LOWERS, DIGITS, HIRAS,  OTHERS, ['_']),
 		'0' : [ '\0' ]
 	};
 
