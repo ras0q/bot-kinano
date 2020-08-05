@@ -98,16 +98,16 @@ module.exports = robot => {
     let deplymessage = ":kinano.ex-large.pyon:";
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
-    // //ID取得
-    // robot.respond(/ID$/i, res => {
-    //     res.send("あなたのIDは"+ userId + "\nあなたの名前は" + displayname + "\nチャンネルIDは" + channelId + "です。")
-    // });
+    //ID取得
+    robot.respond(/ID$/i, res => {
+        res.send("あなたのIDは"+ res.message.message.id + "\nあなたの名前は" + res.message.message.user.displayName + "\nチャンネルIDは" + res.message.message.channelId + "です。")
+    });
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
-            // robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + displayname)
+            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + res.message.message.user.displayName)
         },500);
     });
 
@@ -115,7 +115,7 @@ module.exports = robot => {
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～")
-            // robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + displayname)
+            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + res.message.message.user.displayName)
         },500);
     });
 
