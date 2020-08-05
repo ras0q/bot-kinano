@@ -106,7 +106,7 @@ module.exports = robot => {
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
         setTimeout(() => {
-            res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
+            res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)")
             robot.send(
                 {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
                 "join request\n user : @" + res.message.message.user.displayName
@@ -120,7 +120,7 @@ module.exports = robot => {
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
         setTimeout(() => {
-            res.send("ばいばいやんね～、また遊んでやんね～")
+            res.send("ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)")
             robot.send(
                 {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
                 "leave request\n user : @" + res.message.message.user.displayName 
