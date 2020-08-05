@@ -94,7 +94,7 @@ module.exports = robot => {
 
     //起動時メッセージ
     let deplymessage = ":kinano.ex-large.pyon:";
-    res.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
     //ID取得
     robot.respond(/ID$/i, res => {
@@ -105,7 +105,7 @@ module.exports = robot => {
     robot.respond(/(いらっしゃい|join)$/i, res => {
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
-            res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + displayname)
+            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + displayname)
         },500);
     });
 
@@ -113,7 +113,7 @@ module.exports = robot => {
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～")
-            res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + displayname)
+            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + displayname)
         },500);
     });
 
