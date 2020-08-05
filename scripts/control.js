@@ -104,17 +104,19 @@ module.exports = robot => {
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
-        await api.join(channelId)
+        // await api.join(channelId)
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
+            res.send('!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}')
         },500);
     });
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        await api.leave(channelId)
+        // await api.leave(channelId)
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～")
+            res.send('!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}')
         },500);
     });
 
