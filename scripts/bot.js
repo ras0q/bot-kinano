@@ -1,16 +1,16 @@
 const { User } = require("hubot");
 
-let responds = [
+const responds = [
     /.*hoge.*/i,
     /.*もちもち.*/,
     /(できること|help)/i
 ];
-let replys = [
+const replys = [
     "huga",
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
-let hears = [
+const hears = [
     /.*(もふもち|もちもふ).*/,
     /(いらっしゃい|join)$/i,
     /(ばいばい|バイバイ|bye)$/i,
@@ -26,7 +26,7 @@ let hears = [
     /.*(死|:si.*:).*/,
     /.*(おなか).*/
 ];
-let sends = [
+const sends = [
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
     ':oisu-1::oisu-2::oisu-3::oisu-4yoko: \n!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}',
     '本当によろしいですか？よろしい場合は:one:を、やめられる場合は:two:を押してください。やめられる場合は:two.ex-large:を押してください。\n!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}'  ,
@@ -44,12 +44,12 @@ let sends = [
 ];
 const start = "ぁ".codePointAt(0);
 const end = "ん".codePointAt(0);
-let natterus = [
+const natterus = [
     ":yaya::koreni_natteru.large:",
     ":koreni_natteru.ex-large:",
     "なるな！"
 ]
-let STAMPhears = [
+const STAMPhears = [
     /.*(やんね|きな[この]|黄名子|yannne).*/i,
     /.*(やんね|きな[この]|黄名子|yannne).*/i,
     /.*(やんね|きな[この]|黄名子|yannne).*/i,
@@ -58,7 +58,7 @@ let STAMPhears = [
     /.*(らす|Ras).*/i,
     /.*(おは|ohagoza|ohasta).*/i,
 ];
-let STAMPsends = [
+const STAMPsends = [
     "yannne",
     "gao-",
     "kinako",
@@ -67,7 +67,7 @@ let STAMPsends = [
     "rascal",
     "ohagoza"
 ];
-sleeps = [
+const sleeps = [
     "oyasumi",
     "osumiya",
     "poyasimi",
@@ -128,7 +128,7 @@ module.exports = robot => {
             else {
                 let r = "";
                 for(let i = 0; i < 2; i++){
-                    let generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
+                    const generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
                     r += generated;
                 }
                 setTimeout(() => {
