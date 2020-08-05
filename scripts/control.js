@@ -1,5 +1,5 @@
 const { User } = require("hubot");
-const api = require("../src/api")
+// const api = require("../src/api");
 
 //コマンド一覧
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
@@ -107,7 +107,7 @@ module.exports = robot => {
         // await api.join(channelId)
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
-            res.send('!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}')
+            res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + displayname)
         },500);
     });
 
@@ -116,7 +116,7 @@ module.exports = robot => {
         // await api.leave(channelId)
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～")
-            res.send('!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}')
+            res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + displayname)
         },500);
     });
 
