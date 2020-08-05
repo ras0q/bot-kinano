@@ -117,6 +117,25 @@ module.exports = robot => {
         });
     }
 
+        // //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
+        // //正規表現使って簡潔に書きたい
+        // robot.hear(/.*もふもふ.*/, res => {
+        //     const {message} = res.message;
+        //     const {user} = message;
+        //     if(user.bot)
+        //         return;
+        //     else {
+        //         let r = "";
+        //         for(let i = 0; i < 2; i++){
+        //             r += hira[Math.floor( Math.random() * hira.length )];
+        //         }
+        //         setTimeout(() => {
+        //             res.reply(r + r);
+        //         },500);
+        //     }
+        // });
+
+
         //監視対象チャンネルで"もふもふ"を受け取ったらランダムで返す
         //正規表現使って簡潔に書きたい
         robot.hear(/.*もふもふ.*/, res => {
@@ -125,12 +144,8 @@ module.exports = robot => {
             if(user.bot)
                 return;
             else {
-                let r = "";
-                for(let i = 0; i < 2; i++){
-                    r += hira[Math.floor( Math.random() * hira.length )];
-                }
                 setTimeout(() => {
-                    res.reply(r + r);
+                    res.reply(/([あ - ん]{2}){2}/);
                 },500);
             }
         });
