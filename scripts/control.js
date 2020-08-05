@@ -1,5 +1,4 @@
 const { User } = require("hubot");
-// const api = require("../src/api");
 
 //コマンド一覧
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
@@ -94,8 +93,8 @@ const displayname = res.message.message.user.displayName;
 module.exports = robot => {
 
     //起動時メッセージ
-    deplymessage = ":kinano.ex-large.pyon:";
-    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+    let deplymessage = ":kinano.ex-large.pyon:";
+    res.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
     //ID取得
     robot.respond(/ID$/i, res => {
@@ -104,7 +103,6 @@ module.exports = robot => {
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
-        // await api.join(channelId)
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
             res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"join request by" + displayname)
@@ -113,7 +111,6 @@ module.exports = robot => {
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        // await api.leave(channelId)
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～")
             res.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"leave request by" + displayname)
