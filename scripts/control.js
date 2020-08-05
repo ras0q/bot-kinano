@@ -3,15 +3,11 @@ const { User } = require("hubot");
 //コマンド一覧
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
 const responds = [
-    /(いらっしゃい|join)$/i,
-    /(ばいばい|バイバイ|bye)$/i,
     /.*hoge.*/i,
     /.*もちもち.*/,
     /(できること|help)/i
 ];
 const replys = [
-    "OKやんね～、ちょっと時間がかかるかもやんね～",
-    "本当によろしいですか？\nよろしい場合は:one:を、やめられる場合は:two:を押してください。\nやめられる場合は:two.ex-large:を押してください",
     "huga",
     "きなこもち～～～～～！",
     "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
@@ -97,9 +93,32 @@ module.exports = robot => {
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
     //ID取得
-    robot.respond(/ID/i, res =>{
-        res.send("あなたのIDは"+ res.message.message.user.id + "\nチャンネルIDは" + res.message.message.channelId + "\nチャンネル名は" + res.message.message.user.displayName + "です。")
-    })
+    robot.respond(/ID$/i, res => {
+        res.send("あなたのIDは"+ res.message.message.user.id + "\nあなたの名前は" + res.message.message.user.displayName　+ "\nチャンネルIDは" + res.message.message.channelId + "です。")
+    });
+
+    //監視対象に追加
+    robot.respond(/(いらっしゃい|join)$/i, res => {
+        res.send(
+            {
+                "type": "Joined",
+                "channel": res.message.message.channelId
+            },
+            ":oisu-1::oisu-2::oisu-3::oisu-4yoko:"
+        )
+    });
+
+    //監視対象から解除
+    robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
+        res.send(
+            {
+                "type": "Left",
+                "channel": res.message.message.channelId
+            },
+            "ばいばいやんね～、また遊んでやんね～"
+            )
+    });
+
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
@@ -111,21 +130,6 @@ module.exports = robot => {
                 setTimeout(() => {
                     res.reply(replys[i]);
                 },500);
-                if(i == 0 || i == 1){
-                    setTimeout(() => {
-                        res.send(
-                            {
-                                type: "stamp",
-                                name: "one"
-                            },
-                            {
-                                type: "stamp",
-                                name: "two"
-                            },
-                            '!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"}'
-                            );
-                    },1500);
-                }
         });
     }
 
