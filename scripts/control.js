@@ -86,11 +86,13 @@ const sleeps = [
     "ha-kireta"
 ];
 
-const channelId = res.message.message.channelId;
-const userId = res.message.message.id;
-const displayname = res.message.message.user.displayName;
 
 module.exports = robot => {
+
+    const channelId = res.message.message.channelId;
+    const userId = res.message.message.id;
+    const displayname = res.message.message.user.displayName;
+
 
     //起動時メッセージ
     let deplymessage = ":kinano.ex-large.pyon:";
