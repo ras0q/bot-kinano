@@ -1,7 +1,6 @@
 const { User } = require("hubot");
 
 //コマンド一覧
-
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
 const responds = [
     /(いらっしゃい|join)$/i,
@@ -11,7 +10,7 @@ const responds = [
     /(できること|help)/i
 ];
 const replys = [
-    ":oisu-1::oisu-2::oisu-3::oisu-4yoko:",
+    "OKやんね～、ちょっと時間がかかるかもやんね～",
     "本当によろしいですか？\nよろしい場合は:one:を、やめられる場合は:two:を押してください。\nやめられる場合は:two.ex-large:を押してください",
     "huga",
     "きなこもち～～～～～！",
@@ -97,6 +96,10 @@ module.exports = robot => {
     deplymessage = ":kinano.ex-large.pyon:";
     robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
 
+    //ID取得
+    robot.respond(/ID/i, res =>{
+        res.send("あなたのIDは"+ res.message.message.user.id + "\nチャンネルIDは" + res.message.message.channelId + "\nチャンネル名は" + res.message.message.user.displayName + "です。")
+    })
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
