@@ -42,7 +42,8 @@ let sends = [
     "死ぬな！",
     "ぽんぽん！"
 ];
-let hira =  ["ぁ", "あ", "ぃ", "い", "ぅ", "う", "ぇ", "え", "ぉ", "お", "か", "が", "き", "ぎ", "く", "ぐ", "け", "げ", "こ", "ご", "さ", "ざ", "し", "じ", "す", "ず", "せ", "ぜ", "そ", "ぞ", "た", "だ", "ち", "ぢ", "っ", "つ", "づ", "て", "で", "と", "ど", "な", "に", "ぬ", "ね", "の", "は", "ば", "ぱ", "ひ", "び", "ぴ", "ふ", "ぶ", "ぷ", "へ", "べ", "ぺ", "ほ", "ぼ", "ぽ", "ま", "み", "む", "め", "も", "ゃ", "や", "ゅ", "ゆ", "ょ", "よ", "ら", "り", "る", "れ", "ろ", "ゎ", "わ", "ゐ", "ゑ", "を", "ん"];
+const start = "ぁ".codePointAt(0);
+const end = "ん".codePointAt(0);
 let natterus = [
     ":yaya::koreni_natteru.large:",
     ":koreni_natteru.ex-large:",
@@ -127,7 +128,8 @@ module.exports = robot => {
             else {
                 let r = "";
                 for(let i = 0; i < 2; i++){
-                    r += hira[Math.floor( Math.random() * hira.length )];
+                    let generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
+                    r += generated;
                 }
                 setTimeout(() => {
                     res.reply(r + r);
