@@ -109,10 +109,10 @@ module.exports = robot => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
             robot.send(
                 {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-                "join request\n by @" + res.message.message.user.displayName
+                "join request\n user : @" + res.message.message.user.displayName
                 + "(" + res.message.message.user.name + ")" 
-                + "\nin " + res.message.message.channelId 
-                + "\nat " + res.message.message.createdAt
+                + "\nchannel : " + res.message.message.channelId 
+                + "\ntime : " + res.message.message.createdAt
                 )
         },500);
     });
@@ -123,10 +123,10 @@ module.exports = robot => {
             res.send("ばいばいやんね～、また遊んでやんね～")
             robot.send(
                 {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-                "leave request\n by @" + res.message.message.user.displayName 
+                "leave request\n user : @" + res.message.message.user.displayName 
                 + "(" + res.message.message.user.name + ")" 
-                + "\nin " + res.message.message.channelId 
-                + "\nat " + res.message.message.createdAt
+                + "\nchannel : " + res.message.message.channelId 
+                + "\ntime : " + res.message.message.createdAt
                 )
         },500);
     });
