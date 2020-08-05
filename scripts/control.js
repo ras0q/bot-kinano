@@ -96,7 +96,7 @@ module.exports = robot => {
 
     //起動時メッセージ
     let deplymessage = ":kinano.ex-large.pyon:";
-    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},deplymessage);
+    robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},deplymessage);
 
     //ID取得
     robot.respond(/ID$/i, res => {
@@ -105,29 +105,29 @@ module.exports = robot => {
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
+        robot.send(
+            {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
+            "**join** request" 
+            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
+            + "\nchannel : " + res.message.message.channelId 
+            + "\ntime : " + res.message.message.createdAt
+            )
         setTimeout(() => {
             res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)")
-            robot.send(
-                {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-                "join request\n user : @" + res.message.message.user.displayName
-                + "(" + res.message.message.user.name + ")" 
-                + "\nchannel : " + res.message.message.channelId 
-                + "\ntime : " + res.message.message.createdAt
-                )
         },500);
     });
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
+        robot.send(
+            {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
+            "**leave** request" 
+            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
+            + "\nchannel : " + res.message.message.channelId 
+            + "\ntime : " + res.message.message.createdAt
+            )
         setTimeout(() => {
             res.send("ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)")
-            robot.send(
-                {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-                "leave request\n user : @" + res.message.message.user.displayName 
-                + "(" + res.message.message.user.name + ")" 
-                + "\nchannel : " + res.message.message.channelId 
-                + "\ntime : " + res.message.message.createdAt
-                )
         },500);
     });
 
