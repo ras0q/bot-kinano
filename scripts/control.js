@@ -1,4 +1,5 @@
 const { User } = require("hubot");
+const api = require("../src/api")
 
 //コマンド一覧
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
@@ -86,6 +87,10 @@ const sleeps = [
     "ha-kireta"
 ];
 
+const channelId = res.message.message.channelId;
+const userId = res.message.message.id;
+const displayname = res.message.message.user.displayName;
+
 module.exports = robot => {
 
     //起動時メッセージ
@@ -94,29 +99,23 @@ module.exports = robot => {
 
     //ID取得
     robot.respond(/ID$/i, res => {
-        res.send("あなたのIDは"+ res.message.message.user.id + "\nあなたの名前は" + res.message.message.user.displayName　+ "\nチャンネルIDは" + res.message.message.channelId + "です。")
+        res.send("あなたのIDは"+ userId + "\nあなたの名前は" + displayname + "\nチャンネルIDは" + channelId + "です。")
     });
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
-        res.send(
-            {
-                "type": "Joined",
-                "channel": res.message.message.channelId
-            },
-            ":oisu-1::oisu-2::oisu-3::oisu-4yoko:"
-        )
+        await api.join(channelId)
+        setTimeout(() => {
+            res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
+        },500);
     });
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        res.send(
-            {
-                "type": "Left",
-                "channel": res.message.message.channelId
-            },
-            "ばいばいやんね～、また遊んでやんね～"
-            )
+        await api.leave(channelId)
+        setTimeout(() => {
+            res.send("ばいばいやんね～、また遊んでやんね～")
+        },500);
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
