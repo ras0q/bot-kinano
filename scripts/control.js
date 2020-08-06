@@ -89,9 +89,12 @@ const sleeps = [
 
 module.exports = robot => {
 
-    // const channelId = res.message.message.channelId;
-    // const userId = res.message.message.id;
-    // const displayname = res.message.message.user.displayName;
+    const channelId = res.message.message.channelId; //チャンネルID(長文字列)
+    const userId = res.message.message.id; //ユーザーID(長文字列)
+    const userName = res.message.message.user.name; //ユーザー名(@BOT_kinanoとか)
+    const displayName = res.message.message.user.displayName; //ユーザー名(きなのとか)
+    const bot = res.message.message.user.bot; //BOTかどうか(TorFで返す)
+    const createdAt = res.message.message.createdAt; //投稿時間
 
 
     //起動時メッセージ
@@ -100,7 +103,7 @@ module.exports = robot => {
 
     //ID取得
     robot.respond(/ID$/i, res => {
-        res.send("あなたのIDは"+ res.message.message.id + "\nあなたの名前は" + res.message.message.user.displayName + "\nチャンネルIDは" + res.message.message.channelId + "です。")
+        res.send("あなたのIDは"+ userId + "\nあなたの名前は" + displayName + "\nチャンネルIDは" + channelId + "です。")
     });
 
     //監視対象に追加
@@ -108,12 +111,12 @@ module.exports = robot => {
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request" 
-            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
-            + "\nchannel : " + res.message.message.channelId 
-            + "\ntime : " + res.message.message.createdAt
+            + "\n user : " + '!{"type":"user","raw":"@' + userName + '","id":"' + userId + '"}'
+            + "\nchannel : " + channelId 
+            + "\ntime : " + createdAt
             )
         setTimeout(() => {
-            res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)")
+            res.reply(":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)")
         },500);
     });
 
@@ -122,23 +125,19 @@ module.exports = robot => {
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request" 
-            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
-            + "\nchannel : " + res.message.message.channelId 
-            + "\ntime : " + res.message.message.createdAt
+            + "\n user : " + '!{"type":"user","raw":"@' + userName + '","id":"' + userId + '"}'
+            + "\nchannel : " + channelId 
+            + "\ntime : " + createdAt
             )
         setTimeout(() => {
-            res.send("ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)")
+            res.reply("ばいば～い、また遊んでやんね～\n(少し時間がかかります)")
         },500);
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
-            const {message} = res.message;
-            const {user} = message;
-            if(user.bot)
-                return;
-            else 
+            if(!bot)
                 setTimeout(() => {
                     res.reply(replys[i]);
                 },500);
@@ -148,29 +147,23 @@ module.exports = robot => {
     //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
     for(let i = 0;i < hears.length;i++){
         robot.hear(hears[i], res => {
-            const {message} = res.message;
-            const {user} = message;
-            if(user.bot)
-                return;
-            else if(i === 0) 
-                setTimeout(() => {
-                    res.send(sends[0]);
-                },1000);
-            else 
-                setTimeout(() => {
-                    res.send(sends[i]);
-                },500);
+            if(!bot){
+                if(i === 0) 
+                    setTimeout(() => {
+                        res.send(sends[0]);
+                    },1000);
+                else 
+                    setTimeout(() => {
+                        res.send(sends[i]);
+                    },500);
+            }
         });
     }
 
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
     //正規表現使って簡潔に書きたい
     robot.hear(/.*もふもふ.*/, res => {
-        const {message} = res.message;
-        const {user} = message;
-        if(user.bot)
-            return;
-        else {
+        if(!bot){
             let r = "";
             for(let i = 0; i < 2; i++){
                 const generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
@@ -184,11 +177,7 @@ module.exports = robot => {
 
     //``@BOT_kinano .*なってる``(監視対象チャンネルではメンション不要)(後方一致)を受け取るとnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {
-        const {message} = res.message;
-        const {user} = message;
-        if(user.bot)
-            return;
-        else {
+        if(!bot){
             let i = Math.floor( Math.random() * natterus.length );
             setTimeout(() => {
                 res.reply(natterus[i]);
