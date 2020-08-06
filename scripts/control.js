@@ -89,12 +89,12 @@ const sleeps = [
 
 module.exports = robot => {
 
-    const channelId = res.message.message.channelId; //チャンネルID(長文字列)
-    const userId = res.message.message.id; //ユーザーID(長文字列)
-    const userName = res.message.message.user.name; //ユーザー名(@BOT_kinanoとか)
-    const displayName = res.message.message.user.displayName; //ユーザー名(きなのとか)
-    const bot = res.message.message.user.bot; //BOTかどうか(TorFで返す)
-    const createdAt = res.message.message.createdAt; //投稿時間
+    let channelId = res.message.message.channelId; //チャンネルID(長文字列)
+    let userId = res.message.message.id; //ユーザーID(長文字列)
+    let userName = res.message.message.user.name; //ユーザー名(@BOT_kinanoとか)
+    let displayName = res.message.message.user.displayName; //ユーザー名(きなのとか)
+    let bot = res.message.message.user.bot; //BOTかどうか(TorFで返す)
+    let createdAt = res.message.message.createdAt; //投稿時間
 
 
     //起動時メッセージ
