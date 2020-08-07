@@ -115,7 +115,10 @@ module.exports = robot => {
             + "\ntime : " + res.message.message.createdAt
             )
         setTimeout(() => {
-            res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)")
+            res.send(
+                ":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)",
+                '{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+                )
         },500);
     });
 
@@ -129,7 +132,10 @@ module.exports = robot => {
             + "\ntime : " + res.message.message.createdAt
             )
         setTimeout(() => {
-            res.send("ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)")
+            res.send(
+                "ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)",
+                '{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+            )
         },500);
     });
 
