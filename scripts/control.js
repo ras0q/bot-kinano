@@ -16,7 +16,7 @@ const replys = [
 //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
 const hears = [
     /.*(もふもち|もちもふ).*/,
-    /.*(らす|Ras).*/i,
+    /.*((?!と)らす|(?!t)Ras).*/i,
     /.*もちもち.*/,
     /.*きなこ.*/,
     /.*きなの.*/,
@@ -63,6 +63,7 @@ const STAMPhears = [
     /.*(黄|yellow).*/i,
     /.*(らす|Ras).*/i,
     /.*(おは|ohagoza|ohasta).*/i,
+    /.*trasta.*/i
 ];
 const STAMPsends = [
     "yannne",
@@ -71,7 +72,8 @@ const STAMPsends = [
     "mochimochi_kinakomochi",
     "yellow",
     "rascal",
-    "ohagoza"
+    "ohagoza",
+    "trasta"
 ];
 
 //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)(部分一致、()内の言葉ならどれでもよい)を受け取るとsleepsからランダムでスタンプを押す
@@ -136,9 +138,7 @@ module.exports = robot => {
         robot.respond(responds[i], res => {
             const {message} = res.message;
             const {user} = message;
-            if(user.bot)
-                return;
-            else 
+            if(!user.bot) 
                 setTimeout(() => {
                     res.reply(replys[i]);
                 },500);
@@ -150,16 +150,16 @@ module.exports = robot => {
         robot.hear(hears[i], res => {
             const {message} = res.message;
             const {user} = message;
-            if(user.bot)
-                return;
-            else if(i === 0) 
-                setTimeout(() => {
-                    res.send(sends[0]);
-                },1000);
-            else 
-                setTimeout(() => {
-                    res.send(sends[i]);
-                },500);
+            if(!user.bot){
+                if(i === 0) 
+                    setTimeout(() => {
+                        res.send(sends[0]);
+                    },1000);
+                else 
+                    setTimeout(() => {
+                        res.send(sends[i]);
+                    },500);
+            }
         });
     }
 
@@ -168,9 +168,7 @@ module.exports = robot => {
     robot.hear(/.*もふもふ.*/, res => {
         const {message} = res.message;
         const {user} = message;
-        if(user.bot)
-            return;
-        else {
+        if(!user.bot){
             let r = "";
             for(let i = 0; i < 2; i++){
                 const generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
@@ -186,9 +184,7 @@ module.exports = robot => {
     robot.hear(/.*なってる$/, res => {
         const {message} = res.message;
         const {user} = message;
-        if(user.bot)
-            return;
-        else {
+        if(!user.bot){
             let i = Math.floor( Math.random() * natterus.length );
             setTimeout(() => {
                 res.reply(natterus[i]);
