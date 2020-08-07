@@ -120,7 +120,7 @@ module.exports = robot => {
                 )
         },500);
         setTimeout(() => {
-            res.reply(
+            res.send(
                 '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
                 )
         },1000);
@@ -141,7 +141,7 @@ module.exports = robot => {
             )
         },500);
         setTimeout(() => {
-            res.reply(
+            res.send(
                 '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
                 )
         },1000);
