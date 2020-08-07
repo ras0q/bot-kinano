@@ -117,14 +117,18 @@ module.exports = robot => {
         setTimeout(() => {
             res.send(
                 ":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)",
-                '{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
                 )
         },500);
+        setTimeout(() => {
+            res.reply(
+                '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+                )
+        },1000);
     });
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        robot.send(
+        robot.reply(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request" 
             + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
@@ -132,11 +136,15 @@ module.exports = robot => {
             + "\ntime : " + res.message.message.createdAt
             )
         setTimeout(() => {
-            res.send(
+            res.reply(
                 "ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)",
-                '{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
             )
         },500);
+        setTimeout(() => {
+            res.reply(
+                '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+                )
+        },1000);
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
