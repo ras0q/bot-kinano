@@ -226,30 +226,14 @@ module.exports = robot => {
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
     robot.hear(/.*([おオｵ][いイｲ][すスｽ]|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
-        res.send(
-            {
-                type: "stamp",
-                name: "oisu-1"
-            }
-        );
-        res.send(
-            {
-                type: "stamp",
-                name: "oisu-2"
-            }
-        );
-        res.send(
-            {
-                type: "stamp",
-                name: "oisu-3"
-            }
-        );
-        res.send(
-            {
-                type: "stamp",
-                name: "oisu-4yoko"
-            }
-        );
+        for(let i = 1; i < 5; i++){
+            res.send(
+                {
+                    type: "stamp",
+                    name: "oisu-" + i
+                }
+            );
+        }
     });
 
 };
