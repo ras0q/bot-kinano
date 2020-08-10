@@ -15,21 +15,20 @@ const replys = [
 
 //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
 const hears = [
-    /.*(もふもち|もちもふ).*/,
     /.*((?!と)らす|(?!t)Ras).*/i,
     /.*もちもち.*/,
     /.*きなこ.*/,
     /.*きなの.*/,
     /.*やんね.*/,
-    /.*おい(?!す).*/,
+    /.*おい(?!す|ス|ｽ).*/,
     /.*(か[あ～]|car|[っう]かな|[やす]るぞ).*/, //後方一致どうしよう
     /.*うまうま.*/,
     /.*[い言云]ってい?る$/,
     /.*(死|:si.*:).*/,
-    /.*(おなか).*/
+    /.*(おなか).*/,
+    /.*(もふもち|もちもふ).*/,
 ];
 const sends = [
-    "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
     "えへへ",
     "もちもち～:blobenjoy:",
     ":kinako.ex-large:",
@@ -40,7 +39,8 @@ const sends = [
     "むしゃむしゃ",
     "いうな！",
     "死ぬな！",
-    "ぽんぽん！"
+    "ぽんぽん！",
+    "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
 ];
 
 //unicodeからひらがなを取得(``@BOT_kinano もふもふ``を受け取った時にランダム文字列を返すのに使用)
@@ -119,11 +119,11 @@ module.exports = robot => {
                 ":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)",
                 )
         },500);
-        setTimeout(() => {
-            res.send(
-                '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
-                )
-        },1000);
+        // setTimeout(() => {
+        //     res.send(
+        //         '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+        //         )
+        // },1000);
     });
 
     //監視対象から解除
@@ -140,11 +140,11 @@ module.exports = robot => {
                 "ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)",
             )
         },500);
-        setTimeout(() => {
-            res.send(
-                '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
-                )
-        },1000);
+        // setTimeout(() => {
+        //     res.send(
+        //         '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
+        //         )
+        // },1000);
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
@@ -155,7 +155,7 @@ module.exports = robot => {
             if(!user.bot) 
                 setTimeout(() => {
                     res.reply(replys[i]);
-                },500);
+                },300 * (i + 1));
         });
     }
 
@@ -165,14 +165,9 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             if(!user.bot){
-                if(i === 0) 
-                    setTimeout(() => {
-                        res.send(sends[0]);
-                    },1000);
-                else 
                     setTimeout(() => {
                         res.send(sends[i]);
-                    },500);
+                    },300 * (i + 1));
             }
         });
     }
@@ -230,7 +225,7 @@ module.exports = robot => {
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
-    robot.hear(/.*(おいす|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
+    robot.hear(/.*([おオｵ][いイｲ][すスｽ]|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
         res.send(
             {
                 type: "stamp",
