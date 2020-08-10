@@ -225,7 +225,7 @@ module.exports = robot => {
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
-    robot.hear(/.*([おぉオォｵｫ(:oisu-1.*:)][いぃイィｲｨｨ(:oisu-2.*:)][すスｽ(:oisu-3.*:)]|:oisu-1::oisu-2::oisu-3::oisu-4yoko:).*/i, res => {
+    robot.hear(/.*[おぉオォｵｫ(:oisu-1.*:)][いぃイィｲｨｨ(:oisu-2.*:)][すスｽ(:oisu-3.*:)].*/i, res => {
         for(let i = 1; i < 5; i++){
             if(i == 4){
                 res.send(
