@@ -113,7 +113,7 @@ module.exports = robot => {
         )
     })
 
-    robot.respond(/.*addplaylist.*/i, res => {
+    robot.respond(/.*deleteplaylist.*/i, res => {
         let pop = playlist[playlist.length - 1];
         playlist.pop();
         setTimeout(
