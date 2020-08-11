@@ -105,6 +105,22 @@ module.exports = robot => {
         res.send("あなたのIDは"+ res.message.message.id + "\nあなたの名前は" + res.message.message.user.displayName + "\nチャンネルIDは" + res.message.message.channelId + "です。")
     });
 
+    let playlist = [];
+    robot.respond(/^addplaylist.*/i, res => {
+        playlist.push(res.message.plainText);
+        setTimeout(
+            res.send(res.message.plainText + "を追加したやんね！")
+        )
+    })
+
+    robot.respond(/^watchplaylist.*/i, res => {
+        let playlist2;
+        for(let i = 0; i < playlist.length; i++){
+            playlist2 = playlist2 + playlist[i] +"\n";
+        }
+        res.send(playlist2);
+    })
+
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
         robot.send(
