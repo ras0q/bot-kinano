@@ -28,7 +28,7 @@ module.exports = robot => {
     })
 
     //曲削除
-    robot.respond(/.*%delete ..$/i, res => {
+    robot.respond(/.*%delete .*/i, res => {
         const plainText = res.message.message.plainText;
         if(plainText == "error"){
             setTimeout(() => {
