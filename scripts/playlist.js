@@ -1,6 +1,6 @@
 const { User } = require("hubot");
 
-let playlist =["|例) Ras| いぬのおまわりさん |\n"];
+let playlist =["|Ras| いぬのおまわりさん |\n"];
 
 module.exports = robot => {
     robot.respond(/.*%add.*/i, res => {
@@ -14,7 +14,7 @@ module.exports = robot => {
         else{
             const persentIndex = plainText.indexOf("%add");
             let musicname = plainText.slice(persentIndex + 4);
-            let headline = "| 追加した人 | 曲名 |\n|-|-|\n"
+            let headline = "| 追加した人 | 追加した曲 |\n|-|-|\n"
             let addtolist = "|" + userName + "|" + musicname + "|\n";
             playlist.push(addtolist);
             setTimeout(() => {
@@ -33,7 +33,7 @@ module.exports = robot => {
         else{
             const persentIndex = plainText.indexOf("%delete");
             const deleteIndex = plainText.slice(persentIndex + 8);
-            let deleteTable = "| 追加した人 | 曲名 |\n|-|-|\n" + playlist[deleteIndex];
+            let deleteTable = "| 追加した人 | 削除した曲 |\n|-|-|\n" + playlist[deleteIndex];
             playlist.splice(deleteIndex,1);
             setTimeout(() => {
                 res.send("ぷれいりすとから曲" + deleteIndex +"を削除したやんね！\n" + deleteTable)
@@ -45,7 +45,7 @@ module.exports = robot => {
         let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n";
         for(let i = 0;i < playlist.length; i++){
             if(i == 0)
-                table = table + "|" + playlist[i];
+                table = table + "|例" + playlist[i];
             else
             table = table + "|" + i + playlist[i];
         }
