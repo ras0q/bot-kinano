@@ -57,7 +57,7 @@ module.exports = robot => {
     robot.respond(/.*%watch$/i, res => {
         let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
         for(let i = 0;i < playlist.length; i++){
-            table = table + "|" + i + playlist[i];
+            table = table + "|" + i + playlist[i] + "\n";
         }
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
