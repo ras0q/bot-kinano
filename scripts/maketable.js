@@ -10,7 +10,7 @@ module.exports = robot => {
         const persentIndex = plainText.indexOf("%add");
         const verticalIndex = plainText.indexOf("|");
         const newlineIndex = plainText.indexOf("\n")
-        if(verticalIndex != -1 && newlineIndex != -1){
+        if(verticalIndex != -1 || newlineIndex != -1){
             setTimeout(() => {
                 res.send("えらー")
             }, 500);
@@ -27,7 +27,7 @@ module.exports = robot => {
     })
 
     //曲削除
-    robot.respond(/.*%delete .*/i, res => {
+    robot.respond(/.*%delete ..$/i, res => {
         const plainText = res.message.message.plainText;
         if(plainText == "error"){
             setTimeout(() => {
