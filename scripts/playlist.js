@@ -37,13 +37,16 @@ module.exports = robot => {
             setTimeout(() => {
                 res.send("ぷれいりすとから削除したやんね！\n" + headline + playlist[deleteIndex])
                 }, 500);
-            playlist.splice(deletefromlist,1);
+            playlist.splice(deleteIndex,1);
         }
     })
 
     robot.respond(/.*%watch$/i, res => {
         let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n";
         for(let i = 0;i < playlist.length; i++){
+            if(i == 0)
+                table = table + "| 例）" + playlist[i];
+            else
             table = table + "|" + i + playlist[i];
         }
         setTimeout(() => {
