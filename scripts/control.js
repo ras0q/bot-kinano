@@ -18,7 +18,7 @@ module.exports = robot => {
 
     //ID取得
     robot.respond(/ID$/i, res => {
-        res.send("あなたのIDは"+ res.message.message.id + "\nあなたの名前は" + res.message.message.user.displayName + "\nチャンネルIDは" + res.message.message.channelId + "です。")
+        res.send("Message: " + res.message.message.plainText + "MessageID: "+ res.message.message.id + "\nYour name: " + res.message.message.user.displayName + "\nChannelID: " + res.message.message.channelId)
     });
 
     //監視対象に追加

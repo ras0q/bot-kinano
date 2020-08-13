@@ -23,7 +23,7 @@ module.exports = robot => {
         }
     })
 
-    robot.respond(/.*%delete.*/i, res => {
+    robot.respond(/.*%delete [0-9][0-9]/i, res => {
         const plainText = res.message.message.plainText;
         if(plainText == "error"){
             setTimeout(() => {
@@ -40,10 +40,10 @@ module.exports = robot => {
         }
     })
 
-    robot.respond(/.*%watch.*/i, res => {
-        let table = "| 追加した人 | 曲名 |\n|-|-|\n";
+    robot.respond(/.*%watch$/i, res => {
+        let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n";
         for(let i = 0;i < playlist.length; i++){
-            table = table + "|" + i + "|" + playlist[i];
+            table = table + "|" + i + playlist[i];
         }
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
