@@ -33,11 +33,11 @@ module.exports = robot => {
         else{
             const persentIndex = plainText.indexOf("%delete");
             const deleteIndex = plainText.slice(persentIndex + 8);
-            let headline = "| 追加した人 | 曲名 |\n|-|-|\n"
-            setTimeout(() => {
-                res.send("ぷれいりすとから削除したやんね！\n" + headline + playlist[deleteIndex])
-                }, 500);
+            let deleteTable = "| 追加した人 | 曲名 |\n|-|-|\n" + playlist[deleteIndex];
             playlist.splice(deleteIndex,1);
+            setTimeout(() => {
+                res.send("ぷれいりすとから曲" + deleteIndex +"を削除したやんね！\n" + deleteTable)
+                }, 500);
         }
     })
 
