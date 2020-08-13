@@ -40,7 +40,7 @@ module.exports = robot => {
             const deleteIndex = plainText.slice(persentIndex + 8);
             let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + "|" + playlist[deleteIndex];
             playlist.splice(deleteIndex,1);
-            if(deleteTable == undefined){
+            if(deleteTable == "undefined"){
                 setTimeout(() => {
                     res.send("えらー")
                 }, 500);
