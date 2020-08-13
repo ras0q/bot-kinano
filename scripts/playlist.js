@@ -48,5 +48,5 @@ module.exports = robot => {
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
-    }
-})
+    })
+}
