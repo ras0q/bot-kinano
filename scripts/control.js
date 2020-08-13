@@ -15,7 +15,7 @@ const replys = [
 
 //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
 const hears = [
-    /.*((?![とトﾄ])[らラﾗ][すスｽ]|(?!t)Ras).*/i,
+    /.*Ras.*/i,
     /.*もちもち.*/,
     /.*きなこ.*/,
     /.*きなの.*/,
@@ -61,9 +61,8 @@ const STAMPhears = [
     /.*(やんね|きな[この]|黄名子|yannne).*/i,
     /.*(やんね|きな[この]|黄名子|yannne).*/i,
     /.*(黄|yellow).*/i,
-    /.*((?![とトﾄ])[らラﾗ][すスｽ]|(?!t)Ras).*/i,
+    /.*Ras.*/i,
     /.*(おは|ohagoza|ohasta).*/i,
-    /.*trasta.*/i
 ];
 const STAMPsends = [
     "yannne",
@@ -73,7 +72,6 @@ const STAMPsends = [
     "yellow",
     "rascal",
     "ohagoza",
-    "trasta"
 ];
 
 //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)(部分一致、()内の言葉ならどれでもよい)を受け取るとsleepsからランダムでスタンプを押す
@@ -84,7 +82,6 @@ const sleeps = [
     "oyasta",
     "suya",
     "guaaa",
-    "ha",
     "ha-kireta"
 ];
 
@@ -97,7 +94,7 @@ module.exports = robot => {
 
 
     //起動時メッセージ
-    let deplymessage = ":kinano.ex-large.pyon:";
+    let deplymessage = "# デプロイ完了";
     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},deplymessage);
 
     //ID取得
@@ -105,37 +102,13 @@ module.exports = robot => {
         res.send("あなたのIDは"+ res.message.message.id + "\nあなたの名前は" + res.message.message.user.displayName + "\nチャンネルIDは" + res.message.message.channelId + "です。")
     });
 
-    let playlist = [];
-    robot.respond(/.*addplaylist.*/i, res => {
-        playlist.push(res.message.plainText);
-        setTimeout(
-            res.send(res.message.plainText + "を追加したやんね！")
-        )
-    })
-
-    robot.respond(/.*deleteplaylist.*/i, res => {
-        let pop = playlist[playlist.length - 1];
-        playlist.pop();
-        setTimeout(
-            res.send(pop + "を削除したやんね！")
-        )
-    })
-
-    robot.respond(/.*watchplaylist.*/i, res => {
-        let playlist2;
-        for(let i = 0; i < playlist.length; i++){
-            playlist2 = playlist2 + playlist[i] +"\n";
-        }
-        res.send(playlist2);
-    })
-
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-            "**join** request" 
+            "**join** request"
             + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
-            + "\nchannel : " + res.message.message.channelId 
+            + "\nchannel : " + res.message.message.channelId
             + "\ntime : " + res.message.message.createdAt
             )
         setTimeout(() => {
@@ -154,9 +127,9 @@ module.exports = robot => {
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
         robot.reply(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
-            "**leave** request" 
+            "**leave** request"
             + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
-            + "\nchannel : " + res.message.message.channelId 
+            + "\nchannel : " + res.message.message.channelId
             + "\ntime : " + res.message.message.createdAt
             )
         setTimeout(() => {
@@ -176,10 +149,10 @@ module.exports = robot => {
         robot.respond(responds[i], res => {
             const {message} = res.message;
             const {user} = message;
-            if(!user.bot) 
+            if(!user.bot)
                 setTimeout(() => {
                     res.reply(replys[i]);
-                },300 * (i + 1));
+                },500);
         });
     }
 
@@ -189,9 +162,14 @@ module.exports = robot => {
             const {message} = res.message;
             const {user} = message;
             if(!user.bot){
+                if(i == 0)
                     setTimeout(() => {
                         res.send(sends[i]);
-                    },300 * (i + 1));
+                    },1000);
+                else
+                    setTimeout(() => {
+                        res.send(sends[i]);
+                    },500);
             }
         });
     }
@@ -255,7 +233,7 @@ module.exports = robot => {
                 res.send(
                     {
                         type: "stamp",
-                        name: "oisu-4yoko" 
+                        name: "oisu-4yoko"
                     }
                 );
             }
