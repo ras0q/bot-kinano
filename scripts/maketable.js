@@ -17,8 +17,8 @@ module.exports = robot => {
             }, 500);
         }
         else{
-            const musicName = plainText.slice(persentIndex + 4);
-            const headline = "| 追加した人 | 追加した曲 |\n|-|-|\n"
+            const musicName = plainText.slice(persentIndex + 5);
+            const headline = "|追加した人|追加した曲|\n|-|-|\n"
             const addtolist = "|" + userName + "|" + musicName + "|\n";
             playlist.push(addtolist);
             setTimeout(() => {
@@ -38,7 +38,7 @@ module.exports = robot => {
         }
         else{
             const gotNumber = plainText.slice(plainText.search(/[0-9]?[0-9]/));
-            let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + playlist[gotNumber];
+            let deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + playlist[gotNumber];
             playlist.splice(gotNumber,1);
             if(deleteTable == undefined){
                 setTimeout(() => {
@@ -56,12 +56,13 @@ module.exports = robot => {
 
     //曲確認
     robot.respond(/.*%watch$/i, res => {
-        let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
+        let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
         for(let i = 0;i < playlist.length; i++){
-            table = table + "|" + i + playlist[i] + "\n";
+            table = table + "|" + i + playlist[i];
         }
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
     })
+    
 }
