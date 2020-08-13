@@ -12,27 +12,27 @@ module.exports = robot => {
             }, 500);
         }
         else{
-            const persentIndex = plainText.indexOf("%");
+            const persentIndex = plainText.indexOf("%add");
             let musicname = plainText.slice(persentIndex + 4);
-            let headline = "| 追加した人 | 曲名 |"
+            let headline = "| 追加した人 | 曲名 |\n|-|-|\n"
             let addtolist = "|" + userName + "|" + musicname + "|\n";
             playlist.push(addtolist);
             setTimeout(() => {
-                res.send("ぷれいりすとに追加したやんね！\n"+ headline + "\n"+ addtolist)
+                res.send("ぷれいりすとに追加したやんね！\n"+ headline + addtolist)
             }, 500);
         }
     })
 
     robot.respond(/.*%delete.*/i, res => {
         const plainText = res.message.message.plainText;
-        if(playlist == "error"){
+        if(plainText == "error"){
             setTimeout(() => {
                 res.send("えらー")
             }, 500);
         }
         else{
-            const persentIndex = plainText.indexOf("%");
-            const deletefromlist =plainText.slice(persentIndex + 7);
+            const persentIndex = plainText.indexOf("%delete");
+            const deletefromlist = plainText.slice(persentIndex + 7);
             setTimeout(() => {
                 res.send("ぷれいりすとから" + playlist[deletefromlist] + "を削除したやんね！")
                 }, 500);
