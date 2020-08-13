@@ -1,4 +1,5 @@
 const { User } = require("hubot");
+const readme = require("./readme").readme;
 const responds = require("./words").responds;
 const replys =require("./words").replys;
 const hears =require("./words").hears;
@@ -61,6 +62,16 @@ module.exports = robot => {
         //         '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
         //         )
         // },1000);
+    });
+
+    //help
+    robot.respond(/(できること|help)/i, res => {
+        const {message} = res.message;
+        const {user} = message;
+        if(!user.bot)
+            setTimeout(() => {
+                res.send(readme);
+            },500);
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す

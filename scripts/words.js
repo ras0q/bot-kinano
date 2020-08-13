@@ -3,12 +3,10 @@
 const responds = [
     /.*hoge.*/i,
     /.*もちもち.*/,
-    /(できること|help)/i
 ];
 const replys = [
     "huga",
     "きなこもち～～～～～！",
-    "[きなのはなんでもできるやんね！](https://wiki.trap.jp/bot/kinano)"
 ];
 
 

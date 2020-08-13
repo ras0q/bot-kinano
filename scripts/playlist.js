@@ -1,6 +1,6 @@
 const { User } = require("hubot");
 
-let playlist =["|例) Ras| いぬのおまわりさん |"];
+let playlist =["|例) Ras| いぬのおまわりさん |\n"];
 
 module.exports = robot => {
     robot.respond(/.*%add.*/i, res => {
@@ -37,7 +37,7 @@ module.exports = robot => {
             setTimeout(() => {
                 res.send("ぷれいりすとから削除したやんね！\n" + headline + playlist[deleteIndex])
                 }, 500);
-            playlist = playlist.splice(deletefromlist,1);
+            playlist.splice(deletefromlist,1);
         }
     })
 
