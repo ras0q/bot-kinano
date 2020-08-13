@@ -6,7 +6,7 @@ module.exports = robot => {
     robot.respond(/.*%add.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
-        if(iplaylst == "error"){
+        if(playlst == "error"){
             setTimeout(() => {
                 res.send("えらー")
             }, 500);
