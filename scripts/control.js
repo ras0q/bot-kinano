@@ -1,5 +1,5 @@
 const { User } = require("hubot");
-const readme = require("./readme").readme;
+const readme = require("./words").readme;
 const responds = require("./words").responds;
 const replys =require("./words").replys;
 const hears =require("./words").hears;
@@ -36,11 +36,6 @@ module.exports = robot => {
                 ":oisu-1::oisu-2::oisu-3::oisu-4yoko:\n(少し時間がかかります)",
                 )
         },500);
-        // setTimeout(() => {
-        //     res.send(
-        //         '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
-        //         )
-        // },1000);
     });
 
     //監視対象から解除
@@ -57,11 +52,6 @@ module.exports = robot => {
                 "ばいばいやんね～、また遊んでやんね～\n(少し時間がかかります)",
             )
         },500);
-        // setTimeout(() => {
-        //     res.send(
-        //         '!{"type":"user","raw":"@Ras","id":"8ccd1354-cd16-4cda-9681-5b41e5f6ea76"}'
-        //         )
-        // },1000);
     });
 
     //help

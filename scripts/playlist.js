@@ -1,56 +1,8 @@
-const { User } = require("hubot");
+//仮
+let playlist = [
+    "|Rozelin| [Starry Line](https://open.spotify.com/album/2Rvt10dUcULTfzleIhdVIW?si=gYdLfVdeRE-kkJipKP2dJw)|",
+    "|Hmcmch| https://youtu.be/IfQumd_o0Gk|",
+    "|Hmcmch| [青春サイダー](https://www.youtube.com/watch?v=ULhJSLevmZ8&feature=youtu.be)|",
+]
 
-let playlist =["|Ras| いぬのおまわりさん |\n"];
-
-module.exports = robot => {
-    robot.respond(/.*%add.*/i, res => {
-        const userName = res.message.message.user.name;
-        const plainText = res.message.message.plainText;
-        if(plainText == "error"){
-            setTimeout(() => {
-                res.send("えらー")
-            }, 500);
-        }
-        else{
-            const persentIndex = plainText.indexOf("%add");
-            let musicname = plainText.slice(persentIndex + 4);
-            let headline = "| 追加した人 | 追加した曲 |\n|-|-|\n"
-            let addtolist = "|" + userName + "|" + musicname + "|\n";
-            playlist.push(addtolist);
-            setTimeout(() => {
-                res.send("ぷれいりすとに追加したやんね！\n"+ headline + addtolist)
-            }, 500);
-        }
-    })
-
-    robot.respond(/.*%delete .*/i, res => {
-        const plainText = res.message.message.plainText;
-        if(plainText == "error"){
-            setTimeout(() => {
-                res.send("えらー")
-            }, 500);
-        }
-        else{
-            const persentIndex = plainText.indexOf("%delete");
-            const deleteIndex = plainText.slice(persentIndex + 8);
-            let deleteTable = "| 追加した人 | 削除した曲 |\n|-|-|\n" + playlist[deleteIndex];
-            playlist.splice(deleteIndex,1);
-            setTimeout(() => {
-                res.send("ぷれいりすとから曲" + deleteIndex +"を削除したやんね！\n" + deleteTable)
-                }, 500);
-        }
-    })
-
-    robot.respond(/.*%watch$/i, res => {
-        let table = "| 番号 | 追加した人 | 曲名 |\n|-|-|-|\n";
-        for(let i = 0;i < playlist.length; i++){
-            if(i == 0)
-                table = table + "|例" + playlist[i];
-            else
-            table = table + "|" + i + playlist[i];
-        }
-        setTimeout(() => {
-            res.send("ぷれいりすとやんね～\n" + table)
-        }, 500);
-    })
-}
+exports.playlist = playlist;
