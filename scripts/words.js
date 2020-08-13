@@ -87,3 +87,14 @@ const sleeps = [
     "guaaa",
     "ha-kireta"
 ];
+
+exports.responds = responds;
+exports.replys = replys;
+exports.hears = hears;
+exports.sends = sends;
+exports.start = start;
+exports.end = end;
+exports.natterus = natterus;
+exports.STAMPhears = STAMPhears;
+exports.STAMPsends = STAMPsends;
+exports.sleeps = sleeps;
