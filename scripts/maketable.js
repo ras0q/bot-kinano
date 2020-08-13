@@ -1,5 +1,5 @@
 const { User } = require("hubot");
-let playlist = require("./playlist").playlist.
+let playlist = require("./playlist").playlist;
 
 module.exports = robot => {
 
