@@ -38,7 +38,7 @@ module.exports = robot => {
         }
         else{
             const gotNumber = plainText.slice(plainText.search(/[0-9]?[0-9]/));
-            let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + "|" + playlist[gotNumber];
+            let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + playlist[gotNumber];
             playlist.splice(gotNumber,1);
             if(deleteTable == "undefined"){
                 setTimeout(() => {
