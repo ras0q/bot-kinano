@@ -41,7 +41,7 @@ module.exports = robot => {
     })
 
     robot.respond(/.*%watch.*/i, res => {
-        let table = "| 追加した人 | 曲名 |\n";
+        let table = "| 追加した人 | 曲名 |\n|-|-|\n";
         for(let i = 0;i < playlist.length; i++){
             table = table + "|" + i + "|" + playlist[i];
         }
