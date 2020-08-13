@@ -32,9 +32,10 @@ module.exports = robot => {
         }
         else{
             const persentIndex = plainText.indexOf("%delete");
-            const deletefromlist = plainText.slice(persentIndex + 7);
+            const deletefromlist = plainText.slice(persentIndex + 8);
+            let headline = "| 追加した人 | 曲名 |\n|-|-|\n"
             setTimeout(() => {
-                res.send("ぷれいりすとから" + playlist[deletefromlist] + "を削除したやんね！")
+                res.send("ぷれいりすとから削除したやんね！\n" + headline + deletefromlist)
                 }, 500);
             playlist = playlist.splice(deletefromlist,1);
         }
