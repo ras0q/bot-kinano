@@ -29,6 +29,7 @@ module.exports = robot => {
 
     //曲削除
     robot.respond(/.*%delete.*/i, res => {
+        const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         if(plainText == "error"){
             setTimeout(() => {
@@ -36,10 +37,9 @@ module.exports = robot => {
             }, 500);
         }
         else{
-            const persentIndex = plainText.indexOf("%delete");
-            const deleteIndex = plainText.slice(persentIndex + 8);
-            let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + "|" + playlist[deleteIndex];
-            playlist.splice(deleteIndex,1);
+            const gotNumber = plainText.slice(plainText.search(/[0-9]?[0-9]/));
+            let deleteTable = "| 削除した人 | 追加した人 | 削除した曲 |\n|-|-|-|\n|" + userName + "|" + playlist[gotNumber];
+            playlist.splice(gotNumber,1);
             if(deleteTable == "undefined"){
                 setTimeout(() => {
                     res.send("えらー")
@@ -47,7 +47,7 @@ module.exports = robot => {
             }
             else{
                 setTimeout(() => {
-                    res.send("ぷれいりすとから 曲" + deleteIndex +" を削除したやんね！\n" + deleteTable)
+                    res.send("ぷれいりすとから 曲" + gotNumber +" を削除したやんね！\n" + deleteTable)
                     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + deleteTable)
                 }, 500);
             }
