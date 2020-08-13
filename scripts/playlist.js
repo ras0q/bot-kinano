@@ -3,7 +3,7 @@ const { User } = require("hubot");
 let playlist =[];
 
 module.exports = robot => {
-    res.respond(/.*%add /i), res => {
+    res.respond(/.*%add /i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         if(iplaylst == "error"){
@@ -21,9 +21,9 @@ module.exports = robot => {
                 res.send("ぷれいりすとに追加したやんね！\n"+ headline + "\n"+ addtolist)
             }, 500);
         }
-    }
+    })
 
-    res.respond(/.*%delete /i), res => {
+    res.respond(/.*%delete /i, res => {
         const plainText = res.message.message.plainText;
         if(playlist == "error"){
             setTimeout(() => {
@@ -38,9 +38,9 @@ module.exports = robot => {
                 }, 500);
             playlist = playlist.splice(deletefromlist,1);
         }
-    }
+    })
 
-    res.respond(/.*%watch/i), res => {
+    res.respond(/.*%watch/i, res => {
         let table = "| 追加した人 | 曲名 |\n";
         for(let i = 0;i < playlist.length; i++){
             table = table + "|" + i + "|" + playlist[i];
@@ -49,4 +49,4 @@ module.exports = robot => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
     }
-}
+})
