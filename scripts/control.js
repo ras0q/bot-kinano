@@ -1,14 +1,14 @@
 const { User } = require("hubot");
 const responds = require("./words").responds;
-const replys =rewuire("./words").replys;
-const hears =rewuire("./words").hears;
-const sends =rewuire("./words").sends;
-const start =rewuire("./words").start;
-const end =rewuire("./words").end;
-const natterus =rewuire("./words").natterus;
-const STAMPhears =rewuire("./words").STAMPhears;
-const STAMPsends =rewuire("./words").STAMPsends;
-const sleeps =rewuire("./words").sleeps;
+const replys =require("./words").replys;
+const hears =require("./words").hears;
+const sends =require("./words").sends;
+const start =require("./words").start;
+const end =require("./words").end;
+const natterus =require("./words").natterus;
+const STAMPhears =require("./words").STAMPhears;
+const STAMPsends =require("./words").STAMPsends;
+const sleeps =require("./words").sleeps;
 
 module.exports = robot => {
 
