@@ -23,7 +23,7 @@ module.exports = robot => {
         }
     })
 
-    robot.respond(/.*%delete [0-9][0-9]/i, res => {
+    robot.respond(/.*%delete .*/i, res => {
         const plainText = res.message.message.plainText;
         if(plainText == "error"){
             setTimeout(() => {
