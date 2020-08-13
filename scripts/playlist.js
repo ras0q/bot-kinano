@@ -13,7 +13,7 @@ module.exports = robot => {
         }
         else{
             const persentIndex = plainText.indexOf("%");
-            let musicname = plainText.slice(persentIndex + 4, plainText.end());
+            let musicname = plainText.slice(persentIndex + 4);
             let headline = "| 追加した人 | 曲名 |"
             let addtolist = "|" + userName + "|" + musicname + "|\n";
             playlist.push(addtolist);
@@ -32,7 +32,7 @@ module.exports = robot => {
         }
         else{
             const persentIndex = plainText.indexOf("%");
-            const deletefromlist =plainText.slice(persentIndex + 7, plainText.end());
+            const deletefromlist =plainText.slice(persentIndex + 7);
             setTimeout(() => {
                 res.send("ぷれいりすとから" + playlist[deletefromlist] + "を削除したやんね！")
                 }, 500);
