@@ -135,9 +135,10 @@ module.exports = robot => {
 
     //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
     robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
+        let i = Math.random();
         setTimeout(() => {
-            let i = Math.random();
-            if(i > 0.5) res.send("寝るな！");
+            if(i > 0.9) res.send("えへへ")
+            else if(i > 0.7) res.send("寝るな！")
             else res.send(
                 {
                     type: "stamp",
