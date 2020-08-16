@@ -60,7 +60,7 @@ module.exports = robot => {
         for(let i = 0;i < playlist.length; i++){
             table = table + "|" + i + playlist[i] + "\n";
         }
-        table += "[](" + playlistURL + ")"
+        table = table + "[](" + playlistURL + ")";
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
