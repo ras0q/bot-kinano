@@ -16,7 +16,7 @@ let playlist = [
     "|SSlime|サーチライトと月明り|"
 ]
 
-const playlistURL = "https://www.youtube.com/playlist?list=PLCep_QEAK_Rz-Cnqtn_MZxFd0wWJcNYL0"
+let playlistURL = "https://www.youtube.com/playlist?list=PLCep_QEAK_Rz-Cnqtn_MZxFd0wWJcNYL0"
 
 exports.playlist = playlist;
 exports.playlistURL = playlistURL;

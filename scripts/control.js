@@ -1,4 +1,4 @@
-// const readme = require("./words").readme;
+const readme = require("./words").readme;
 const responds = require("./words").responds;
 const replys =require("./words").replys;
 const hears =require("./words").hears;
