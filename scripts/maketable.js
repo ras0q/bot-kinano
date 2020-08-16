@@ -1,6 +1,6 @@
 // const { User } = require("hubot");
 let playlist = require("./playlist").playlist;
-let URL = require("./playlist").URL;
+let URL = require("./playlist").playlistURL;
 
 module.exports = robot => {
 
@@ -60,6 +60,7 @@ module.exports = robot => {
         for(let i = 0;i < playlist.length; i++){
             table = table + "|" + i + playlist[i] + "\n";
         }
+        table += "[](" + playlistURL + ")"
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
