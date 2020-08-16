@@ -1,4 +1,4 @@
-//仮
+//仮 jsonとかで書いた方がよさそう、知らんけど
 let playlist = [
     "|Rozelin|Starry Line|",
     "|Hmcmch|青春サイダー|",

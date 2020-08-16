@@ -19,10 +19,11 @@ module.exports = robot => {
         else{
             const musicName = plainText.slice(persentIndex + 5);
             const headline = "|追加した人|追加した曲|\n|-|-|\n"
-            const addtolist = "|" + userName + "|" + musicName;
+            const addtolist = "|" + userName + "|" + musicName + "|";
             playlist.push(addtolist);
             setTimeout(() => {
                 res.send("ぷれいりすとに追加したやんね！\n"+ headline + addtolist)
+                robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト追加\n" + headline + addtolist)
             }, 500);
         }
     })
