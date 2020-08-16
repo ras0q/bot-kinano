@@ -79,18 +79,6 @@ const STAMPsends = [
     "ohagoza",
 ];
 
-
-//``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)(部分一致、()内の言葉ならどれでもよい)を受け取るとsleepsからランダムでスタンプを押す
-const sleeps = [
-    "oyasumi",
-    "osumiya",
-    "poyasimi",
-    "oyasta",
-    "suya",
-    "guaaa",
-    "ha-kireta"
-];
-
 //helpメッセージ
 const readme = "# :kinano.large.shake:できること:kinano.large.shake:\nきなのはなんでもできるやんね！\n\n### コミュニケーション :blobdrum:\n- ``@BOT_kinano できること`` : きなのはなんでもできるやんね～\n- ``@BOT_kinano いらっしゃい`` : 監視対象に追加するやんね～\n- ``@BOT_kinano もちもち`` : おもちをたべるやんね！\n- ``@BOT_kinano もふもふ`` : もふもふするやんね～\n- ``@BOT_kinano もちもち`` : もちもちするやんね～\n- ``@BOT_kinano おはよう`` : おはようやんね～\n- ``@BOT_kinano おやすみ`` : おやすみやんね～\n- ほかにもあるやんね～\n\n### プレイリスト:blobguitar:\n- ``@BOT_kinano %add 曲名``: 曲を追加できるやんね！\n- ``@BOT_kinano %watch``: プレイリストが見れるやんね～\n- ``@BOT_kinano %delete 曲番号``プレイリストから削除できるやんね！ほかの人が追加した曲を削除しないように注意するやんね～\n";
 
@@ -104,5 +92,4 @@ exports.end = end;
 exports.natterus = natterus;
 exports.STAMPhears = STAMPhears;
 exports.STAMPsends = STAMPsends;
-exports.sleeps = sleeps;
 exports.readme = readme;

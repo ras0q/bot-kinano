@@ -8,7 +8,6 @@ const end =require("./words").end;
 const natterus =require("./words").natterus;
 const STAMPhears =require("./words").STAMPhears;
 const STAMPsends =require("./words").STAMPsends;
-const sleeps =require("./words").sleeps;
 
 module.exports = robot => {
 
@@ -134,15 +133,18 @@ module.exports = robot => {
         });
     }
 
-    //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)(部分一致、()内の言葉ならどれでもよい)を受け取るとsleepsからランダムでスタンプを押す
+    //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
     robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
-        let i = Math.floor( Math.random() * sleeps.length );
-        res.send(
-            {
-                type: "stamp",
-                name: sleeps[i]
-            }
-        );
+        setTimeout(() => {
+            let i = Math.random();
+            if(i > 0.4) res.send("寝るな！");
+            else res.send(
+                {
+                    type: "stamp",
+                    name: "oyasumi"
+                }
+            );
+        }, 500);
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
