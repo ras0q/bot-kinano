@@ -137,7 +137,7 @@ module.exports = robot => {
     robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
         setTimeout(() => {
             let i = Math.random();
-            if(i > 0.4) res.send("寝るな！");
+            if(i > 0.5) res.send("寝るな！");
             else res.send(
                 {
                     type: "stamp",
