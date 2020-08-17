@@ -69,7 +69,7 @@ module.exports = robot => {
     })
 
 
-    robot.respond(/test/, res => {
+    robot.respond(/.*test.*/, res => {
         let text = plainText;
         try {
             fs.writeFileSync("playlist.js", text);
