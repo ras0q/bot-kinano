@@ -1,6 +1,7 @@
-// const { User } = require("hubot");
+let fs = require("fs");
 let playlist = require("./playlist").playlist;
 let playlistURL = require("./playlist").playlistURL;
+
 
 module.exports = robot => {
 
@@ -67,4 +68,14 @@ module.exports = robot => {
         }, 500);
     })
 
+
+    robot.respond(/test/, res => {
+        let text = plainText;
+        try {
+            fs.writeFileSync("playlist.js", text);
+            res.send("end")
+        }catch(e){
+            res.send("error")
+        }
+    })
 }
