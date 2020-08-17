@@ -70,12 +70,11 @@ module.exports = robot => {
 
 
     robot.respond(/.*test.*/, res => {
+        const fs = require('fs');
         let text = plainText;
-        try {
-            fs.writeFileSync("playlist.js", text);
-            res.send("end")
-        }catch(e){
-            res.send("error")
-        }
+        fs.writeFileSync("output.txt", text, (err) => {
+            if (err) throw err;
+            console.log('ファイルが正常に出力されました。');
+        });
     })
 }
