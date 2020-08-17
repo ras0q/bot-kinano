@@ -18,12 +18,24 @@ module.exports = robot => {
     //ID取得
     robot.respond(/.*ID.*/, res => {
         const MessageID = res.message.message.id;
-        const channelID = res.message.message.channelID;
-        const userID = res.message.message.id;
+        const channelID = res.message.message.channelId;
+        const userID = res.message.message.user.id;
         const traqID = res.message.message.user.name;
         const displayName = res.message.message.user.displayName;
+        const botflag = res.message.message.user.bot;
         const plainText = res.message.message.plainText;
-        res.send("MessageID: "+ MessageID + "\nChannelID: " + channelID + "\nYour ID: " + userID + "\nYour traqID: " + traqID + "\nYour name: " + displayName + "\nPlain text: 「" + plainText + "」")
+        const time = res.message.message.createdAt;
+        res.send(
+            "|MessageID|"+ MessageID
+            + "|\n|-|-"
+            + "|\n|ChannelID|" + channelID
+            + "|\n|Your ID|" + userID
+            + "|\n|Your traqID|@" + traqID
+            + "|\n|Your name|" + displayName
+            + "|\n|Bot|" + botflag
+            + "|\n|Plain text|「" + plainText + "」"
+            + "|\n|Time|" + time + "|"
+            )
     });
 
     //監視対象に追加
@@ -31,7 +43,7 @@ module.exports = robot => {
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request"
-            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
+            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.user.id + '"}'
             + "\nchannel : " + res.message.message.channelId
             + "\ntime : " + res.message.message.createdAt
             )
