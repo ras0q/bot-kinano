@@ -1,4 +1,3 @@
-let fs = require("fs");
 let playlist = require("./playlist").playlist;
 let playlistURL = require("./playlist").playlistURL;
 
@@ -68,13 +67,4 @@ module.exports = robot => {
         }, 500);
     })
 
-
-    robot.respond(/.*test.*/, res => {
-        const fs = require('fs');
-        let text = plainText;
-        fs.writeFileSync("output.txt", text, (err) => {
-            if (err) throw err;
-            console.log('ファイルが正常に出力されました。');
-        });
-    })
 }
