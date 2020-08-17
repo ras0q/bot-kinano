@@ -16,8 +16,14 @@ module.exports = robot => {
     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},deplymessage);
 
     //ID取得
-    robot.respond(/ID$/i, res => {
-        res.send("Message: " + res.message.message.plainText + "MessageID: "+ res.message.message.id + "\nYour name: " + res.message.message.user.displayName + "\nChannelID: " + res.message.message.channelId)
+    robot.respond(/.*ID.*/, res => {
+        const MessageID = res.message.message.id;
+        const channelID = res.message.message.channelID;
+        const userID = res.message.message.id;
+        const traqID = res.message.message.user.name;
+        const displayName = res.message.message.user.displayName;
+        const plainText = res.message.message.plainText;
+        res.send("MessageID: "+ MessageID + "\nChannelID: " + channelID + "\nYour ID: " + userID + "\nYour traqID: " + traqID + "\nYour name: " + displayName + "\nPlain text: 「" + plainText + "」")
     });
 
     //監視対象に追加
