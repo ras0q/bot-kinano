@@ -26,8 +26,9 @@ module.exports = robot => {
         const plainText = res.message.message.plainText;
         const time = res.message.message.createdAt;
         res.send(
-            "|MessageID|"+ MessageID
+            "|||"
             + "|\n|-|-"
+            + "|\n|MessageID|"+ MessageID
             + "|\n|ChannelID|" + channelID
             + "|\n|Your ID|" + userID
             + "|\n|Your traqID|@" + traqID
