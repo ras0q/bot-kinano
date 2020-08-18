@@ -17,7 +17,7 @@ module.exports = robot => {
         }
         else{
             //jsonに追記
-            fs.readFile('./playlist.json', 'utf8', (err, data) => {
+            fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
                 if (err){
                     res.send("よみこみえらー");
                 }
@@ -25,7 +25,7 @@ module.exports = robot => {
                     obj = JSON.parse(data);
                     obj.list.push({user: userName, music: musicName});
                     json = JSON.stringify(obj, null, 4);
-                    fs.writeFile('./playlist.json', json, 'utf8', (err) => {
+                    fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                         if (err) {
                             res.send("かきこみえらー")
                         }
@@ -52,7 +52,7 @@ module.exports = robot => {
         let deletedMusic;
 
         //jsonから削除
-        fs.readFile('./playlist.json', 'utf8', (err, data) => {
+        fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
                 res.send("よみこみえらー");
             }
@@ -62,7 +62,7 @@ module.exports = robot => {
                 deletedMusic = obj.list[deleteIndex].music;
                 delete obj.playlist[deleteIndex];
                 json = JSON.stringify(obj, null, 4);
-                fs.writeFile('./playlist.json', json, 'utf8', (err) => {
+                fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                     if (err) {
                         res.send("かきこみえらー")
                     }
@@ -83,7 +83,7 @@ module.exports = robot => {
         let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
 
         //jsonからデータ取り出し
-        fs.readFile('./playlist.json', 'utf8', (err, data) => {
+        fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
                 res.send("よみこみえらー");
             }
