@@ -26,27 +26,38 @@ module.exports = robot => {
             }, 500);
 
             //jsonに追記
-            obj = JSON.parse(playlist);
-            obj.list.Push({user: userName, music:musicName});
-            json = JSON.stringify(obj);
-            fs.writeFile('myjsonfile.json', json, 'utf8', callback);
-            };
-        }
-    )
+            fs.readFile('playlist.json', 'utf8', function readFileCallback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                    obj = JSON.parse(data);
+                    obj.list.Push({user: userName, music:musicName});
+                    json = JSON.stringify(obj);
+                    fs.writeFile('playlist.json', json, 'utf8', callback);
+            }});
+        };
+    })
 
     //曲削除
     robot.respond(/.*%delete.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const deleteIndex = plainText.slice(plainText.search(/[0-9]?/));
+        let deletedUser;
+        let deletedMusic;
 
         //jsonから削除
-        obj = JSON.parse(playlist);
-        const deletedUser = obj.list[deleteIndex].user;
-        const deletedMusic = obj.list[deleteIndex].music;
-        delete obj.playlist[deleteIndex];
-        json = JSON.stringify(obj);
-        fs.writeFile('myjsonfile.json', json, 'utf8', callback);
+        fs.readFile('playlist.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                obj = JSON.parse(data);
+                deletedUser = obj.list[deleteIndex].user;
+                deletedMusic = obj.list[deleteIndex].music;
+                delete obj.playlist[deleteIndex];
+                json = JSON.stringify(obj);
+                fs.writeFile('playlist.json', json, 'utf8', callback);
+        }});
 
         let deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n";
         setTimeout(() => {
@@ -58,14 +69,21 @@ module.exports = robot => {
 
     //曲確認
     robot.respond(/.*%watch$/i, res => {
-        obj = JSON.parse(playlist);
         let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
-        for(let i = 0;i < playlist.length; i++){
-            const user = obj.list[i].user;
-            const music = obj.list[i].music;
-            table = table + "|" + i + "|" + user + "|" + music + "|\n";
-        }
-        table = table + "[](" + playlistURL + ")";
+
+        fs.readFile('myjsonfile.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+            obj = JSON.parse(data);
+            for(let i = 0;i < playlist.length; i++){
+                const user = obj.list[i].user;
+                const music = obj.list[i].music;
+                table = table + "|" + i + "|" + user + "|" + music + "|\n";
+            }
+            table = table + "[](" + playlistURL + ")";
+        }});
+
         setTimeout(() => {
             res.send("ぷれいりすとやんね～\n" + table)
         }, 500);
