@@ -5,6 +5,9 @@ module.exports = robot => {
 
     //曲追加
     robot.respond(/.*%add.*/i, res => {
+        // //ターミナル操作用
+        // const userName = "Ras"
+        // const plainText = "@BOT_kinano %add hogehoge"
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const persentIndex = plainText.indexOf("%add"); //位置指定
@@ -32,8 +35,8 @@ module.exports = robot => {
                             res.send("かきこみえらー") //書き込み失敗時メッセージ
                         }
                         else {
-                            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
                             const addtable = "|追加した人|追加した曲|\n|-|-|\n" + "|" + userName + "|" + musicName + "|\n" //追加曲の表を作成
+                            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
                             setTimeout(() => {
                                 res.send("ぷれいりすとに追加したやんね！\n"+ addtable) //追加成功時メッセージ
                             }, 500); //メッセージ順逆転防止
@@ -47,6 +50,9 @@ module.exports = robot => {
 
     //曲削除
     robot.respond(/.*%delete.*/i, res => {
+        // //ターミナル操作用
+        // const userName = "Ras"
+        // const plainText = "@BOT_kinano %delete 13"
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const deleteIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
@@ -73,8 +79,8 @@ module.exports = robot => {
                             res.send("かきこみえらー") //書き込み失敗時メッセージ
                         }
                         else {
+                            const deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n"; //削除曲の表作成
                             robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + deleteTable) //RasへのDMに通知
-                            let deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n"; //削除曲の表作成
                             setTimeout(() => {
                                 res.send("ぷれいりすとから 曲" + deleteIndex +" を削除したやんね！\n" + deleteTable) //削除成功時メッセージ
                             }, 500); //メッセージ順逆転防止
@@ -85,7 +91,7 @@ module.exports = robot => {
         )
     })
 
-    
+
     //曲確認
     robot.respond(/.*%watch$/i, res => {
         let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n"; //表の項目と例
