@@ -89,7 +89,7 @@ module.exports = robot => {
             }
             else {
                 obj = JSON.parse(data);
-                for(let i = 0;i < playlist.length; i++){
+                for(let i = 0;i < obj.list.length; i++){
                     const user = obj.list[i].user;
                     const music = obj.list[i].music;
                     table = table + "|" + i + "|" + user + "|" + music + "|\n";
