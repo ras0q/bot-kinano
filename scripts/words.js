@@ -82,6 +82,8 @@ const STAMPsends = [
 //helpメッセージ
 const readme = "# :kinano.large.shake:できること:kinano.large.shake:\nきなのはなんでもできるやんね！\n\n### コミュニケーション :blobdrum:\n- ``@BOT_kinano できること`` : きなのはなんでもできるやんね～\n- ``@BOT_kinano いらっしゃい`` : 監視対象に追加するやんね～\n- ``@BOT_kinano もちもち`` : おもちをたべるやんね！\n- ``@BOT_kinano もふもふ`` : もふもふするやんね～\n- ``@BOT_kinano もちもち`` : もちもちするやんね～\n- ``@BOT_kinano おはよう`` : おはようやんね～\n- ``@BOT_kinano おやすみ`` : おやすみやんね～\n- ほかにもあるやんね～\n\n### プレイリスト:blobguitar:\n- ``@BOT_kinano %add 曲名``: 曲を追加できるやんね！\n- ``@BOT_kinano %watch``: プレイリストが見れるやんね～\n- ``@BOT_kinano %delete 曲番号``プレイリストから削除できるやんね！ほかの人が追加した曲を削除しないように注意するやんね～\n";
 
+//playlistURL
+const playlistURL = "https://www.youtube.com/playlist?list=PLCep_QEAK_Rz-Cnqtn_MZxFd0wWJcNYL0"
 
 exports.responds = responds;
 exports.replys = replys;
@@ -93,3 +95,4 @@ exports.natterus = natterus;
 exports.STAMPhears = STAMPhears;
 exports.STAMPsends = STAMPsends;
 exports.readme = readme;
+exports.playlistURL = playlistURL;

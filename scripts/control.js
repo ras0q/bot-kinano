@@ -1,13 +1,13 @@
 const readme = require("./words").readme;
 const responds = require("./words").responds;
-const replys =require("./words").replys;
-const hears =require("./words").hears;
-const sends =require("./words").sends;
-const start =require("./words").start;
-const end =require("./words").end;
-const natterus =require("./words").natterus;
-const STAMPhears =require("./words").STAMPhears;
-const STAMPsends =require("./words").STAMPsends;
+const replys = require("./words").replys;
+const hears = require("./words").hears;
+const sends = require("./words").sends;
+const start = require("./words").start;
+const end = require("./words").end;
+const natterus = require("./words").natterus;
+const STAMPhears = require("./words").STAMPhears;
+const STAMPsends = require("./words").STAMPsends;
 
 module.exports = robot => {
 
@@ -41,12 +41,16 @@ module.exports = robot => {
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
+        const traqID = res.message.message.user.name;
+        const userID = res.message.message.user.id;
+        const channelID = res.message.message.channelId;
+        const time = res.message.message.createdAt;
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request"
-            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.user.id + '"}'
-            + "\nchannel : " + res.message.message.channelId
-            + "\ntime : " + res.message.message.createdAt
+            + "\n user : " + '!{"type":"user","raw":"@' + traqID + '","id":"' + userID + '"}'
+            + "\nchannel : " + channelID
+            + "\ntime : " + time
             )
         setTimeout(() => {
             res.send(
@@ -57,12 +61,16 @@ module.exports = robot => {
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        robot.reply(
+        const traqID = res.message.message.user.name;
+        const userID = res.message.message.user.id;
+        const channelID = res.message.message.channelId;
+        const time = res.message.message.createdAt;
+        robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request"
-            + "\n user : " + '!{"type":"user","raw":"@' + res.message.message.user.name + '","id":"' + res.message.message.id + '"}'
-            + "\nchannel : " + res.message.message.channelId
-            + "\ntime : " + res.message.message.createdAt
+            + "\n user : " + '!{"type":"user","raw":"@' + traqID + '","id":"' + userID + '"}'
+            + "\nchannel : " + channelID
+            + "\ntime : " + time
             )
         setTimeout(() => {
             res.reply(
@@ -73,9 +81,8 @@ module.exports = robot => {
 
     //help
     robot.respond(/(できること|help)/i, res => {
-        const {message} = res.message;
-        const {user} = message;
-        if(!user.bot)
+        const botflag = res.message.message.user.bot;
+        if(!botflag)
             setTimeout(() => {
                 res.send(readme);
             },500);
@@ -84,9 +91,8 @@ module.exports = robot => {
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
-            const {message} = res.message;
-            const {user} = message;
-            if(!user.bot)
+            const botflag = res.message.message.user.bot;
+            if(!botflag)
                 setTimeout(() => {
                     res.reply(replys[i]);
                 },500);
@@ -96,9 +102,8 @@ module.exports = robot => {
     //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
     for(let i = 0;i < hears.length;i++){
         robot.hear(hears[i], res => {
-            const {message} = res.message;
-            const {user} = message;
-            if(!user.bot){
+            const botflag = res.message.message.user.bot;
+            if(!botflag){
                 if(i == 0)
                     setTimeout(() => {
                         res.send(sends[i]);
@@ -114,9 +119,8 @@ module.exports = robot => {
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
     //正規表現使って簡潔に書きたい
     robot.hear(/.*もふもふ.*/, res => {
-        const {message} = res.message;
-        const {user} = message;
-        if(!user.bot){
+        const botflag = res.message.message.user.bot;
+        if(!botflag){
             let r = "";
             for(let i = 0; i < 2; i++){
                 const generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
@@ -130,9 +134,8 @@ module.exports = robot => {
 
     //``@BOT_kinano .*なってる``(監視対象チャンネルではメンション不要)(後方一致)を受け取るとnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {
-        const {message} = res.message;
-        const {user} = message;
-        if(!user.bot){
+        const botflag = res.message.message.user.bot;
+        if(!botflag){
             let i = Math.floor( Math.random() * natterus.length );
             setTimeout(() => {
                 res.reply(natterus[i]);
