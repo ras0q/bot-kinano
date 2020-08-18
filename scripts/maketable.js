@@ -16,12 +16,6 @@ module.exports = robot => {
             }, 500);
         }
         else{
-            const musicName = plainText.slice(persentIndex + 5);
-            const addtable = "|追加した人|追加した曲|\n|-|-|\n" + "|" + userName + "|" + musicName + "|\n"
-            setTimeout(() => {
-                res.send("ぷれいりすとに追加したやんね！\n"+ addtable)
-            }, 500);
-
             //jsonに追記
             fs.readFile('./playlist.json', 'utf8', (err, data) => {
                 if (err){
@@ -29,7 +23,7 @@ module.exports = robot => {
                 }
                 else {
                     obj = JSON.parse(data);
-                    obj.list.Push({user: userName, music:musicName});
+                    obj.list.push({user: userName, music: musicName});
                     json = JSON.stringify(obj, null, 4);
                     fs.writeFile('./playlist.json', json, 'utf8', (err) => {
                         if (err) {
@@ -39,9 +33,14 @@ module.exports = robot => {
                             robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト追加\n"+ addtable)
                         }
                     });
+                    const musicName = plainText.slice(persentIndex + 5);
+                    const addtable = "|追加した人|追加した曲|\n|-|-|\n" + "|" + userName + "|" + musicName + "|\n"
+                    setTimeout(() => {
+                        res.send("ぷれいりすとに追加したやんね！\n"+ addtable)
+                    }, 500);
                 }
-            });
-        };
+            })
+        }
     })
 
     //曲削除
@@ -64,42 +63,43 @@ module.exports = robot => {
                 delete obj.playlist[deleteIndex];
                 json = JSON.stringify(obj, null, 4);
                 fs.writeFile('./playlist.json', json, 'utf8', (err) => {
-            if (err) {
-                res.send("かきこみえらー")
-            }
-            else {
-                robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + deleteTable)
-            }
-        });
-        }});
-
-        let deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n";
-        setTimeout(() => {
-            res.send("ぷれいりすとから 曲" + deleteIndex +" を削除したやんね！\n" + deleteTable)
-        }, 500);
-
+                    if (err) {
+                        res.send("かきこみえらー")
+                    }
+                    else {
+                        robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + deleteTable)
+                    }
+                });
+                let deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n";
+                setTimeout(() => {
+                    res.send("ぷれいりすとから 曲" + deleteIndex +" を削除したやんね！\n" + deleteTable)
+                }, 500);
+            }}
+        )
     })
 
     //曲確認
     robot.respond(/.*%watch$/i, res => {
         let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n";
 
+        //jsonからデータ取り出し
         fs.readFile('./playlist.json', 'utf8', (err, data) => {
             if (err){
                 res.send("よみこみえらー");
-            } else {
-            obj = JSON.parse(data);
-            for(let i = 0;i < playlist.length; i++){
-                const user = obj.list[i].user;
-                const music = obj.list[i].music;
-                table = table + "|" + i + "|" + user + "|" + music + "|\n";
             }
-            table = table + "[](" + playlistURL + ")";
-        }});
-
-        setTimeout(() => {
-            res.send("ぷれいりすとやんね～\n" + table)
-        }, 500);
+            else {
+                obj = JSON.parse(data);
+                for(let i = 0;i < playlist.length; i++){
+                    const user = obj.list[i].user;
+                    const music = obj.list[i].music;
+                    table = table + "|" + i + "|" + user + "|" + music + "|\n";
+                }
+                table = table + "[](" + playlistURL + ")";
+                setTimeout(() => {
+                    res.send("ぷれいりすとやんね～\n" + table)
+                }, 500);
+            }
+        });
     })
 
 }
