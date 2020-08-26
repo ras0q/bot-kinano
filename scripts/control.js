@@ -11,20 +11,20 @@ const STAMPsends = require("./words").STAMPsends;
 
 module.exports = robot => {
 
+    let MessageID = res.message.message.id;
+    let channelID = res.message.message.channelId;
+    let userID = res.message.message.user.id;
+    let traqID = res.message.message.user.name;
+    let displayName = res.message.message.user.displayName;
+    let botflag = res.message.message.user.bot;
+    let plainText = res.message.message.plainText;
+    let time = res.message.message.createdAt;
+
     //起動時メッセージ
-    let deplymessage = "# デプロイ完了";
-    robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},deplymessage);
+    robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"# デプロイ完了");
 
     //ID取得
     robot.respond(/.*ID.*/, res => {
-        const MessageID = res.message.message.id;
-        const channelID = res.message.message.channelId;
-        const userID = res.message.message.user.id;
-        const traqID = res.message.message.user.name;
-        const displayName = res.message.message.user.displayName;
-        const botflag = res.message.message.user.bot;
-        const plainText = res.message.message.plainText;
-        const time = res.message.message.createdAt;
         res.send(
             "||"
             + "|\n|-|-"
@@ -41,10 +41,6 @@ module.exports = robot => {
 
     //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
-        const traqID = res.message.message.user.name;
-        const userID = res.message.message.user.id;
-        const channelID = res.message.message.channelId;
-        const time = res.message.message.createdAt;
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request"
@@ -61,10 +57,6 @@ module.exports = robot => {
 
     //監視対象から解除
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-        const traqID = res.message.message.user.name;
-        const userID = res.message.message.user.id;
-        const channelID = res.message.message.channelId;
-        const time = res.message.message.createdAt;
         robot.send(
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request"
@@ -81,7 +73,6 @@ module.exports = robot => {
 
     //help
     robot.respond(/(できること|help)/i, res => {
-        const botflag = res.message.message.user.bot;
         if(!botflag)
             setTimeout(() => {
                 res.send(readme);
@@ -91,7 +82,6 @@ module.exports = robot => {
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
     for(let i = 0;i < responds.length;i++){
         robot.respond(responds[i], res => {
-            const botflag = res.message.message.user.bot;
             if(!botflag)
                 setTimeout(() => {
                     res.reply(replys[i]);
@@ -102,7 +92,6 @@ module.exports = robot => {
     //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
     for(let i = 0;i < hears.length;i++){
         robot.hear(hears[i], res => {
-            const botflag = res.message.message.user.bot;
             if(!botflag){
                 if(i == 0)
                     setTimeout(() => {
@@ -119,7 +108,6 @@ module.exports = robot => {
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
     //正規表現使って簡潔に書きたい
     robot.hear(/.*もふもふ.*/, res => {
-        const botflag = res.message.message.user.bot;
         if(!botflag){
             let r = "";
             for(let i = 0; i < 2; i++){
@@ -134,7 +122,6 @@ module.exports = robot => {
 
     //``@BOT_kinano .*なってる``(監視対象チャンネルではメンション不要)(後方一致)を受け取るとnatterusからランダムで返す
     robot.hear(/.*なってる$/, res => {
-        const botflag = res.message.message.user.bot;
         if(!botflag){
             let i = Math.floor( Math.random() * natterus.length );
             setTimeout(() => {

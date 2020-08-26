@@ -1,6 +1,10 @@
 {
     "list": [
         {
+            "user": "Ras",
+            "music": "sample"
+        },
+        {
             "user": "Rozelin",
             "music": "Starry Line"
         },
@@ -53,12 +57,12 @@
             "music": "致死量の自由"
         },
         {
-            "user": "Ras",
-            "music": "sample"
-        },
-        {
             "user": "Hmcmch",
             "music": "サーチライトと月明り"
+        },
+        {
+            "user": "SSlime",
+            "music": "ルルージュ"
         }
     ]
 }
