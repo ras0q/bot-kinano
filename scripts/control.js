@@ -144,17 +144,17 @@ module.exports = robot => {
 
     //``@BOT_kinano STAMPhears[i]``(監視対象チャンネルではメンション不要)を受け取るとSTAMPsends[i]のスタンプを押す
     for(let i = 0; i < STAMPhears.length; i++){
-        const botflag = res.message.message.user.bot;
-        if(!botflag){
-            robot.hear(STAMPhears[i], res => {
+        robot.hear(STAMPhears[i], res => {
+            const botflag = res.message.message.user.bot;
+            if(!botflag){
                 res.send(
                     {
                         type: "stamp",
                         name: STAMPsends[i]
                     }
                 );
-            });
-        }
+            }
+        });
     }
 
     //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
