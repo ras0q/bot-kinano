@@ -22,14 +22,14 @@ const hears = [
     /.*うまうま.*/,
     /.*[い言云]ってい?る.*/,
     /.*(死|:si.*:).*/,
-    /.*(おなか).*/,
+    /.*(おなか|お腹).*/,
     /.*(もふもち|もちもふ).*/,
 ];
 const sends = [
     "えへへ",
     "もちもち～:blobenjoy:",
     ":kinako.ex-large:",
-    ":kinano.ex-large.pyon:",
+    "えへえへ",
     "やんね！",
     "おい！",
     "いいぞいいぞ",
@@ -61,20 +61,10 @@ const natterus = [
 
 //``@BOT_kinano STAMPhears[i]``(監視対象チャンネルではメンション不要)を受け取るとSTAMPsends[i]のスタンプを押す
 const STAMPhears = [
-    /.*(やんね|きな[この]|黄名子|yannne).*/i,
-    /.*(やんね|きな[この]|黄名子|yannne).*/i,
-    /.*(やんね|きな[この]|黄名子|yannne).*/i,
-    /.*(やんね|きな[この]|黄名子|yannne).*/i,
-    /.*(黄|yellow).*/i,
     /.*Ras.*/i,
     /.*(おは|ohagoza|ohasta).*/i,
 ];
 const STAMPsends = [
-    "yannne",
-    "gao-",
-    "kinako",
-    "mochimochi_kinakomochi",
-    "yellow",
     "rascal",
     "ohagoza",
 ];

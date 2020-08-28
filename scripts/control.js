@@ -88,7 +88,7 @@ module.exports = robot => {
     });
 
     //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
-    for(let i = 0;i < responds.length;i++){
+    for(let i = 0; i < responds.length; i++){
         robot.respond(responds[i], res => {
             const botflag = res.message.message.user.bot;
             if(!botflag)
@@ -99,7 +99,7 @@ module.exports = robot => {
     }
 
     //``@BOT_kinano hears[i]``(監視対象チャンネルではメンション不要)を受け取ると``sends[i]``を返す
-    for(let i = 0;i < hears.length;i++){
+    for(let i = 0; i < hears.length; i++){
         robot.hear(hears[i], res => {
             const botflag = res.message.message.user.bot;
             if(!botflag){
@@ -143,30 +143,36 @@ module.exports = robot => {
     });
 
     //``@BOT_kinano STAMPhears[i]``(監視対象チャンネルではメンション不要)を受け取るとSTAMPsends[i]のスタンプを押す
-    for(let i = 0;i < hears.length;i++){
-        robot.hear(STAMPhears[i], res => {
-            res.send(
-                {
-                    type: "stamp",
-                    name: STAMPsends[i]
-                }
-            );
-        });
+    for(let i = 0; i < STAMPhears.length; i++){
+        const botflag = res.message.message.user.bot;
+        if(!botflag){
+            robot.hear(STAMPhears[i], res => {
+                res.send(
+                    {
+                        type: "stamp",
+                        name: STAMPsends[i]
+                    }
+                );
+            });
+        }
     }
 
     //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
     robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
-        let i = Math.random();
-        setTimeout(() => {
-            if(i > 0.9) res.send("えへへ")
-            else if(i > 0.7) res.send("寝るな！")
-            else res.send(
-                {
-                    type: "stamp",
-                    name: "oyasumi"
-                }
-            );
-        }, 500);
+        const botflag = res.message.message.user.bot;
+        if(!botflag){
+            let i = Math.random();
+            setTimeout(() => {
+                if(i > 0.9) res.send("えへへ")
+                else if(i > 0.8) res.send("寝るな！")
+                else res.send(
+                    {
+                        type: "stamp",
+                        name: "oyasumi"
+                    }
+                );
+            }, 500);
+        }
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
