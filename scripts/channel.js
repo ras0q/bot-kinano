@@ -9,6 +9,12 @@ module.exports = robot => {
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request\n https://q.trap.jp/messages/" + MessageID
             )
+        res.send(
+            {
+                type: "stamp",
+                name: "eyes"
+            }
+        )
         // const channelID = channel.Id;
         // try {
         //     api.join(channelID);
@@ -30,6 +36,12 @@ module.exports = robot => {
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request\n https://q.trap.jp/messages/" + MessageID
             )
+        res.send(
+            {
+                type: "stamp",
+                name: "eyes"
+            }
+        )
         //     const channelID = channel.Id;
         // try {
         //     api.leave(channelID);
