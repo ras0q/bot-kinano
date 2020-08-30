@@ -158,4 +158,15 @@ module.exports = robot => {
         }
     });
 
+    //メッセージの時間を返す
+    robot.hear(/\/.*/, res => {
+        const MessageID = res.message.message.id;
+        const time = res.message.message.createdAt;
+        const time2 = time.slice(0,-1);
+        const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
+        const JPNhourStr = ("0" + JPNhour).slice(-2);
+        const JPNtime = time2.replace(/T../, " " + JPNhourStr);
+        res.send(JPNtime + "\n https://q.trap.jp/messages/" + MessageID );
+    })
+
 };
