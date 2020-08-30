@@ -15,7 +15,7 @@ module.exports = robot => {
     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"# デプロイ完了");
 
     //ID取得
-    robot.respond(/^.*ID.*$/, res => {
+    robot.respond(/.*ID.*$/, res => {
         const MessageID = res.message.message.id;
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
@@ -167,7 +167,7 @@ module.exports = robot => {
         const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
         const JPNhourStr = ("0" + JPNhour).slice(-2);
         const JPNtime = time2.replace(/T../, " " + JPNhourStr);
-        res.send("このメッセージの投稿時間は " + JPNtime + " やんね～ \n https://q.trap.jp/messages/" + MessageID );
+        res.send(JPNtime + "\n https://q.trap.jp/messages/" + MessageID );
     })
 
 };

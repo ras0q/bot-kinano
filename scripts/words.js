@@ -1,8 +1,8 @@
 //コマンド一覧
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
 const responds = [
-    /^.*hoge.*$/i,
-    /^.*もちもち.*$/,
+    /.*hoge.*$/i,
+    /.*もちもち.*$/,
 ];
 const replys = [
     "huga",
