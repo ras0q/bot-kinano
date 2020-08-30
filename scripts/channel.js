@@ -15,8 +15,9 @@ module.exports = robot => {
             + "\nchannel : " + channelID
             + "\ntime : " + time
             )
+        const channelID2 = res.message.channel.Id;
         try {
-            api.join(channelID);
+            api.join(channelID2);
             setTimeout(() => {
                 res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
             },500);
@@ -41,7 +42,9 @@ module.exports = robot => {
             + "\nchannel : " + channelID
             + "\ntime : " + time
             )
+            const channelID2 = res.message.channel.Id;
         try {
+            api.leave(channelID2);
             setTimeout(() => {
                 res.reply("ばいばいやんね～、また遊んでやんね～")
             },500);
