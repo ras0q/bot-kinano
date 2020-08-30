@@ -34,7 +34,8 @@ module.exports = robot => {
             + "|\n|Your name|" + displayName
             + "|\n|Bot|" + botflag
             + "|\n|Plain text|「" + plainText + "」"
-            + "|\n|Time|" + time + "|"
+            + "|\n|Time|" + time
+            + "|\n https://q.trap.jp/messages/" + MessageID
             )
     });
 
