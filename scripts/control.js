@@ -15,7 +15,7 @@ module.exports = robot => {
     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"# デプロイ完了");
 
     //ID取得
-    robot.respond(/.*ID.*/, res => {
+    robot.respond(/ID.*$/, res => {
         const MessageID = res.message.message.id;
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
@@ -40,8 +40,9 @@ module.exports = robot => {
     });
 
     //help
-    robot.respond(/(できること|help)/i, res => {
-        const botflag = res.message.message.user.bot;
+    robot.respond(/(できること|help)$/i, res => {
+        // const botflag = res.message.message.user.bot;
+        const botflag = false;
         if(!botflag)
             setTimeout(() => {
                 res.send(readme);
@@ -78,7 +79,7 @@ module.exports = robot => {
 
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
     //正規表現使って簡潔に書きたい
-    robot.hear(/.*もふもふ.*/, res => {
+    robot.hear(/^.*もふもふ.*$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let r = "";
@@ -93,7 +94,7 @@ module.exports = robot => {
     });
 
     //``@BOT_kinano .*なってる``(監視対象チャンネルではメンション不要)(後方一致)を受け取るとnatterusからランダムで返す
-    robot.hear(/.*なってる$/, res => {
+    robot.hear(/^.*なってる$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let i = Math.floor( Math.random() * natterus.length );
@@ -119,7 +120,7 @@ module.exports = robot => {
     }
 
     //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
-    robot.hear(/.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
+    robot.hear(/^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let i = Math.random();
@@ -137,7 +138,7 @@ module.exports = robot => {
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
-    robot.hear(/.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i, res => {
+    robot.hear(/^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*$/i, res => {
         for(let i = 1; i < 5; i++){
             if(i == 4){
                 res.send(
@@ -166,7 +167,7 @@ module.exports = robot => {
         const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
         const JPNhourStr = ("0" + JPNhour).slice(-2);
         const JPNtime = time2.replace(/T../, " " + JPNhourStr);
-        res.send(JPNtime + "\n https://q.trap.jp/messages/" + MessageID );
+        res.send("このメッセージの投稿時間は " + JPNtime + " やんね～ \n https://q.trap.jp/messages/" + MessageID );
     })
 
 };
