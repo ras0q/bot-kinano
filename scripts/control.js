@@ -15,7 +15,7 @@ module.exports = robot => {
     robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"# デプロイ完了");
 
     //ID取得
-    robot.respond(/ID.*$/, res => {
+    robot.respond(/^.*ID.*$/, res => {
         const MessageID = res.message.message.id;
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
