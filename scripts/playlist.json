@@ -1,8 +1,8 @@
 {
     "list": [
         {
-            "user": "Ras",
-            "music": "sample"
+            "user": "BOT_kinano",
+            "music": "hogehoge"
         },
         {
             "user": "Rozelin",
@@ -63,6 +63,14 @@
         {
             "user": "SSlime",
             "music": "ルルージュ"
+        },
+        {
+            "user": "SSlime",
+            "music": "[ヒール](https://www.youtube.com/watch?v=ploDPZ9idyk&t=0s)"
+        },
+        {
+            "user": "SSlime",
+            "music": "[イート](https://youtu.be/x5OXBk3Qjsc)"
         }
     ]
 }

@@ -10,7 +10,7 @@ module.exports = robot => {
         if(channelID == "37612932-7437-4d99-ba61-f8c69cb85c41" && userID == "0fa5d740-0841-4b88-b7c8-34a68774c784"){
             fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
                 if(err){
-                    res.send("よみこみえらー"); //読み込み失敗時メッセージ
+                    res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
                 }
                 else {
                     res.send(data);
@@ -20,7 +20,7 @@ module.exports = robot => {
     })
 
     //曲追加
-    robot.respond(/.*%add.*/i, res => {
+    robot.respond(/%add.*/i, res => {
         // //ターミナル操作用
         // const userName = "Ras"
         // const plainText = "@BOT_kinano %add hogehoge"
@@ -30,16 +30,16 @@ module.exports = robot => {
         const verticalIndex = plainText.indexOf("|"); //位置指定(!=-1のときエラー)
         const newlineIndex = plainText.indexOf("\n"); //位置指定(!=-1のときエラー)
         const musicName = plainText.slice(persentIndex + 5); //曲名切り取り
-        if(verticalIndex != -1 || newlineIndex != -1){
+        if(verticalIndex != -1 || newlineIndex != -1 || musicName == ""){
             setTimeout(() => {
-                res.send("こーぶんえらー") //"|"や改行があると表がバグるのではじく
+                res.send("こーぶんえらー:eyes:") //"|"や改行があると表がバグるのではじく
             }, 500); //メッセージ順逆転防止
         }
         else{
             //playlist.jsonを読み込む
             fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
                 if (err){
-                    res.send("よみこみえらー"); //読み込み失敗時メッセージ
+                    res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
                 }
                 else {
                     obj = JSON.parse(data); //json文字列をオブジェクトに
@@ -48,7 +48,7 @@ module.exports = robot => {
                     //playlist.jsonに書き込む
                     fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                         if (err) {
-                            res.send("かきこみえらー") //書き込み失敗時メッセージ
+                            res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
                             const addtable = "|追加した人|追加した曲|\n|-|-|\n" + "|" + userName + "|" + musicName + "|\n" //追加曲の表を作成
@@ -65,7 +65,7 @@ module.exports = robot => {
 
 
     //曲削除
-    robot.respond(/.*%delete.*/i, res => {
+    robot.respond(/%delete.*/i, res => {
         // //ターミナル操作用
         // const userName = "Ras"
         // const plainText = "@BOT_kinano %delete 13"
@@ -77,12 +77,12 @@ module.exports = robot => {
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
-                res.send("よみこみえらー"); //読み込み失敗時メッセージ
+                res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
             }
             else {
                 obj = JSON.parse(data); //json文字列をオブジェクトに
-                if(obj == undefined || obj.list[deleteIndex] == undefined){
-                    res.send("えらー") //Indexが存在しないときメッセージ
+                if(obj == undefined || obj.list[deleteIndex] == ""){
+                    res.send("えらー:eyes:") //Indexが存在しないときメッセージ
                 }
                 else {
                     deletedUser = obj.list[deleteIndex].user; //オブジェクトから追加実行者を取り出す
@@ -92,7 +92,7 @@ module.exports = robot => {
                     //playlist.jsonに書き込む
                     fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                         if (err) {
-                            res.send("かきこみえらー") //書き込み失敗時メッセージ
+                            res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
                             const deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n"; //削除曲の表作成
@@ -114,7 +114,7 @@ module.exports = robot => {
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
-                res.send("よみこみえらー"); //読み込み失敗時メッセージ
+                res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
             }
             else {
                 obj = JSON.parse(data); //json文字列をオブジェクトに
