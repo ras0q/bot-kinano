@@ -159,7 +159,7 @@ module.exports = robot => {
     });
 
     //メッセージの時間を返す
-    robot.hear(/\/.*/, res => {
+    robot.hear(/^\/.*$/, res => {
         const MessageID = res.message.message.id;
         const time = res.message.message.createdAt;
         const time2 = time.slice(0,-1);
