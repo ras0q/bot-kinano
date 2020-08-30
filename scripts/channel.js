@@ -9,18 +9,18 @@ module.exports = robot => {
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**join** request\n https://q.trap.jp/messages/" + MessageID
             )
-        const channelID = channel.Id;
-        try {
-            api.join(channelID);
-            setTimeout(() => {
-                res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
-            },500);
-        }
-        catch(e) {
-            setTimeout(() => {
-                res.send("追加えらー:eyes:")
-            },500);
-        }
+        // const channelID = channel.Id;
+        // try {
+        //     api.join(channelID);
+        //     setTimeout(() => {
+        //         res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
+        //     },500);
+        // }
+        // catch(e) {
+        //     setTimeout(() => {
+        //         res.send("追加えらー:eyes:")
+        //     },500);
+        // }
     });
 
     //監視対象から解除
@@ -30,18 +30,18 @@ module.exports = robot => {
             {channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},
             "**leave** request\n https://q.trap.jp/messages/" + MessageID
             )
-            const channelID = channel.Id;
-        try {
-            api.leave(channelID);
-            setTimeout(() => {
-                res.reply("ばいばいやんね～、また遊んでやんね～")
-            },500);
-        }
-        catch(e) {
-            setTimeout(() => {
-                res.send("削除えらー:eyes:")
-            },500);
-        }
+        //     const channelID = channel.Id;
+        // try {
+        //     api.leave(channelID);
+        //     setTimeout(() => {
+        //         res.reply("ばいばいやんね～、また遊んでやんね～")
+        //     },500);
+        // }
+        // catch(e) {
+        //     setTimeout(() => {
+        //         res.send("削除えらー:eyes:")
+        //     },500);
+        // }
     });
 
 }
