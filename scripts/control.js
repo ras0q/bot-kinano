@@ -114,8 +114,8 @@ module.exports = robot => {
         if(!botflag){
             let recent = 177 - 42;
             let index = ("00" + Math.floor(Math.random() * recent + 43)).slice(-3);
-            if(index >= 126) let diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
-            else let diff = String.fromCodePoint(Math.floor(Math.random() * 4) + 97);
+            if(index >= 126) diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
+            else diff = String.fromCodePoint(Math.floor(Math.random() * 4) + 97);
             setTimeout(() => {
                 res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
             })
@@ -189,12 +189,3 @@ module.exports = robot => {
     })
 
 };
-
-let recent = 177 - 42;
-let index = ("00" + Math.floor(Math.random() * recent + 43)).slice(-3);
-let diff = "";
-if(index >= 126) diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
-else diff = String.fromCodePoint(Math.floor(Math.random() * 4) + 97);
-setTimeout(() => {
-    console.log("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
-})
