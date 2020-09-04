@@ -104,6 +104,18 @@ module.exports = robot => {
         }
     });
 
+    //``ABCやるか``を受け取るとランダムで問題を返す
+    robot.hear(/^.*ABCや(ろ|るか|ります).*$/, res => {
+        const botflag = res.message.message.user.bot;
+        if(!botflag){
+            let index = ("00" + Math.floor(Math.random() * 177)  + 1).slice(-3);
+            let diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
+            setTimeout(() => {
+                res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
+            })
+        }
+    })
+
     //``@BOT_kinano STAMPhears[i]``(監視対象チャンネルではメンション不要)を受け取るとSTAMPsends[i]のスタンプを押す
     for(let i = 0; i < STAMPhears.length; i++){
         robot.hear(STAMPhears[i], res => {
