@@ -1,4 +1,4 @@
-const deploymessages = require("./words").deploymessages
+const deploymessages = require("./words").deploymessages;
 const readme = require("./words").readme;
 const responds = require("./words").responds;
 const replys = require("./words").replys;
@@ -13,8 +13,10 @@ const STAMPsends = require("./words").STAMPsends;
 module.exports = robot => {
 
     //起動時メッセージ
-    let i = Math.floor(Math.random() * deploymessages.length)
-    robot.send({channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"}, deploymessages[i]);
+    robot.send(
+        {channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},
+        deploymessages[Math.floor(Math.random() * deploymessages.length)]
+        );
 
     //ID取得
     robot.respond(/.*ID.*$/, res => {
@@ -187,3 +189,12 @@ module.exports = robot => {
     })
 
 };
+
+let recent = 177 - 42;
+let index = ("00" + Math.floor(Math.random() * recent + 43)).slice(-3);
+let diff = "";
+if(index >= 126) diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
+else diff = String.fromCodePoint(Math.floor(Math.random() * 4) + 97);
+setTimeout(() => {
+    console.log("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
+})
