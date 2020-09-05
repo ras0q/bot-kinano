@@ -1,4 +1,3 @@
-const deploymessages = require("./words").deploymessages;
 const readme = require("./words").readme;
 const responds = require("./words").responds;
 const replys = require("./words").replys;
@@ -13,9 +12,14 @@ const STAMPsends = require("./words").STAMPsends;
 module.exports = robot => {
 
     //起動時メッセージ
+    let r = "";
+    for(let i = 0; i < 2; i++){
+        const generated = String.fromCodePoint(Math.floor(Math.random() * (end - start)) + start);
+        r += generated;
+    }
     robot.send(
         {channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},
-        deploymessages[Math.floor(Math.random() * deploymessages.length)]
+        "デプロイ完了やんね～ " + r + r
         );
 
     //ID取得
@@ -109,7 +113,7 @@ module.exports = robot => {
     });
 
     //``ABCやるか``を受け取るとランダムで問題を返す
-    robot.hear(/^.*ABCや(ろ|るか|ります).*$/, res => {
+    robot.hear(/^.*ABCや.*$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let recent = 177 - 42;
