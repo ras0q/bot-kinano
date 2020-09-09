@@ -116,7 +116,7 @@ module.exports = robot => {
         if(!botflag){
             let recent = 177;
             let min = 126;
-            let index = ("00" + Math.floor(Math.random() * (recent + 1 - min)) + min).slice(-3);
+            let index = ("00" + (Math.floor(Math.random() * (recent + 1 - min)) + min)).slice(-3);
             diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
             setTimeout(() => {
                 res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
