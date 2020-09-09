@@ -11,7 +11,7 @@ module.exports = robot => {
         const botflag = res.message.message.user.bot;
         if(!botflag)
             setTimeout(() => {
-                let i = Math.floor(Math.random() * weather.length());
+                let i = Math.floor(Math.random() * weather.length);
                 res.send(weather[i]);
             },500);
     });

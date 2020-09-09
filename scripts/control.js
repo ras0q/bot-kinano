@@ -114,10 +114,10 @@ module.exports = robot => {
     robot.hear(/^.*ABCや.*$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
-            let recent = 177 - 42;
-            let index = ("00" + Math.floor(Math.random() * recent + 43)).slice(-3);
-            if(index >= 126) diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
-            else diff = String.fromCodePoint(Math.floor(Math.random() * 4) + 97);
+            let recent = 177;
+            let min = 126;
+            let index = ("00" + Math.floor(Math.random() * (recent + 1 - min)) + min).slice(-3);
+            diff = String.fromCodePoint(Math.floor(Math.random() * y) + 97);
             setTimeout(() => {
                 res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
             })
