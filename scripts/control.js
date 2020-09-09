@@ -49,8 +49,7 @@ module.exports = robot => {
 
     //help
     robot.respond(/(できること|help)$/i, res => {
-        // const botflag = res.message.message.user.bot;
-        const botflag = false;
+        const botflag = res.message.message.user.bot;
         if(!botflag)
             setTimeout(() => {
                 res.send(readme);
@@ -86,7 +85,6 @@ module.exports = robot => {
     }
 
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
-    //正規表現使って簡潔に書きたい
     robot.hear(/^.*もふもふ.*$/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
