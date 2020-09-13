@@ -113,11 +113,15 @@ module.exports = robot => {
     //``ABCやるか``を受け取るとランダムで問題を返す
     robot.hear(/^.*ABCや.*$/, res => {
         const botflag = res.message.message.user.bot;
+        const plainText = res.message.message.plainText;
         if(!botflag){
+            let slashindex = plainText.indexOf("/");
             let recent = 177;
             let min = 126;
             let index = ("00" + (Math.floor(Math.random() * (recent + 1 - min)) + min)).slice(-3);
-            diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
+            let diff = "";
+            if(slashindex != -1 && plainText[slashindex + 1].match(/[a-f]/i)) diff = plainText[slashindex + 1];
+            else diff = String.fromCodePoint(Math.floor(Math.random() * 6) + 97);
             setTimeout(() => {
                 res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
             })
