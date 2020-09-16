@@ -20,7 +20,7 @@ module.exports = robot => {
     robot.send(
         {channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},
         "デプロイ完了やんね～ " + r + r
-        );
+    );
 
     //ID取得
     robot.respond(/.*ID.*$/, res => {
