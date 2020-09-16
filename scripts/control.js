@@ -116,7 +116,7 @@ module.exports = robot => {
         const plainText = res.message.message.plainText;
         if(!botflag){
             let slashindex = plainText.indexOf("/");
-            let recent = 177;
+            let recent = 178; //最新回
             let min = 126;
             let index = ("00" + (Math.floor(Math.random() * (recent + 1 - min)) + min)).slice(-3);
             let diff = "";
