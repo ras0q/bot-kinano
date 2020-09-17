@@ -164,7 +164,7 @@ module.exports = robot => {
 
     //URL確認
     robot.respond(/.*\/url.*$/i, res => {
-        const plainText = "@BOT_kinano /url 22"
+        const plainText = res.message.message.plainText;
         const urlIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //確認する曲のIndex
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
