@@ -47,10 +47,21 @@ module.exports = robot => {
     robot.respond(/\/add.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
-        const persentIndex = plainText.indexOf("/add"); //位置指定
+        const kagikakko = plainText.indexOf("["); //URLがあれば読み取る
+        const kakko = plainText.indexOf("](");
+        const kakkotoji = plainText.indexOf(")");
+        const URL = "";
+        const musicIndex = plainText.indexOf("/add"); //位置指定
+        const musicName = "";
+        if(kakko != -1 && kakkotoji != -1 && kagikakko != -1){
+            musicName = plainText.slice(kagikakko + 1, kakko); //曲名切り取り
+            URL = plainText.slice(kakko + 2, kakkotoji);
+        }
+        else {
+            musicName = plainText.slice(musicIndex + 5); //曲名切り取り
+        }
         const verticalIndex = plainText.indexOf("|"); //位置指定(!=-1のときエラー)
         const newlineIndex = plainText.indexOf("\n"); //位置指定(!=-1のときエラー)
-        const musicName = plainText.slice(persentIndex + 5); //曲名切り取り
         if(verticalIndex != -1 || newlineIndex != -1 || musicName == ""){
             setTimeout(() => {
                 res.send("こーぶんえらー:eyes:") //"|"や改行があると表がバグるのではじく
@@ -64,7 +75,7 @@ module.exports = robot => {
                 }
                 else {
                     let obj = JSON.parse(data); //json文字列をオブジェクトに
-                    obj.list.push({user: userName, music: musicName}); //実行者と曲をリストに追加
+                    obj.list.push({user: userName, music: musicName, url: URL}); //実行者と曲をリストに追加
                     let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
                     //playlist.jsonに書き込む
                     fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
@@ -90,9 +101,9 @@ module.exports = robot => {
     robot.respond(/\/remove.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
-        const deleteIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
-        let deletedUser; //削除する曲の追加実行者
-        let deletedMusic; //削除する曲の名前
+        const removeIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
+        let removedUser; //削除する曲の追加実行者
+        let removedMusic; //削除する曲の名前
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
@@ -100,13 +111,13 @@ module.exports = robot => {
             }
             else {
                 let obj = JSON.parse(data); //json文字列をオブジェクトに
-                if(obj == undefined || obj.list[deleteIndex] == ""){
+                if(obj == undefined || obj.list[removeIndex] == ""){
                     res.send("えらー:eyes:") //Indexが存在しないときメッセージ
                 }
                 else {
-                    deletedUser = obj.list[deleteIndex].user; //オブジェクトから追加実行者を取り出す
-                    deletedMusic = obj.list[deleteIndex].music; //オブジェクトから曲名を取り出す
-                    obj.list.splice(deleteIndex, 1); //オブジェクトから曲を削除
+                    removedUser = obj.list[removeIndex].user; //オブジェクトから追加実行者を取り出す
+                    removedMusic = obj.list[removeIndex].music; //オブジェクトから曲名を取り出す
+                    obj.list.splice(removeIndex, 1); //オブジェクトから曲を削除
                     let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
                     //playlist.jsonに書き込む
                     fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
@@ -114,11 +125,11 @@ module.exports = robot => {
                             res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
-                            const deleteTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + deletedUser + "|" + deletedMusic + "|\n"; //削除曲の表作成
-                            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + deleteTable) //RasへのDMに通知
+                            const removeTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + removedUser + "|" + removedMusic + "|\n"; //削除曲の表作成
+                            robot.send({channelID: "37612932-7437-4d99-ba61-f8c69cb85c41"},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
                             robot.send({channelID: R_KchannelID},json)
                             setTimeout(() => {
-                                res.send("ぷれいりすとから 曲" + deleteIndex +" を削除したやんね！\n" + deleteTable) //削除成功時メッセージ
+                                res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
                             }, 500); //メッセージ順逆転防止
                         }
                     });
@@ -147,6 +158,28 @@ module.exports = robot => {
                 setTimeout(() => {
                     res.send("ぷれいりすとやんね～\n" + table) //表作成成功時メッセージ
                 }, 500); //メッセージ順逆転防止
+            }
+        });
+    })
+
+    //URL確認
+    robot.respond(/.*\/url$/i, res => {
+        const plainText = res.message.message.plainText;
+        const urlIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //確認する曲のIndex
+        //playlist.jsonを読み込む
+        fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+            if (err){
+                res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
+            }
+            else {
+                obj = JSON.parse(data); //json文字列をオブジェクトに
+                const URL = obj.list[urlIndex];
+                if(obj == undefined || obj.list[urlIndex].url == ""){
+                    res.send("えらー:eyes:") //Indexが存在しないときメッセージ
+                }
+                else {
+                    res.send(obj.list[urlIndex].music + "のURLは\n\n" + obj.list[urlIndex].url + "\n\nやんね！")
+                }
             }
         });
     })
