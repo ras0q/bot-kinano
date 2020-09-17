@@ -23,7 +23,9 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/add.*/,res => {
+    robot.hear(/add.*/, res => {
+        const channelID = res.message.message.channelId;
+        const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
             const plainText = res.message.message.plainText;
             const json = plainText.slice(4);
@@ -32,7 +34,7 @@ module.exports = robot => {
                     res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                 }
                 else {
-                    res.send("書き込み成功");
+                    res.send("書き込み成功")
                 }
             });
         }
