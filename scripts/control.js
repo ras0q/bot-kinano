@@ -11,6 +11,10 @@ const STAMPsends = require("./words").STAMPsends;
 
 module.exports = robot => {
 
+    const RaschannelID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f"; //#gps/times/Ras
+    const R_KchannelID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
+    const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
+
     //起動時メッセージ
     let r = "";
     for(let i = 0; i < 2; i++){
@@ -18,7 +22,7 @@ module.exports = robot => {
         r += generated;
     }
     robot.send(
-        {channelID: "f58c72a4-14f0-423c-9259-dbb4a90ca35f"},
+        {channelID: RaschannelID},
         "デプロイ完了やんね～ " + r + r
     );
 
