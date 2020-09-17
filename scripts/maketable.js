@@ -173,12 +173,13 @@ module.exports = robot => {
             }
             else {
                 obj = JSON.parse(data); //json文字列をオブジェクトに
+                const musicName = obj.list[urlIndex].music;
                 const URL = obj.list[urlIndex].url;
-                if(obj == undefined || URL == ""){
+                if(obj == undefined){
                     res.send("えらー:eyes:") //Indexが存在しないときメッセージ
                 }
                 else {
-                    res.send(obj.list[urlIndex].music + " のURLは\n\n" + URL + "\n\nやんね！")
+                    res.send(musicName + " のURLは\n\n" + URL + "\n\nやんね！")
                 }
             }
         });
