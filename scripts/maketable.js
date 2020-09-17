@@ -8,7 +8,7 @@ module.exports = robot => {
     const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
 
     //playlist.json確認
-    robot.hear(/playlist/, res => {
+    robot.hear(/json watch/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
@@ -23,18 +23,21 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/add.*/, res => {
+    robot.hear(/json update.*/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
             const plainText = res.message.message.plainText;
-            const json = plainText.slice(4);
+            const index = plainText.indexOf("{")
+            const json = plainText.slice(index);
             fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                 if (err) {
                     res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                 }
                 else {
-                    res.send("書き込み成功")
+                    setTimeout(() => {
+                        res.send("書き込み成功")
+                    }, 500);
                 }
             });
         }
@@ -42,12 +45,9 @@ module.exports = robot => {
 
     //曲追加
     robot.respond(/\/add.*/i, res => {
-        // //ターミナル操作用
-        // const userName = "Ras"
-        // const plainText = "@BOT_kinano %add hogehoge"
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
-        const persentIndex = plainText.indexOf("%add"); //位置指定
+        const persentIndex = plainText.indexOf("/add"); //位置指定
         const verticalIndex = plainText.indexOf("|"); //位置指定(!=-1のときエラー)
         const newlineIndex = plainText.indexOf("\n"); //位置指定(!=-1のときエラー)
         const musicName = plainText.slice(persentIndex + 5); //曲名切り取り
@@ -87,10 +87,7 @@ module.exports = robot => {
 
 
     //曲削除
-    robot.respond(/\/delete.*/i, res => {
-        // //ターミナル操作用
-        // const userName = "Ras"
-        // const plainText = "@BOT_kinano %delete 13"
+    robot.respond(/\/remove.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const deleteIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
@@ -147,7 +144,6 @@ module.exports = robot => {
                     const music = obj.list[i].music;
                     table = table + "|" + i + "|" + user + "|" + music + "|\n";
                 }
-                table = table + "[](" + playlistURL + ")";
                 setTimeout(() => {
                     res.send("ぷれいりすとやんね～\n" + table) //表作成成功時メッセージ
                 }, 500); //メッセージ順逆転防止

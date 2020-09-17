@@ -76,9 +76,6 @@ const STAMPsends = [
     "ohagoza",
 ];
 
-//playlistURL
-const playlistURL = "https://www.youtube.com/playlist?list=PLCep_QEAK_Rz-Cnqtn_MZxFd0wWJcNYL0"
-
 exports.readme = readme;
 exports.responds = responds;
 exports.replys = replys;
@@ -89,5 +86,4 @@ exports.end = end;
 exports.natterus = natterus;
 exports.STAMPhears = STAMPhears;
 exports.STAMPsends = STAMPsends;
-exports.playlistURL = playlistURL;
 
