@@ -1,14 +1,18 @@
 const request = require('request');
-const { responds } = require('./words');
 
 let URL = 'https://script.google.com/macros/s/AKfycbzZtvOvf14TaMdRIYzocRcf3mktzGgXvlFvyczo/exec';
 
 module.exports = robot => {
-    robot.hear(/^tra .*$/i, res => {
+    robot.hear(/^tra.*$/i, res => {
         const plainText = res.message.message.plainText;
-        const src = plainText.slice(4,6);
-        const tar = plainText.slice(7,9);
-        const txt = plainText.slice(10);
+        const index = plainText.search(/(\(..=>..\)|\(..->..\))/); //言語指定があれば変える
+        let txt = plainText.slice(3);
+        let src = "ja";
+        let tar = "en";
+        if(index != -1){
+            src = plainText.slice(index+1,index+3);
+            tar = plainText.slice(index+5,index+7);
+        }
         request.get({
             uri: URL,
             headers: {'Content-type': 'application/json'},
@@ -19,7 +23,8 @@ module.exports = robot => {
             },
             json: true
         }, function(err, req, data){
-            res.reply(data.text);
+            if(data.text) res.reply(data.text);
+            else res.reply("きなのその言語知らない！");
         });
     })
 }
