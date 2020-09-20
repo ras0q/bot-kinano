@@ -19,7 +19,7 @@ module.exports = robot => {
             },
             json: true
         }, function(err, req, data){
-            res.respond(data.text);
+            res.reply(data.text);
         });
     })
 }
