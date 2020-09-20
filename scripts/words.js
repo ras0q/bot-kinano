@@ -1,8 +1,8 @@
 //コマンド一覧
 
 //helpメッセージ
-const readme = "# :kinano.large.shake:できること:kinano.large.shake:\nきなのはなんでもできるやんね！\n\n### コミュニケーション :blobdrum:\n- ``@BOT_kinano できること`` : きなのはなんでもできるやんね～\n- ``@BOT_kinano いらっしゃい`` : 監視対象に追加するやんね～\n- ``@BOT_kinano もちもち`` : おもちをたべるやんね！\n- ``@BOT_kinano もふもふ`` : もふもふするやんね～\n- ``@BOT_kinano もちもち`` : もちもちするやんね～\n- ``@BOT_kinano おはよう`` : おはようやんね～\n- ``@BOT_kinano おやすみ`` : おやすみやんね～\n- ほかにもあるやんね～\n\n### プレイリスト:blobguitar:\n- ``@BOT_kinano %add 曲名``: 曲を追加できるやんね！\n- ``@BOT_kinano %watch``: プレイリストが見れるやんね～\n- ``@BOT_kinano %delete 曲番号``プレイリストから削除できるやんね！ほかの人が追加した曲を削除しないように注意するやんね～\n\n### その他\n- メッセージの先頭に``/``をつけるときなのが時間を測るやんね！\n- ``ABCやるか``できなのが問題をだすやんね！";
-
+const fs = require('fs');
+const readme = fs.readFileSync("./README.md", 'utf8');
 
 //``@BOT_kinano responds[i]``を受け取ると``@username replys[i]``を返す
 const responds = [
