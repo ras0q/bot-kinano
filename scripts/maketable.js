@@ -8,7 +8,7 @@ module.exports = robot => {
     const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
 
     //playlist.json確認
-    robot.hear(/json watch/, res => {
+    robot.hear(/%watch/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
@@ -23,7 +23,7 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/json update.*/, res => {
+    robot.hear(/%update.*/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
@@ -43,8 +43,10 @@ module.exports = robot => {
         }
     })
 
+
+
     //曲追加
-    robot.respond(/\/add.*/i, res => {
+    robot.hear(/%add.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const kagikakko = plainText.indexOf("["); //URLがあれば読み取る
@@ -83,7 +85,7 @@ module.exports = robot => {
                             res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
-                            const addtable = "|追加した人|追加した曲|\n|-|-|\n" + "|" + userName + "|" + musicName + "|\n" //追加曲の表を作成
+                            const addtable = "|追加した人|追加した曲|URL|\n|-|-|\n" + "|" + userName + "|" + musicName + "|" + URL + "\n" //追加曲の表を作成
                             robot.send({channelID: R_KchannelID},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
                             robot.send({channelID: R_KchannelID},json)
                             setTimeout(() => {
@@ -96,9 +98,8 @@ module.exports = robot => {
         }
     })
 
-
     //曲削除
-    robot.respond(/\/remove.*/i, res => {
+    robot.hear(/%remove.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const removeIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
@@ -140,7 +141,7 @@ module.exports = robot => {
 
 
     //曲確認
-    robot.respond(/.*\/watch$/i, res => {
+    robot.hear(/%watch$/i, res => {
         let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n"; //表の項目と例
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
@@ -163,7 +164,7 @@ module.exports = robot => {
     })
 
     //URL確認
-    robot.respond(/.*\/url.*$/i, res => {
+    robot.hear(/%url.*$/i, res => {
         const plainText = res.message.message.plainText;
         const urlIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //確認する曲のIndex
         //playlist.jsonを読み込む

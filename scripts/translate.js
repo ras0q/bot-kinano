@@ -27,5 +27,36 @@ module.exports = robot => {
             else res.reply("きなのその言語知らない！");
         });
     })
+
+        robot.hear(/^tratra .*$/i, res => {
+        const plainText = res.message.message.plainText;
+        let txt = plainText.slice(6);
+        request.get({
+            uri: URL,
+            headers: {'Content-type': 'application/json'},
+            qs: {
+                "text": txt,
+                "source": "ja",
+                "target": "en"
+            },
+            json: true
+        }, function(err, req, data){
+            if(data.text) txt = data.text;
+            else res.reply("きなのその言語知らない！");
+        });
+        request.get({
+            uri: URL,
+            headers: {'Content-type': 'application/json'},
+            qs: {
+                "text": txt,
+                "source": "en",
+                "target": "ja"
+            },
+            json: true
+        }, function(err, req, data){
+            if(data.text) res.reply(data.text);
+            else res.reply("きなのその言語知らない！");
+        });
+    })
 }
 
