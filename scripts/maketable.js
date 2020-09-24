@@ -105,6 +105,7 @@ module.exports = robot => {
         const removeIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
         let removedUser; //削除する曲の追加実行者
         let removedMusic; //削除する曲の名前
+        let removedURL; //削除する曲のURL
         //playlist.jsonを読み込む
         fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
             if (err){
