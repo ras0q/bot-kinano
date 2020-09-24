@@ -24,38 +24,41 @@ module.exports = robot => {
             json: true
         }, function(err, req, data){
             if(data.text) res.reply(data.text);
-            else res.reply("きなのその言語知らない！");
+            else res.reply("きなのその言葉知らない！");
         });
     })
 
         robot.hear(/^tratra .*$/i, res => {
         const plainText = res.message.message.plainText;
-        let txt = plainText.slice(6);
+        let txt1 = plainText.slice(6);
+        let txt2 = "";
         request.get({
             uri: URL,
             headers: {'Content-type': 'application/json'},
             qs: {
-                "text": txt,
+                "text": txt1,
                 "source": "ja",
                 "target": "en"
             },
             json: true
         }, function(err, req, data){
-            if(data.text) txt = data.text;
-            else res.reply("きなのその言語知らない！");
-        });
-        request.get({
-            uri: URL,
-            headers: {'Content-type': 'application/json'},
-            qs: {
-                "text": txt,
-                "source": "en",
-                "target": "ja"
-            },
-            json: true
-        }, function(err, req, data){
-            if(data.text) res.reply(data.text);
-            else res.reply("きなのその言語知らない！");
+            if(data.text) {
+                txt2 = data.text;
+                request.get({
+                    uri: URL,
+                    headers: {'Content-type': 'application/json'},
+                    qs: {
+                        "text": txt2,
+                        "source": "en",
+                        "target": "ja"
+                    },
+                    json: true
+                }, function(err, req, data){
+                    if(data.text) res.reply(data.text);
+                    else res.reply("きなのその言葉知らない！");
+                });
+            }
+            else res.reply("きなのその言葉知らない！");
         });
     })
 }

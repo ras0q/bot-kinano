@@ -1,4 +1,4 @@
-#メモ
+# メモ
 
 ## ID
 - ``res.message.message.channelId`` : チャンネルID取得
@@ -11,7 +11,10 @@
 - . : 任意の一文字
 - * : 直前の記号の0回以上の繰り返し
 
+## GAS
+- `const txt = LanguageApp.translate("ねこです。", "ja", "en");` で日本語から英語に翻訳
+- `const txt = LanguageApp.translate("ねこです。", "", "en");` とするとsourceを自動判別
+
 ## やりたいこと
 - 便利な機能の追加
-- 自動監視チャンネル追加/解除
 - 過度なメッセージ同時投稿の防止
