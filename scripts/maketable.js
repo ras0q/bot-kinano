@@ -100,10 +100,8 @@ module.exports = robot => {
 
     //曲削除
     robot.hear(/^%remove.*$/i, res => {
-        // const userName = res.message.message.user.name;
-        const userName = "Ras";
-        // const plainText = res.message.message.plainText;
-        const plainText = "%remove 0"
+        const userName = res.message.message.user.name;
+        const plainText = res.message.message.plainText;
         const removeIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
         let removedUser = ""; //削除する曲の追加実行者
         let removedMusic = ""; //削除する曲の名前
