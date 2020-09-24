@@ -85,7 +85,7 @@ module.exports = robot => {
                             res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
-                            const addtable = "|追加した人|追加した曲|URL|\n|-|-|\n" + "|" + userName + "|" + musicName + "|" + URL + "\n" //追加曲の表を作成
+                            const addtable = "|追加した人|追加した曲|曲のURL|\n|-|-|-|\n" + "|" + userName + "|" + musicName + "|" + URL + "|\n" //追加曲の表を作成
                             robot.send({channelID: R_KchannelID},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
                             robot.send({channelID: R_KchannelID},json)
                             setTimeout(() => {
@@ -118,6 +118,7 @@ module.exports = robot => {
                 else {
                     removedUser = obj.list[removeIndex].user; //オブジェクトから追加実行者を取り出す
                     removedMusic = obj.list[removeIndex].music; //オブジェクトから曲名を取り出す
+                    removedURL = obj.list[removeIndex].url; //オブジェクトからURLを取り出す
                     obj.list.splice(removeIndex, 1); //オブジェクトから曲を削除
                     let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
                     //playlist.jsonに書き込む
@@ -126,7 +127,7 @@ module.exports = robot => {
                             res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
                         }
                         else {
-                            const removeTable = "|削除した人|追加した人|削除した曲|\n|-|-|-|\n|" + userName + "|" + removedUser + "|" + removedMusic + "|\n"; //削除曲の表作成
+                            const removeTable = "|削除した人|追加した人|削除した曲|曲のURL|\n|-|-|-|-|\n|" + userName + "|" + removedUser + "|" + removedMusic + removeURL + "|\n"; //削除曲の表作成
                             robot.send({channelID: R_KchannelID},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
                             robot.send({channelID: R_KchannelID},json)
                             setTimeout(() => {
