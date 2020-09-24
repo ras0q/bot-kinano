@@ -23,12 +23,12 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/^%update.*$/, res => {
+    robot.hear(/^%update.*/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
         if(channelID == R_KchannelID && userID == RasuserID){
             const plainText = res.message.message.plainText;
-            const index = plainText.indexOf("{")
+            const index = plainText.indexOf("{");
             const json = plainText.slice(index);
             fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
                 if (err) {
@@ -46,7 +46,7 @@ module.exports = robot => {
 
 
     //曲追加
-    robot.hear(/^%add.*$/i, res => {
+    robot.hear(/^%add.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const kagikakko = plainText.indexOf("["); //URLがあれば読み取る
@@ -99,7 +99,7 @@ module.exports = robot => {
     })
 
     //曲削除
-    robot.hear(/^%remove.*$/i, res => {
+    robot.hear(/^%remove.*/i, res => {
         const userName = res.message.message.user.name;
         const plainText = res.message.message.plainText;
         const removeIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //削除する曲のIndex
@@ -166,7 +166,7 @@ module.exports = robot => {
     })
 
     //URL確認
-    robot.hear(/^%url.*$/i, res => {
+    robot.hear(/^%url.*/i, res => {
         const plainText = res.message.message.plainText;
         const urlIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //確認する曲のIndex
         //playlist.jsonを読み込む

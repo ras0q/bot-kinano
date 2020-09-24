@@ -3,7 +3,7 @@ const request = require('request');
 let URL = 'https://script.google.com/macros/s/AKfycbzZtvOvf14TaMdRIYzocRcf3mktzGgXvlFvyczo/exec';
 
 module.exports = robot => {
-    robot.hear(/^tra .*$/i, res => {
+    robot.hear(/^tra .*/i, res => {
         const plainText = res.message.message.plainText;
         const index = plainText.search(/(\(..=>..\)|\(..->..\))/); //言語指定があれば変える
         let txt = plainText.slice(3);
@@ -28,7 +28,7 @@ module.exports = robot => {
         });
     })
 
-        robot.hear(/^tratra .*$/i, res => {
+        robot.hear(/^tratra .*/i, res => {
         const plainText = res.message.message.plainText;
         let txt1 = plainText.slice(6);
         let txt2 = "";

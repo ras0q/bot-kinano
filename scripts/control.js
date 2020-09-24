@@ -27,7 +27,7 @@ module.exports = robot => {
     );
 
     //ID取得
-    robot.respond(/.*ID.*$/, res => {
+    robot.respond(/.*ID.*/, res => {
         const MessageID = res.message.message.id;
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
@@ -89,7 +89,7 @@ module.exports = robot => {
     }
 
     //``@BOT_kinano もふもふ``(監視対象チャンネルではメンション不要)を受け取るとランダム文字列を返す
-    robot.hear(/^.*もふもふ.*$/, res => {
+    robot.hear(/^.*もふもふ.*/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let r = "";
@@ -115,7 +115,7 @@ module.exports = robot => {
     });
 
     //``ABCやるか``を受け取るとランダムで問題を返す
-    robot.hear(/^.*ABCや.*$/, res => {
+    robot.hear(/^.*ABCや.*/, res => {
         const botflag = res.message.message.user.bot;
         const plainText = res.message.message.plainText;
         if(!botflag){
@@ -148,7 +148,7 @@ module.exports = robot => {
     }
 
     //``@BOT_kinano .*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*``(監視対象チャンネルではメンション不要)を受け取るとランダム返信
-    robot.hear(/^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*$/, res => {
+    robot.hear(/^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
         const botflag = res.message.message.user.bot;
         if(!botflag){
             let i = Math.random();
@@ -166,7 +166,7 @@ module.exports = robot => {
     });
 
         //監視対象チャンネルで"おいすー"を受け取ったら"お""い""す""ー"スタンプをランダム順で返す
-    robot.hear(/^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*$/i, res => {
+    robot.hear(/^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i, res => {
         for(let i = 1; i < 5; i++){
             if(i == 4){
                 res.send(
@@ -188,7 +188,7 @@ module.exports = robot => {
     });
 
     //メッセージの時間を返す
-    robot.hear(/^\/.*$/, res => {
+    robot.hear(/^\/.*/, res => {
         const MessageID = res.message.message.id;
         const time = res.message.message.createdAt;
         const time2 = time.slice(0,-1);
