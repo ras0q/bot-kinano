@@ -29,6 +29,7 @@ const hears = [
     /^.*(死|:si.*:).*/,
     /^.*(おなか|お腹).*/,
     /^.*(もふもち|もちもふ).*/,
+    /^.*おおお.*/,
     /^.*(助けて|たすけて|tasukete).*/
 ];
 const sends = [
@@ -44,6 +45,7 @@ const sends = [
     "死ぬな！",
     "ぽんぽん！",
     "言いすぎやんね！！！:gao-.ex-large::anger.small.wiggle.wiggle:",
+    "かやま！",
     readme
 ];
 
