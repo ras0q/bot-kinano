@@ -26,31 +26,6 @@ module.exports = robot => {
         "デプロイ完了やんね～ " + r + r
     );
 
-    //ID取得
-    robot.respond(/.*ID.*/, res => {
-        const MessageID = res.message.message.id;
-        const channelID = res.message.message.channelId;
-        const userID = res.message.message.user.id;
-        const traqID = res.message.message.user.name;
-        const displayName = res.message.message.user.displayName;
-        const botflag = res.message.message.user.bot;
-        const plainText = res.message.message.plainText;
-        const time = res.message.message.createdAt;
-        res.send(
-            "||"
-            + "|\n|-|-"
-            + "|\n|MessageID|"+ MessageID
-            + "|\n|ChannelID|" + channelID
-            + "|\n|Your ID|" + userID
-            + "|\n|Your traqID|@" + traqID
-            + "|\n|Your name|" + displayName
-            + "|\n|Bot|" + botflag
-            + "|\n|Plain text|「" + plainText + "」"
-            + "|\n|Time|" + time
-            + "|\n https://q.trap.jp/messages/" + MessageID
-            )
-    });
-
     //help
     robot.respond(/(できること|help)$/i, res => {
         const botflag = res.message.message.user.bot;
@@ -129,6 +104,18 @@ module.exports = robot => {
             setTimeout(() => {
                 res.reply("今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc" + index + "/tasks/abc" + index + "_" + diff)
             })
+        }
+    })
+
+    robot.hear(/^.*(お|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/, res => {
+        const botflag = res.message.message.user.bot;
+        const plainText = res.message.message.plainText;
+        if(!botflag){
+            let r = "";
+            while(plainText.match(/^.*(お|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/) != -1){
+                r += "かやま！";
+            }
+            res.send(r);
         }
     })
 
