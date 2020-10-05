@@ -107,17 +107,20 @@ module.exports = robot => {
         }
     })
 
-    // robot.hear(/^.*(お|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/, res => {
-    //     const botflag = res.message.message.user.bot;
-    //     const plainText = res.message.message.plainText;
-    //     if(!botflag){
-    //         let r = "";
-    //         while(plainText.match(/^.*(お|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/) != -1){
-    //             r += "かやま！";
-    //         }
-    //         res.send(r);
-    //     }
-    // })
+    const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/g;
+    robot.hear(/^.*(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/, res => {
+        const botflag = res.message.message.user.bot;
+        let plainText = res.message.message.plainText;
+        if(!botflag){
+            let r = "";
+            while(plainText.search(oisuregexp) != -1){
+                plainText = plainText.substr(plainText.search(oisuregexp)+3)
+                r += "かやま";
+            }
+            r += "！";
+            res.send(r);
+        }
+    })
 
     //``@BOT_kinano STAMPhears[i]``(監視対象チャンネルではメンション不要)を受け取るとSTAMPsends[i]のスタンプを押す
     for(let i = 0; i < STAMPhears.length; i++){
