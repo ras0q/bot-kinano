@@ -9,7 +9,7 @@ const getRandom　= (start, end) => {
 const getMofu = () => {
     let r = "";
     for(let i = 0; i < 2; i++){
-        const generated = String.fromCodePoint(getMofu("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
+        const generated = String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
         r += generated;
     }
     return r + r;
