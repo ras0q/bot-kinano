@@ -23,7 +23,7 @@ module.exports = robot => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.reply(is_mentioned[i][res]);
+                    res.reply(is_mentioned[i][ans]);
                 },500);
             }
         });
@@ -35,7 +35,7 @@ module.exports = robot => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.send(is_not_mentioned[i][res]);
+                    res.send(is_not_mentioned[i][ans]);
                 },500);
             }
         });

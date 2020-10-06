@@ -18,106 +18,106 @@ const getMofu = () => {
 const is_mentioned = [
     {
         msg: /.*hoge.*/i,
-        res: "huga"
+        ans: "huga"
     },
     {
         msg: /(できること|help)$/i,
-        res: readme,
+        ans: readme,
     },
     {
         msg: /.*もちもち.*/,
-        res: "きなこもち～～～～～！"
+        ans: "きなこもち～～～～～！"
     }
 ];
 
 const is_not_mentioned = [
     {
         msg: /^.*Ras.*/i,
-        res:{
+        ans:{
                 type: "stamp",
                 name: "Rascal"
             }
     },
     {
         msg: /^.*もちもち.*/,
-        res: "もちもち～:blobenjoy:"
+        ans: "もちもち～:blobenjoy:"
     },
     {
         msg: /^.*(きなこ|kinako).*/,
-        res: ":kinako.ex-large:"
+        ans: ":kinako.ex-large:"
     },
     {
         msg: /^.*(きなの|kinano).*/,
-        res: "えへえへ"
+        ans: "えへえへ"
     },
     {
         msg: /^.*やんね.*/,
-        res: "やんね！"
+        ans: "やんね！"
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))(?!([すスｽ]|(:oisu\-3.*:))).*/,
-        res: "おい！"
+        ans: "おい！"
     },
     {
         msg: /^.*(か[あ～]|car|[っう]かな|[やす]るぞ).*/,
-        res: "いいぞいいぞ"
+        ans: "いいぞいいぞ"
     },
     {
         msg: /^.*うまうま.*/,
-        res: "むしゃむしゃ"
+        ans: "むしゃむしゃ"
     },
     {
         msg: /^.*[い言云]ってい?る.*/,
-        res: "いうな！"
+        ans: "いうな！"
     },
     {
         msg: /^.*(死|:si.*:).*/,
-        res: "死ぬな！"
+        ans: "死ぬな！"
     },
     {
         msg: /^.*(おなか|お腹).*/,
-        res: "ぽんぽん！"
+        ans: "ぽんぽん！"
     },
     {
         msg: /^.*(助けて|たすけて|tasukete).*]/,
-        res: readme
+        ans: readme
     },
     {
         msg: /^.*もふもふ.*/,
-        res: getMofu("ぁ".codePointAt(0), "ん".codePointAt(0)+1)
+        ans: getMofu("ぁ".codePointAt(0), "ん".codePointAt(0)+1)
     },
     {
         msg: /^.*なってる$/,
-        res: natterus[getRandom(0, natterus.length)]
+        ans: natterus[getRandom(0, natterus.length)]
     },
     {
         msg: /^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/,
-        res: sleeps[getRandom(0, sleeps.length)]
+        ans: sleeps[getRandom(0, sleeps.length)]
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i,
-        res: {
+        ans: {
             type: "stamp",
             name: "oisu-1"
         }
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i,
-        res: {
+        ans: {
             type: "stamp",
             name: "oisu-2"
         }
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i,
-        res: {
+        ans: {
             type: "stamp",
             name: "oisu-3"
         }
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i,
-        res: {
+        ans: {
             type: "stamp",
             name: "oisu-4yoko"
         }
