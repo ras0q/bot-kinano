@@ -15,6 +15,54 @@ const getMofu = () => {
     return r + r;
 }
 
+const natterus = [
+    ":yaya::koreni_natteru.large:",
+    ":koreni_natteru.ex-large.rotate:",
+    "なるな！",
+    "なるな！",
+    "なるな！",
+    "なるな！",
+    "なるな！",
+    "なるな！",
+]
+
+const sleeps = [
+    "おやすみやんね～えへへ",
+    "寝るな！",
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    },
+    {
+        type: "stamp",
+        name: "oyasumi"
+    }
+]
+
 const is_mentioned = [
     {
         msg: /.*hoge.*/i,
@@ -124,57 +172,8 @@ const is_not_mentioned = [
     }
 ];
 
-const natterus = [
-    ":yaya::koreni_natteru.large:",
-    ":koreni_natteru.ex-large.rotate:",
-    "なるな！",
-    "なるな！",
-    "なるな！",
-    "なるな！",
-    "なるな！",
-    "なるな！",
-]
-
-const sleeps = [
-    "おやすみやんね～えへへ",
-    "寝るな！",
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    },
-    {
-        type: "stamp",
-        name: "oyasumi"
-    }
-]
-
 exports.getRandom = getRandom;
 exports.getMofu = getMofu;
 exports.is_mentioned = is_mentioned;
 exports.is_not_mentioned = is_not_mentioned;
-exports.natterus = natterus;
 

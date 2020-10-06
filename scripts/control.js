@@ -19,11 +19,12 @@ module.exports = robot => {
 
     //メンション付きメッセージ
     for(let i = 0; i < is_mentioned.length; i++){
-        robot.respond(is_mentioned[i][msg], res => {
+        const {msg, ans} = is_mentioned[i];
+        robot.respond(msg, res => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.reply(is_mentioned[i][ans]);
+                    res.reply(ans);
                 },500);
             }
         });
@@ -31,11 +32,12 @@ module.exports = robot => {
 
     //メンション無しメッセージ
     for(let i = 0; i < is_not_mentioned.length; i++){
-        robot.hear(is_not_mentioned[i][msg], res => {
+        const {msg, ans} = is_not_mentioned[i];
+        robot.hear(msg, res => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.send(is_not_mentioned[i][ans]);
+                    res.send(ans);
                 },500);
             }
         });
