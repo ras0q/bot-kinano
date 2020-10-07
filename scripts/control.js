@@ -1,9 +1,25 @@
 const {
-    getRandom,
-    getMofu,
+    natterus,
+    sleeps,
     is_mentioned,
     is_not_mentioned,
 } = require("./words");
+
+//start以上end未満の乱数を返す
+const getRandom　= (start, end) => {
+    return Math.floor(Math.random() * (end - start)) + start;
+}
+
+//もふもふ
+const getMofu = () => {
+    let r = "";
+    for(let i = 0; i < 2; i++){
+        const generated = String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
+        r += generated;
+    }
+    return r + r;
+}
+
 
 module.exports = robot => {
 
@@ -61,6 +77,7 @@ module.exports = robot => {
         }
     })
 
+    //大岡山
     const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/g;
     robot.hear(/^.*(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/, res => {
         const { bot } = res.message.message.user.bot;
@@ -74,6 +91,21 @@ module.exports = robot => {
             r += "！";
             res.send(r);
         }
+    })
+
+    //もふもふ
+    robot.hear(/^.*もふもふ.*/, res => {
+        res.send(getMofu());
+    })
+
+    //なってる
+    robot.hear(/^.*なってる$/, res => {
+        res.reply(natterus[getRandom(0, natterus.length)]);
+    })
+
+    //おやすみ
+    robot.hear(/^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
+        res.send(sleeps[getRandom(0, sleeps.length)]);
     })
 
     //メッセージの時間を返す

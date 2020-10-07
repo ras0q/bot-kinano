@@ -1,20 +1,6 @@
 const fs = require('fs');
 const readme = fs.readFileSync("./README.md", 'utf8');
 
-//start以上end未満の乱数を返す
-const getRandom　= (start, end) => {
-    return Math.floor(Math.random() * (end - start)) + start;
-}
-
-const getMofu = () => {
-    let r = "";
-    for(let i = 0; i < 2; i++){
-        const generated = String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
-        r += generated;
-    }
-    return r + r;
-}
-
 const natterus = [
     ":yaya::koreni_natteru.large:",
     ":koreni_natteru.ex-large.rotate:",
@@ -127,20 +113,8 @@ const is_not_mentioned = [
         ans: "ぽんぽん！"
     },
     {
-        msg: /^.*(助けて|たすけて|tasukete).*]/,
+        msg: /^.*(助けて|たすけて|tasukete).*/,
         ans: readme
-    },
-    {
-        msg: /^.*もふもふ.*/,
-        ans: getMofu("ぁ".codePointAt(0), "ん".codePointAt(0)+1)
-    },
-    {
-        msg: /^.*なってる$/,
-        ans: natterus[getRandom(0, natterus.length)]
-    },
-    {
-        msg: /^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/,
-        ans: sleeps[getRandom(0, sleeps.length)]
     },
     {
         msg: /^.*([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:)).*/i,
@@ -172,8 +146,8 @@ const is_not_mentioned = [
     }
 ];
 
-exports.getRandom = getRandom;
-exports.getMofu = getMofu;
+exports.natterus = natterus;
+exports.sleeps = sleeps;
 exports.is_mentioned = is_mentioned;
 exports.is_not_mentioned = is_not_mentioned;
 
