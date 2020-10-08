@@ -38,7 +38,7 @@ module.exports = robot => {
             qs: {
                 "text": txt1,
                 "source": "ja",
-                "target": "en"
+                "target": "kg"
             },
             json: true
         }, function(err, req, data){
@@ -49,7 +49,7 @@ module.exports = robot => {
                     headers: {'Content-type': 'application/json'},
                     qs: {
                         "text": txt2,
-                        "source": "en",
+                        "source": "kg",
                         "target": "ja"
                     },
                     json: true
