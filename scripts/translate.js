@@ -5,7 +5,7 @@ let URL = 'https://script.google.com/macros/s/AKfycbzZtvOvf14TaMdRIYzocRcf3mktzG
 module.exports = robot => {
     robot.hear(/^tra .*/i, res => {
         const plainText = res.message.message.plainText;
-        const index = plainText.search(/(\(..=>..\)|\(..->..\))/); //言語指定があれば変える
+        const index = plainText.search(/(\(|\[)..([=-]>|→)..(\)|\])/); //言語指定があれば変える
         let txt = plainText.slice(3);
         let src = "ja";
         let tar = "en";
@@ -37,8 +37,8 @@ module.exports = robot => {
             headers: {'Content-type': 'application/json'},
             qs: {
                 "text": txt1,
-                "source": "ja",
-                "target": "eo"
+                "source": "",
+                "target": "en"
             },
             json: true
         }, function(err, req, data){
@@ -49,7 +49,7 @@ module.exports = robot => {
                     headers: {'Content-type': 'application/json'},
                     qs: {
                         "text": txt2,
-                        "source": "eo",
+                        "source": "",
                         "target": "ja"
                     },
                     json: true
@@ -73,7 +73,7 @@ module.exports = robot => {
                 headers: {'Content-type': 'application/json'},
                 qs: {
                     "text": plainText,
-                    "source": "ja",
+                    "source": "",
                     "target": "en"
                 },
                 json: true
@@ -85,7 +85,7 @@ module.exports = robot => {
                         headers: {'Content-type': 'application/json'},
                         qs: {
                             "text": txt,
-                            "source": "en",
+                            "source": "",
                             "target": "ja"
                         },
                         json: true

@@ -67,10 +67,17 @@ const is_mentioned = [
 const is_not_mentioned = [
     {
         msg: /^.*Ras.*/i,
-        ans:{
+        ans: {
                 type: "stamp",
                 name: "Rascal"
             }
+    },
+    {
+        msg: /^(おわ|った)$/,
+        ans: {
+                type: "stamp",
+                name: "clap"
+        }
     },
     {
         msg: /^.*もちもち.*/,
@@ -81,7 +88,7 @@ const is_not_mentioned = [
         ans: ":kinako.ex-large:"
     },
     {
-        msg: /^.*(きなの|kinano).*/,
+        msg: /^.*きなの.*/,
         ans: "えへえへ"
     },
     {
