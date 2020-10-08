@@ -48,7 +48,7 @@ module.exports = robot => {
 
     //メンション無しメッセージ
     for(let i = 0; i < is_not_mentioned.length; i++){
-        const {msg, ans} = is_not_mentioned[i];
+        const { msg, ans } = is_not_mentioned[i];
         robot.hear(msg, res => {
             const { bot } = res.message.message.user;
             if(!bot){
@@ -60,7 +60,7 @@ module.exports = robot => {
     }
 
     //``ABCやるか``を受け取るとランダムで問題を返す
-    robot.hear(/^.*ABCや.*/i, res => {
+    robot.hear(/ABCや/i, res => {
         const { message } = res.message;
         const { bot, plainText } = message;
         if(!bot){
@@ -78,8 +78,8 @@ module.exports = robot => {
     })
 
     //大岡山
-    const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/g;
-    robot.hear(/^.*(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}.*/, res => {
+    const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/;
+    robot.hear(oisuregexp, res => {
         const { bot } = res.message.message.user.bot;
         let plainText = res.message.message.plainText;
         if(!bot){
@@ -94,22 +94,22 @@ module.exports = robot => {
     })
 
     //もふもふ
-    robot.hear(/^.*もふもふ.*/, res => {
+    robot.hear(/もふもふ/, res => {
         res.send(getMofu());
     })
 
     //なってる
-    robot.hear(/^.*なってる$/, res => {
+    robot.hear(/なってる/, res => {
         res.reply(natterus[getRandom(0, natterus.length)]);
     })
 
     //おやすみ
-    robot.hear(/^.*(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi).*/, res => {
+    robot.hear(/(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi)/, res => {
         res.send(sleeps[getRandom(0, sleeps.length)]);
     })
 
     //メッセージの時間を返す
-    robot.hear(/^\/.*/, res => {
+    robot.hear(/\/.*/, res => {
         const { message } = res.message;
         const { id, createdAt } = message;
         const time2 = createdAt.slice(0,-1);
