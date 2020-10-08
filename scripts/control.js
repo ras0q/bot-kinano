@@ -35,7 +35,7 @@ module.exports = robot => {
 
     //メンション付きメッセージ
     for(let i = 0; i < is_mentioned.length; i++){
-        const {msg, ans} = is_mentioned[i];
+        const { msg, ans } = is_mentioned[i];
         robot.respond(msg, res => {
             const { bot } = res.message.message.user;
             if(!bot){
@@ -95,28 +95,47 @@ module.exports = robot => {
 
     //もふもふ
     robot.hear(/もふもふ/, res => {
+        const { bot } = res.message.message.user;
+        if(!bot){
+            setTimeout(() => {
+                res.send(getMofu());
+            },500);
+        }
         res.send(getMofu());
     })
 
     //なってる
     robot.hear(/なってる/, res => {
-        res.reply(natterus[getRandom(0, natterus.length)]);
+        const { bot } = res.message.message.user;
+        if(!bot){
+            setTimeout(() => {
+                res.reply(natterus[getRandom(0, natterus.length)]);
+            },500);
+        }
     })
 
     //おやすみ
     robot.hear(/(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi)/, res => {
-        res.send(sleeps[getRandom(0, sleeps.length)]);
+        const { bot } = res.message.message.user;
+        if(!bot){
+            setTimeout(() => {
+                res.send(sleeps[getRandom(0, sleeps.length)]);
+            },500);
+        }
     })
 
     //メッセージの時間を返す
     robot.hear(/^\/.*/, res => {
         const { message } = res.message;
-        const { id, createdAt } = message;
-        const time2 = createdAt.slice(0,-1);
-        const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
-        const JPNhourStr = ("0" + JPNhour).slice(-2);
-        const JPNtime = time2.replace(/T../, " " + JPNhourStr);
-        res.send(JPNtime + "\n https://q.trap.jp/messages/" + id );
+        const { id, createdAt, user } = message;
+        const { bot } = user;
+        if(!bot){
+            const time2 = createdAt.slice(0,-1);
+            const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
+            const JPNhourStr = ("0" + JPNhour).slice(-2);
+            const JPNtime = time2.replace(/T../, " " + JPNhourStr);
+            res.send(JPNtime + "\n https://q.trap.jp/messages/" + id );
+        }
     })
 
 };
