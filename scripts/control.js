@@ -109,7 +109,7 @@ module.exports = robot => {
     })
 
     //メッセージの時間を返す
-    robot.hear(/\/.*/, res => {
+    robot.hear(/^\/.*/, res => {
         const { message } = res.message;
         const { id, createdAt } = message;
         const time2 = createdAt.slice(0,-1);
