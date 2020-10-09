@@ -138,10 +138,4 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/infoinfo$/, res => {
-        res.send(res.message);
-        res.send(res.message.message);
-        res.send(res.message.message.id);
-    })
-
 };
