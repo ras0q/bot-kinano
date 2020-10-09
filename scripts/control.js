@@ -29,7 +29,7 @@ module.exports = robot => {
     //起動時メッセージ
     robot.send(
         {channelID: gtRB_ID},
-        "デプロイ完了 " + getMofu()
+        "デプロイ完了(" + new Date().toLocaleString() + ") " + getMofu()
     );
 
     //メンション付きメッセージ
