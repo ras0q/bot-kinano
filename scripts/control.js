@@ -138,8 +138,8 @@ module.exports = robot => {
         }
     })
 
-    robot.respond(/info/, res => {
-        res.send(res);
+    robot.respond(/infomation$/, res => {
+        res.send(res.message);
     })
 
 };
