@@ -138,7 +138,7 @@ module.exports = robot => {
         }
     })
 
-    robot.respond(/infomation$/, res => {
+    robot.respond(/.*infomation$/, res => {
         res.send(res.message);
     })
 
