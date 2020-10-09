@@ -99,7 +99,6 @@ module.exports = robot => {
                 res.send(getMofu());
             },500);
         }
-        res.send(getMofu());
     })
 
     //なってる
