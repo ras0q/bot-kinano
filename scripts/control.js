@@ -140,6 +140,7 @@ module.exports = robot => {
 
     robot.respond(/.*infomation$/, res => {
         res.send(res.message);
+        res.send(res.message.message);
     })
 
 };
