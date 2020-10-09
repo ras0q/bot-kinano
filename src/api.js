@@ -14,7 +14,3 @@ exports.join = channelId => {
 exports.leave = channelId => {
     return api.letBotLeaveChannel(BOT_ID, { channelId })
 }
-
-exports.getChannelsInfo = async () => {
-    return (await api.getChannels()).data.public
-}
