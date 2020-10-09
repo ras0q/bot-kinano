@@ -1,3 +1,4 @@
+const { get } = require("request");
 const {
     natterus,
     sleeps,
@@ -9,6 +10,7 @@ const {
 const getRandom　= (start, end) => {
     return Math.floor(Math.random() * (end - start)) + start;
 }
+exports.getRandom = getRandom;
 
 //もふもふ
 const getMofu = () => {
