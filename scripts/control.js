@@ -23,13 +23,11 @@ const getMofu = () => {
 
 module.exports = robot => {
 
-    const RaschannelID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f"; //#gps/times/Ras
-    const R_KchannelID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
-    const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
+    const gtR_ID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f"; //#gps/times/Ras
 
     //起動時メッセージ
     robot.send(
-        {channelID: RaschannelID},
+        {channelID: gtR_ID},
         "デプロイ完了やんね～ " + getMofu()
     );
 

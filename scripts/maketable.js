@@ -3,15 +3,14 @@ const fs = require('fs'); //ファイルの読み込み、書き込み
 
 module.exports = robot => {
 
-    const RaschannelID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f"; //#gps/times/Ras
-    const R_KchannelID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
+    const DM_ID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
     const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
 
     //playlist.json確認
     robot.hear(/^%watch$/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
-        if(channelID == R_KchannelID && userID == RasuserID){
+        if(channelID == DM_ID && userID == RasuserID){
             fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
                 if(err){
                     res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
@@ -26,7 +25,7 @@ module.exports = robot => {
     robot.hear(/^%update.*/, res => {
         const channelID = res.message.message.channelId;
         const userID = res.message.message.user.id;
-        if(channelID == R_KchannelID && userID == RasuserID){
+        if(channelID == DM_ID && userID == RasuserID){
             const plainText = res.message.message.plainText;
             const index = plainText.indexOf("{");
             const json = plainText.slice(index);
@@ -86,8 +85,8 @@ module.exports = robot => {
                         }
                         else {
                             const addtable = "|追加した人|追加した曲|曲のURL|\n|-|-|-|\n" + "|" + userName + "|" + musicName + "|" + URL + "|\n" //追加曲の表を作成
-                            robot.send({channelID: R_KchannelID},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
-                            robot.send({channelID: R_KchannelID},json)
+                            robot.send({channelID: DM_ID},"プレイリスト追加\n"+ addtable) //RasへのDMに通知
+                            robot.send({channelID: DM_ID},json)
                             setTimeout(() => {
                                 res.send("ぷれいりすとに追加したやんね！\n"+ addtable) //追加成功時メッセージ
                             }, 500); //メッセージ順逆転防止
@@ -129,8 +128,8 @@ module.exports = robot => {
                         }
                         else {
                             const removeTable = "|削除した人|追加した人|削除した曲|曲のURL|\n|-|-|-|-|\n|" + userName + "|" + removedUser + "|" + removedMusic + "|" + removedURL + "|\n"; //削除曲の表作成
-                            robot.send({channelID: R_KchannelID},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
-                            robot.send({channelID: R_KchannelID},json)
+                            robot.send({channelID: DM_ID},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
+                            robot.send({channelID: DM_ID},json)
                             setTimeout(() => {
                                 res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
                             }, 500); //メッセージ順逆転防止

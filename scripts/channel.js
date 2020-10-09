@@ -2,21 +2,15 @@ const api = require("../src/api");
 
 module.exports = robot => {
 
-    const R_KchannelID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
+    const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/time/Ras/BotのID
 
 //監視対象に追加
     robot.respond(/(いらっしゃい|join)$/i, res => {
         const MessageID = res.message.message.id;
         const channelID = res.message.message.channelId;
         robot.send(
-            {channelID: R_KchannelID},
+            {channelID: gtRB_ID},
             "## join\n https://q.trap.jp/messages/" + MessageID
-        )
-        res.send(
-            {
-                type: "stamp",
-                name: "eyes"
-            }
         )
         try {
             api.join(channelID);
@@ -26,7 +20,7 @@ module.exports = robot => {
         }
         catch(error) {
             robot.send(
-                {channelID: R_KchannelID},
+                {channelID: gtRB_ID},
                 "## join error\n" + error + "\nhttps://q.trap.jp/messages/" + MessageID
             )
         }
@@ -36,14 +30,8 @@ module.exports = robot => {
     robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
         const MessageID = res.message.message.id;
         robot.send(
-            {channelID: R_KchannelID},
+            {channelID: gtRB_ID},
             "## leave\n https://q.trap.jp/messages/" + MessageID
-        )
-        res.send(
-            {
-                type: "stamp",
-                name: "eyes"
-            }
         )
         const channelID = res.message.message.channelId;
         try {
@@ -54,7 +42,7 @@ module.exports = robot => {
         }
         catch(error) {
             robot.send(
-                {channelID: R_KchannelID},
+                {channelID: gtRB_ID},
                 "## leave error\n" + error + "\nhttps://q.trap.jp/messages/" + MessageID
             )
         }
