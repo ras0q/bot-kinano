@@ -124,6 +124,10 @@ const is_not_mentioned = [
         ans: readme
     },
     {
+        msg: /いい？/,
+        ans: "いいよ"
+    },
+    {
         msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
         ans: {
             type: "stamp",
