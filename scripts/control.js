@@ -20,7 +20,6 @@ const getMofu = () => {
     return r + r;
 }
 
-
 module.exports = robot => {
 
     const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
@@ -28,7 +27,7 @@ module.exports = robot => {
     //起動時メッセージ
     robot.send(
         {channelID: gtRB_ID},
-        "デプロイ完了(" + new Date().toLocaleString() + ") " + getMofu()
+        "デプロイ完了" + getMofu() + " (" + new Date().toLocaleString() + ")"
     );
 
     //メンション付きメッセージ
@@ -87,7 +86,9 @@ module.exports = robot => {
                 r += "かやま";
             }
             r += "！";
-            res.send(r);
+            setTimeout(() => {
+                res.send(r);
+            },500);
         }
     })
 

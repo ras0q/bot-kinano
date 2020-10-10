@@ -66,10 +66,10 @@ const is_mentioned = [
 
 const is_not_mentioned = [
     {
-        msg: /Ras/i,
+        msg: /(Ras|らす|ラス)/i,
         ans: {
                 type: "stamp",
-                name: "Rascal"
+                name: "rascal"
             }
     },
     {
