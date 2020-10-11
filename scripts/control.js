@@ -37,7 +37,7 @@ module.exports = robot => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.reply(ans);
+                    res.reply(ans); //replyでメンション付きメッセージ
                 },500);
             }
         });
@@ -50,7 +50,7 @@ module.exports = robot => {
             const { bot } = res.message.message.user;
             if(!bot){
                 setTimeout(() => {
-                    res.send(ans);
+                    res.send(ans); //sendでメンション無しメッセージ
                 },500);
             }
         });

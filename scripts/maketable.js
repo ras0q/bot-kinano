@@ -1,4 +1,3 @@
-const playlistURL = require("./words").playlistURL;
 const fs = require('fs'); //ファイルの読み込み、書き込み
 
 module.exports = robot => {
@@ -7,6 +6,7 @@ module.exports = robot => {
     const DM_ID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
     const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
 
+/*admin------------------------------------------------------------------------------------- */
     //playlist.json確認
     robot.hear(/^%watch$/, res => {
         const channelID = res.message.message.channelId;
@@ -44,7 +44,7 @@ module.exports = robot => {
     })
 
 
-
+/*public-------------------------------------------------------------------------------------*/
     //曲追加
     robot.hear(/^%add.*/i, res => {
         const userName = res.message.message.user.name;
@@ -121,22 +121,27 @@ module.exports = robot => {
                     removedUser = obj.list[removeIndex].user; //オブジェクトから追加実行者を取り出す
                     removedMusic = obj.list[removeIndex].music; //オブジェクトから曲名を取り出す
                     removedURL = obj.list[removeIndex].url; //オブジェクトからURLを取り出す
-                    obj.list.splice(removeIndex, 1); //オブジェクトから曲を削除
-                    let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
-                    //playlist.jsonに書き込む
-                    fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
-                        if (err) {
-                            res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
-                        }
-                        else {
-                            const removeTable = "|削除した人|追加した人|削除した曲|曲のURL|\n|-|-|-|-|\n|" + userName + "|" + removedUser + "|" + removedMusic + "|" + removedURL + "|\n"; //削除曲の表作成
-                            robot.send({channelID: gtRB_ID},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
-                            robot.send({channelID: DM_ID},json)
-                            setTimeout(() => {
-                                if(channelID != gtRB_ID) res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
-                            }, 500); //メッセージ順逆転防止
-                        }
-                    });
+                    if(userName == removedUser){
+                        obj.list.splice(removeIndex, 1); //オブジェクトから曲を削除
+                        let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
+                        //playlist.jsonに書き込む
+                        fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
+                            if (err) {
+                                res.send("かきこみえらー:eyes:") //書き込み失敗時メッセージ
+                            }
+                            else {
+                                const removeTable = "|削除した人|削除した曲|曲のURL|\n|-|-|-|\n|" + userName  + "|" + removedMusic + "|" + removedURL + "|\n"; //削除曲の表作成
+                                robot.send({channelID: gtRB_ID},"プレイリスト削除\n" + removeTable) //RasへのDMに通知
+                                robot.send({channelID: DM_ID},json)
+                                setTimeout(() => {
+                                    if(channelID != gtRB_ID) res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
+                                }, 500); //メッセージ順逆転防止
+                            }
+                        });
+                    }
+                    else {
+                        res.send("他の人が追加した曲は削除できないやんね！");
+                    }
                 }
             }}
         )

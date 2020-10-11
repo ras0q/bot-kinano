@@ -15,6 +15,7 @@ const natterus = [
 const sleeps = [
     "おやすみやんね～えへへ",
     "寝るな！",
+    "すやすや",
     {
         type: "stamp",
         name: "oyasumi"
@@ -100,15 +101,19 @@ const is_not_mentioned = [
         ans: "おい！"
     },
     {
-        msg: /(か[あ～]|car|[っう]かな|[やす]るぞ)/,
+        msg: /(か[あ～]|car|[っう]かな|[やす]るぞ)$/,
         ans: "いいぞいいぞ"
+    },
+    {
+        msg: /うま(?!うま)/,
+        ans: "むしゃ"
     },
     {
         msg: /うまうま/,
         ans: "むしゃむしゃ"
     },
     {
-        msg: /[い言云]ってい?る/,
+        msg: /[い言云]ってい?る$/,
         ans: "いうな！"
     },
     {
@@ -124,7 +129,7 @@ const is_not_mentioned = [
         ans: readme
     },
     {
-        msg: /いい？/,
+        msg: /いい？$/,
         ans: "いいよ"
     },
     {

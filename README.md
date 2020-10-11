@@ -1,18 +1,16 @@
-# :kinano.large.shake:できること:kinano.large.shake:
+# :kinano.large.shake:きなの:kinano.large.shake:
 きなのはなんでもできるやんね！
 ## コミュニケーション :blobdrum:
 - `@BOT_kinano できること` : きなのはなんでもできるやんね～
 - `@BOT_kinano いらっしゃい` : 監視対象に追加するやんね～
-- `@BOT_kinano もちもち` : おもちをたべるやんね！
+- `@BOT_kinano ばいばい` : 監視対象から外すやんね、、
 - `@BOT_kinano もふもふ` : もふもふするやんね～
 - `@BOT_kinano もちもち` : もちもちするやんね～
-- `@BOT_kinano おはよう` : おはようやんね～
-- `@BOT_kinano おやすみ` : おやすみやんね～
 - ほかにもあるやんね～
 ## プレイリスト:blobguitar:
-- `%add 曲名`: 曲を追加できるやんね！
-- `%watch`: プレイリストを教えるやんね～
-- `%remove [num]`: プレイリストから曲`num`を削除できるやんね！ほかの人が追加した曲を削除しないように注意するやんね～
+- `%add 曲名`: プレイリストに曲を追加できるやんね！
+- `%watch`: プレイリストを見せるやんね！
+- `%remove [num]`: プレイリストから曲`num`を削除できるやんね！
 ## その他
 - `/[hoge]`: 今の時刻を教えるやんね！
 - `ABCやるか`: なぞなぞをだすやんね！
@@ -20,8 +18,4 @@
     - `src`,`tar`は[ISO 639-1コード](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7)
     - きなのはマルチリンガルやんね～～～～
 - `tratra [txt] ([src]=>[tar])`: やまびこするやんね！やっほ～
-## メモ
-- 10/08
-    - 毎朝traPのブログを投げる
-- 10/10
-    - ストップウォッチ機能
+- その他要望があれば[#gps/times/Ras](https://q.trap.jp/channels/gps/times/Ras)までお願いやんね！

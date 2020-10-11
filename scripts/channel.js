@@ -1,4 +1,6 @@
 const api = require("../src/api");
+const fs = require('fs');
+const readme = fs.readFileSync("./README.md", 'utf8');
 
 module.exports = robot => {
 
@@ -15,8 +17,11 @@ module.exports = robot => {
         try {
             api.join(channelID);
             setTimeout(() => {
-                res.send(":oisu-1::oisu-2::oisu-3::oisu-4yoko:")
+                res.reply(":oisu-1::oisu-2::oisu-3::oisu-4yoko:");
             },500);
+            setTimeout(() => {
+                res.send(readme);
+            },1000)
         }
         catch(error) {
             robot.send(
