@@ -59,7 +59,8 @@ module.exports = robot => {
     //``ABCやるか``を受け取るとランダムで問題を返す
     robot.hear(/ABCや/i, res => {
         const { message } = res.message;
-        const { bot, plainText } = message;
+        const { user, plainText } = message;
+        const { bot } = user;
         if(!bot){
             let slashindex = plainText.indexOf("/");
             let recent = 179; //最新回
