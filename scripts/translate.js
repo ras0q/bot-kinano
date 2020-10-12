@@ -50,7 +50,6 @@ module.exports = robot => {
                 },
                 json: true
             }, function(err, req, data){
-                if(data.text) {
                 txt2 = data.text;
                 request.get({
                     uri: URL,
@@ -61,12 +60,9 @@ module.exports = robot => {
                         "target": "ja"
                     },
                     json: true
-                }, function(err, req, data){
-                    if(data.text) res.reply(data.text);
-                    else res.reply("きなのその言葉知らない！");
+                }, function(err, req, data2){
+                    res.reply(data2.text + " (" + data.text + ")");
                 });
-            }
-            else res.reply("きなのその言葉知らない！");
             });
         }
     })
@@ -98,8 +94,8 @@ module.exports = robot => {
                             "target": "ja"
                         },
                         json: true
-                    }, function(err, req, data){
-                        if(data.text) res.reply(data.text);
+                    }, function(err, req, data2){
+                        if(data2.text) res.reply(data2.text);
                         else res.reply("きなのその言葉知らない！");
                     });
                 }
