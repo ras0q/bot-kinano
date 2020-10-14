@@ -1,5 +1,6 @@
 const request = require('request');
-const { APIkey } = require('./env');
+// const { APIkey } = require('./env');
+const APIkey = process.env.CHAPLUS_API_KEY;
 
 module.exports = robot => {
 
