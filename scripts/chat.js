@@ -20,7 +20,7 @@ module.exports = robot => {
                 "username": displayName,
                 "agentState": {
                     "agentName": "きなの",
-                    "tone": "kansai",
+                    "tone": "dechu",
                     "age": "14"
                 }
             }
