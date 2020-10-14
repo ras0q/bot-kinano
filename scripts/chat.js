@@ -4,7 +4,7 @@ const APIkey = process.env.CHAPLUS_API_KEY;
 
 module.exports = robot => {
 
-    robot.hear(/^へいきなの /, res => {
+    robot.hear(/^hey kinano/i, res => {
         const { plainText } = res.message.message;
         const { displayName } = res.message.message.user;
         var options = {
