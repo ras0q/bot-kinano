@@ -17,7 +17,12 @@ module.exports = robot => {
             },
             json: {
                 "utterance": plainText.slice(6),
-                "username": displayName
+                "username": displayName,
+                "agentState": {
+                    "agentName": "きなの",
+                    "tone": "kansai",
+                    "age": "14"
+                }
             }
         };
             request.post(options, function(error, response, body){
