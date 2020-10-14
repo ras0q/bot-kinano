@@ -21,7 +21,7 @@ module.exports = robot => {
             }
         };
             request.post(options, function(error, response, body){
-                console.log(body.bestResponse.utterance)
+                res.reply(body.bestResponse.utterance)
         });
     })
 }
