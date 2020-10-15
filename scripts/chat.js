@@ -1,6 +1,6 @@
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 
-require('dotenv').config();
+// require('dotenv').config();
 const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
 
