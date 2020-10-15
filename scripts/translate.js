@@ -67,17 +67,18 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/.*/, res => {
-        const createdAt = res.message.message.createdAt;
-        const bot = res.message.message.user.bot;
-        if(!bot && (Number(createdAt.slice(11,13)) + 9) % 24 == Number(createdAt.slice(14,16))){
-            const plainText = res.message.message.plainText;
-            let txt = "";
-            request.get({
-                uri: URL,
-                headers: {'Content-type': 'application/json'},
-                qs: {
-                    "text": plainText,
+    let now = new Date();
+    if((now.getHours() + 9) % 24 == now.getMinutes()){
+        robot.hear(/.*/, res => {
+            const bot = res.message.message.user.bot;
+            if(!bot){
+                const plainText = res.message.message.plainText;
+                let txt = "";
+                request.get({
+                    uri: URL,
+                    headers: {'Content-type': 'application/json'},
+                    qs: {
+                        "text": plainText,
                     "source": "",
                     "target": "en"
                 },
@@ -103,5 +104,6 @@ module.exports = robot => {
             });
         }
     })
+}
 }
 
