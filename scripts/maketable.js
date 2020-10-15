@@ -133,9 +133,11 @@ module.exports = robot => {
                                 const removeTable = "|削除した人|削除した曲|曲のURL|\n|-|-|-|\n|" + userName  + "|" + removedMusic + "|" + removedURL + "|\n"; //削除曲の表作成
                                 robot.send({channelID: gtRB_ID},"**プレイリスト削除**\n" + removeTable) //RasへのDMに通知
                                 robot.send({channelID: DM_ID},json)
-                                setTimeout(() => {
-                                    if(channelID != gtRB_ID) res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
-                                }, 500); //メッセージ順逆転防止
+                                if(channelID != gtRB_ID){
+                                    setTimeout(() => {
+                                        res.send("ぷれいりすとから 曲" + removeIndex +" を削除したやんね！\n" + removeTable) //削除成功時メッセージ
+                                    }, 500); //メッセージ順逆転防止
+                                }
                             }
                         });
                     }
