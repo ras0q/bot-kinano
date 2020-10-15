@@ -1,6 +1,6 @@
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 
-// require('dotenv').config();
+require('dotenv').config();
 const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
 
@@ -25,12 +25,6 @@ module.exports = robot => {
                     "agentState": {
                         "agentName": "きなの",
                         "age": "14"
-                    },
-                    "addition": {
-                        "utterancePairs": {
-                            "utterance": "おいす～",
-                            "response": "おいおいす～"
-                        }
                     }
                 }
             };
@@ -59,18 +53,11 @@ module.exports = robot => {
                     "agentState": {
                         "agentName": "きなの",
                         "age": "14"
-                    },
-                    "addition": {
-                        "utterancePairs": {
-                            "utterance": "おいす～",
-                            "response": "おいおいす～"
-                        }
                     }
                 }
             };
             request.post(options, function(error, response, body){
                 res.reply(body)
-                console.log(body)
             });
         }
     })
