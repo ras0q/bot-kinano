@@ -6,12 +6,14 @@ const APIkey = process.env.CHAPLUS_API_KEY;
 
 module.exports = robot => {
 
+    const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
+
     robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
         const { message } = res.message;
         const { plainText, user } = message;
         const { displayName, bot } = user;
         if(!bot){
-            var options = {
+        let options = {
                 uri: "https://www.chaplus.jp/v1/chat",
                 qs: {
                     "apikey": APIkey
@@ -29,7 +31,12 @@ module.exports = robot => {
                 }
             };
             request.post(options, function(error, response, body){
-                res.reply(body.bestResponse.utterance + "(score: " + body.bestResponse.score + ")")
+                if(body.status != ""){
+                    robot.send({channelId: gtRB_ID},
+                        body.status + "\n" + body.message
+                    )
+                }
+                else res.reply(body.bestResponse.utterance + "(score: " + body.bestResponse.score + ")")
             });
         }
     })
@@ -39,7 +46,7 @@ module.exports = robot => {
         const { plainText, user } = message;
         const { displayName, bot } = user;
         if(!bot){
-            var options = {
+            let options = {
                 uri: "https://www.chaplus.jp/v1/chat",
                 qs: {
                     "apikey": APIkey
@@ -57,7 +64,7 @@ module.exports = robot => {
                 }
             };
             request.post(options, function(error, response, body){
-                res.reply(body)
+                res.send(JSON.stringify(body, undefined, 4))
             });
         }
     })
