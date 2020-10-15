@@ -36,7 +36,7 @@ module.exports = robot => {
                         body.status + "\n" + body.message
                     )
                 }
-                else res.reply(body.bestResponse.utterance + "(score: " + body.bestResponse.score + ")")
+                res.reply(body.bestResponse.utterance + "(score: " + body.bestResponse.score + ")")
             });
         }
     })
@@ -64,7 +64,7 @@ module.exports = robot => {
                 }
             };
             request.post(options, function(error, response, body){
-                res.send(JSON.stringify(body, undefined, 4))
+                res.send("```\n" + JSON.stringify(body, undefined, 4) + "\n```")
             });
         }
     })
