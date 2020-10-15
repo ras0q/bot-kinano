@@ -6,7 +6,7 @@ const APIkey = process.env.CHAPLUS_API_KEY;
 
 module.exports = robot => {
 
-    robot.hear(/(?<!BOT_)kinano/i, res => {
+    robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
         const { message } = res.message;
         const { plainText, user } = message;
         const { displayName, bot } = user;
@@ -20,7 +20,7 @@ module.exports = robot => {
                     "Content-type": "application/json",
                 },
                 json: {
-                    "utterance": plainText.slice(10),
+                    "utterance": plainText,
                     "username": displayName,
                     "agentState": {
                         "agentName": "きなの",

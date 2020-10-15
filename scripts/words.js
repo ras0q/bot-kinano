@@ -89,10 +89,6 @@ const is_not_mentioned = [
         ans: ":kinako.ex-large:"
     },
     {
-        msg: /きなの/,
-        ans: "えへえへ"
-    },
-    {
         msg: /やんね/,
         ans: "やんね！"
     },
