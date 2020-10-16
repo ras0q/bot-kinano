@@ -16,7 +16,7 @@ module.exports = robot => {
 
     robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
         const { message } = res.message;
-        const { plainText, user } = message;
+        const { plainText, user, id } = message;
         const { displayName, bot } = user;
         // const plainText = "きなのおはよう"
         // const displayName = "らす"
@@ -45,7 +45,7 @@ module.exports = robot => {
             request.post(options, function(error, response, body){
                 if(body.status != ""){
                     robot.send({channelId: gtRB_ID},
-                        body.status + "\n" + body.message
+                        body.status + "\n" + body.message + "\n" + id
                     )
                 }
                 const i = getRandom(0,(body.responses).length);

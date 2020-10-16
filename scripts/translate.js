@@ -34,11 +34,11 @@ module.exports = robot => {
     })
 
     //逆翻訳
-    robot.hear(/^tratra/i, res => {
+    robot.hear(/^tratra /i, res => {
         const plainText = res.message.message.plainText;
         const bot = res.message.message.user.bot;
         if(!bot){
-            let txt1 = plainText.slice(6);
+            let txt1 = plainText.slice(7);
             let txt2 = "";
             request.get({
                 uri: URL,
@@ -56,7 +56,7 @@ module.exports = robot => {
                     headers: {'Content-type': 'application/json'},
                     qs: {
                         "text": txt2,
-                        "source": "",
+                        "source": "en",
                         "target": "ja"
                     },
                     json: true
