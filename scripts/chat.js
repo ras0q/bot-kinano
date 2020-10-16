@@ -21,6 +21,9 @@ module.exports = robot => {
         // const plainText = "きなのおはよう"
         // const displayName = "らす"
         // const bot = false;
+        let uttr = plainText;
+        if(plainText.indexOf("きなの") == 0) uttr = plainText.slice(3);
+        if(plainText.indexOf("kinano") == 0) uttr = plainText.slice(6);
         if(!bot){
         let options = {
                 uri: "https://www.chaplus.jp/v1/chat",
@@ -31,7 +34,7 @@ module.exports = robot => {
                     "Content-type": "application/json",
                 },
                 json: {
-                    "utterance": plainText,
+                    "utterance": uttr,
                     "username": displayName,
                     "agentState": {
                         "agentName": "きなの",
