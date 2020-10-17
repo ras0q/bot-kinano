@@ -32,10 +32,14 @@ module.exports = robot => {
             let list = "|rank|name|\n|-|-|\n";
             client.get('trends/place.json', params, function(error, tweets, response) {
                 if (!error) {
-                    for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
-                        list += "|" + (i+1) + "|" + tweets[0].trends[i].name + "|\n";
+                    for(let i = 0; i < 10; i++){
+                        list += "|" + (i+1);
+                        if(i == 0) list += ":first_place:";
+                        if(i == 1) list += ":second_place:";
+                        if(i == 2) list += ":third_place:";
+                        list += "|" + tweets[0].trends[i].name + "|\n";
                     }
-                    res.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
+                    res.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
                 }
             });
         }
