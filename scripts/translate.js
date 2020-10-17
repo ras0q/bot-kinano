@@ -61,51 +61,11 @@ module.exports = robot => {
                     },
                     json: true
                 }, function(err, req, data2){
-                    res.reply("**" + data2.text + "**\n(" + data.text + ")");
+                    res.reply(data2.text + "\n\n(" + data.text + ")");
                 });
             });
         }
     })
 
-    let now = new Date();
-    if((now.getHours() + 9) % 24 == now.getMinutes()){
-        robot.hear(/.*/, res => {
-            const bot = res.message.message.user.bot;
-            if(!bot){
-                const plainText = res.message.message.plainText;
-                let txt = "";
-                request.get(
-                    {
-                        uri: URL,
-                        headers: {'Content-type': 'application/json'},
-                        qs: {
-                            "text": plainText,
-                            "source": "",
-                            "target": "en"
-                        },
-                        json: true
-                    },
-                function(err, req, data){
-                    if(data.text) {
-                        txt = data.text;
-                        request.get({
-                            uri: URL,
-                            headers: {'Content-type': 'application/json'},
-                            qs: {
-                                "text": txt,
-                                "source": "en",
-                                "target": "ja"
-                            },
-                            json: true
-                        }, function(err, req, data2){
-                            if(data2.text) res.reply(data2.text);
-                            else res.reply("きなのその言葉知らない！");
-                        });
-                    }
-                    else res.reply("きなのその言葉知らない！");
-                });
-            }
-        })
-    }
 }
 

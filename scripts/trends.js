@@ -22,9 +22,9 @@ module.exports = robot => {
                     if(i == 0) list += ":first_place:";
                     if(i == 1) list += ":second_place:";
                     if(i == 2) list += ":third_place:";
-                    list += "|" + tweets[0].trends[i].name + "|"+ tweets[0].trends[i].tweet_volume +"\n";
+                    list += "|[" + tweets[0].trends[i].name + "](" + tweets[0].trends[i].url + ")|"+ tweets[0].trends[i].tweet_volume +"\n";
                 }
-                robot.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
+                robot.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
             }
         });
     })
