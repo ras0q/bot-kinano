@@ -33,7 +33,7 @@ module.exports = robot => {
                 for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
                     list += "|" + i+1 + "|" + tweets[0].trends[i].name + "|\n";
                 }
-                robot.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
+                res.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
             }
         });
     })
