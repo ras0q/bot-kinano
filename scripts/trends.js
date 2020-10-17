@@ -31,7 +31,7 @@ module.exports = robot => {
         client.get('trends/place.json', params, function(error, tweets, response) {
             if (!error) {
                 for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
-                    list += "|" + i+1 + "|" + tweets[0].trends[i].name + "|\n";
+                    list += "|" + (i+1) + "|" + tweets[0].trends[i].name + "|\n";
                 }
                 res.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
             }
