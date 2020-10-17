@@ -26,15 +26,18 @@ module.exports = robot => {
     })
 
     robot.hear(/^trend/, res => {
-        const params = {id: 23424856};
-        let list = "|rank|name|\n|-|-|\n";
-        client.get('trends/place.json', params, function(error, tweets, response) {
-            if (!error) {
-                for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
-                    list += "|" + (i+1) + "|" + tweets[0].trends[i].name + "|\n";
+        const { bot } = res.message.message.user;
+        if(!bot){
+            const params = {id: 23424856};
+            let list = "|rank|name|\n|-|-|\n";
+            client.get('trends/place.json', params, function(error, tweets, response) {
+                if (!error) {
+                    for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
+                        list += "|" + (i+1) + "|" + tweets[0].trends[i].name + "|\n";
+                    }
+                    res.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
                 }
-                res.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
-            }
-        });
+            });
+        }
     })
 }
