@@ -12,7 +12,20 @@ module.exports = robot => {
 
     const gtR_ID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f";
 
-    cron.schedule('0 0 * * * *', () => {
+    cron.schedule('0 0 15,21,3,9 * * *', () => {
+        const params = {id: 23424856};
+        let list = "|rank|name|\n|-|-|\n";
+        client.get('trends/place.json', params, function(error, tweets, response) {
+            if (!error) {
+                for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
+                    list += "|" + (i+1) + "|" + tweets[0].trends[i].name + "|\n";
+                }
+                robot.send({channelID: gtR_ID}, "今のトレンドは\n" + list + "\nやんね！");
+            }
+        });
+    })
+
+    robot.hear(/^trend/, res => {
         const params = {id: 23424856};
         let list = "|rank|name|\n|-|-|\n";
         client.get('trends/place.json', params, function(error, tweets, response) {
