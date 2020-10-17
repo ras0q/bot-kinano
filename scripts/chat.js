@@ -26,31 +26,31 @@ module.exports = robot => {
         if(plainText.indexOf("kinano") == 0) uttr = plainText.slice(6);
         if(!bot){
         let options = {
-                uri: "https://www.chaplus.jp/v1/chat",
-                qs: {
-                    "apikey": APIkey
-                },
-                headers: {
-                    "Content-type": "application/json",
-                },
-                json: {
-                    "utterance": uttr,
-                    "username": displayName,
-                    "agentState": {
-                        "agentName": "きなの",
-                        "age": "14"
-                    }
+            uri: "https://www.chaplus.jp/v1/chat",
+            qs: {
+                "apikey": APIkey
+            },
+            headers: {
+                "Content-type": "application/json",
+            },
+            json: {
+                "utterance": uttr,
+                "username": displayName,
+                "agentState": {
+                    "agentName": "きなの",
+                    "age": "14"
                 }
-            };
-            request.post(options, function(error, response, body){
-                if(body.status != ""){
-                    robot.send({channelId: gtRB_ID},
-                        body.status + "\n" + body.message + "\n" + id
-                    )
-                }
-                const i = getRandom(0,(body.responses).length);
-                res.reply(body.responses[i].utterance + "(score: " + body.responses[i].score + ")")
-            });
+            }
+        };
+        request.post(options, function(error, response, body){
+            if(body.status != ""){
+                robot.send({channelId: gtRB_ID},
+                    body.status + "\n" + body.message + "\n" + id
+                )
+            }
+            const i = getRandom(0,(body.responses).length);
+            res.reply(body.responses[i].utterance + "(score: " + body.responses[i].score + ")")
+        });
         }
     })
 
