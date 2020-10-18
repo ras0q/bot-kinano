@@ -36,7 +36,7 @@ module.exports = robot => {
             let list = "|rank|name|count|\n|-|-|-|\n";
             client.get('trends/place.json', params, function(error, tweets, response) {
                 if (!error) {
-                    for(let i = 0; i < 10; i++){
+                    for(let i = 0; i < Object.keys(tweets[0].trends).length; i++){
                         list += "|" + (i+1);
                         if(i == 0) list += ":first_place:";
                         if(i == 1) list += ":second_place:";
