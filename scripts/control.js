@@ -62,7 +62,7 @@ module.exports = robot => {
       let recent = 180; //最新回
       let index = `00${Math.floor(getRandom(1, recent+1))}`.slice(-3);
       setTimeout(() => {
-        res.reply(`今日のなぞなぞセットはこれやんね！\nhttps://atcoder.jp/contests/abc${index}`);
+        res.reply(`今日のなぞなぞセットはこれやんね！\nhttps://atcoder.jp/contests/abc${index}/tasks`);
       })
     }
   })
