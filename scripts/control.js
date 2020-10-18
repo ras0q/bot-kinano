@@ -57,19 +57,12 @@ module.exports = robot => {
 
   //``ABCやるか``を受け取るとランダムで問題を返す
   robot.hear(/ABCや/i, res => {
-    const { message } = res.message;
-    const { user, plainText } = message;
-    const { bot } = user;
+    const { bot } = res.message.message.user;
     if(!bot){
-      let slashindex = plainText.indexOf("/");
       let recent = 180; //最新回
-      let min = 126;
-      let index = `00${Math.floor(getRandom(min, recent+1)).slice(-3)}`;
-      let diff = "";
-      if(slashindex != -1 && plainText[slashindex + 1].match(/[a-f]/i)) diff = plainText[slashindex + 1];
-      else diff = String.fromCodePoint(getRandom("a".codePointAt(0), "f".codePointAt(0)));
+      let index = `00${Math.floor(getRandom(1, recent+1))}`.slice(-3);
       setTimeout(() => {
-        res.reply(`今日の問題はこれやんね！\nhttps://atcoder.jp/contests/abc${index}/tasks/abc${index}_${diff}`);
+        res.reply(`今日のなぞなぞセットはこれやんね！\nhttps://atcoder.jp/contests/abc${index}`);
       })
     }
   })
