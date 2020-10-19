@@ -3,7 +3,7 @@ module.exports = robot => {
 
     robot.catchAll(res => {
         const { type, stamps } = res.message;
-        const { stampId } = stamps;
+        const { stampId } = stamps[0];
         if(type == "BotMessageStampsUpdated" && stampId == "e43a01b3-48bb-44b6-bca9-733706676641"){
             robot.send({userID: stamps[0].userId},"2人の世界へようこそ、ここでは2人きりで会話ができるやんね...")
         }
