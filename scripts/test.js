@@ -1,5 +1,5 @@
 module.exports = robot => {
-    robot.catchALL(/kinano/, res => {
+    robot.catchAll(res => {
         if(res.message.type = "BotMessageStampsUpdated"){
             res.send("押すな！");
         }
