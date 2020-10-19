@@ -17,8 +17,24 @@ module.exports = robot => {
     const { plainText, user, id } = message;
     const { displayName, bot } = user;
     let uttr = plainText;
-    if(plainText.indexOf("きなの") == 0) uttr = plainText.slice(3);
-    if(plainText.indexOf("kinano") == 0) uttr = plainText.slice(6);
+    let tone = "normal"
+    if(uttr.indexOf("きなの") == 0) uttr = plainText.slice(3);
+    if(uttr.indexOf("kinano") == 0) uttr = plainText.slice(6);
+    if(uttr.indexOf("kansai") != -1) {
+      tone = "kansai";
+      let i = uttr.indexOf("kansai");
+      uttr = uttr.slice(0,i) + uttr.slice(i+6);
+    }
+    if(uttr.indexOf("koshu") != -1) {
+      tone = "koshu";
+      let i = uttr.indexOf("koshu");
+      uttr = uttr.slice(0,i) + uttr.slice(i+5);
+    }
+    if(uttr.indexOf("dechu") != -1) {
+      tone = "dechu";
+      let i = uttr.indexOf("dechu");
+      uttr = uttr.slice(0,i) + uttr.slice(i+5);
+    }
     if(!bot){
     let options = {
       uri: "https://www.chaplus.jp/v1/chat",
@@ -33,7 +49,8 @@ module.exports = robot => {
         "username": displayName,
         "agentState": {
           "agentName": "きなの",
-          "age": "14"
+          "age": "14",
+          "tone": tone
         }
       }
     };
@@ -53,6 +70,24 @@ module.exports = robot => {
     const { message } = res.message;
     const { plainText, user } = message;
     const { displayName, bot } = user;
+    let uttr = plainText.slice(8);
+    let tone = "normal"
+    if(uttr.indexOf("kansai") != -1) {
+      tone = "kansai";
+      let i = uttr.indexOf("kansai");
+      uttr = uttr.slice(0,i) + uttr.slice(i+6);
+      console.log(i);
+    }
+    if(uttr.indexOf("koshu") != -1) {
+      tone = "koshu";
+      let i = uttr.indexOf("koshu");
+      uttr = uttr.slice(0,i) + uttr.slice(i+5);
+    }
+    if(uttr.indexOf("dechu") != -1) {
+      tone = "dechu";
+      let i = uttr.indexOf("dechu");
+      uttr = uttr.slice(0,i) + uttr.slice(i+5);
+    }
     if(!bot){
       let options = {
         uri: "https://www.chaplus.jp/v1/chat",
@@ -63,11 +98,12 @@ module.exports = robot => {
           "Content-type": "application/json",
         },
         json: {
-          "utterance": plainText.slice(8),
+          "utterance": uttr,
           "username": displayName,
           "agentState": {
             "agentName": "きなの",
-            "age": "14"
+            "age": "14",
+            "tone": tone
           }
         }
       };
