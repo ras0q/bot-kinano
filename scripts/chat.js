@@ -61,7 +61,7 @@ module.exports = robot => {
         );
       }
       const i = getRandom(0,(body.responses).length);
-      res.reply(`${body.responses[i].utterance}\n(score: ${body.responses[i].score})`)
+      res.reply(`${body.responses[i].utterance}\n`)
     });
     }
   })
