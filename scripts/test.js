@@ -3,8 +3,7 @@ module.exports = robot => {
 
     robot.catchAll(res => {
         if(res.message.type == "BotMessageStampsUpdated"){
-            res.send("押すな！");
+            robot.send({channelID: gtRB_ID}, "押すな！");
         }
-        robot.send({channelID: gtRB_ID}, `${res.message.type} was done`);
     })
 }
