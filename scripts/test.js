@@ -3,8 +3,9 @@ module.exports = robot => {
 
     robot.catchAll(res => {
         const { type, stamps } = res.message;
-        if(type == "BotMessageStampsUpdated"){
-            robot.send({userID: stamps[0].userId},stamps[0].stampId)
+        const { stampId } = stamps;
+        if(type == "BotMessageStampsUpdated" && stampId == "e43a01b3-48bb-44b6-bca9-733706676641"){
+            robot.send({userID: stamps[0].userId},"2人の世界へようこそ、ここでは2人きりで会話ができるやんね...")
         }
     })
 }
