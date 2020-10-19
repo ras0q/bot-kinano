@@ -5,9 +5,10 @@
   "author": "Ras",
   "description": "This is Ras's bot.",
   "dependencies": {
+    "@traptitech/traq": "^3.4.6-4",
     "dotenv": "^8.2.0",
     "hubot": "^3.3.2",
-    "hubot-traq": "^1.5.4",
+    "hubot-traq": "^1.6.0",
     "node-cron": "^2.0.3",
     "request": "^2.88.2",
     "twitter": "^1.7.1"
