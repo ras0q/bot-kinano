@@ -33,13 +33,14 @@ module.exports = robot => {
           if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTnull:";
           list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
         }
-        res.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
+        robot.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
       }
+      else robot.send({channelID: gtR_ID}, "cron error at trends.js")
     });
   })
 
   robot.hear(/^trend$/, res => {
-    const { bot } = res.message.message.user;
+    const { bot, id } = res.message.message.user;
     if(!bot){
       const params = {id: 23424856};
       let list = "|rank|name|count|\n|-|-|-|\n";
@@ -60,8 +61,9 @@ module.exports = robot => {
             }
             list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
           }
-          res.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
+          res.send("今のTwitterトレンドは\n" + list + "\nやんね！");
         }
+        else robot.send({channelID: gtR_ID}, `error at trends.js\nhttps://q.trap.jp/messages/${id}`)
       });
     }
   })
