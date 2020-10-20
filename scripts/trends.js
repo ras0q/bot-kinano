@@ -30,7 +30,7 @@ module.exports = robot => {
               list += ":third_place:";
               break;
           }
-          if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTnull:";
+          if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTNull:";
           list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
         }
         robot.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
@@ -59,6 +59,7 @@ module.exports = robot => {
                 list += ":third_place:";
                 break;
             }
+            if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTNull:";
             list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
           }
           res.send("今のTwitterトレンドは\n" + list + "\nやんね！");
