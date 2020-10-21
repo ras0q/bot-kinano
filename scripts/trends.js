@@ -10,7 +10,7 @@ module.exports = robot => {
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SEC
   });
 
-  const gtR_ID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f";
+  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
   cron.schedule('0 0 15,21,3,9 * * *', () => {
     const params = {id: 23424856};
@@ -33,9 +33,9 @@ module.exports = robot => {
           if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTNull:";
           list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
         }
-        robot.send({channelID: gtR_ID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
+        robot.send({channelID: logID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
       }
-      else robot.send({channelID: gtR_ID}, "cron error at trends.js")
+      else robot.send({channelID: logID}, "cron error at trends.js")
     });
   })
 
@@ -64,7 +64,7 @@ module.exports = robot => {
           }
           res.send("今のTwitterトレンドは\n" + list + "\nやんね！");
         }
-        else robot.send({channelID: gtR_ID}, `error at trends.js\nhttps://q.trap.jp/messages/${id}`)
+        else robot.send({channelID: logID}, `error at trends.js\nhttps://q.trap.jp/messages/${id}`)
       });
     }
   })
