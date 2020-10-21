@@ -204,7 +204,6 @@ module.exports = robot => {
     //URL確認
     robot.hear(/^%url all/i, res => {
       const { plainText } = res.message.message;
-      const op = plainText.slice(6);
       //playlist.jsonを読み込む
       fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
         if (err){
@@ -212,16 +211,14 @@ module.exports = robot => {
         }
         else {
           obj = JSON.parse(data); //json文字列をオブジェクトに
-          if(op == "all"){
-            let table = "|番号|追加した人|曲名|URL|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
-            for(let i = 0;i < obj.list.length; i++){
-              const { user, music, url } = obj.list[i];
-              table = `${table}|${i}|${user}|${music}|${url}|\n`;
-            }
-            setTimeout(() => {
-              res.send(`URLつきぷれいりすとやんね～\n${table}`) //表作成成功時メッセージ
-            }, 500); //メッセージ順逆転防止
+          let table = "|番号|追加した人|曲名|URL|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
+          for(let i = 0;i < obj.list.length; i++){
+            const { user, music, url } = obj.list[i];
+            table = `${table}|${i}|${user}|${music}|${url}|\n`;
           }
+          setTimeout(() => {
+            res.send(`URLつきぷれいりすとやんね～\n${table}`) //表作成成功時メッセージ
+          }, 500); //メッセージ順逆転防止
         }
       });
     })
