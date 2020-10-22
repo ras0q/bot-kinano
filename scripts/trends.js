@@ -12,7 +12,7 @@ module.exports = robot => {
 
   const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
-  cron.schedule('0 0 15,21,3,9 * * *', () => {
+  cron.schedule('0 0 * * * *', () => {
     const params = {id: 23424856};
     let list = "|rank|name|count|\n|-|-|-|\n";
     client.get('trends/place.json', params, function(error, tweets, response) {

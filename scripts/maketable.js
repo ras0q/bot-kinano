@@ -211,7 +211,7 @@ module.exports = robot => {
         }
         else {
           obj = JSON.parse(data); //json文字列をオブジェクトに
-          let table = "|番号|追加した人|曲名|URL|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
+          let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
           for(let i = 0;i < obj.list.length; i++){
             const { user, music, url } = obj.list[i];
             table = `${table}|${i}|${user}|${music}|${url}|\n`;
