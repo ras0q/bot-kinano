@@ -12,4 +12,8 @@ module.exports = robot => {
   cron.schedule('0 0 4,8,23 * * *', () => {
     robot.send({channelID: gtRID}, `https://trap.jp/post/${getRandom(0,recent+1)}/`)
   });
+
+  cron.schedule('0 0 23 * * *', () => {
+    robot.send({channelID: "2937b540-2991-44ce-91dd-504dd29f01e7"}, `https://trap.jp/post/${getRandom(0,recent+1)}/`)
+  });
 }
