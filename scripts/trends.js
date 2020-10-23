@@ -12,32 +12,32 @@ module.exports = robot => {
 
   const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
-  cron.schedule('0 0 * * * *', () => {
-    const params = {id: 23424856};
-    let list = "|rank|name|count|\n|-|-|-|\n";
-    client.get('trends/place.json', params, function(error, tweets, response) {
-      if (!error) {
-        for(let i = 0; i < 10; i++){
-          list += "|" + (i+1);
-          switch (i) {
-            case 0:
-              list += ":first_place:";
-              break;
-            case 1:
-              list += ":second_place:";
-              break;
-            case 2:
-              list += ":third_place:";
-              break;
-          }
-          if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTNull:";
-          list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
-        }
-        robot.send({channelID: logID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
-      }
-      else robot.send({channelID: logID}, "cron error at trends.js")
-    });
-  })
+  // cron.schedule('0 0 * * * *', () => {
+  //   const params = {id: 23424856};
+  //   let list = "|rank|name|count|\n|-|-|-|\n";
+  //   client.get('trends/place.json', params, function(error, tweets, response) {
+  //     if (!error) {
+  //       for(let i = 0; i < 10; i++){
+  //         list += "|" + (i+1);
+  //         switch (i) {
+  //           case 0:
+  //             list += ":first_place:";
+  //             break;
+  //           case 1:
+  //             list += ":second_place:";
+  //             break;
+  //           case 2:
+  //             list += ":third_place:";
+  //             break;
+  //         }
+  //         if(!tweets[0].trends[i].tweet_volume) tweets[0].trends[i].tweet_volume = ":NOTNull:";
+  //         list += `|[${tweets[0].trends[i].name}](${tweets[0].trends[i].url})|${tweets[0].trends[i].tweet_volume}|\n`;
+  //       }
+  //       robot.send({channelID: logID}, "今のTwitterトレンドは\n" + list + "\nやんね！");
+  //     }
+  //     else robot.send({channelID: logID}, "cron error at trends.js")
+  //   });
+  // })
 
   robot.hear(/^trend$/, res => {
     const { bot, id } = res.message.message.user;
