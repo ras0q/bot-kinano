@@ -16,7 +16,7 @@ exports.natterus = natterus;
 const sleeps = [
   "おやすみやんね～えへへ",
   "寝るな！",
-  "すやすや",
+  "寝るな！",
   {
     type: "stamp",
     name: "oyasumi"
