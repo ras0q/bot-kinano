@@ -18,8 +18,6 @@ module.exports = robot => {
     const { displayName, bot } = user;
     let uttr = plainText;
     let tone = "normal"
-    if(uttr.indexOf("きなの") == 0) uttr = plainText.slice(3);
-    if(uttr.indexOf("kinano") == 0) uttr = plainText.slice(6);
     if(uttr.indexOf("kansai") != -1) {
       tone = "kansai";
       let i = uttr.indexOf("kansai");
