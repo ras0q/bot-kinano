@@ -55,18 +55,6 @@ module.exports = robot => {
     });
   }
 
-  //``ABCやるか``を受け取るとランダムで問題を返す
-  robot.hear(/ABCや/i, res => {
-    const { bot } = res.message.message.user;
-    if(!bot){
-      let recent = 180; //最新回
-      let index = `00${Math.floor(getRandom(1, recent+1))}`.slice(-3);
-      setTimeout(() => {
-        res.reply(`今日のなぞなぞセットはこれやんね！\nhttps://atcoder.jp/contests/abc${index}/tasks`);
-      })
-    }
-  })
-
   //大岡山
   const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/;
   robot.hear(oisuregexp, res => {
@@ -101,16 +89,6 @@ module.exports = robot => {
     if(!bot){
       setTimeout(() => {
         res.reply(natterus[getRandom(0, natterus.length)]);
-      },500);
-    }
-  })
-
-  //おやすみ
-  robot.hear(/(寝|おやすみ|oyasumi|osumiya|oyasta|poyasimi)/, res => {
-    const { bot } = res.message.message.user;
-    if(!bot){
-      setTimeout(() => {
-        res.send(sleeps[getRandom(0, sleeps.length)]);
       },500);
     }
   })

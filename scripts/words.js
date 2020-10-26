@@ -4,6 +4,12 @@ const readme = fs.readFileSync("./README.md", 'utf8');
 const natterus = [
   ":yaya::koreni_natteru.large:",
   ":koreni_natteru.ex-large.rotate:",
+  ":koreni_natteru.ex-large.rotate.rotate:",
+  ":koreni_natteru.ex-large.rotate.rotate.rotate:",
+  ":koreni_natteru.ex-large.rotate.rotate.rotate.rotate:",
+  "なるな！",
+  "なるな！",
+  "なるな！",
   "なるな！",
   "なるな！",
   "なるな！",
@@ -12,45 +18,6 @@ const natterus = [
   "なるな！",
 ];
 exports.natterus = natterus;
-
-const sleeps = [
-  "おやすみやんね～えへへ",
-  "寝るな！",
-  "寝るな！",
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  },
-  {
-    type: "stamp",
-    name: "oyasumi"
-  }
-];
-exports.sleeps = sleeps;
 
 const is_mentioned = [
   {
@@ -88,10 +55,6 @@ const is_not_mentioned = [
   ans: "もちもち～:blobenjoy:"
   },
   {
-  msg: /(きなこ|kinako)/,
-  ans: ":kinako.ex-large:"
-  },
-  {
   msg: /やんね/,
   ans: "やんね！"
   },
@@ -104,7 +67,7 @@ const is_not_mentioned = [
   ans: "いいぞいいぞ"
   },
   {
-  msg: /うま(?!うま)/,
+  msg: /うま(?!(うま))/,
   ans: "むしゃ"
   },
   {
