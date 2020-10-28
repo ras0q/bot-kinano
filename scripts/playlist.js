@@ -86,7 +86,7 @@ module.exports = robot => {
           res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
         }
         else {
-          const obj = JSON.parse(data); //json文字列をオブジェクトに
+          let obj = JSON.parse(data); //json文字列をオブジェクトに
           obj.list.push({user: name, music: musicName, url: URL}); //実行者と曲をリストに追加
           let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
           //playlist.jsonに書き込む
@@ -123,7 +123,7 @@ module.exports = robot => {
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
       else {
-        const obj = JSON.parse(data); //json文字列をオブジェクトに
+        let obj = JSON.parse(data); //json文字列をオブジェクトに
         if(obj == undefined || obj.list[removeIndex] == ""){
           res.send("えらー:eyes:"); //Indexが存在しないときメッセージ
         }
@@ -171,7 +171,7 @@ module.exports = robot => {
           res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
         }
         else {
-          const obj = JSON.parse(data); //json文字列をオブジェクトに
+          let obj = JSON.parse(data); //json文字列をオブジェクトに
           //表作成
           for(let i = 0;i < obj.list.length; i++){
             const user = obj.list[i].user;
@@ -196,7 +196,7 @@ module.exports = robot => {
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
       else {
-        const obj = JSON.parse(data); //json文字列をオブジェクトに
+        let obj = JSON.parse(data); //json文字列をオブジェクトに
         const musicName = obj.list[urlIndex].music;
         const URL = obj.list[urlIndex].url;
         if(obj == undefined){
@@ -218,7 +218,7 @@ module.exports = robot => {
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
       else {
-        const obj = JSON.parse(data); //json文字列をオブジェクトに
+        let obj = JSON.parse(data); //json文字列をオブジェクトに
         let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
         for(let i = 0;i < obj.list.length; i++){
           const { user, music, url } = obj.list[i];
@@ -239,7 +239,7 @@ module.exports = robot => {
         robot.send({channelID: log_ID}, "error at playlist.js at [/scripts/playlist.js](https://git.trap.jp/Ras/KNKbot/src/branch/master/scripts/playlist.js)");
       }
       else {
-        const obj = JSON.parse(data);
+        let obj = JSON.parse(data);
         const i =  getRandom(0,obj.list.length);
         const { user, music, url } = obj.list[i];
         robot.send({channelID: log_ID}, `[${music}](${url})(added by :@${user}.ex-large:)`);
