@@ -37,6 +37,10 @@ exports.is_mentioned = is_mentioned;
 
 const is_not_mentioned = [
   {
+    msg: /^code$/,
+    ans: "https://git.trap.jp/Ras/KNKbot"
+  },
+  {
     msg: /(Ras|らす|ラス)/i,
     ans: {
       type: "stamp",

@@ -21,7 +21,7 @@ module.exports = robot => {
     const { channelId, user } = message;
     const { id } = user;
     if(channelId == DM_ID && id == RasuserID){
-      fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+      fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
         if(err){
           res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
         }
@@ -39,7 +39,7 @@ module.exports = robot => {
     if(channelId == DM_ID && id == RasuserID){
       const index = plainText.indexOf("{");
       const json = plainText.slice(index);
-      fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
+      fs.writeFile('../src/playlist.json', json, 'utf8', (err) => {
         if (err) {
           res.send("かきこみえらー:eyes:"); //書き込み失敗時メッセージ
         }
@@ -81,7 +81,7 @@ module.exports = robot => {
     }
     else{
       //playlist.jsonを読み込む
-      fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+      fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
         if (err){
           res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
         }
@@ -90,7 +90,7 @@ module.exports = robot => {
           obj.list.push({user: name, music: musicName, url: URL}); //実行者と曲をリストに追加
           let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
           //playlist.jsonに書き込む
-          fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
+          fs.writeFile('../src/playlist.json', json, 'utf8', (err) => {
             if (err) {
               res.send("かきこみえらー:eyes:"); //書き込み失敗時メッセージ
             }
@@ -118,7 +118,7 @@ module.exports = robot => {
     let removedMusic = ""; //削除する曲の名前
     let removedURL = ""; //削除する曲のURL
     //playlist.jsonを読み込む
-    fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+    fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
       if (err){
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
@@ -135,7 +135,7 @@ module.exports = robot => {
             obj.list.splice(removeIndex, 1); //オブジェクトから曲を削除
             let json = JSON.stringify(obj, undefined, 4); //オブジェクトをjson文字列に
             //playlist.jsonに書き込む
-            fs.writeFile('./scripts/playlist.json', json, 'utf8', (err) => {
+            fs.writeFile('../src/playlist.json', json, 'utf8', (err) => {
               if (err) {
                 res.send("かきこみえらー:eyes:"); //書き込み失敗時メッセージ
               }
@@ -166,7 +166,7 @@ module.exports = robot => {
     if(channelId != DM_ID){
       let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n"; //表の項目と例
       //playlist.jsonを読み込む
-      fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+      fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
         if (err){
           res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
         }
@@ -191,7 +191,7 @@ module.exports = robot => {
     const { plainText } = res.message.message;
     const urlIndex = plainText.slice(plainText.search(/[0-9]?[0-9]/)); //確認する曲のIndex
     //playlist.jsonを読み込む
-    fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+    fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
       if (err){
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
@@ -213,7 +213,7 @@ module.exports = robot => {
   robot.hear(/^%url all/i, res => {
     const { plainText } = res.message.message;
     //playlist.jsonを読み込む
-    fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+    fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
       if (err){
         res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
       }
@@ -234,7 +234,7 @@ module.exports = robot => {
   /*log----------------------------------------------------------------------------------------------*/
   //定期投稿(3時間ごと)
   cron.schedule('0 0 */3 * * *', () => {
-    fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+    fs.readFile('../src/playlist.json', 'utf8', (err, data) => {
       if(err){
         robot.send({channelID: log_ID}, "error at playlist.js at [/scripts/playlist.js](https://git.trap.jp/Ras/KNKbot/src/branch/master/scripts/playlist.js)");
       }
