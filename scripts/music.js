@@ -176,7 +176,7 @@ module.exports = robot => {
           for(let i = 0;i < obj.list.length; i++){
             const user = obj.list[i].user;
           const music = obj.list[i].music;
-          table = `${table}|${i}|${user}|${music}|\n`;
+          table = `${table}|${i}|${user}:@${user}:|${music}|\n`;
           }
           setTimeout(() => {
             res.send(`ぷれいりすとやんね～\n${table}`) //表作成成功時メッセージ
@@ -242,7 +242,7 @@ module.exports = robot => {
         let obj = JSON.parse(data);
         const i =  getRandom(0,obj.list.length);
         const { user, music, url } = obj.list[i];
-        robot.send({channelID: log_ID}, `[${music}](${url})(added by :@${user}.ex-large:)`);
+        robot.send({channelID: log_ID}, `[${music}](${url})(added by :@${user}:)`);
       }
     })
   })
