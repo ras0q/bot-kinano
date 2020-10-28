@@ -37,90 +37,104 @@ exports.is_mentioned = is_mentioned;
 
 const is_not_mentioned = [
   {
-  msg: /(Ras|らす|ラス)/i,
-  ans: {
-    type: "stamp",
-    name: "rascal"
+    msg: /(Ras|らす|ラス)/i,
+    ans: {
+      type: "stamp",
+      name: "rascal"
     }
   },
   {
-  msg: /^(おわ|った)$/,
-  ans: {
-    type: "stamp",
-    name: "clap"
+    msg: /^(おわ|った)$/,
+    ans: {
+      type: "stamp",
+      name: "clap"
+    }
+  },
+  {
+    msg: /もちもち/,
+    ans: "もちもち～:blobenjoy:"
+  },
+  {
+    msg: /やんね/,
+    ans: "やんね！"
+  },
+  {
+    msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))(?!([すスｽ]|(:oisu\-3.*:)))/,
+    ans: "おい！"
+  },
+  {
+    msg: /(か[あ～]|car|[っう]かな|[やす]るぞ)$/,
+    ans: "いいぞいいぞ"
+  },
+  {
+    msg: /うま(?!(うま))/,
+    ans: "むしゃ"
+  },
+  {
+    msg: /うまうま/,
+    ans: "むしゃむしゃ"
+  },
+  {
+    msg: /[い言云]ってい?る$/,
+    ans: "いうな！"
+  },
+  {
+    msg: /(死|:si.*:)/,
+    ans: "死ぬな！"
+  },
+  {
+    msg: /(おなか|お腹)/,
+    ans: "ぽんぽん！"
+  },
+  {
+    msg: /(助けて|たすけて|tasukete)/,
+    ans: readme
+  },
+  {
+    msg: /いい？$/,
+    ans: "いいよ"
+  },
+  {
+    msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
+    ans: {
+      type: "stamp",
+      name: "oisu-1"
+    }
+  },
+  {
+    msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
+    ans: {
+      type: "stamp",
+      name: "oisu-2"
+    }
+  },
+  {
+    msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
+    ans: {
+      type: "stamp",
+      name: "oisu-3"
+    }
+  },
+  {
+    msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
+    ans: {
+      type: "stamp",
+      name: "oisu-4yoko"
   }
   },
   {
-  msg: /もちもち/,
-  ans: "もちもち～:blobenjoy:"
+    msg: /^test1$/,
+    ans: {
+      type: "stamp",
+      name: "@Ras"
+    }
   },
   {
-  msg: /やんね/,
-  ans: "やんね！"
-  },
-  {
-  msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))(?!([すスｽ]|(:oisu\-3.*:)))/,
-  ans: "おい！"
-  },
-  {
-  msg: /(か[あ～]|car|[っう]かな|[やす]るぞ)$/,
-  ans: "いいぞいいぞ"
-  },
-  {
-  msg: /うま(?!(うま))/,
-  ans: "むしゃ"
-  },
-  {
-  msg: /うまうま/,
-  ans: "むしゃむしゃ"
-  },
-  {
-  msg: /[い言云]ってい?る$/,
-  ans: "いうな！"
-  },
-  {
-  msg: /(死|:si.*:)/,
-  ans: "死ぬな！"
-  },
-  {
-  msg: /(おなか|お腹)/,
-  ans: "ぽんぽん！"
-  },
-  {
-  msg: /(助けて|たすけて|tasukete)/,
-  ans: readme
-  },
-  {
-  msg: /いい？$/,
-  ans: "いいよ"
-  },
-  {
-  msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
-  ans: {
-    type: "stamp",
-    name: "oisu-1"
-  }
-  },
-  {
-  msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
-  ans: {
-    type: "stamp",
-    name: "oisu-2"
-  }
-  },
-  {
-  msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
-  ans: {
-    type: "stamp",
-    name: "oisu-3"
-  }
-  },
-  {
-  msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,
-  ans: {
-    type: "stamp",
-    name: "oisu-4yoko"
-  }
+    msg: /^test2$/,
+    ans: {
+      type: "stamp",
+      name: "0x00ff00"
+    }
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
