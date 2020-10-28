@@ -1,6 +1,5 @@
 require('dotenv').config();
 const Twitter = require('twitter');
-const cron = require('node-cron');
 
 module.exports = robot => {
   const client = new Twitter({
