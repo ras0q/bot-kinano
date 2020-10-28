@@ -1,8 +1,16 @@
 const fs = require('fs'); //ファイルの読み込み、書き込み
+const cron = require('node-cron'); //定期投稿
+
+//start以上end未満の乱数を返す
+const getRandom　= (start, end) => {
+  return Math.floor(Math.random() * (end - start)) + start;
+}
+
 
 module.exports = robot => {
 
   const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
+  const log_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487" //#gps/times/Ras/Bot/log
   const DM_ID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
   const RasuserID = "0fa5d740-0841-4b88-b7c8-34a68774c784"; //RasのuserID
 
@@ -201,25 +209,41 @@ module.exports = robot => {
     });
   })
 
-    //URL確認
-    robot.hear(/^%url all/i, res => {
-      const { plainText } = res.message.message;
-      //playlist.jsonを読み込む
-      fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
-        if (err){
-          res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
+  //URL確認
+  robot.hear(/^%url all/i, res => {
+    const { plainText } = res.message.message;
+    //playlist.jsonを読み込む
+    fs.readFile('./scripts/playlist.json', 'utf8', (err, data) => {
+      if (err){
+        res.send("よみこみえらー:eyes:"); //読み込み失敗時メッセージ
+      }
+      else {
+        obj = JSON.parse(data); //json文字列をオブジェクトに
+        let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
+        for(let i = 0;i < obj.list.length; i++){
+          const { user, music, url } = obj.list[i];
+          table = `${table}|${i}|${user}:@${user}:|${music}|${url}|\n`;
         }
-        else {
-          obj = JSON.parse(data); //json文字列をオブジェクトに
-          let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://example.com|\n"; //表の項目と例
-          for(let i = 0;i < obj.list.length; i++){
-            const { user, music, url } = obj.list[i];
-            table = `${table}|${i}|${user}|${music}|${url}|\n`;
-          }
-          setTimeout(() => {
-            res.send(`URLつきぷれいりすとやんね～\n${table}`) //表作成成功時メッセージ
-          }, 500); //メッセージ順逆転防止
-        }
-      });
+        setTimeout(() => {
+          res.send(`URLつきぷれいりすとやんね～\n${table}`) //表作成成功時メッセージ
+        }, 500); //メッセージ順逆転防止
+      }
+    });
+  })
+
+  /*log----------------------------------------------------------------------------------------------*/
+  //定期投稿(3時間ごと)
+  cron.schedule('0 0 0,3,6,9,12,18,21,24 * * *', () => {
+    fs.readFile('./scripts/playlist.json', 'utf-8', (err, data) => {
+      if(err){
+        robot.send({channelID: log_ID}, "error at playlist.js at [/scripts/playlist.js](https://git.trap.jp/Ras/KNKbot/src/branch/master/scripts/playlist.js)");
+      }
+      else {
+        obj = JSON.parse(data);
+        const i =  getRandom(0,obj.list.length);
+        const { user, music, url } = obj.list[i];
+        robot.send({channelID: log_ID}, `[${music}](${url})(added by :@${user}.ex-large:)`);
+      }
     })
+  })
 }
