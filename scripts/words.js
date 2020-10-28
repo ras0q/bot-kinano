@@ -120,20 +120,6 @@ const is_not_mentioned = [
     ans: {
       type: "stamp",
       name: "oisu-4yoko"
-  }
-  },
-  {
-    msg: /^test1$/,
-    ans: {
-      type: "stamp",
-      name: "@Ras"
-    }
-  },
-  {
-    msg: /^test2$/,
-    ans: {
-      type: "stamp",
-      name: "0x00ff00"
     }
   }
 ];
