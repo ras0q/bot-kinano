@@ -24,6 +24,10 @@
     - きなのはマルチリンガルやんね～～～～
 - `tratra [txt]`: やまびこするやんね！やっほ～
 
+## :blobmaracas: *Memo* :blobmaracas:
+- `memo`でメモを確認できるやんね！
+- `memo+ [text]`でメモをあっぷでーとできるやんね！
+
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `/[hoge]`: 今の時刻を教えるやんね！
 - `trend`: ついったーのトレンドを教えるやんね！
