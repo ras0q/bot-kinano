@@ -118,7 +118,7 @@ module.exports = robot => {
     request.get(option(), (error, response, body) => {
       if(!error){
         const i = getRandom(0,body.length);
-        const { user, music, url } = obj.list[i];
+        const { user, music, url } = body[i];
         robot.send({channelID: log_ID}, `きなののオススメソングはこれ！\n[${music}](${url})(added by :@${user}:)`);
       }
     })

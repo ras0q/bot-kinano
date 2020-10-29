@@ -1,4 +1,3 @@
-const { Robot } = require('hubot');
 const request = require('request');
 
 //requestのoptionをつくる
@@ -13,7 +12,7 @@ const option = (Q) => {
 }
 
 module.exports = robot => {
-  robot.hear(/^memo$/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
     const { bot, name } = res.message.message.user;
     if(!bot){
       const qs = {user: name};
@@ -21,17 +20,17 @@ module.exports = robot => {
         if(!error){
           const { user, memo } = body;
           if(memo == "") memo = "#NULL"
-          res.send(`***${user}'s memo is ...***\n\n${memo}`);
+          res.send(`***${user}'s memo is ...***\n${memo}`);
         }
       })
     }
   })
 
-  robot.hear(/^memo\+ /i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)/i, res => {
     const { plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const qs = {user: name, memo: plainText.slice(6)};
+      const qs = {user: name, memo: plainText.slice(5)};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
           res.send(`***${name}'s memo was updated!***`);
