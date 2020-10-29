@@ -20,7 +20,8 @@ module.exports = robot => {
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { user, memo } = body;
-          res.send(`*${user}'s memo is ...*\n${memo}`);
+          if(memo == "") memo = "#NULL"
+          res.send(`***${user}'s memo is ...***\n\n${memo}`);
         }
       })
     }
@@ -33,7 +34,7 @@ module.exports = robot => {
       const qs = {user: name, memo: plainText.slice(6)};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
-          res.send(`*${name}'s memo was updated!*`);
+          res.send(`***${name}'s memo was updated!***`);
         }
       })
     }
