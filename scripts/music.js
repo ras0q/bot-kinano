@@ -52,12 +52,9 @@ module.exports = robot => {
 
   //曲追加
   robot.hear(/^%add .*/i, res => {
-    // const { message } = res.message;
-    // const { user, plainText } = message;
-    // const { name, bot } = user;
-    const plainText = "%add [hoge](fuga)";
-    const name = "Ras";
-    const bot = false;
+    const { message } = res.message;
+    const { user, plainText } = message;
+    const { name, bot } = user;
     if(!bot){
       const { music, url } = extractValues(plainText);
       const qs = {
@@ -69,7 +66,7 @@ module.exports = robot => {
         if(!error){
           const addtable = `|追加した人|追加した曲|曲のURL|\n|-|-|-|\n|${name}|${music}|${url}|\n`
           res.send(`ぷれいりすとに追加したやんね！\n${addtable}`)
-          robot.send({channelID: gtRB_ID},"**Add to PLAYLISTAdd to PLAYLIST**\n"+ addtable); //RasへのDMに通知
+          robot.send({channelID: gtRB_ID},"**Add to PLAYLIST**\n"+ addtable); //RasへのDMに通知
         }
       })
     }
