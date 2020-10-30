@@ -30,7 +30,8 @@ module.exports = robot => {
     const { plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const qs = {user: name, memo: plainText.slice(5)};
+      const i = plainText.search(/(\+|＋)/);
+      const qs = {user: name, memo: plainText.slice(i + 1)};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
           res.send(`***${name}'s memo was updated!***`);
