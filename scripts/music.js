@@ -48,7 +48,6 @@ const extractValues = (text) => {
 module.exports = robot => {
   const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
   const log_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487" //#gps/times/Ras/Bot/log
-  const DM_ID = "37612932-7437-4d99-ba61-f8c69cb85c41"; //Ras-BOT_kinanoのDM
 
   //曲追加
   robot.hear(/^%add .*/i, res => {
@@ -65,8 +64,8 @@ module.exports = robot => {
       request.post(option(qs), (error, response, body) => {
         if(!error){
           const addtable = `|追加した人|追加した曲|曲のURL|\n|-|-|-|\n|${name}|${music}|${url}|\n`
-          res.send(`ぷれいりすとに追加したやんね！\n${addtable}`)
-          robot.send({channelID: gtRB_ID},"**Add to PLAYLIST**\n"+ addtable); //RasへのDMに通知
+          res.send(`${music}を追加したやんね！\n${addtable}`)
+          robot.send({channelID: log_ID},"## 曲が追加されたやんね！\n"+ addtable); //RasへのDMに通知
         }
       })
     }
@@ -98,7 +97,7 @@ module.exports = robot => {
 
 
   //曲確認(URLつき)
-  robot.hear(/^%watch [0-9]+$/i, res => {
+  robot.hear(/^%watch [0-9]+/i, res => {
     if(!res.message.message.user.bot){
       let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n"; //表の項目と例
       const { plainText } = res.message.message;
@@ -115,7 +114,7 @@ module.exports = robot => {
   })
 
   //曲確認(URLつき)
-  robot.hear(/^%watch url$/i, res => {
+  robot.hear(/^%watch all$/i, res => {
     if(!res.message.message.user.bot){
       let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|\n"; //表の項目と例
       request.get(option(), (error, response, body) => {
@@ -137,7 +136,7 @@ module.exports = robot => {
       if(!error){
         const i = getRandom(0,body.length);
         const { user, music, url } = body[i];
-        robot.send({channelID: log_ID}, `きなののオススメソングはこれ！\n[${music}](${url})(added by :@${user}:)`);
+        robot.send({channelID: log_ID}, `## きなののオススメソングはこれ！\n[${music}](${url})(added by :@${user}:)`);
       }
     })
   })
