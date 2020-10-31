@@ -15,8 +15,10 @@
 
 ## :blobguitar: *Playlist* :blobguitar:
 - `%add [musicname]`: プレイリストに曲`musicname`を追加できるやんね！
-- `%watch`: プレイリストを見せるやんね！
 - `%remove [number]`: プレイリストから曲`number`を削除できるやんね！
+- `%watch`: プレイリストを見せるやんね！
+  - `%watch url`: URLつきのプレイリストを見せるやんね！
+  - `%watch [num]`: 曲`num`の詳細情報を見せるやんね！
 
 ## :blobmicrophone: *Translation* :blobmicrophone:
 - `tra [txt] ([src]=>[tar])`: `txt`を`src`語から`tar`語に翻訳するやんね！

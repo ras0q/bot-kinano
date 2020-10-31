@@ -96,6 +96,24 @@ module.exports = robot => {
     }
   })
 
+
+  //曲確認(URLつき)
+  robot.hear(/^%watch [0-9]+$/i, res => {
+    if(!res.message.message.user.bot){
+      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n"; //表の項目と例
+      const { plainText } = res.message.message;
+      const i = plainText.slice(7);
+      request.get(option(), (error, response, body) => {
+        if(!error){
+          //表作成
+          const { user, music, url } = body[i];
+          table = `${table}|${i}|${user}:@${user}:|${music}|${url}|\n`;
+          res.send(`曲${i}はこれ！\n${table}`);
+        }
+      })
+    }
+  })
+
   //曲確認(URLつき)
   robot.hear(/^%watch url$/i, res => {
     if(!res.message.message.user.bot){
