@@ -89,7 +89,7 @@ module.exports = robot => {
             const { user, music } = body[i];
             table += `|${i}|${user}:@${user}:|${music}|\n`;
           }
-          res.send(`プレイリストやんね～\n${table}`);
+          res.send(`プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
         }
       })
     }
