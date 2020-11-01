@@ -1,4 +1,5 @@
 const request = require('request');
+const cron = require('node-cron');
 
 //requestのoptionをつくる
 const option = (Q) => {
@@ -12,6 +13,7 @@ const option = (Q) => {
 }
 
 module.exports = robot => {
+  const gtR_ID ="f58c72a4-14f0-423c-9259-dbb4a90ca35f";
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
     const { bot, name } = res.message.message.user;
     if(!bot){
@@ -38,5 +40,17 @@ module.exports = robot => {
         }
       })
     }
+  })
+
+  //cron(8,16時)
+  cron.schedule('* * 7,23 * * *', () => {
+    const qs = {user: "Ras"};
+    request.get(option(qs), (error,respond,body) => {
+      if(!error){
+        const { user, memo } = body;
+        if(memo == "") memo = "#NULL"
+        robot.send({channelID: gtR_ID}, `***${user}'s memo is ...***\n${memo}`);
+      }
+    })
   })
 }
