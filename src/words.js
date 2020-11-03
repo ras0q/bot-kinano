@@ -55,7 +55,7 @@ const is_not_mentioned = [
     }
   },
   {
-    msg: /もちもち$/,
+    msg: /もちもち/,
     ans: "もちもち～:blobenjoy:"
   },
   {
