@@ -21,7 +21,7 @@ exports.natterus = natterus;
 
 const is_mentioned = [
   {
-    msg: /.*hoge.*/i,
+    msg: /hoge$/i,
     ans: "huga"
   },
   {
@@ -29,7 +29,7 @@ const is_mentioned = [
     ans: readme,
   },
   {
-    msg: /.*もちもち.*/,
+    msg: /もちもち$/,
     ans: "きなこもち～～～～～！"
   }
 ];
@@ -55,7 +55,7 @@ const is_not_mentioned = [
     }
   },
   {
-    msg: /もちもち/,
+    msg: /もちもち$/,
     ans: "もちもち～:blobenjoy:"
   },
   {
@@ -83,7 +83,7 @@ const is_not_mentioned = [
     ans: "いうな！"
   },
   {
-    msg: /(死|:si.*:)/,
+    msg: /(死|:si.*:)$/,
     ans: "死ぬな！"
   },
   {
@@ -91,12 +91,8 @@ const is_not_mentioned = [
     ans: "ぽんぽん！"
   },
   {
-    msg: /(助けて|たすけて|tasukete)/,
+    msg: /(助けて|たすけて|tasukete)$/,
     ans: readme
-  },
-  {
-    msg: /いい？$/,
-    ans: "いいよ"
   },
   {
     msg: /([おぉオォｵｫ]|(:oisu\-1.*:))([いぃイィｲｨｨ]|(:oisu\-2.*:))([すスｽ]|(:oisu\-3.*:))/i,

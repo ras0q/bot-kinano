@@ -83,7 +83,7 @@ module.exports = robot => {
   })
 
   //なってる
-  robot.hear(/なってる/, res => {
+  robot.hear(/なってる$/, res => {
     const { bot } = res.message.message.user;
     if(!bot){
       setTimeout(() => {
