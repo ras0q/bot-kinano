@@ -87,7 +87,7 @@ module.exports = robot => {
           //表作成
           for(let i = 0;i < body.length; i++){
             const { user, music } = body[i];
-            table += `|${i}|${user}:@${user}:|${music}|\n`;
+            table += `|${i}|:@${user}:${user}|${music}|\n`;
           }
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
         }
@@ -106,7 +106,7 @@ module.exports = robot => {
         if(!error){
           //表作成
           const { user, music, url } = body[i];
-          table = `${table}|${i}|${user}:@${user}:|${music}|${url}|\n`;
+          table = `${table}|${i}|:@${user}:${user}|${music}|${url}|\n`;
           res.send(`## 曲${i}はこれ！\n${table}`);
         }
       })
@@ -125,7 +125,7 @@ module.exports = robot => {
           //表作成
           const i = getRandom(0,body.length);
           const { user, music, url } = body[i];
-          table = `${table}|${i}|${user}:@${user}:|${music}|${url}|\n`;
+          table = `${table}|${i}|:@${user}:${user}|${music}|${url}|\n`;
           res.send(`## きなののオススメソングはこれ！\n${table}`);
         }
       })
@@ -141,7 +141,7 @@ module.exports = robot => {
           //表作成
           for(let i = 0;i < body.length; i++){
             const { user, music, url } = body[i];
-            table = `${table}|${i}|${user}:@${user}:|${music}|${url}|\n`;
+            table = `${table}|${i}|:@${user}:${user}|${music}|${url}|\n`;
           }
           res.send(`## プレイリストやんね～\n${table}`);
         }
