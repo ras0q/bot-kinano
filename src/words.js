@@ -91,7 +91,7 @@ const is_not_mentioned = [
     ans: "ぽんぽん！"
   },
   {
-    msg: /(助けて|たすけて|tasukete)$/,
+    msg: /(助けて|たすけて|tasukete)/,
     ans: readme
   },
   {
