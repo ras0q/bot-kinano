@@ -19,7 +19,7 @@ module.exports = robot => {
         res.reply(":oisu-1::oisu-2::oisu-3::oisu-4yoko:");
       },500);
       setTimeout(() => {
-        res.send(readme);
+        res.reply("きなのの機能を表示するには以下のコマンドを打つやんね！\n`@BOT_kinano できること`");
       },1000)
     }
     catch(error) {
