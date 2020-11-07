@@ -34,4 +34,4 @@
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `/[hoge]`: 今の時刻を教えるやんね！
 - `trend`: ついったーのトレンドを教えるやんね！
-- その他要望があれば[!{"type":"channel","raw":"#gps/times/Ras","id":"f58c72a4-14f0-423c-9259-dbb4a90ca35f"}](https://q.trap.jp/channels/gps/times/Ras)までお願いやんね！
+- その他要望があれば#gps/times/Rasまでお願いやんね！
