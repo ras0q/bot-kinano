@@ -71,7 +71,7 @@ module.exports = robot => {
       if(!error){
         const { user, memo } = body;
         if(memo == "") memo = "#NULL"
-        robot.send({channelID: gtR_ID}, `*${user}'s memo is ...*\n${memo}`);
+        robot.send({channelID: gtR_ID}, `# *${user}'s memo is ...*\n${memo}`);
       }
     })
   })
