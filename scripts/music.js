@@ -74,7 +74,7 @@ module.exports = robot => {
   //曲削除
   robot.hear(/^%remove .*/i, res => {
     if(!res.message.message.user.bot){
-      res.send(`!{"type":"user","raw":"@Ras","id":"0fa5d740-0841-4b88-b7c8-34a68774c784"} 頼んだ！`)
+      res.send(`@Ras 頼んだ！`)
     }
   })
 
