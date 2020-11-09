@@ -6,6 +6,7 @@ module.exports = robot => {
         if(type == "BotMessageStampsUpdated"){
             res.send(messageId);
             res.send(stamps);
+            res.send(type);
         }
     })
 }
