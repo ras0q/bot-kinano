@@ -5,7 +5,7 @@ module.exports = robot => {
         const { type, messageId, stamps } = res.message;
         if(type == "BotMessageStampsUpdated"){
             robot.send({channelID: gtRB_ID},messageId);
-            robot.send({channelID: gtRB_ID},stamps);
+            robot.send({channelID: gtRB_ID},JSON.stringify(stamps));
             robot.send({channelID: gtRB_ID},type);
         }
     })
