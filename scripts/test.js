@@ -4,9 +4,9 @@ module.exports = robot => {
     robot.catchAll(res => {
         const { type, messageId, stamps } = res.message;
         if(type == "BotMessageStampsUpdated"){
-            res.send(messageId);
-            res.send(stamps);
-            res.send(type);
+            robot.send({channelID: gtRB_ID},messageId);
+            robot.send({channelID: gtRB_ID},stamps);
+            robot.send({channelID: gtRB_ID},type);
         }
     })
 }
