@@ -1,10 +1,11 @@
+require('dotenv').config();
 const request = require('request');
 const cron = require('node-cron');
 
 //requestのoptionをつくる
 const option = (Q) => {
   let op = {
-    uri: "https://script.google.com/macros/s/AKfycbyULsWt54OcPDgjk_rSWK1rh6xCPeNW7-z7X__nu3CVidMeKOQ/exec", //GAS
+    uri: process.env.MEMO_SS, //SS
     headers: {'Content-type': 'application/json'},
     qs: Q,
     json: true
