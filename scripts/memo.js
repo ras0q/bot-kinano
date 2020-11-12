@@ -23,6 +23,12 @@ module.exports = robot => {
         if(!error){
           const { user, memo } = body;
           if(memo == "") memo = "#NULL"
+          res.send(
+            {
+              type: "stamp",
+              name: "writing_hand"
+            }
+          )
           res.send(`## *${user}'s memo is ...*\n${memo}`);
         }
       })
@@ -38,6 +44,12 @@ module.exports = robot => {
       const qs = {user: name, memo: memo};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
+          res.send(
+            {
+              type: "stamp",
+              name: "writing_hand"
+            }
+          )
           res.send(`## *${name}'s memo was updated!*\n${memo}`);
         }
       })
@@ -57,6 +69,12 @@ module.exports = robot => {
           const qs2 = {user: name, memo: memo2};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
+              res.send(
+                {
+                  type: "stamp",
+                  name: "writing_hand"
+                }
+              )
               res.send(`## *${name}'s memo was updated!*\n${memo2}`);
             }
           })
