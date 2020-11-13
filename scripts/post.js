@@ -21,4 +21,8 @@ module.exports = robot => {
   cron.schedule('0 0 12,23 * * *', () => {
     robot.send({channelID: "2fab81dd-a750-4699-a9c5-3fc13ab9bcee"}, `https://trap.jp/post/${getRandom(0,recent+1)}/`)
   });
+  //#gps/times/d_etteiu8383(5)
+  cron.schedule('0 0 20 * * *', () => {
+    robot.send({channelID: "9f452f69-2bc2-40ee-a165-7e7ca251116d"}, `https://trap.jp/post/${getRandom(0,recent+1)}/`)
+  });
 }
