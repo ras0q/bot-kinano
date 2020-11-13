@@ -16,7 +16,9 @@ const option = (Q) => {
 module.exports = robot => {
   const gtR_ID ="f58c72a4-14f0-423c-9259-dbb4a90ca35f";
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
-    const { bot, name } = res.message.message.user;
+    // const { bot, name } = res.message.message.user;
+    const bot = false;
+    const name = "Ras";
     if(!bot){
       const qs = {user: name};
       res.send(
@@ -27,9 +29,7 @@ module.exports = robot => {
       );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
-          const { user, memo } = body;
-          res.send(user);
-          res.send(memo);
+          let { user, memo } = body;
           if(memo == "") memo = "#NULL";
           res.send(`## *${user}'s memo is ...*\n${memo}`);
         }
