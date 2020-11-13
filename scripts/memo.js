@@ -16,9 +16,7 @@ const option = (Q) => {
 module.exports = robot => {
   const gtR_ID ="f58c72a4-14f0-423c-9259-dbb4a90ca35f";
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
-    // const { bot, name } = res.message.message.user;
-    const bot = false;
-    const name = "Ras";
+    const { bot, name } = res.message.message.user;
     if(!bot){
       const qs = {user: name};
       res.send(
