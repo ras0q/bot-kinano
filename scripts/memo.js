@@ -19,17 +19,17 @@ module.exports = robot => {
     const { bot, name } = res.message.message.user;
     if(!bot){
       const qs = {user: name};
-      res.send(
-        {
-          type: "stamp",
-          name: "writing_hand"
-        }
-      );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           let { user, memo } = body;
-          if(memo == "") memo = "# NULL";
+          if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
           res.send(`## *${user}'s memo is ...*\n${memo}`);
+          res.send(
+            {
+              type: "stamp",
+              name: "writing_hand"
+            }
+          );
         }
         else {
           res.send("@Ras Error at memo.js");
@@ -45,15 +45,15 @@ module.exports = robot => {
       const i = plainText.search(/(\+|＋)/);
       const memo = plainText.slice(i + 1);
       const qs = {user: name, memo: memo};
-      res.send(
-        {
-          type: "stamp",
-          name: "writing_hand"
-        }
-      );
       request.post(option(qs), (error,respond,body) => {
         if(!error){
           res.send(`## *${name}'s memo was updated!*\n${memo}`);
+          res.send(
+            {
+              type: "stamp",
+              name: "writing_hand"
+            }
+          );
         }
         else{
           res.send("@Ras Error at memo.js");
@@ -68,12 +68,6 @@ module.exports = robot => {
     if(!bot){
       const i = plainText.search(/(\+|＋){2}/);
       const qs = {user: name};
-      res.send(
-        {
-          type: "stamp",
-          name: "writing_hand"
-        }
-      );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { memo } = body;
@@ -82,6 +76,12 @@ module.exports = robot => {
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
               res.send(`## *${name}'s memo was updated!*\n${memo2}`);
+              res.send(
+                {
+                  type: "stamp",
+                  name: "writing_hand"
+                }
+              );
             }
             else{
               res.send("@Ras Error at memo.js");
