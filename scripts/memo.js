@@ -28,7 +28,7 @@ module.exports = robot => {
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           let { user, memo } = body;
-          if(memo == "") memo = "#NULL";
+          if(memo == "") memo = "# NULL";
           res.send(`## *${user}'s memo is ...*\n${memo}`);
         }
         else {
