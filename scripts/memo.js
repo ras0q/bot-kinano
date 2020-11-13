@@ -9,7 +9,7 @@ const option = (Q) => {
     headers: {'Content-type': 'application/json'},
     qs: Q,
     json: true
-  }
+  };
   return op;
 }
 
@@ -19,17 +19,20 @@ module.exports = robot => {
     const { bot, name } = res.message.message.user;
     if(!bot){
       const qs = {user: name};
+      res.send(
+        {
+          type: "stamp",
+          name: "writing_hand"
+        }
+      );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { user, memo } = body;
-          if(memo == "") memo = "#NULL"
-          res.send(
-            {
-              type: "stamp",
-              name: "writing_hand"
-            }
-          )
+          if(memo == "") memo = "#NULL";
           res.send(`## *${user}'s memo is ...*\n${memo}`);
+        }
+        else {
+          res.send("@Ras Error at memo.js");
         }
       })
     }
@@ -42,15 +45,18 @@ module.exports = robot => {
       const i = plainText.search(/(\+|＋)/);
       const memo = plainText.slice(i + 1);
       const qs = {user: name, memo: memo};
+      res.send(
+        {
+          type: "stamp",
+          name: "writing_hand"
+        }
+      );
       request.post(option(qs), (error,respond,body) => {
         if(!error){
-          res.send(
-            {
-              type: "stamp",
-              name: "writing_hand"
-            }
-          )
           res.send(`## *${name}'s memo was updated!*\n${memo}`);
+        }
+        else{
+          res.send("@Ras Error at memo.js");
         }
       })
     }
@@ -62,22 +68,28 @@ module.exports = robot => {
     if(!bot){
       const i = plainText.search(/(\+|＋){2}/);
       const qs = {user: name};
+      res.send(
+        {
+          type: "stamp",
+          name: "writing_hand"
+        }
+      );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { memo } = body;
-          const memo2 = memo + plainText.slice(i + 2)
+          const memo2 = memo + plainText.slice(i + 2);
           const qs2 = {user: name, memo: memo2};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
-              res.send(
-                {
-                  type: "stamp",
-                  name: "writing_hand"
-                }
-              )
               res.send(`## *${name}'s memo was updated!*\n${memo2}`);
             }
+            else{
+              res.send("@Ras Error at memo.js");
+            }
           })
+        }
+        else{
+          res.send("@Ras Error at memo.js");
         }
       })
     }

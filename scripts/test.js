@@ -1,3 +1,4 @@
+// // BotMessageStampsUpdated
 // module.exports = robot => {
 //     robot.catchAll(res => {
 //         const { type } = res.message;
