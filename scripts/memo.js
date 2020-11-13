@@ -27,6 +27,7 @@ module.exports = robot => {
       );
       request.get(option(qs), (error,respond,body) => {
         if(!error){
+          res.send(body);
           const { user, memo } = body;
           if(memo == "") memo = "#NULL";
           res.send(`## *${user}'s memo is ...*\n${memo}`);
