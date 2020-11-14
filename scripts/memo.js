@@ -101,7 +101,7 @@ module.exports = robot => {
     request.get(option(qs), (error,respond,body) => {
       if(!error){
         let { user, memo } = body;
-        if(memo == "") memo = "#NULL"
+        if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
         robot.send({channelID: gtR_ID}, `## *${user}'s memo is ...*\n${memo}`);
       }
     })
