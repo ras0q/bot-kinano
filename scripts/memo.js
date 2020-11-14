@@ -100,7 +100,7 @@ module.exports = robot => {
     const qs = {user: "Ras"};
     request.get(option(qs), (error,respond,body) => {
       if(!error){
-        const { user, memo } = body;
+        let { user, memo } = body;
         if(memo == "") memo = "#NULL"
         robot.send({channelID: gtR_ID}, `## *${user}'s memo is ...*\n${memo}`);
       }
