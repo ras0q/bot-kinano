@@ -4,7 +4,7 @@ module.exports = robot => {
         const { type, stamps, messageId } = res.message;
         const { stampName, userId } = stamps[0];
         if(type == "BotMessageStampsUpdated" && (stampName == "eenyade" || stampName == "eennyade") && Math.random() > 0.9){
-            robot.send({channelID: "82b9f8ad-17d9-4597-88f1-0375247a2487"},
+            robot.send({channelID: "2a5616d5-5d69-4716-8377-1e1fb33278fe"},
                 `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
             );
         }
