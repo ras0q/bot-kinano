@@ -43,10 +43,11 @@ module.exports = robot => {
     const { bot, name } = user;
     if(!bot){
       const i = plainText.search(/(\+|＋)/);
-      const memo = plainText.slice(i + 1);
+      let memo = plainText.slice(i + 1);
       const qs = {user: name, memo: memo};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
+          if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
           res.send(`## *${name}'s memo was updated!*\n${memo}`);
           res.send(
             {
