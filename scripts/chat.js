@@ -34,8 +34,8 @@ module.exports = robot => {
 
   robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
     const { message } = res.message;
-    const { user, id } = message;
-    if(!user.bot){
+    const { channelId, user, id } = message;
+    if(!user.bot && channelId != gtRB_ID){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
