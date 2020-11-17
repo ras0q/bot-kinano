@@ -38,11 +38,11 @@ module.exports = robot => {
     }
   })
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)(?!(\+|＋))/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\=|＝)/i, res => {
     const { plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const i = plainText.search(/(\+|＋)/);
+      const i = plainText.search(/(\=|＝)/);
       let memo = plainText.slice(i + 1);
       const qs = {user: name, memo: memo};
       request.post(option(qs), (error,respond,body) => {
@@ -63,16 +63,16 @@ module.exports = robot => {
     }
   })
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋){2}/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)/i, res => {
     const { plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const i = plainText.search(/(\+|＋){2}/);
+      const i = plainText.search(/(\+|＋)/);
       const qs = {user: name};
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { memo } = body;
-          const memo2 = memo + plainText.slice(i + 2);
+          const memo2 = memo + plainText.slice(i + 1);
           const qs2 = {user: name, memo: memo2};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){

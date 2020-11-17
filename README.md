@@ -29,8 +29,8 @@
 
 ## :blobmaracas: *Memo* :blobmaracas:
 - `memo`でメモを確認できるやんね！
-- `memo+ [text]`でメモをあっぷでーとできるやんね！ (全て書き換えてしまうので注意してください)
-- `memo++ [text]`でメモに`text`を追加できるやんね！ (`memo+`、`memo++`ともに`text`の前に改行を入れることを推奨します)
+- `memo= [text]`でメモをあっぷでーとできるやんね！ (全て書き換えてしまうので注意してください)
+- `memo+ [text]`でメモに`text`を追加できるやんね！ (`memo=`、`memo+`ともに`text`の前に改行を入れることを推奨します)
 
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `/[hoge]`: 今の時刻を教えるやんね！
