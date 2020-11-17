@@ -60,7 +60,7 @@ module.exports = robot => {
 
   //gtRB限定
   let env = "dev"
-  robot.hear(/^env $/, res => {
+  robot.hear(/^env /, res => {
     const { message } = res.message;
     const { user, plainText, channelId } = message;
     if(user.id = "0fa5d740-0841-4b88-b7c8-34a68774c784"){
