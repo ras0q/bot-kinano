@@ -39,7 +39,7 @@ module.exports = robot => {
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status != ""){
-        robot.send({channelId: gtRB_ID},
+        robot.send({channelID: gtRB_ID},
           `${status}\n${message}\nhttps://q.trap.jp/messages/${id}`
         );
       }
@@ -62,19 +62,20 @@ module.exports = robot => {
   let env = "dev"
   robot.hear(/^env $/, res => {
     const { message } = res.message;
-    const { user, plainText } = message;
+    const { user, plainText, channelId } = message;
     if(user.id = "0fa5d740-0841-4b88-b7c8-34a68774c784"){
       env = plainText.slice(4);
+      res.reply(`env: ${env}`)
     }
   })
   robot.hear(/.+/i, res => {
     const { message } = res.message;
-    const { user, id } = message;
+    const { channelId, user, id } = message;
     if(!user.bot && channelId == gtRB_ID && env == "chat"){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
-        robot.send({channelId: gtRB_ID},
+        robot.send({channelID: gtRB_ID},
           `@Ras\n${status}\n${message}\n${id}`
         );
       }
