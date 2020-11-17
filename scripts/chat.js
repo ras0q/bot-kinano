@@ -9,33 +9,9 @@ const getRandom　= (start, end) => {
   return Math.floor(Math.random() * (end - start)) + start;
 }
 
-module.exports = robot => {
-  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
-
-  robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
-    const { message } = res.message;
-    const { plainText, user, id } = message;
-    const { displayName, bot } = user;
-    let uttr = plainText;
-    let tone = "normal"
-    if(uttr.indexOf("kansai") != -1) {
-      tone = "kansai";
-      let i = uttr.indexOf("kansai");
-      uttr = uttr.slice(0,i) + uttr.slice(i+6);
-    }
-    if(uttr.indexOf("koshu") != -1) {
-      tone = "koshu";
-      let i = uttr.indexOf("koshu");
-      uttr = uttr.slice(0,i) + uttr.slice(i+5);
-    }
-    if(uttr.indexOf("dechu") != -1) {
-      tone = "dechu";
-      let i = uttr.indexOf("dechu");
-      uttr = uttr.slice(0,i) + uttr.slice(i+5);
-    }
-    if(!bot){
-    let options = {
-      uri: "https://www.chaplus.jp/v1/chat",
+const option = (message) => {
+  return {
+    uri: "https://www.chaplus.jp/v1/chat",
       qs: {
         "apikey": APIkey
       },
@@ -43,71 +19,70 @@ module.exports = robot => {
         "Content-type": "application/json",
       },
       json: {
-        "utterance": uttr,
-        "username": displayName,
+        "utterance": message.plainText,
+        "username": message.user.displayName,
         "agentState": {
           "agentName": "きなの",
           "age": "14",
-          "tone": tone
         }
       }
-    };
-    request.post(options, function(error, response, body){
-      if(body.status != ""){
+  }
+}
+
+module.exports = robot => {
+  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
+
+  robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
+    const { message } = res.message;
+    const { user, id } = message;
+    if(!user.bot){
+    request.post(option(message), function(error, response, body){
+      const { status, message, responses } = body;
+      if(status != ""){
         robot.send({channelId: gtRB_ID},
-          `${body.status}\n${body.message}\n${id}`
+          `${status}\n${message}\nhttps://q.trap.jp/messages/${id}`
         );
       }
-      const i = getRandom(0,(body.responses).length);
-      res.reply(`${body.responses[i].utterance}\n`)
+      else res.reply(`${responses[getRandom(0,(responses).length)].utterance}\n`)
     });
     }
   })
 
   robot.hear(/^chattest/, res => {
     const { message } = res.message;
-    const { plainText, user } = message;
-    const { displayName, bot } = user;
-    let uttr = plainText.slice(8);
-    let tone = "normal"
-    if(uttr.indexOf("kansai") != -1) {
-      tone = "kansai";
-      let i = uttr.indexOf("kansai");
-      uttr = uttr.slice(0,i) + uttr.slice(i+6);
-      console.log(i);
-    }
-    if(uttr.indexOf("koshu") != -1) {
-      tone = "koshu";
-      let i = uttr.indexOf("koshu");
-      uttr = uttr.slice(0,i) + uttr.slice(i+5);
-    }
-    if(uttr.indexOf("dechu") != -1) {
-      tone = "dechu";
-      let i = uttr.indexOf("dechu");
-      uttr = uttr.slice(0,i) + uttr.slice(i+5);
-    }
-    if(!bot){
-      let options = {
-        uri: "https://www.chaplus.jp/v1/chat",
-        qs: {
-          "apikey": APIkey
-        },
-        headers: {
-          "Content-type": "application/json",
-        },
-        json: {
-          "utterance": uttr,
-          "username": displayName,
-          "agentState": {
-            "agentName": "きなの",
-            "age": "14",
-            "tone": tone
-          }
-        }
-      };
-      request.post(options, function(error, response, body){
+    const { user } = message;
+    if(user.bot){
+      request.post(option(message), function(error, response, body){
         res.send(`\`\`\`\n${JSON.stringify(body, undefined, 4)}\n\`\`\``);
       });
+    }
+  })
+
+  //gtRB限定
+  let env = "dev"
+  robot.hear(/^env $/, res => {
+    const { message } = res.message;
+    const { user, plainText } = message;
+    if(user.id = "0fa5d740-0841-4b88-b7c8-34a68774c784"){
+      env = plainText.slice(4);
+    }
+  })
+  robot.hear(/.+/i, res => {
+    const { message } = res.message;
+    const { user, id } = message;
+    if(!user.bot && channelId == gtRB_ID && env == "chat"){
+    request.post(option(message), function(error, response, body){
+      const { status, message, responses } = body;
+      if(status){
+        robot.send({channelId: gtRB_ID},
+          `@Ras\n${status}\n${message}\n${id}`
+        );
+      }
+      else {
+        const i = getRandom(0,(responses).length)
+        res.reply(`${responses[i].utterance} (score: ${responses[i].score})`);
+      }
+    });
     }
   })
 }
