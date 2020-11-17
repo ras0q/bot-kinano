@@ -38,7 +38,7 @@ module.exports = robot => {
     if(!user.bot){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
-      if(status != ""){
+      if(status){
         robot.send({channelID: gtRB_ID},
           `${status}\n${message}\nhttps://q.trap.jp/messages/${id}`
         );
