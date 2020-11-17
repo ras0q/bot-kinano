@@ -6,11 +6,10 @@ const getRandom　= (start, end) => {
 }
 
 module.exports = robot => {
-  //毎日8時,13時,17時にtraPの記事を#gps/times/Ras/Bot/gtRに投げる
   const gtRID = "f58c72a4-14f0-423c-9259-dbb4a90ca35f";
   const recent = 1134; //最新回
   //#gps/times/Ras(8,13,17)
-  cron.schedule('0 0 4,8,23 * * *', () => {
+  cron.schedule('0 0 8,23 * * *', () => {
     robot.send({channelID: gtRID}, `https://trap.jp/post/${getRandom(0,recent+1)}/`)
   });
   //#gps/times/Z(8)
