@@ -60,14 +60,6 @@ module.exports = robot => {
 
   //gtRB限定
   let env = "dev"
-  robot.hear(/^env /, res => {
-    const { message } = res.message;
-    const { user, plainText, channelId } = message;
-    if(user.id = "0fa5d740-0841-4b88-b7c8-34a68774c784"){
-      env = plainText.slice(4);
-      res.reply(`env: ${env}`)
-    }
-  })
   robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
@@ -85,5 +77,15 @@ module.exports = robot => {
       }
     });
     }
+  })
+  //環境切り替え
+  robot.hear(/^env /, res => {
+    const { message } = res.message;
+    const { user, plainText } = message;
+    if(user.name = "0fa5d740-0841-4b88-b7c8-34a68774c784"){
+      env = plainText.slice(4);
+      res.reply(`env: ${env}`)
+    }
+    else res.send(`You are ${user.name}, **not Ras**!!`)
   })
 }
