@@ -121,6 +121,14 @@ const is_not_mentioned = [
       type: "stamp",
       name: "oisu-4yoko"
     }
+  },
+  {
+    msg: /いい？$/,
+    ans: "いいよ"
+  },
+  {
+    msg: /^よ$/,
+    ans: "よっっ！:v:"
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
