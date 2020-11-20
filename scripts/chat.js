@@ -23,7 +23,7 @@ const option = (message) => {
         "username": message.user.displayName,
         "agentState": {
           "agentName": "きなの",
-          "age": "14",
+          "age": "40",
         }
       }
   }
