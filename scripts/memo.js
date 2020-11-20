@@ -22,7 +22,7 @@ module.exports = robot => {
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           let { user, memo } = body;
-          if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
+          if(memo == "") memo = ":404_notfound.ex-large.pyon:";
           res.send(`## $\\blue{\\bf{${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
           res.send(
             {
@@ -47,7 +47,7 @@ module.exports = robot => {
       const qs = {user: name, memo: memo};
       request.post(option(qs), (error,respond,body) => {
         if(!error){
-          if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
+          if(memo == "") memo = ":404_notfound.ex-large.pyon:";
           res.send(`## $\\green{\\bf{${name}'s\\, memo\\, was\\, updated!}}$\n${memo}`);
           res.send(
             {
@@ -102,7 +102,7 @@ module.exports = robot => {
     request.get(option(qs), (error,respond,body) => {
       if(!error){
         let { user, memo } = body;
-        if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
+        if(memo == "") memo = ":404_notfound.ex-large.pyon:";
         robot.send({channelID: gtR_ID}, `## $\\blue{\\bf{${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
       }
     })
