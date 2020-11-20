@@ -23,7 +23,7 @@ module.exports = robot => {
         if(!error){
           let { user, memo } = body;
           if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
-          res.send(`## $\\blue{\\bf${user}'s\\, memo\\, is\\, ...}}$\\n${memo}`);
+          res.send(`## $\\blue{\\bf{${user}'s\\, memo\\, is\\, ...}}$\\n${memo}`);
           res.send(
             {
               type: "stamp",
@@ -103,7 +103,7 @@ module.exports = robot => {
       if(!error){
         let { user, memo } = body;
         if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
-        robot.send({channelID: gtR_ID}, `## $\\blue{\\bf${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
+        robot.send({channelID: gtR_ID}, `## $\\blue{\\bf{${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
       }
     })
   })
