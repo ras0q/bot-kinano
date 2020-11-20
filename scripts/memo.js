@@ -23,7 +23,7 @@ module.exports = robot => {
         if(!error){
           let { user, memo } = body;
           if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
-          res.send(`## $\blue{\bf${user}'s\, memo\, is\, ...}}$\n${memo}`);
+          res.send(`## $\\blue{\\bf${user}'s\\, memo\\, is\\, ...}}$\\n${memo}`);
           res.send(
             {
               type: "stamp",
@@ -48,7 +48,7 @@ module.exports = robot => {
       request.post(option(qs), (error,respond,body) => {
         if(!error){
           if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
-          res.send(`## $\green{\bf{${name}'s\, memo\, was\, updated!}}$\n${memo}`);
+          res.send(`## $\\green{\\bf{${name}'s\\, memo\\, was\\, updated!}}$\n${memo}`);
           res.send(
             {
               type: "stamp",
@@ -76,7 +76,7 @@ module.exports = robot => {
           const qs2 = {user: name, memo: memo2};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
-              res.send(`## $\green{\bf{${name}'s\, memo\, was\, updated!}}$\n${memo2}`);
+              res.send(`## $\\green{\\bf{${name}'s\\, memo\\, was\\, updated!}}$\n${memo2}`);
               res.send(
                 {
                   type: "stamp",
@@ -103,7 +103,7 @@ module.exports = robot => {
       if(!error){
         let { user, memo } = body;
         if(memo == "") memo = ":404_notfound.ex-large.zoom.zoom.zoom.zoom:";
-        robot.send({channelID: gtR_ID}, `## $\blue{\bf${user}'s\, memo\, is\, ...}}$\n${memo}`);
+        robot.send({channelID: gtR_ID}, `## $\\blue{\\bf${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
       }
     })
   })
