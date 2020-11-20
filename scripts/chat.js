@@ -1,3 +1,4 @@
+//https://www.chaplus.jp/
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 
 require('dotenv').config();
@@ -23,7 +24,7 @@ const option = (message) => {
         "username": message.user.displayName,
         "agentState": {
           "agentName": "きなの",
-          "age": "40",
+          "age": "14",
         }
       }
   }
