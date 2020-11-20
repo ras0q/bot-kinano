@@ -81,13 +81,13 @@ module.exports = robot => {
     //曲確認
   robot.hear(/^%watch$/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|\n"; //表の項目と例
+      let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|:kinano:|きなこもちもちのうた|\n"; //表の項目と例
       request.get(option(), (error, response, body) => {
         if(!error){
           //表作成
           for(let i = 0;i < body.length; i++){
             const { user, music } = body[i];
-            table += `|${i}|:@${user}:${user}|${music}|\n`;
+            table += `|${i}|:@${user}:|${music}|\n`;
           }
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
         }
@@ -135,7 +135,7 @@ module.exports = robot => {
   //曲確認(URLつき、全部)
   robot.hear(/^%watch all$/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|\n"; //表の項目と例
+      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|\n"; //表の項目と例
       request.get(option(), (error, response, body) => {
         if(!error){
           //表作成
