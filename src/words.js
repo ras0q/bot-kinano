@@ -71,14 +71,6 @@ const is_not_mentioned = [
     ans: "いいぞいいぞ"
   },
   {
-    msg: /(?<!うま)うま(?!(うま))/,
-    ans: "むしゃ"
-  },
-  {
-    msg: /うまうま/,
-    ans: "むしゃむしゃ"
-  },
-  {
     msg: /[い言云]ってい?る$/,
     ans: "いうな！"
   },
@@ -133,3 +125,18 @@ const is_not_mentioned = [
 ];
 exports.is_not_mentioned = is_not_mentioned;
 
+const loop = [
+  {
+    msg: /(お|o|O|オ){3}/,
+    ans: "かやま"
+  },
+  {
+    msg: /うま/,
+    ans: "むしゃ"
+  },
+  {
+    msg: /もち/,
+    ans: "もち"
+  }
+]
+exports.loop = loop;

@@ -2,6 +2,7 @@ const {
   natterus,
   is_mentioned,
   is_not_mentioned,
+  loop
 } = require("../src/words");
 
 //start以上end未満の乱数を返す
@@ -54,23 +55,26 @@ module.exports = robot => {
     });
   }
 
-  //大岡山
-  const oisuregexp = /(お|o|O|オ|:oisu-1(.large|.ex-large|.small|.rotate|.wiggle|.parrot|.zoom|.inversion|.turn|.turn-v|.happa|.pyon|.flashy|.pull|.atsumori|.stretch|.stretch-v|.conga|.rainbow|.ascension|.shake|.party|.attract){0,5}:){3}/;
-  robot.hear(oisuregexp, res => {
-    const { bot } = res.message.message.user.bot;
+  //loop
+  for(let i = 0; i < loop.length; i++){
+    const {msg, ans } = loop[i];
+    robot.hear(msg, res => {
+      const { bot } = res.message.message.user.bot;
     let plainText = res.message.message.plainText;
     if(!bot){
-      let r = "";
-      while(plainText.search(oisuregexp) != -1){
-        plainText = plainText.substr(plainText.search(oisuregexp)+3);
-        r += "かやま";
+      let r = "",ex = "";
+      while(plainText.search(msg) != -1){
+        plainText = plainText.substr(plainText.search(msg)+plainText.match(msg)[0].length);
+        r += ans;
+        ex += "！"
       }
-      r += "！";
+      r += ex;
       setTimeout(() => {
         res.send(r);
       },500);
     }
   })
+}
 
   //もふもふ
   robot.hear(/もふもふ/, res => {
