@@ -57,24 +57,24 @@ module.exports = robot => {
 
   //loop
   for(let i = 0; i < loop.length; i++){
-    const {msg, ans } = loop[i];
+    const { msg, ans } = loop[i];
     robot.hear(msg, res => {
-      const { bot } = res.message.message.user.bot;
-    let plainText = res.message.message.plainText;
-    if(!bot){
-      let r = "",ex = "";
-      while(plainText.search(msg) != -1){
-        plainText = plainText.substr(plainText.search(msg)+plainText.match(msg)[0].length);
-        r += ans;
-        ex += "！"
+
+      let { user, plainText } = res.message.message.user;
+      if(!user.bot){
+        let r = "",ex = "";
+        while(plainText.search(msg) != -1){
+          plainText = plainText.substr(plainText.search(msg)+plainText.match(msg)[0].length);
+          r += ans;
+          ex += "！"
+        }
+        r += ex;
+        setTimeout(() => {
+          res.send(r);
+        },500);
       }
-      r += ex;
-      setTimeout(() => {
-        res.send(r);
-      },500);
-    }
-  })
-}
+    })
+  }
 
   //もふもふ
   robot.hear(/もふもふ/, res => {
