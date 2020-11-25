@@ -60,7 +60,7 @@ module.exports = robot => {
     const { msg, ans } = loop[i];
     robot.hear(msg, res => {
 
-      let { user, plainText } = res.message.message.user;
+      let { user, plainText } = res.message.message;
       if(!user.bot){
         let r = "",ex = "";
         while(plainText.search(msg) != -1){
