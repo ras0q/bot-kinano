@@ -83,7 +83,7 @@ module.exports = robot => {
   robot.hear(/^env /, res => {
     const { message } = res.message;
     const { user, plainText } = message;
-    if(user.name == "0fa5d740-0841-4b88-b7c8-34a68774c784"){
+    if(user.name == "Ras"){
       env = plainText.slice(4);
       res.reply(`env: ${env}`)
     }
