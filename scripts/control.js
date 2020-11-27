@@ -59,7 +59,6 @@ module.exports = robot => {
   for(let i = 0; i < loop.length; i++){
     const { msg, ans } = loop[i];
     robot.hear(msg, res => {
-
       let { user, plainText } = res.message.message;
       if(!user.bot){
         let r = "",ex = "";

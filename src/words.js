@@ -26,7 +26,7 @@ const is_mentioned = [
   },
   {
     msg: /(できること|help)$/i,
-    ans: readme,
+    ans: `\n${readme}`,
   },
   {
     msg: /もちもち$/,
@@ -53,10 +53,6 @@ const is_not_mentioned = [
       type: "stamp",
       name: "clap"
     }
-  },
-  {
-    msg: /もちもち/,
-    ans: "もちもち～:blobenjoy:"
   },
   {
     msg: /やんね/,
