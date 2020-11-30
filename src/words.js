@@ -33,7 +33,7 @@ const is_mentioned = [
     ans: "きなこもち～～～～～！"
   },
   {
-    msg: /^@ぼぶ[ー～]$/,
+    msg: /ぼぶ[ー～]$/,
     ans: "@takku_bobshiroshiro_titech_trap"
   }
 ];
