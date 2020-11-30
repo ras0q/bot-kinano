@@ -117,6 +117,10 @@ const is_not_mentioned = [
   {
     msg: /^よ$/,
     ans: "よっっ！:v:"
+  },
+  {
+    msg: /^ぼぶ[ー～]$/,
+    ans: `!{"type":"user","raw":"@takku_bobshiroshiro_titech_trap","id":"e13313e3-83de-4de0-8c20-73a685e50139"}`
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
