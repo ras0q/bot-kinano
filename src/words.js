@@ -31,6 +31,10 @@ const is_mentioned = [
   {
     msg: /もちもち$/,
     ans: "きなこもち～～～～～！"
+  },
+  {
+    msg: /^@ぼぶ[ー～]$/,
+    ans: "@takku_bobshiroshiro_titech_trap"
   }
 ];
 exports.is_mentioned = is_mentioned;
@@ -117,10 +121,6 @@ const is_not_mentioned = [
   {
     msg: /^よ$/,
     ans: "よっっ！:v:"
-  },
-  {
-    msg: /^ぼぶ[ー～]$/,
-    ans: "@takku_bobshiroshiro_titech_trap"
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
