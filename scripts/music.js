@@ -1,4 +1,3 @@
-const cron = require('node-cron'); //定期投稿
 const request = require('request');
 
 /*function----------------------------------------------------------------*/
@@ -147,16 +146,5 @@ module.exports = robot => {
         }
       })
     }
-  })
-
-  //定期投稿(3時間ごと)
-  cron.schedule('0 0 */3 * * *', () => {
-    request.get(option(), (error, response, body) => {
-      if(!error){
-        const i = getRandom(0,body.length);
-        const { user, music, url } = body[i];
-        robot.send({channelID: log_ID}, `## きなののオススメソングはこれ！\n[${music}](${url})(added by :@${user}:)`);
-      }
-    })
   })
 }
