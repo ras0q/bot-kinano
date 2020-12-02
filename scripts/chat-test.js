@@ -13,6 +13,7 @@ const option = (message) => {
     }
 }
 
+
 module.exports = robot => {
     robot.hear(/^test /, res => {
         const { message } = res.message;
