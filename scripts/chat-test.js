@@ -1,4 +1,4 @@
-require('dotenv').config;
+require('dotenv').config();
 const request = require("request");
 
 const APIkey = process.env.ST_API_KEY;
@@ -6,10 +6,10 @@ const APIkey = process.env.ST_API_KEY;
 const option = (message) => {
     return {
         uri: "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
-        json: {
+        form: {
             "apikey": APIkey,
             "query": message
-        },
+        }
     }
 }
 
@@ -20,7 +20,7 @@ module.exports = robot => {
         if(!user.bot){
             request.post(option(plainText.slice(5)), (err, resp, body) => {
                 const { status } = body;
-                if(status == 0) res.reply(results[body.reply]);
+                if(status == 0) res.reply(body.results[reply]);
                 else res.reply(JSON.stringify(body));
             })
         }
