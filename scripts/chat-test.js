@@ -10,9 +10,6 @@ const option = (message) => {
             "apikey": APIkey,
             "query": message
         },
-        headers: {
-            "Content-type": "application/json",
-        },
     }
 }
 
@@ -22,8 +19,9 @@ module.exports = robot => {
         const { user, plainText } = message;
         if(!user.bot){
             request.post(option(plainText.slice(5)), (err, resp, body) => {
-                if(body.status == 0) res.reply(results[body.reply]);
-                else res.reply(body.message);
+                const { status, message } = body;
+                if(status == 0) res.reply(results[body.reply]);
+                else res.reply(`${status} ${message}`);
             })
         }
     })
