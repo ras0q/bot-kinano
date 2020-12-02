@@ -19,9 +19,9 @@ module.exports = robot => {
         const { user, plainText } = message;
         if(!user.bot){
             request.post(option(plainText.slice(5)), (err, resp, body) => {
-                const { status, message } = body;
+                const { status } = body;
                 if(status == 0) res.reply(results[body.reply]);
-                else res.reply(`${status} ${message}`);
+                else res.reply(JSON.stringify(body));
             })
         }
     })
