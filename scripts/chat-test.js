@@ -16,10 +16,8 @@ const option = (message) => {
 
 module.exports = robot => {
     robot.hear(/^test /, res => {
-        // const { message } = res.message;
-        // const { user, plainText } = message;
-        const user = {bot:false};
-        const plainText = "test おはよう";
+        const { message } = res.message;
+        const { user, plainText } = message;
         if(!user.bot){
             request.post(option(plainText.slice(5)), (err, resp, body) => {
                 const { status } = body;
