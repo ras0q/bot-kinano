@@ -6,13 +6,12 @@ const APIkey = process.env.ST_API_KEY;
 const option = (message) => {
     return {
         uri: "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
-        qs: {
+        json: {
             "apikey": APIkey,
             "query": message
         },
     }
 }
-
 
 module.exports = robot => {
     robot.hear(/^test /, res => {
