@@ -9,7 +9,10 @@ const option = (message) => {
         qs: {
             "apikey": APIkey,
             "query": message
-        }
+        },
+        headers: {
+            "Content-type": "application/json",
+        },
     }
 }
 
@@ -20,7 +23,7 @@ module.exports = robot => {
         if(!user.bot){
             request.post(option(plainText.slice(5)), (err, resp, body) => {
                 if(body.status == 0) res.reply(results[body.reply]);
-                else res.reply("error");
+                else res.reply(body.message);
             })
         }
     })
