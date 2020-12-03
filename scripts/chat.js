@@ -59,12 +59,11 @@ module.exports = robot => {
     }
   })
 
-  //gtRB限定
-  let env = "dev"
+  let chatChannelId = ""
   robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
-    if(!user.bot && channelId == gtRB_ID && env == "chat"){
+    if(!user.bot && chatChannelId == channelId){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
@@ -80,13 +79,11 @@ module.exports = robot => {
     }
   })
   //環境切り替え
-  robot.hear(/^env /, res => {
+  robot.hear(/^:koko:$/, res => {
     const { message } = res.message;
-    const { user, plainText } = message;
-    if(user.name == "Ras"){
-      env = plainText.slice(4);
-      res.reply(`env: ${env}`)
+    const { user, channelId } = message;
+    if(!user.bot){
+      res.reply(`Chat Channel is :koko:\n(channelID: ${channelId})`)
     }
-    else res.send(`You are ${user.name}, **not Ras**!!`)
   })
 }
