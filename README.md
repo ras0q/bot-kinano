@@ -35,4 +35,5 @@
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `/[hoge]`: 今の時刻を教えるやんね！
 - `trend`: ついったーのトレンドを教えるやんね！
+- `:koko:`: きなのと:motto::motto:おしゃべりできるようになるやんね！
 - その他要望があれば#gps/times/Ras/Botまでお願いやんね！
