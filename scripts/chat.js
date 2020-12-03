@@ -91,7 +91,7 @@ module.exports = robot => {
           name: "haakusita"
         }
       )
-      robot.send({channelID: gtRBL_ID}, `\`Chat Channel\` moved to here!!\nhttps://q.trap.jp/messages/${id}"}`)
+      robot.send({channelID: gtRBL_ID}, `\`Chat Channel\` moved to here!!\nhttps://q.trap.jp/messages/${id}`)
     }
   })
 }
