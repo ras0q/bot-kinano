@@ -83,6 +83,7 @@ module.exports = robot => {
     const { message } = res.message;
     const { user, channelId } = message;
     if(!user.bot){
+      chatChannelId = channelId;
       res.reply(`Chat Channel is :koko:\n(channelID: ${channelId})`)
     }
   })
