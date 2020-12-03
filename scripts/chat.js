@@ -32,12 +32,13 @@ const option = (message) => {
 
 module.exports = robot => {
   const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
-  const gtRBL_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487"
+  const gtRBL_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487"; //#gps/times/Ras/Bot/log
+  let chatChannelId = "";
 
   robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
-    if(!user.bot && channelId != gtRB_ID){
+    if(!user.bot && channelId != chatChannelId){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
@@ -60,7 +61,6 @@ module.exports = robot => {
     }
   })
 
-  let chatChannelId = ""
   robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
@@ -69,7 +69,7 @@ module.exports = robot => {
       const { status, message, responses } = body;
       if(status){
         robot.send({channelID: gtRB_ID},
-          `@Ras\n${status}\n${message}\n${id}`
+          `@Ras\n${status}\n${message}\nhttps://q.trap.jp/messages/${id}`
         );
       }
       else {
@@ -91,7 +91,7 @@ module.exports = robot => {
           name: "haakusita"
         }
       )
-      robot.send({channelID: gtRBL_ID}, `ChatChannel moved to !{"type":"channel","raw":"here","id":"${channelId}"}!!`)
+      robot.send({channelID: gtRBL_ID}, `\`Chat Channel\` moved to !{"type":"channel","raw":"here","id":"${channelId}"}!!`)
     }
   })
 }
