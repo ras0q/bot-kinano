@@ -32,6 +32,7 @@ const option = (message) => {
 
 module.exports = robot => {
   const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
+  const gtRBL_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487"
 
   robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
     const { message } = res.message;
@@ -84,7 +85,14 @@ module.exports = robot => {
     const { user, channelId } = message;
     if(!user.bot){
       chatChannelId = channelId;
-      res.reply(`Chat Channel is :koko:\n(channelID: ${channelId})`)
+      res.send(
+        {
+          type: "stamp",
+          name: "haakusita"
+        }
+      )
+      robot.send({channelID: gtRBL_ID}, `ChatChannel moved to !{"type":"channel","raw":"here","id":"${channelId}"}!!`)
     }
   })
 }
+
