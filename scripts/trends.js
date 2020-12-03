@@ -9,7 +9,7 @@ module.exports = robot => {
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SEC
   });
 
-  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
+  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe";
 
   robot.hear(/^trend$/, res => {
     const { bot, id } = res.message.message.user;
@@ -36,7 +36,7 @@ module.exports = robot => {
           }
           res.send("今のTwitterトレンドは\n" + list + "\nやんね！");
         }
-        else robot.send({channelID: logID}, `error at trends.js\nhttps://q.trap.jp/messages/${id}`)
+        else robot.send({channelID: gtRB_ID}, `@Ras\n## error at trends.js\nhttps://q.trap.jp/messages/${id}`)
       });
     }
   })

@@ -82,7 +82,7 @@ module.exports = robot => {
   //環境切り替え
   robot.hear(/^:koko:$/, res => {
     const { message } = res.message;
-    const { user, channelId } = message;
+    const { user, channelId, id } = message;
     if(!user.bot){
       chatChannelId = channelId;
       res.send(
@@ -91,7 +91,7 @@ module.exports = robot => {
           name: "haakusita"
         }
       )
-      robot.send({channelID: gtRBL_ID}, `\`Chat Channel\` moved to !{"type":"channel","raw":"here","id":"${channelId}"}!!`)
+      robot.send({channelID: gtRBL_ID}, `\`Chat Channel\` moved to here!!\nhttps://q.trap.jp/messages/${id}"}`)
     }
   })
 }

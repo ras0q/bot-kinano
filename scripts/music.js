@@ -45,8 +45,7 @@ const extractValues = (text) => {
 /*module------------------------------------------------------------------*/
 
 module.exports = robot => {
-  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
-  const log_ID = "82b9f8ad-17d9-4597-88f1-0375247a2487" //#gps/times/Ras/Bot/log
+  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
   //曲追加
   robot.hear(/^%add .*/i, res => {
@@ -64,7 +63,7 @@ module.exports = robot => {
         if(!error){
           const addtable = `|追加した人|追加した曲|曲のURL|\n|-|-|-|\n|${name}|${music}|${url}|\n`
           res.send(`${music}を追加したやんね！\n${addtable}`)
-          robot.send({channelID: log_ID},"## 曲が追加されたやんね！\n"+ addtable); //RasへのDMに通知
+          robot.send({channelID: logID},"## 曲が追加されたやんね！\n"+ addtable); //RasへのDMに通知
         }
       })
     }

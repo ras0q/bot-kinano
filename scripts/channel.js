@@ -4,13 +4,14 @@ const readme = fs.readFileSync("./README.md", 'utf8');
 
 module.exports = robot => {
 
-  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/time/Ras/BotのID
+  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe";
+  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
 //監視対象に追加
   robot.respond(/(いらっしゃい|join)$/i, res => {
     const { id, channelId } = res.message.message;
     robot.send(
-      {channelID: gtRB_ID},
+      {channelID: logID},
       `## join\n https://q.trap.jp/messages/${id}`
     );
     try {
@@ -25,7 +26,7 @@ module.exports = robot => {
     catch(error) {
       robot.send(
         {channelID: gtRB_ID},
-        `## join error\n${error}\nhttps://q.trap.jp/messages/${id}`
+        `@Ras\n## error at channel.js\n${error}\nhttps://q.trap.jp/messages/${id}`
       );
     }
   });
@@ -34,7 +35,7 @@ module.exports = robot => {
   robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
     const { id, channelId } = res.message.message;
     robot.send(
-      {channelID: gtRB_ID},
+      {channelID: logID},
       `## leave\n https://q.trap.jp/messages/${id}`
     )
     try {
@@ -46,7 +47,7 @@ module.exports = robot => {
     catch(error) {
       robot.send(
         {channelID: gtRB_ID},
-        `## leave error\n${error}\nhttps://q.trap.jp/messages/${id}`
+        `@Ras\n## error at channel.js\n${error}\nhttps://q.trap.jp/messages/${id}`
       );
     }
   });

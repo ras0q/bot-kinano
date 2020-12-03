@@ -21,11 +21,11 @@ const getMofu = () => {
 }
 
 module.exports = robot => {
-  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe"; //#gps/times/Ras/Bot
+  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
 
   //起動時メッセージ
   robot.send(
-    {channelID: gtRB_ID},
+    {channelID: logID},
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
