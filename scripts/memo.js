@@ -23,7 +23,8 @@ module.exports = robot => {
         if(!error){
           let { user, memo } = body;
           if(memo == "") memo = ":404_notfound.ex-large.pyon:";
-          res.send(`## $\\blue{\\bf{${user}'s\\, memo\\, is\\, ...}}$\n${memo}`);
+          const formatedMemo = memo.replace(/\n/gi, "|\n|");
+          res.send(`|memo|\n|-|\n${formatedMemo}`);
           res.send(
             {
               type: "stamp",
@@ -48,7 +49,7 @@ module.exports = robot => {
       request.post(option(qs), (error,respond,body) => {
         if(!error){
           if(memo == "") memo = ":404_notfound.ex-large.pyon:";
-          const formatedMemo = memo.replace(/\\n/gi, "|\n|");
+          const formatedMemo = memo.replace(/\n/gi, "|\n|");
           res.send(`|memo|\n|-|\n${formatedMemo}`);
           res.send(
             {
@@ -74,7 +75,7 @@ module.exports = robot => {
         if(!error){
           const { memo } = body;
           const updatedMemo = memo + plainText.slice(i + 1);
-          const formatedMemo = updatedMemo.replace(/\\n/gi, "|\n|");
+          const formatedMemo = updatedMemo.replace(/\n/gi, "|\n|");
           const qs2 = {user: name, memo: updatedMemo};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
