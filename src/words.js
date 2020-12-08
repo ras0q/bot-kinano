@@ -119,7 +119,7 @@ const is_not_mentioned = [
     ans: "よっっ！:v:"
   },
   {
-    msg: /ぼぶ[ー～]$/,
+    msg: /^(ぼぶ[ー～]|たっくぼぶしろしろたいてっくとらっぷ)$/,
     ans: "@takku_bobshiroshiro_titech_trap"
   }
 ];
