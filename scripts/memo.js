@@ -24,7 +24,7 @@ module.exports = robot => {
           let { user, memo } = body;
           if(memo == "") memo = "\n:404_notfound.ex-large:|";
           const formatedMemo = memo.replace(/\n/gi, "\n|");
-          res.send(`|:@${name}:'s memo|\n|-${formatedMemo}|`);
+          res.send(`|${name}'s memo\n|-${formatedMemo}|`);
           res.send(
             {
               type: "stamp",
@@ -50,7 +50,7 @@ module.exports = robot => {
         if(!error){
           if(memo == "") memo = "\n:404_notfound.ex-large:";
           const formatedMemo = memo.replace(/\n/gi, "\n|");
-          res.send(`|:@${name}:'s memo|\n|-${formatedMemo}|`);
+          res.send(`|${name}'s memo\n|-${formatedMemo}|`);
           res.send(
             {
               type: "stamp",
@@ -79,7 +79,7 @@ module.exports = robot => {
           const qs2 = {user: name, memo: updatedMemo};
           request.post(option(qs2), (error2,respond2,body2) => {
             if(!error2){
-              res.send(`|:@${name}:'s memo|\n|-${formatedMemo}|`);
+              res.send(`|${name}'s memo\n|-${formatedMemo}|`);
               res.send(
                 {
                   type: "stamp",
@@ -107,7 +107,7 @@ module.exports = robot => {
         let { user, memo } = body;
         if(memo == "") memo = "\n:404_notfound.ex-large:";
         const formatedMemo = memo.replace(/\n/gi, "\n|");
-        robot.send({channelID: gtR_ID}, `|:@Ras:'s memo|\n|-${formatedMemo}|`);
+        robot.send({channelID: gtR_ID}, `|:@Ras:'s memo\n|-${formatedMemo}|`);
       }
     })
   })
