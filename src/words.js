@@ -41,7 +41,7 @@ const is_not_mentioned = [
     ans: "https://git.trap.jp/Ras/KNKbot"
   },
   {
-    msg: /(Ras|らす|ラス)/i,
+    msg: /(?<![tとト])(Ras|らす|ラス)(?!(ta|た|タ))/i,
     ans: {
       type: "stamp",
       name: "rascal"

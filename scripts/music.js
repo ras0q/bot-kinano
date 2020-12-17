@@ -62,7 +62,7 @@ module.exports = robot => {
       request.post(option(qs), (error, response, body) => {
         if(!error){
           const addtable = `|追加した人|追加した曲|曲のURL|\n|-|-|-|\n|${name}|${music}|${url}|\n`
-          res.send(`${music}を追加したやんね！\n${addtable}`)
+          res.send(`『${music}』を追加したやんね！\n${addtable}`)
           robot.send({channelID: logID},"## 曲が追加されたやんね！\n"+ addtable); //RasへのDMに通知
         }
       })
