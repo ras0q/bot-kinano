@@ -61,9 +61,9 @@ module.exports = robot => {
       };
       request.post(option(qs), (error, response, body) => {
         if(!error){
-          const addtable = `|追加した人|追加した曲|曲のURL|\n|-|-|-|\n|${name}|${music}|${url}|\n`
+          const addtable = `|User|Music|URL|\n|-|-|-|\n|:@${name}:${name}|${music}|${url}|\n`
           res.send(`『${music}』を追加したやんね！\n${addtable}`)
-          robot.send({channelID: logID},"## 曲が追加されたやんね！\n"+ addtable); //RasへのDMに通知
+          robot.send({channelID: logID},"## 曲が追加されたやんね！\n"+ addtable);
         }
       })
     }
@@ -79,7 +79,7 @@ module.exports = robot => {
     //曲確認
   robot.hear(/^%watch$/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|\n|-|-|-|\n|例|:kinano:|きなこもちもちのうた|\n"; //表の項目と例
+      let table = "|No.|User|Music|\n|-:|:-:|-|\n|例|:kinano:|きなこもちもちのうた|\n"; //表の項目と例
       request.get(option(), (error, response, body) => {
         if(!error){
           //表作成
@@ -93,11 +93,10 @@ module.exports = robot => {
     }
   })
 
-
   //曲確認(URLつき、番号指定)
   robot.hear(/^%watch [0-9]+/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n"; //表の項目と例
+      let table = "|No.|User|Music|URL|\n|-:|-|-|-|\n"; //表の項目と例
       const { plainText } = res.message.message;
       const i = plainText.slice(7);
       request.get(option(), (error, response, body) => {
@@ -111,11 +110,10 @@ module.exports = robot => {
     }
   })
 
-
   //曲確認(URLつき、番号random)
   robot.hear(/^%watch r/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n"; //表の項目と例
+      let table = "|No.|User|Music|URL|\n|-:|-|-|-|\n"; //表の項目と例
       const { plainText } = res.message.message;
       const i = plainText.slice(7);
       request.get(option(), (error, response, body) => {
@@ -133,7 +131,7 @@ module.exports = robot => {
   //曲確認(URLつき、全部)
   robot.hear(/^%watch all$/i, res => {
     if(!res.message.message.user.bot){
-      let table = "|番号|追加した人|曲名|URL|\n|-|-|-|-|\n|例|:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|\n"; //表の項目と例
+      let table = "|No.|User|Music|URL|\n|-:|-|-|-|\n||:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|\n"; //表の項目と例
       request.get(option(), (error, response, body) => {
         if(!error){
           //表作成
