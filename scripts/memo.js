@@ -75,7 +75,7 @@ module.exports = robot => {
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { memo } = body;
-          const updatedMemo = memo + plainText.slice(i);
+          const updatedMemo = memo + plainText.slice(i-1);
           const formatedMemo = updatedMemo.replace(/\n/gi, "\n|");
           const qs2 = {user: name, memo: updatedMemo};
           request.post(option(qs2), (error2,respond2,body2) => {
