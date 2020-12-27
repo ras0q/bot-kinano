@@ -69,12 +69,13 @@ module.exports = robot => {
     const { plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const i = plainText.search(/(\+|＋)/);
+      const i = plainText.search(/\n/);
+      if (i == -1) i = 4;
       const qs = {user: name};
       request.get(option(qs), (error,respond,body) => {
         if(!error){
           const { memo } = body;
-          const updatedMemo = memo + plainText.slice(i + 1);
+          const updatedMemo = memo + plainText.slice(i);
           const formatedMemo = updatedMemo.replace(/\n/gi, "\n|");
           const qs2 = {user: name, memo: updatedMemo};
           request.post(option(qs2), (error2,respond2,body2) => {
