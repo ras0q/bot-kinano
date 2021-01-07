@@ -111,8 +111,8 @@ const is_not_mentioned = [
     ans: "いいよ"
   },
   {
-    msg: /^よ$/,
-    ans: "よっっ！:v:"
+    msg: /^.$/,
+    ans: res.message.message.PlainText.match(msg)[0]+"っっ！:v:"
   },
   {
     msg: /^(ぼぶ[ー～]|たっくぼぶしろしろたいてっくとらっぷ)$/,
