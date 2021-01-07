@@ -111,7 +111,7 @@ const is_not_mentioned = [
     ans: "いいよ"
   },
   {
-    msg: /^.$/,
+    msg: /^よ$/,
     ans: "よっっ！:v:"
   },
   {
