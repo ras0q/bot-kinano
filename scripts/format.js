@@ -9,9 +9,7 @@ module.exports = robot => {
     })
 
     robot.hear(/^(format|fmt)[ 　]table/i, res => {
-        // const { user, plainText } = res.message.message;
-        const user = {"bot": false};
-        const plainText = "fmt table\nhoge\nhoge"
+        const { user, plainText } = res.message.message;
         if(!user.bot){
             let rows = plainText.slice(plainText.search(/\n/) + 1).split(/\n/);
             let len = [], table = rows[0] + "|\n";
