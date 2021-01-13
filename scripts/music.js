@@ -5,9 +5,6 @@ const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + st
 //requestのoptionをつくる
 const option = (Q) => {
   return {
-    uri: "https://script.google.com/macros/s/AKfycbwi70WcQuyozUl08tuQFrjiT7znHusgOURUXGigwFidHFFZrvkm/exec", //GAS
-//requestのoptionをつくる
-  return {
     uri: 'https://script.google.com/macros/s/AKfycbwi70WcQuyozUl08tuQFrjiT7znHusgOURUXGigwFidHFFZrvkm/exec', //GAS
     headers: {'Content-type': 'application/json'},
     qs: Q,
