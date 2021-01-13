@@ -32,6 +32,10 @@
 - `memo= [text]`でメモをあっぷでーとできるやんね！ (全て書き換えてしまうので注意してください)
 - `memo+ [text]`でメモに`text`を追加できるやんね！ (`memo=`、`memo+`ともに`text`の前に改行を入れることを推奨します)
 
+## :blobbass: *format* :blobbass:
+- `(fmt|format) matrix`: きなののスーパーパワーでコンマ区切りのテキストを行列に変換しちゃうやんね！
+- `(fmt|format) table`: こっちは表に変換しちゃうやんね！
+
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `/[hoge]`: 今の時刻を教えるやんね！
 - `trend`: ついったーのトレンドを教えるやんね！
