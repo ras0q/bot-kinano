@@ -6,7 +6,7 @@ const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
 
 //start以上end未満の乱数を返す
-const getRandom　= (start, end) => {
+const getRandom = (start, end) => {
   return Math.floor(Math.random() * (end - start)) + start;
 }
 
