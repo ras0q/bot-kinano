@@ -14,7 +14,7 @@ module.exports = robot => {
       const langs = plainText.match(/[\(\[]\s*(..)\s*([=-]>|→)\s*(..)\s*[\)\]]/)
       const [src, tar] = langs !== null
         ? [langs[1], langs[3]]
-        : ["ja", "en"]
+        : ["ja", "en"];
       request.get({
         uri: URL,
         headers: {'Content-type': 'application/json'},

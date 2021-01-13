@@ -18,21 +18,21 @@ module.exports = robot => {
       client.get('trends/place.json', params, function(error, tweets, response) {
         if (!error) {
           const trendTableMain = Object.keys(tweets[0].trends).map((_, idx) => {
-            const { name, url, tweet_volume } = tweets[0].trends[idx]
+            const { name, url, tweet_volume } = tweets[0].trends[idx];
             const place_stamp = idx === 0
               ? ":first_place:"
               : idx === 1
                 ? ":second_place:"
                 : idx === 2
                   ? ":third_place:"
-                  : ""
-            return `|${idx+1}${place_stamp}|[${name}](${url})|${tweet_volume ? tweet_volume : ":NOTNull:"}|`
-          })
+                  : "";
+            return `|${idx+1}${place_stamp}|[${name}](${url})|${tweet_volume ? tweet_volume : ":NOTNull:"}|`;
+          });
           const trendTable = [
             "|rank|name|count|",
             "|-|-|-|",
             ...trendTableMain
-          ].join("\n") + "\n"
+          ].join("\n") + "\n";
           res.send("今のTwitterトレンドは\n" + trendTable + "\nやんね！");
         }
         else robot.send({channelID: gtRB_ID}, `@Ras\n## error at trends.js\nhttps://q.trap.jp/messages/${id}`)

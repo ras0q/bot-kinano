@@ -4,7 +4,7 @@ const {
   is_not_mentioned,
   loop
 } = require("../src/words");
-import { getRandom } from "../modules/random"
+import { getRandom } from "../modules/random";
 
 //もふもふ
 const getMofu = () => {
@@ -53,9 +53,9 @@ module.exports = robot => {
     robot.hear(msg, res => {
       const { user, plainText } = res.message.message;
       if(!user.bot){
-        const times = plainText.match(msg).length
-        const text = ans.repeat(times)
-        const ex = "！".repeat(times)
+        const times = plainText.match(msg).length;
+        const text = ans.repeat(times);
+        const ex = "！".repeat(times);
         setTimeout(() => {
           res.send(text + ex);
         }, 500);
