@@ -3,20 +3,20 @@ const {
   is_mentioned,
   is_not_mentioned,
   loop
-} = require("../src/words");
-import { getRandom } from "../modules/random";
+} = require('../src/words');
+const { getRandom } = require('../modules/random');
 
 //もふもふ
 const getMofu = () => {
   const r = new Array(2)
     .fill(null)
-    .map(() => String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0) + 1)))
-    .join("");
+    .map(() => String.fromCodePoint(getRandom('ぁ'.codePointAt(0), 'ん'.codePointAt(0) + 1)))
+    .join('');
   return r + r;
-}
+};
 
 module.exports = robot => {
-  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
+  const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
 
   //起動時メッセージ
   robot.send(
@@ -55,12 +55,12 @@ module.exports = robot => {
       if(!user.bot){
         const times = plainText.match(msg).length;
         const text = ans.repeat(times);
-        const ex = "！".repeat(times);
+        const ex = '！'.repeat(times);
         setTimeout(() => {
           res.send(text + ex);
         }, 500);
       }
-    })
+    });
   });
 
   //もふもふ
@@ -71,7 +71,7 @@ module.exports = robot => {
         res.send(getMofu());
       },500);
     }
-  })
+  });
 
   //なってる
   robot.hear(/なってる$/, res => {
@@ -81,7 +81,7 @@ module.exports = robot => {
         res.reply(natterus[getRandom(0, natterus.length)]);
       },500);
     }
-  })
+  });
 
   //メッセージの時間を返す
   robot.hear(/^\/.*/, res => {
@@ -92,8 +92,8 @@ module.exports = robot => {
       const time2 = createdAt.slice(0,-1);
       const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
       const JPNhourStr = `0${JPNhour}`.slice(-2);
-      const JPNtime = time2.replace(/T../, " " + JPNhourStr);
+      const JPNtime = time2.replace(/T../, ' ' + JPNhourStr);
       res.send(`${JPNtime}\nhttps://q.trap.jp/messages/${id}`);
     }
-  })
+  });
 };
