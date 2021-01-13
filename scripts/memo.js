@@ -4,13 +4,12 @@ const cron = require('node-cron');
 
 //requestのoptionをつくる
 const option = (Q) => {
-  let op = {
+  return {
     uri: process.env.MEMO_SS, //SS
     headers: {'Content-type': 'application/json'},
     qs: Q,
     json: true
   };
-  return op;
 }
 
 module.exports = robot => {
@@ -21,9 +20,10 @@ module.exports = robot => {
       const qs = {user: name};
       request.get(option(qs), (error,respond,body) => {
         if(!error){
-          let { user, memo } = body;
-          if(memo == "") memo = "\n:404_notfound.ex-large:|";
-          const formatedMemo = memo.replace(/\n/gi, "\n|");
+          const { memo } = body;
+          const formatedMemo = memo !== ""
+            ? memo.replace(/\n/gi, "\n|")
+            : "\n|:404_notfound.ex-large:|";
           res.send(`|memo\n|-${formatedMemo}|`);
           res.send(
             {
@@ -43,13 +43,13 @@ module.exports = robot => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const i = text.search(/(\=|＝)/);
-      let memo = text.slice(i + 1);
-      const qs = {user: name, memo: memo};
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\=|＝)/i, "")
+      const qs = { user: name, memo };
       request.post(option(qs), (error,respond,body) => {
         if(!error){
-          if(memo == "") memo = "\n:404_notfound.ex-large:";
-          const formatedMemo = memo.replace(/\n/gi, "\n|");
+          const formatedMemo = memo !== ""
+            ? memo.replace(/\n/gi, "\n|")
+            : "\n|:404_notfound.ex-large:|";
           res.send(`|memo\n|-${formatedMemo}|`);
           res.send(
             {
@@ -104,9 +104,10 @@ module.exports = robot => {
     const qs = {user: "Ras"};
     request.get(option(qs), (error,respond,body) => {
       if(!error){
-        let { user, memo } = body;
-        if(memo == "") memo = "\n:404_notfound.ex-large:";
-        const formatedMemo = memo.replace(/\n/gi, "\n|");
+        const { memo } = body;
+        const formatedMemo = memo !== ""
+          ? memo.replace(/\n/gi, "\n|")
+          : "\n|:404_notfound.ex-large:|";
         robot.send({channelID: gtR_ID}, `|memo\n|-${formatedMemo}|`);
       }
     })

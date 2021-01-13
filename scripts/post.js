@@ -1,9 +1,5 @@
 const cron = require("node-cron");
-
-//start以上end未満の乱数を返す
-const getRandom　= (start, end) => {
-  return Math.floor(Math.random() * (end - start)) + start;
-}
+import { getRandom } from "../modules/random";
 
 module.exports = robot => {
   const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
