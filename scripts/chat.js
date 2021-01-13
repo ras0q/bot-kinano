@@ -4,7 +4,7 @@
 require('dotenv').config();
 const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
-const { getRandom } = require('../modules/random');
+const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + start;
 
 const option = (message) => {
   return {
