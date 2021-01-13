@@ -1,11 +1,6 @@
 const request = require('request');
-
+import { getRandom } from "../modules/random"
 /*function----------------------------------------------------------------*/
-
-//start以上end未満の乱数を返す
-const getRandom = (start, end) => {
-  return Math.floor(Math.random() * (end - start)) + start;
-};
 
 //requestのoptionをつくる
 const option = (Q) => {

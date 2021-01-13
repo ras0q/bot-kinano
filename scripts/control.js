@@ -4,11 +4,7 @@ const {
   is_not_mentioned,
   loop
 } = require("../src/words");
-
-//start以上end未満の乱数を返す
-const getRandom = (start, end) => {
-  return Math.floor(Math.random() * (end - start)) + start;
-}
+import { getRandom } from "../modules/random"
 
 //もふもふ
 const getMofu = () => {
