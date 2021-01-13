@@ -4,7 +4,7 @@ const {
   is_not_mentioned,
   loop
 } = require('../src/words');
-import { getRandom } from '../modules/random';
+const { getRandom } = require('../modules/random');
 
 //もふもふ
 const getMofu = () => {

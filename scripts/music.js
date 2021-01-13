@@ -1,5 +1,5 @@
 const request = require('request');
-import { getRandom } from '../modules/random';
+const { getRandom } = require('../modules/random');
 /*function----------------------------------------------------------------*/
 
 //requestのoptionをつくる
