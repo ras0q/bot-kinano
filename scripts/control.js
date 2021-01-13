@@ -3,25 +3,20 @@ const {
   is_mentioned,
   is_not_mentioned,
   loop
-} = require("../src/words");
-
-//start以上end未満の乱数を返す
-const getRandom　= (start, end) => {
-  return Math.floor(Math.random() * (end - start)) + start;
-}
+} = require('../src/words');
+const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + start;
 
 //もふもふ
 const getMofu = () => {
-  let r = "";
-  for(let i = 0; i < 2; i++){
-    const generated = String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
-    r += generated;
-  }
+  const r = new Array(2)
+    .fill(null)
+    .map(() => String.fromCodePoint(getRandom('ぁ'.codePointAt(0), 'ん'.codePointAt(0) + 1)))
+    .join('');
   return r + r;
-}
+};
 
 module.exports = robot => {
-  const logID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
+  const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
 
   //起動時メッセージ
   robot.send(
@@ -30,50 +25,43 @@ module.exports = robot => {
   );
 
   //メンション付きメッセージ
-  for(let i = 0; i < is_mentioned.length; i++){
-    const { msg, ans } = is_mentioned[i];
+  is_mentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {
       const { bot } = res.message.message.user;
       if(!bot){
         setTimeout(() => {
           res.reply(ans); //replyでメンション付きメッセージ
-        },500);
+        }, 500);
       }
     });
-  }
+  });
 
-  //メンション無しメッセージ
-  for(let i = 0; i < is_not_mentioned.length; i++){
-    const { msg, ans } = is_not_mentioned[i];
+  // メンション無しメッセージ
+  is_not_mentioned.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
       const { bot } = res.message.message.user;
       if(!bot){
         setTimeout(() => {
           res.send(ans); //sendでメンション無しメッセージ
-        },500);
+        }, 500);
       }
     });
-  }
+  });
 
   //loop
-  for(let i = 0; i < loop.length; i++){
-    const { msg, ans } = loop[i];
+  loop.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
-      let { user, plainText } = res.message.message;
+      const { user, plainText } = res.message.message;
       if(!user.bot){
-        let r = "",ex = "";
-        while(plainText.search(msg) != -1){
-          plainText = plainText.substr(plainText.search(msg)+plainText.match(msg)[0].length);
-          r += ans;
-          ex += "！"
-        }
-        r += ex;
+        const times = plainText.match(msg).length;
+        const text = ans.repeat(times);
+        const ex = '！'.repeat(times);
         setTimeout(() => {
-          res.send(r);
-        },500);
+          res.send(text + ex);
+        }, 500);
       }
-    })
-  }
+    });
+  });
 
   //もふもふ
   robot.hear(/もふもふ/, res => {
@@ -83,7 +71,7 @@ module.exports = robot => {
         res.send(getMofu());
       },500);
     }
-  })
+  });
 
   //なってる
   robot.hear(/なってる$/, res => {
@@ -93,7 +81,7 @@ module.exports = robot => {
         res.reply(natterus[getRandom(0, natterus.length)]);
       },500);
     }
-  })
+  });
 
   //メッセージの時間を返す
   robot.hear(/^\/.*/, res => {
@@ -104,8 +92,8 @@ module.exports = robot => {
       const time2 = createdAt.slice(0,-1);
       const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
       const JPNhourStr = `0${JPNhour}`.slice(-2);
-      const JPNtime = time2.replace(/T../, " " + JPNhourStr);
+      const JPNtime = time2.replace(/T../, ' ' + JPNhourStr);
       res.send(`${JPNtime}\nhttps://q.trap.jp/messages/${id}`);
     }
-  })
+  });
 };
