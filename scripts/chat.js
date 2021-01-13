@@ -38,7 +38,7 @@ module.exports = robot => {
   robot.hear(/((?<!BOT_)kinano|きなの)/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
-    if(!user.bot && channelId != chatChannelId){
+    if(!user.bot && channelId !== chatChannelId){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
@@ -64,7 +64,7 @@ module.exports = robot => {
   robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, user, id } = message;
-    if(!user.bot && chatChannelId == channelId){
+    if(!user.bot && chatChannelId === channelId){
     request.post(option(message), function(error, response, body){
       const { status, message, responses } = body;
       if(status){
