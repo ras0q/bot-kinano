@@ -16,7 +16,7 @@ module.exports = robot => {
       const rows = plainText
         .replace(/^[^\n]*\n/, '')
         .split('\n');
-      const len = rows[0].match(/[,、，]/g)?.length ?? 0;
+      const len = (rows[0].match(/[,、，]/g)?.length) ?? 0;
       const preformedRows = rows.map(text =>
         text.replace(/[,、，]/g, '|') + '|'
       );
