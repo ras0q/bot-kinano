@@ -12,11 +12,10 @@ const getRandom = (start, end) => {
 
 //もふもふ
 const getMofu = () => {
-  let r = "";
-  for(let i = 0; i < 2; i++){
-    const generated = String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0)+1));
-    r += generated;
-  }
+  const r = new Array(2)
+    .fill(null)
+    .map(() => String.fromCodePoint(getRandom("ぁ".codePointAt(0), "ん".codePointAt(0) + 1)))
+    .join("");
   return r + r;
 }
 
@@ -30,50 +29,43 @@ module.exports = robot => {
   );
 
   //メンション付きメッセージ
-  for(let i = 0; i < is_mentioned.length; i++){
-    const { msg, ans } = is_mentioned[i];
+  is_mentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {
       const { bot } = res.message.message.user;
       if(!bot){
         setTimeout(() => {
           res.reply(ans); //replyでメンション付きメッセージ
-        },500);
+        }, 500);
       }
     });
-  }
+  });
 
-  //メンション無しメッセージ
-  for(let i = 0; i < is_not_mentioned.length; i++){
-    const { msg, ans } = is_not_mentioned[i];
+  // メンション無しメッセージ
+  is_not_mentioned.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
       const { bot } = res.message.message.user;
       if(!bot){
         setTimeout(() => {
           res.send(ans); //sendでメンション無しメッセージ
-        },500);
+        }, 500);
       }
     });
-  }
+  });
 
   //loop
-  for(let i = 0; i < loop.length; i++){
-    const { msg, ans } = loop[i];
+  loop.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
-      let { user, plainText } = res.message.message;
+      const { user, plainText } = res.message.message;
       if(!user.bot){
-        let r = "",ex = "";
-        while(plainText.search(msg) != -1){
-          plainText = plainText.substr(plainText.search(msg)+plainText.match(msg)[0].length);
-          r += ans;
-          ex += "！"
-        }
-        r += ex;
+        const times = plainText.match(msg).length
+        const text = ans.repeat(times)
+        const ex = "！".repeat(times)
         setTimeout(() => {
-          res.send(r);
-        },500);
+          res.send(text + ex);
+        }, 500);
       }
     })
-  }
+  });
 
   //もふもふ
   robot.hear(/もふもふ/, res => {
