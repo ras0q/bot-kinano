@@ -1,5 +1,5 @@
 module.exports = robot => {
-    robot.hear(/^(format|fmt)[ 　]matrix/i, res => {
+    robot.hear(/^(format|fmt)\smatrix/i, res => {
         const { user, plainText } = res.message.message;
         if(!user.bot){
             let text = plainText.slice(plainText.search(/\n/) + 1);
@@ -8,7 +8,7 @@ module.exports = robot => {
         }
     })
 
-    robot.hear(/^(format|fmt)[ 　]table/i, res => {
+    robot.hear(/^(format|fmt)\stable/i, res => {
         const { user, plainText } = res.message.message;
         if(!user.bot){
             let rows = plainText.slice(plainText.search(/\n/) + 1).split(/\n/);
