@@ -1,13 +1,13 @@
-const api = require("../src/traqapi");
+const api = require('../src/traqapi');
 const fs = require('fs');
-const readme = fs.readFileSync("./README.md", 'utf8');
+const readme = fs.readFileSync('./README.md', 'utf8');
 
 module.exports = robot => {
 
-  const gtRB_ID = "2a5616d5-5d69-4716-8377-1e1fb33278fe";
-  const RasID = "82b9f8ad-17d9-4597-88f1-0375247a2487";
+  const gtRB_ID = '2a5616d5-5d69-4716-8377-1e1fb33278fe';
+  const RasID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
 
-//監視対象に追加
+  //監視対象に追加
   robot.respond(/(いらっしゃい|join)$/i, res => {
     const { id, channelId } = res.message.message;
     robot.send(
@@ -17,11 +17,11 @@ module.exports = robot => {
     try {
       api.join(channelId);
       setTimeout(() => {
-        res.reply(":oisu-1::oisu-2::oisu-3::oisu-4yoko:");
+        res.reply(':oisu-1::oisu-2::oisu-3::oisu-4yoko:');
       },500);
       setTimeout(() => {
-        res.reply("きなのの機能を表示するには以下のコマンドを打つやんね！\n`@BOT_kinano できること`");
-      },1000)
+        res.reply('きなのの機能を表示するには以下のコマンドを打つやんね！\n`@BOT_kinano できること`');
+      },1000);
     }
     catch(error) {
       robot.send(
@@ -37,11 +37,11 @@ module.exports = robot => {
     robot.send(
       {userID: RasID},
       `## leave\n https://q.trap.jp/messages/${id}`
-    )
+    );
     try {
       api.leave(channelId);
       setTimeout(() => {
-        res.reply("ばいばいやんね～、また遊んでやんね～");
+        res.reply('ばいばいやんね～、また遊んでやんね～');
       },500);
     }
     catch(error) {
@@ -52,4 +52,4 @@ module.exports = robot => {
     }
   });
 
-}
+};

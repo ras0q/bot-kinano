@@ -9,27 +9,26 @@ module.exports = robot => {
     const plainText = res.message.message.plainText;
     const bot = res.message.message.user.bot;
     if(!bot){
-      const index = plainText.search(/(\(|\[)..([=-]>|→)..(\)|\])/); //言語指定があれば変える
-      const txt = plainText.replace(/^tra /i, "");
-      const langs = plainText.match(/[\(\[]\s*(..)\s*([=-]>|→)\s*(..)\s*[\)\]]/)
+      const txt = plainText.replace(/^tra /i, '');
+      const langs = plainText.match(/[([]\s*(..)\s*([=-]>|→)\s*(..)\s*[)\]]/);
       const [src, tar] = langs !== null
         ? [langs[1], langs[3]]
-        : ["ja", "en"];
+        : ['ja', 'en'];
       request.get({
         uri: URL,
         headers: {'Content-type': 'application/json'},
         qs: {
-          "text": txt,
-          "source": src,
-          "target": tar
+          'text': txt,
+          'source': src,
+          'target': tar
         },
         json: true
       }, function(err, req, data){
         if(data.text) res.reply(data.text);
-        else res.reply("きなのその言葉知らない！");
+        else res.reply('きなのその言葉知らない！');
       });
     }
-  })
+  });
 
   //逆翻訳
   robot.hear(/^tratra /i, res => {
@@ -40,9 +39,9 @@ module.exports = robot => {
         uri: URL,
         headers: {'Content-type': 'application/json'},
         qs: {
-          "text": plainText.replace(/^tratra /, ""),
-          "source": "",
-          "target": "en"
+          'text': plainText.replace(/^tratra /, ''),
+          'source': '',
+          'target': 'en'
         },
         json: true
       }, function(err, req, data){
@@ -50,9 +49,9 @@ module.exports = robot => {
           uri: URL,
           headers: {'Content-type': 'application/json'},
           qs: {
-            "text": data.text,
-            "source": "en",
-            "target": "ja"
+            'text': data.text,
+            'source': 'en',
+            'target': 'ja'
           },
           json: true
         }, function(err, req, data2){
@@ -60,6 +59,6 @@ module.exports = robot => {
         });
       });
     }
-  })
+  });
 
-}
+};
