@@ -1,3 +1,6 @@
+//Description:
+//  make or update MEMO.
+
 require('dotenv').config();
 const request = require('request');
 const cron = require('node-cron');

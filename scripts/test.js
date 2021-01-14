@@ -1,5 +1,13 @@
-// BotMessageStampsUpdated
+//Description:
+// work in progress.
+
 module.exports = robot => {
+  // sample
+  robot.hear(/fuga/, res => {
+    res.send("fugafuga");
+  });;
+
+  // BotMessageStampsUpdated
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
     const { stampName, userId } = stamps[0];

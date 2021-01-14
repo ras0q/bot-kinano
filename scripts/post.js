@@ -1,3 +1,6 @@
+//Description:
+//  post articles to specific channels.
+
 const cron = require('node-cron');
 const { getRandom } = require('../modules/random');
 

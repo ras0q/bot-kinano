@@ -1,6 +1,7 @@
+//Description:
+//  Let BOT_kinano join to or leave from a channel.
+
 const api = require('../src/traqapi');
-// const fs = require('fs');
-// const readme = fs.readFileSync('./README.md', 'utf8');
 
 module.exports = robot => {
 

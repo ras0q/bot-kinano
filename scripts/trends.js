@@ -1,3 +1,6 @@
+//Description:
+//  show a now trend of twitter.
+
 require('dotenv').config();
 const Twitter = require('twitter');
 

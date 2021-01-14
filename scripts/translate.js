@@ -1,3 +1,6 @@
+//Description:
+//  translate words.
+
 const request = require('request');
 
 const URL = 'https://script.google.com/macros/s/AKfycby3sNNJlWubQB4q_K4xHjZnpCxaCtYzbcuPmT-r9PJGTs4ZMb0/exec';
