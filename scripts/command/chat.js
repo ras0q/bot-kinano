@@ -37,7 +37,7 @@ module.exports = robot => {
     const { message } = res.message;
     const { channelId, user, id } = message;
     if(!user.bot && channelId !== chatChannelId){
-      request.post(option(message), function(error, response, body){
+      request.post(option(message), (_error, _response, body) => {
         const { status, message, responses } = body;
         if(status){
           robot.send({channelID: gtRB_ID},
@@ -53,7 +53,7 @@ module.exports = robot => {
     const { message } = res.message;
     const { user } = message;
     if(user.bot){
-      request.post(option(message), function(error, response, body){
+      request.post(option(message), (_error, _response, body) => {
         res.send(`\`\`\`\n${JSON.stringify(body, undefined, 4)}\n\`\`\``);
       });
     }
@@ -63,7 +63,7 @@ module.exports = robot => {
     const { message } = res.message;
     const { channelId, user, id } = message;
     if(!user.bot && chatChannelId === channelId){
-      request.post(option(message), function(error, response, body){
+      request.post(option(message), (_error, _response, body) => {
         const { status, message, responses } = body;
         if(status){
           robot.send({channelID: gtRB_ID},
