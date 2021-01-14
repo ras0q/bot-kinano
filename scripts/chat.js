@@ -1,3 +1,7 @@
+//Description:
+//  talk with BOT_kinano naturally.
+
+//Reference:
 //https://www.chaplus.jp/
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 

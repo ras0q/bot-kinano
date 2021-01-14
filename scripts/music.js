@@ -1,6 +1,8 @@
+//Description:
+//  control traQplaylist.
+
 const request = require('request');
 const { getRandom } = require('../modules/random');
-/*function----------------------------------------------------------------*/
 
 //requestのoptionをつくる
 const option = (Q) => {
@@ -32,8 +34,6 @@ const extractValues = (text) => {
   }
   return values;
 };
-
-/*module------------------------------------------------------------------*/
 
 module.exports = robot => {
   const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';

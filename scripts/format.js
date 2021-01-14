@@ -1,3 +1,6 @@
+//Description:
+//  format text to a matrix or a table.
+
 module.exports = robot => {
   robot.hear(/^(format|fmt)\smatrix/i, res => {
     const { user, plainText } = res.message.message;

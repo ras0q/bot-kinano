@@ -1,3 +1,6 @@
+//Description:
+//  reply or send messages when BOT_kinano receives specific words.
+
 const {
   natterus,
   is_mentioned,
