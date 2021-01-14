@@ -50,7 +50,7 @@ module.exports = robot => {
         music,
         url
       };
-      request.post(option(qs), (error, response, body) => {
+      request.post(option(qs), (error, _response, _body) => {
         if(!error){
           const addtable = `|User|Music|URL|\n|-|-|-|\n|:@${name}:${name}|${music}|${url}|\n`;
           res.send(`『${music}』を追加したやんね！\n${addtable}`);

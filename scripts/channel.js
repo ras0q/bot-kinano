@@ -1,6 +1,6 @@
 const api = require('../src/traqapi');
-const fs = require('fs');
-const readme = fs.readFileSync('./README.md', 'utf8');
+// const fs = require('fs');
+// const readme = fs.readFileSync('./README.md', 'utf8');
 
 module.exports = robot => {
 
