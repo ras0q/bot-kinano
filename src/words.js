@@ -3,19 +3,10 @@ const readme = fs.readFileSync('./README.md', 'utf8');
 
 const natterus = [
   ':yaya::koreni_natteru.large:',
-  ':koreni_natteru.ex-large.rotate:',
-  ':koreni_natteru.ex-large.rotate.rotate:',
-  ':koreni_natteru.ex-large.rotate.rotate.rotate:',
-  ':koreni_natteru.ex-large.rotate.rotate.rotate.rotate:',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
-  'なるな！',
+  ...new Array(4).fill(null).map((_, idx) =>
+    `:koreni_natteru.ex-large${'.rotate'.repeat(idx + 1)}:`
+  ),
+  ...new Array(9).fill('なるな！')
 ];
 exports.natterus = natterus;
 
