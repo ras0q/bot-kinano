@@ -1,5 +1,5 @@
 const request = require('request');
-const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + start;
+const { getRandom } = require('../modules/random');
 /*function----------------------------------------------------------------*/
 
 //requestのoptionをつくる

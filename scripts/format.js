@@ -16,13 +16,14 @@ module.exports = robot => {
       const rows = plainText
         .replace(/^[^\n]*\n/, '')
         .split('\n');
-      const len = (rows[0].match(/[,、，]/g)?.length) ?? 0;
+      const commas = rows[0].match(/[,、，]/g);
+      const colLen = commas !== null ? commas.length + 1 : 1;
       const preformedRows = rows.map(text =>
         text.replace(/[,、，]/g, '|') + '|'
       );
       const table = [
         preformedRows[0],
-        '-|'.repeat(len+1),
+        '-|'.repeat(colLen),
         ...preformedRows.slice(1)
       ].join('\n') + '\n';
       res.send(table);

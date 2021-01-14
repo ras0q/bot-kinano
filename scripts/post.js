@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + start;
+const { getRandom } = require('../modules/random');
 
 module.exports = robot => {
   const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
