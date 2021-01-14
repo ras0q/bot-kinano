@@ -1,3 +1,6 @@
+//Description:
+//  All commands will be run here.
+
 const fileNames = [
   'channel',
   'chat',
