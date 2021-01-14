@@ -102,10 +102,9 @@ module.exports = robot => {
     }
   });
 
-  //cron(8,16時)
-  cron.schedule('0 0 7,23 * * *', () => {
+  cron.schedule('0 0 8,16 * * *', () => {
     const qs = {user: 'Ras'};
-    request.get(option(qs), (error,respond,body) => {
+    request.get(option(qs), (error, respond, body) => {
       if(!error){
         const { memo } = body;
         const formatedMemo = memo !== ''
@@ -114,5 +113,5 @@ module.exports = robot => {
         robot.send({channelID: gtR_ID}, `|memo\n|-${formatedMemo}|`);
       }
     });
-  });
+  }, { timezone: 'Asia/Tokyo' });
 };
