@@ -71,13 +71,13 @@ module.exports = robot => {
     if(!bot){
       const i = text.search(/(\+|＋)/);
       const qs = {user: name};
-      request.get(option(qs), (error, _respond, body) => {
+      request.get(option(qs), (error, respond, body) => {
         if(!error){
           const { memo } = body;
           const updatedMemo = memo + text.slice(i + 1);
           const formatedMemo = updatedMemo.replace(/\n/gi, '\n|');
           const qs2 = {user: name, memo: updatedMemo};
-          request.post(option(qs2), (error2, _respond2, _body2) => {
+          request.post(option(qs2), (error2, _respond, _body) => {
             if(!error2){
               res.send(`|memo\n|-${formatedMemo}|`);
               res.send(
