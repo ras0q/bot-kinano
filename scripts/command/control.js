@@ -6,7 +6,7 @@ const {
   is_mentioned,
   is_not_mentioned,
   loop
-} = require('../src/words');
+} = require('../lib/words');
 const { getRandom } = require('../modules/random');
 
 //もふもふ
