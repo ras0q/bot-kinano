@@ -5,17 +5,15 @@ const request = require('request');
 const { getRandom } = require('../../modules/random');
 
 //requestのoptionをつくる
-const option = (Q) => {
-  return {
-    uri: 'https://script.google.com/macros/s/AKfycbwi70WcQuyozUl08tuQFrjiT7znHusgOURUXGigwFidHFFZrvkm/exec', //GAS
-    headers: {'Content-type': 'application/json'},
-    qs: Q,
-    json: true
-  };
-};
+const option = Q => ({
+  uri: 'https://script.google.com/macros/s/AKfycbwi70WcQuyozUl08tuQFrjiT7znHusgOURUXGigwFidHFFZrvkm/exec', //GAS
+  headers: {'Content-type': 'application/json'},
+  qs: Q,
+  json: true
+});
 
 //textからmusicとurlを抽出
-const extractValues = (text) => {
+const extractValues = text => {
   const values = {
     music: '',
     url: ''

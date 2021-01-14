@@ -6,14 +6,12 @@ const request = require('request');
 const cron = require('node-cron');
 
 //requestのoptionをつくる
-const option = (Q) => {
-  return {
-    uri: process.env.MEMO_SS, //SS
-    headers: {'Content-type': 'application/json'},
-    qs: Q,
-    json: true
-  };
-};
+const option = Q => ({
+  uri: process.env.MEMO_SS, //SS
+  headers: {'Content-type': 'application/json'},
+  qs: Q,
+  json: true
+});
 
 module.exports = robot => {
   const gtR_ID ='f58c72a4-14f0-423c-9259-dbb4a90ca35f';

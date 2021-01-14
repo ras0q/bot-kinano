@@ -10,25 +10,23 @@ const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
 const { getRandom } = require('../modules/random');
 
-const option = (message) => {
-  return {
-    uri: 'https://www.chaplus.jp/v1/chat',
-    qs: {
-      'apikey': APIkey
-    },
-    headers: {
-      'Content-type': 'application/json',
-    },
-    json: {
-      'utterance': message.plainText,
-      'username': message.user.displayName,
-      'agentState': {
-        'agentName': 'きなの',
-        'age': '14',
-      }
+const option = message => ({
+  uri: 'https://www.chaplus.jp/v1/chat',
+  qs: {
+    'apikey': APIkey
+  },
+  headers: {
+    'Content-type': 'application/json',
+  },
+  json: {
+    'utterance': message.plainText,
+    'username': message.user.displayName,
+    'agentState': {
+      'agentName': 'きなの',
+      'age': '14',
     }
-  };
-};
+  }
+});
 
 module.exports = robot => {
   const gtRB_ID = '2a5616d5-5d69-4716-8377-1e1fb33278fe'; //#gps/times/Ras/Bot
