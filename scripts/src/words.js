@@ -1,5 +1,5 @@
 const fs = require('fs');
-const readme = fs.readFileSync('./README.md', 'utf8');
+const readme = fs.readFileSync('../../README.md', 'utf8');
 
 const natterus = [
   ':yaya::koreni_natteru.large:',
@@ -58,7 +58,7 @@ const is_not_mentioned = [
     ans: 'いうな！'
   },
   {
-    msg: /(死|:si.*:)$/,
+    msg: /(死|:si[^:]*:)$/,
     ans: '死ぬな！'
   },
   {
@@ -70,28 +70,28 @@ const is_not_mentioned = [
     ans: readme
   },
   {
-    msg: /([おぉオォｵｫ]|(:oisu-1.*:))([いぃイィｲｨｨ]|(:oisu-2.*:))([すスｽ]|(:oisu-3.*:))/i,
+    msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
     ans: {
       type: 'stamp',
       name: 'oisu-1'
     }
   },
   {
-    msg: /([おぉオォｵｫ]|(:oisu-1.*:))([いぃイィｲｨｨ]|(:oisu-2.*:))([すスｽ]|(:oisu-3.*:))/i,
+    msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
     ans: {
       type: 'stamp',
       name: 'oisu-2'
     }
   },
   {
-    msg: /([おぉオォｵｫ]|(:oisu-1.*:))([いぃイィｲｨｨ]|(:oisu-2.*:))([すスｽ]|(:oisu-3.*:))/i,
+    msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
     ans: {
       type: 'stamp',
       name: 'oisu-3'
     }
   },
   {
-    msg: /([おぉオォｵｫ]|(:oisu-1.*:))([いぃイィｲｨｨ]|(:oisu-2.*:))([すスｽ]|(:oisu-3.*:))/i,
+    msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
     ans: {
       type: 'stamp',
       name: 'oisu-4yoko'
@@ -118,7 +118,7 @@ exports.is_not_mentioned = is_not_mentioned;
 
 const loop = [
   {
-    msg: /([おぉオォｵｫ]|(:oisu-1.*:))([いぃイィｲｨｨ]|(:oisu-2.*:))(?!([すスｽ]|(:oisu-3.*:)))/g,
+    msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))(?!([すスｽ]|(:oisu-3[^:]*:)))/g,
     ans: 'おい'
   },
   {
