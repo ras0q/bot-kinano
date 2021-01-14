@@ -4,7 +4,7 @@ const {
   is_not_mentioned,
   loop
 } = require('../src/words');
-const getRandom = (start, end) => Math.floor(Math.random() * (end - start)) + start;
+const { getRandom } = require('../modules/random')
 
 //もふもふ
 const getMofu = () => {
