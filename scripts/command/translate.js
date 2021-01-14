@@ -26,7 +26,7 @@ module.exports = robot => {
           'target': tar
         },
         json: true
-      }, function(err, req, data){
+      }, (_err, _req, data) => {
         if(data.text) res.reply(data.text);
         else res.reply('きなのその言葉知らない！');
       });
@@ -47,7 +47,7 @@ module.exports = robot => {
           'target': 'en'
         },
         json: true
-      }, function(err, req, data){
+      }, (_err, _req, data) => {
         request.get({
           uri: URL,
           headers: {'Content-type': 'application/json'},
@@ -57,7 +57,7 @@ module.exports = robot => {
             'target': 'ja'
           },
           json: true
-        }, function(err, req, data2){
+        }, (_err, _req, data2) => {
           res.reply(`${data2.text}\n\n(${data.text})`);
         });
       });

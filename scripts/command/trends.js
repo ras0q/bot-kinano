@@ -18,7 +18,7 @@ module.exports = robot => {
     const { bot, id } = res.message.message.user;
     if(!bot){
       const params = {id: 23424856};
-      client.get('trends/place.json', params, function(error, tweets, _response) {
+      client.get('trends/place.json', params, (error, tweets, _response) => {
         if (!error) {
           const trendTableMain = Object.keys(tweets[0].trends).map((_, idx) => {
             const { name, url, tweet_volume } = tweets[0].trends[idx];
