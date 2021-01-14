@@ -8,11 +8,11 @@ const URL = 'https://script.google.com/macros/s/AKfycby3sNNJlWubQB4q_K4xHjZnpCxa
 module.exports = robot => {
 
   //翻訳(デフォルトは日=>英)
-  robot.hear(/^tra /i, res => {
+  robot.hear(/^tra\s+/i, res => {
     const plainText = res.message.message.plainText;
     const bot = res.message.message.user.bot;
     if(!bot){
-      const txt = plainText.replace(/^tra /i, '');
+      const txt = plainText.replace(/^tra\s+/i, '');
       const langs = plainText.match(/[([]\s*(..)\s*([=-]>|→)\s*(..)\s*[)\]]/);
       const [src, tar] = langs !== null
         ? [langs[1], langs[3]]
@@ -34,7 +34,7 @@ module.exports = robot => {
   });
 
   //逆翻訳
-  robot.hear(/^tratra /i, res => {
+  robot.hear(/^tratra\s+/i, res => {
     const plainText = res.message.message.plainText;
     const bot = res.message.message.user.bot;
     if(!bot){
@@ -42,7 +42,7 @@ module.exports = robot => {
         uri: URL,
         headers: {'Content-type': 'application/json'},
         qs: {
-          'text': plainText.replace(/^tratra /, ''),
+          'text': plainText.replace(/^tratra\s+/, ''),
           'source': '',
           'target': 'en'
         },
