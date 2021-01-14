@@ -2,7 +2,7 @@
 //  control traQplaylist.
 
 const request = require('request');
-const { getRandom } = require('../modules/random');
+const { getRandom } = require('../../modules/random');
 
 //requestのoptionをつくる
 const option = (Q) => {

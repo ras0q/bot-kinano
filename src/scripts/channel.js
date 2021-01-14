@@ -1,7 +1,7 @@
 //Description:
 //  Let BOT_kinano join to or leave from a channel.
 
-const api = require('../src/traqapi');
+const api = require('../traqapi');
 
 module.exports = robot => {
 

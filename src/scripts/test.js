@@ -4,8 +4,8 @@
 module.exports = robot => {
   // sample
   robot.hear(/fuga/, res => {
-    res.send("fugafuga");
-  });;
+    res.send('fugafuga');
+  });
 
   // BotMessageStampsUpdated
   robot.catchAll(res => {

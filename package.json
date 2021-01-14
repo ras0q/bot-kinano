@@ -19,6 +19,6 @@
   "devDependencies": {
     "eslint": "^7.17.0"
   },"scripts": {
-    "lint": "eslint ."
+    "lint": "eslint ./src --fix"
   }
 }
