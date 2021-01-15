@@ -11,7 +11,7 @@ const fileNames = [
   'reaction',
   'test',
   'translate',
-  'treands'
+  'trends'
 ];
 const commands = {};
 fileNames.forEach(name =>

@@ -8,7 +8,7 @@
 require('dotenv').config();
 const request = require('request');
 const APIkey = process.env.CHAPLUS_API_KEY;
-const { getRandom } = require('../src/modules/random');
+const { getRandom } = require('../modules/random');
 
 const option = message => ({
   uri: 'https://www.chaplus.jp/v1/chat',
