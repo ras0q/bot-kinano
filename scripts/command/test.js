@@ -10,7 +10,7 @@ module.exports = robot => {
   robot.hear(/.+[食た]べたい$/, res => {
     const query = res.message.message.plainText
       .match(/.+(?=[食た]べたい)/);
-    res.reply(`https://cookpad.com/search/${query}`);
+    res.reply(`https://www.kurashiru.com/search?query=${query}`);
   });
 
   // BotMessageStampsUpdated
