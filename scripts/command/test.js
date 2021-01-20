@@ -7,6 +7,12 @@ module.exports = robot => {
     res.send('fugafuga');
   });
 
+  robot.hear(/.+[食た]べたい$/, res => {
+    const query = res.message.message.plainText
+      .match(/.+(?=[食た]べたい)/);
+    res.reply(`https://cookpad.com/search/${query}`);
+  });
+
   // BotMessageStampsUpdated
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
