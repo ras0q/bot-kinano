@@ -117,7 +117,7 @@ const is_not_mentioned = [
 ];
 exports.is_not_mentioned = is_not_mentioned;
 
-const loop = [
+const loops = [
   {
     msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))(?!([すスｽ]|(:oisu-3[^:]*:)))/g,
     ans: 'おい'
@@ -131,8 +131,12 @@ const loop = [
     ans: 'むしゃ'
   },
   {
+    msg: /わく/g,
+    ans: 'わくわく'
+  },
+  {
     msg: /[もモ][ちチ]/g,
     ans: 'もち'
   }
 ];
-exports.loop = loop;
+exports.loops = loops;

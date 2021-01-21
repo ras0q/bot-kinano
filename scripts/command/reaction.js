@@ -5,7 +5,7 @@ const {
   natterus,
   is_mentioned,
   is_not_mentioned,
-  loop
+  loops
 } = require('../src/words');
 const { getRandom } = require('../modules/random');
 
@@ -51,8 +51,8 @@ module.exports = robot => {
     });
   });
 
-  //loop
-  loop.forEach(({ msg, ans }) => {
+  //loops
+  loops.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
       const { user, plainText } = res.message.message;
       if(!user.bot){
