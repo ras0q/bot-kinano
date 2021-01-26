@@ -137,6 +137,10 @@ const loops = [
   {
     msg: /[もモ][ちチ]/g,
     ans: 'もち'
+  },
+  {
+    msg: /うん/g,
+    ans: 'うんうん'
   }
 ];
 exports.loops = loops;
