@@ -105,10 +105,10 @@ module.exports = robot => {
     request.get(option(qs), (error, respond, body) => {
       if(!error){
         const { memo } = body;
-        const formatedMemo = memo !== ''
-          ? memo.replace(/\n/gi, '\n|')
-          : '\n|:404_notfound.ex-large:|';
-        robot.send({channelID: gtR_ID}, `|memo\n|-${formatedMemo}|`);
+        if(memo){
+          const formatedMemo = memo.replace(/\n/gi, '\n|');
+          robot.send({channelID: gtR_ID}, `|memo\n|-${formatedMemo}|`);
+        }
       }
     });
   }, { timezone: 'Asia/Tokyo' });
