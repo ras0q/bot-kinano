@@ -4,9 +4,10 @@
 const request = require('request');
 const { getRandom } = require('../modules/random');
 
+const clientID = process.env.CLIENT_ID;
 //requestのoptionをつくる
 const option = Q => ({
-  uri: 'https://ras.trap.show/knkbot-database/song',
+  uri: `https://ras.trap.show/knkbot-database/song?${clientID}`,
   headers: {'Content-type': 'application/json'},
   qs: Q,
   json: true
@@ -76,11 +77,12 @@ module.exports = robot => {
           return;
         }
         const req = {
-          uri: `https://ras.trap.show/knkbot-database/song?id=${body[idx].id}&user=${name}`,
+          uri: `https://ras.trap.show/knkbot-database/song?client_id=${clientID}id=${body[idx].id}&user=${name}`,
           headers: {'Content-type': 'application/json'},
           json: true
         };
-        request.delete(req, (error, _response, _body) => {
+        request.delete(req, (error, _response, body) => {
+          console.log(JSON.stringify(body));
           if (error !== null) {
             res.send(`faild to remove id ${idx} song`);
           } else {
