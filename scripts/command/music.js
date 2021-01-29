@@ -91,7 +91,7 @@ module.exports = robot => {
             '|No.|User|Title|',
             '|-:|:-:|-|',
             '|例|:kinano:|きなこもちもちのうた|',
-            ...body.map(({ user, title }, idx) => `|${idx}|:@${user}:|${title}|`)
+            ...body.map(({ id, user, title }) => `|${id}|:@${user}:|${title}|`)
           ]
             .join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
@@ -109,8 +109,8 @@ module.exports = robot => {
       request.get(option(), (error, _response, body) => {
         if(!error){
           //表作成
-          const { user, title, url } = body[i];
-          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
+          const { id, user, title, url } = body[i];
+          const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## 曲${i}はこれ！\n${table}`);
         }
       });
@@ -125,8 +125,8 @@ module.exports = robot => {
         if(!error){
           //表作成
           const i = getRandom(0, body.length);
-          const { user, title, url } = body[i];
-          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
+          const { id, user, title, url } = body[i];
+          const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## きなののオススメソングはこれ！\n${table}`);
         }
       });
@@ -143,7 +143,7 @@ module.exports = robot => {
             '|No.|User|Title|URL|',
             '|-:|-|-|-|',
             '||:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|', //表の項目と例
-            ...body.map(({ user, title, url }, idx) => `|${idx}|:@${user}:${user}|${title}|${url}|`)
+            ...body.map(({ id, user, title, url }) => `|${id}|:@${user}:${user}|${title}|${url}|`)
           ].join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}`);
         }
