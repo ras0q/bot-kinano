@@ -109,7 +109,7 @@ module.exports = robot => {
       request.get(option(), (error, _response, body) => {
         if(!error){
           //表作成
-          body.array.forEach(({ id, user, title, url }) => {
+          body.forEach(({ id, user, title, url }) => {
             if(id == i){
               const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
               res.send(`## 曲${i}はこれ！\n${table}`);
