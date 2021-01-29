@@ -24,7 +24,7 @@ module.exports = {
     'no-unused-vars': [
       'error',
       {
-        'argsIgnorePattern': '^_' // 使わない引数は _ で始める
+        'argsIgnorePattern': '^_' // 変数名が '_' で始まる場合は許可
       }
     ]
   }

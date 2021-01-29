@@ -65,18 +65,26 @@ module.exports = robot => {
     const { name, bot } = user;
     if(!bot){
       const i = plainText.replace(/^%remove\s+/i, '');
-      const req = {
-        uri: `https://ras.trap.show/knkbot-database/song?id=${i}&user=${name}`,
-        headers: {'Content-type': 'application/json'},
-        json: true
-      };
-      request.delete(req, (error, _response, _body) => {
-        if(error){
-          res.send(`${name}には曲${i}の削除権限がないやんね！:gahaha:`);
+      const idx = parseInt(i);
+      request.get(option(), (error, response, body) => {
+        if (idx >= body.length) {
+          res.send('index out of range!');
         }
-        else {
-          res.send(`曲${i}を削除したやんね！`);
+        if (body[idx].user !== name) {
+          res.send(`${name}には曲${idx}の削除権限がないやんね！:gahaha:`);
         }
+        const req = {
+          uri: `https://ras.trap.show/knkbot-database/song?id=${body[idx].id}&user=${name}`,
+          headers: {'Content-type': 'application/json'},
+          json: true
+        };
+        request.delete(req, (error, _response, _body) => {
+          if (error !== null) {
+            res.send(`faild to remove id ${idx} song`);
+          } else {
+            res.send(`曲${idx}を削除したやんね！`);
+          }
+        });
       });
     }
   });
@@ -85,13 +93,13 @@ module.exports = robot => {
   robot.hear(/^%watch$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const table = [
             '|No.|User|Title|',
             '|-:|:-:|-|',
             '|例|:kinano:|きなこもちもちのうた|',
-            ...body.map(({ id, user, title }) => `|${id}|:@${user}:|${title}|`)
+            ...body.map(({ user, title }, idx) => `|${idx}|:@${user}:|${title}|`)
           ]
             .join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
@@ -106,15 +114,11 @@ module.exports = robot => {
       const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       const { plainText } = res.message.message;
       const i = plainText.replace(/^%watch\s+/i, '');
-      request.get(option(), (error, _response, body) => {
-        if(!error){
-          //表作成
-          body.forEach(({ id, user, title, url }) => {
-            if(id === parseInt(i)){
-              const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
-              res.send(`## 曲${i}はこれ！\n${table}`);
-            }
-          });
+      request.get(option(), (error, response, body) => {
+        if(error === null){
+          const { user, title, url } = body[parseInt(i)];
+          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
+          res.send(`## 曲${i}はこれ！\n${table}`);
         }
       });
     }
@@ -125,11 +129,11 @@ module.exports = robot => {
     if(!res.message.message.user.bot){
       const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const i = getRandom(0, body.length);
-          const { id, user, title, url } = body[i];
-          const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
+          const { user, title, url } = body[i];
+          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## きなののオススメソングはこれ！\n${table}`);
         }
       });
@@ -140,13 +144,13 @@ module.exports = robot => {
   robot.hear(/^%watch\s+all$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const table = [
             '|No.|User|Title|URL|',
             '|-:|-|-|-|',
             '||:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|', //表の項目と例
-            ...body.map(({ id, user, title, url }) => `|${id}|:@${user}:${user}|${title}|${url}|`)
+            ...body.map(({ user, title, url }, idx) => `|${idx}|:@${user}:${user}|${title}|${url}|`)
           ].join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}`);
         }
