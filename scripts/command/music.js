@@ -109,9 +109,12 @@ module.exports = robot => {
       request.get(option(), (error, _response, body) => {
         if(!error){
           //表作成
-          const { id, user, title, url } = body[i];
-          const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
-          res.send(`## 曲${i}はこれ！\n${table}`);
+          body.array.forEach(({ id, user, title, url }) => {
+            if(id === i){
+              const table = `${tableExample}\n|${id}|:@${user}:${user}|${title}|${url}|\n`;
+              res.send(`## 曲${i}はこれ！\n${table}`);
+            }
+          });
         }
       });
     }
