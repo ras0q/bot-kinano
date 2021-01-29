@@ -93,7 +93,7 @@ module.exports = robot => {
   robot.hear(/^%watch$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const table = [
             '|No.|User|Title|',
@@ -115,7 +115,7 @@ module.exports = robot => {
       const { plainText } = res.message.message;
       const i = plainText.replace(/^%watch\s+/i, '');
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           const { user, title, url } = body[parseInt(i)];
           const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## 曲${i}はこれ！\n${table}`);
@@ -129,7 +129,7 @@ module.exports = robot => {
     if(!res.message.message.user.bot){
       const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const i = getRandom(0, body.length);
           const { user, title, url } = body[i];
@@ -144,7 +144,7 @@ module.exports = robot => {
   robot.hear(/^%watch\s+all$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(!error){
+        if(error === null){
           //表作成
           const table = [
             '|No.|User|Title|URL|',
