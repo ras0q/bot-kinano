@@ -13,7 +13,7 @@ const option = (url, Q = {}) => ({
   json: true
 });
 
-const url = process.env.SHOWCASE_URL;
+const url = process.env.SHOWCASE_URL+ '/memo';
 const clientID = process.env.SHOWCASE_CLIENT_ID;
 
 module.exports = robot => {
