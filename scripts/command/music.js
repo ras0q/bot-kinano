@@ -6,16 +6,16 @@ const { getRandom } = require('../modules/random');
 
 //requestのoptionをつくる
 const option = Q => ({
-  uri: 'https://script.google.com/macros/s/AKfycbwi70WcQuyozUl08tuQFrjiT7znHusgOURUXGigwFidHFFZrvkm/exec', //GAS
+  uri: 'https://ras.trap.show/knkbot-database/song',
   headers: {'Content-type': 'application/json'},
   qs: Q,
   json: true
 });
 
-//textからmusicとurlを抽出
+//textからtitleとurlを抽出
 const extractValues = text => {
   const values = {
-    music: '',
+    title: '',
     url: ''
   };
 
@@ -23,12 +23,12 @@ const extractValues = text => {
     return values;
   }
 
-  const music_element = text.match(/\[([^[\]]*)\]\((.*)\)/);
-  if (music_element !== null){
-    values.music = music_element[1];
-    values.url = music_element[2];
+  const title_element = text.match(/\[([^[\]]*)\]\((.*)\)/);
+  if (title_element !== null){
+    values.title = title_element[1];
+    values.url = title_element[2];
   } else {
-    values.music = text.replace(/^%add\s+/i, ''); // 曲名切り取り
+    values.title = text.replace(/^%add\s+/i, ''); // 曲名切り取り
   }
   return values;
 };
@@ -42,16 +42,16 @@ module.exports = robot => {
     const { user, plainText } = message;
     const { name, bot } = user;
     if(!bot){
-      const { music, url } = extractValues(plainText);
+      const { title, url } = extractValues(plainText);
       const qs = {
         user: name,
-        music,
+        title,
         url
       };
       request.post(option(qs), (error, _response, _body) => {
         if(!error){
-          const addtable = `|User|Music|URL|\n|-|-|-|\n|:@${name}:${name}|${music}|${url}|\n`;
-          res.send(`『${music}』を追加したやんね！\n${addtable}`);
+          const addtable = `|User|Title|URL|\n|-|-|-|\n|:@${name}:${name}|${title}|${url}|\n`;
+          res.send(`『${title}』を追加したやんね！\n${addtable}`);
           robot.send({channelID: logID},'## 曲が追加されたやんね！\n'+ addtable);
         }
       });
@@ -59,9 +59,25 @@ module.exports = robot => {
   });
 
   //曲削除
-  robot.hear(/^%remove\s+.*/i, res => {
-    if(!res.message.message.user.bot){
-      res.send('@Ras 頼んだ！');
+  robot.hear(/^%remove\s+[0-9]+/i, res => {
+    const { message } = res.message;
+    const { user, plainText } = message;
+    const { name, bot } = user;
+    if(!bot){
+      const i = plainText.replace(/^%remove\s+/i, '');
+      const req = {
+        uri: `https://ras.trap.show/knkbot-database/song?id=${i}&user=${name}`,
+        headers: {'Content-type': 'application/json'},
+        json: true
+      };
+      request.delete(req, (error, _response, _body) => {
+        if(error){
+          res.send(`${name}には曲${i}の削除権限がないやんね！:gahaha:`);
+        }
+        else {
+          res.send(`曲${i}を削除したやんね！`);
+        }
+      });
     }
   });
 
@@ -72,10 +88,10 @@ module.exports = robot => {
         if(!error){
           //表作成
           const table = [
-            '|No.|User|Music|',
+            '|No.|User|Title|',
             '|-:|:-:|-|',
-            '|例|:kinano:|きなこもちもちのうた|', //表の項目と例
-            ...body.map(({ user, music }, idx) => `|${idx}|:@${user}:|${music}|`)
+            '|例|:kinano:|きなこもちもちのうた|',
+            ...body.map(({ user, title }, idx) => `|${idx}|:@${user}:|${title}|`)
           ]
             .join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
@@ -87,14 +103,14 @@ module.exports = robot => {
   //曲確認(URLつき、番号指定)
   robot.hear(/^%watch\s+[0-9]+/i, res => {
     if(!res.message.message.user.bot){
-      const tableExample = '|No.|User|Music|URL|\n|-:|-|-|-|'; //表の項目と例
+      const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       const { plainText } = res.message.message;
       const i = plainText.replace(/^%watch\s+/i, '');
-      request.get(option(), (error, response, body) => {
+      request.get(option(), (error, _response, body) => {
         if(!error){
           //表作成
-          const { user, music, url } = body[i];
-          const table = `${tableExample}\n|${i}|:@${user}:${user}|${music}|${url}|\n`;
+          const { user, title, url } = body[i];
+          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## 曲${i}はこれ！\n${table}`);
         }
       });
@@ -104,13 +120,13 @@ module.exports = robot => {
   //曲確認(URLつき、番号random)
   robot.hear(/^%watch\s+r$/i, res => {
     if(!res.message.message.user.bot){
-      const tableExample = '|No.|User|Music|URL|\n|-:|-|-|-|'; //表の項目と例
+      const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       request.get(option(), (error, response, body) => {
         if(!error){
           //表作成
           const i = getRandom(0, body.length);
-          const { user, music, url } = body[i];
-          const table = `${tableExample}\n|${i}|:@${user}:${user}|${music}|${url}|\n`;
+          const { user, title, url } = body[i];
+          const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## きなののオススメソングはこれ！\n${table}`);
         }
       });
@@ -124,10 +140,10 @@ module.exports = robot => {
         if(!error){
           //表作成
           const table = [
-            '|No.|User|Music|URL|',
+            '|No.|User|Title|URL|',
             '|-:|-|-|-|',
             '||:kinano:BOT_kinano|きなこもちもちのうた|https://wiki.trap.jp/bot/kinano|', //表の項目と例
-            ...body.map(({ user, music, url }, idx) => `|${idx}|:@${user}:${user}|${music}|${url}|`)
+            ...body.map(({ user, title, url }, idx) => `|${idx}|:@${user}:${user}|${title}|${url}|`)
           ].join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}`);
         }
