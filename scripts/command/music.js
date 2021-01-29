@@ -69,9 +69,11 @@ module.exports = robot => {
       request.get(option(), (error, response, body) => {
         if (idx >= body.length) {
           res.send('index out of range!');
+          return;
         }
         if (body[idx].user !== name) {
           res.send(`${name}には曲${idx}の削除権限がないやんね！:gahaha:`);
+          return;
         }
         const req = {
           uri: `https://ras.trap.show/knkbot-database/song?id=${body[idx].id}&user=${name}`,
