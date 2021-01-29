@@ -4,10 +4,11 @@
 const request = require('request');
 const { getRandom } = require('../modules/random');
 
-const clientID = process.env.CLIENT_ID;
+const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
+
 //requestのoptionをつくる
 const option = Q => ({
-  uri: `https://ras.trap.show/knkbot-database/song?${clientID}`,
+  uri: url,
   headers: {'Content-type': 'application/json'},
   qs: Q,
   json: true
@@ -77,7 +78,7 @@ module.exports = robot => {
           return;
         }
         const req = {
-          uri: `https://ras.trap.show/knkbot-database/song?client_id=${clientID}id=${body[idx].id}&user=${name}`,
+          uri: `${url}&id=${body[idx].id}&user=${name}`,
           headers: {'Content-type': 'application/json'},
           json: true
         };
