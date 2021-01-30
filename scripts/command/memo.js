@@ -68,7 +68,7 @@ module.exports = robot => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋|\\n)/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
