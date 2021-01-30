@@ -36,7 +36,7 @@ module.exports = robot => {
           );
         }
         else {
-          res.send('@Ras Error at memo.js');
+          res.send('@Ras Error at memo.js' + error.toString());
         }
       });
     }
@@ -62,13 +62,13 @@ module.exports = robot => {
           );
         }
         else{
-          res.send('@Ras Error at memo.js');
+          res.send('@Ras Error at memo.js' + error.toString());
         }
       });
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋|\\n)/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋|\n)/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
@@ -89,7 +89,7 @@ module.exports = robot => {
           );
         }
         else {
-          res.send('@Ras Error at memo.js');
+          res.send('@Ras Error at memo.js' + error.toString());
         }
       });
     }
