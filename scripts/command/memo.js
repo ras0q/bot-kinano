@@ -72,7 +72,7 @@ module.exports = robot => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋)/i, '');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋|\n)/i, '');
       const qs = {user: name, memo};
       request.patch(option(`${url}?client_id=${clientID}`, qs), (error, respond, body) => {
         if(!error){
