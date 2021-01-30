@@ -42,16 +42,16 @@ module.exports = robot => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)*(\s)*\n/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)+/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)*(\s)*/i, '');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)*(\s)*/i, '\n');
       const Q = {user: name, memo};
       request.post(option(`${url}?client_id=${clientID}`, Q), (error, _respond, _body) => {
         if(!error){
           const formatedMemo = memo !== ''
-            ? memo.replace(/\n/gi, '\n|')
+            ? memo.replace(/\n/gi, '|\n|')
             : '\n|:404_notfound.ex-large:|';
           res.send(`|memo\n|-${formatedMemo}|`);
           res.send(
@@ -72,13 +72,13 @@ module.exports = robot => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋|\s)*/i, '');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋|\s)*/i, '\n');
       const qs = {user: name, memo};
       request.patch(option(`${url}?client_id=${clientID}`, qs), (error, respond, body) => {
         if(!error){
           const { memo } = body;
           const formatedMemo = memo !== ''
-            ? memo.replace(/\n/gi, '\n|')
+            ? memo.replace(/\n/gi, '|\n|')
             : '\n|:404_notfound.ex-large:|';
           res.send(`|memo\n|-${formatedMemo}|`);
           res.send(
