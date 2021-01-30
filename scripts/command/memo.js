@@ -42,11 +42,11 @@ module.exports = robot => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)*(\s)*\n/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)/i, '');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)*(\s)*/i, '');
       const Q = {user: name, memo};
       request.post(option(`${url}?client_id=${clientID}`, Q), (error, _respond, _body) => {
         if(!error){
@@ -68,11 +68,11 @@ module.exports = robot => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋|\n)/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋|\s)*\n/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋|\n)/i, '');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋|\s)*/i, '');
       const qs = {user: name, memo};
       request.patch(option(`${url}?client_id=${clientID}`, qs), (error, respond, body) => {
         if(!error){
