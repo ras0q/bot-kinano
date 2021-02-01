@@ -46,7 +46,7 @@ module.exports = robot => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
-      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝|\s)+\s/i, '\n');
+      const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝|\s)+/i, '\n');
       const Q = {user: name, memo};
       request.post(option(`${url}?client_id=${clientID}`, Q), (error, _respond, _body) => {
         if(!error){
