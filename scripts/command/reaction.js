@@ -5,7 +5,8 @@ const {
   natterus,
   is_mentioned,
   is_not_mentioned,
-  loops
+  loops,
+  IDs
 } = require('../src/words');
 const { getRandom } = require('../modules/random');
 
@@ -19,11 +20,9 @@ const getMofu = () => {
 };
 
 module.exports = robot => {
-  const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
-
   //起動時メッセージ
   robot.send(
-    {channelID: logID},
+    {channelID: IDs.gtRB_log},
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
@@ -72,7 +71,7 @@ module.exports = robot => {
     if(!bot){
       setTimeout(() => {
         res.send(getMofu());
-      },500);
+      }, 500);
     }
   });
 
@@ -82,7 +81,7 @@ module.exports = robot => {
     if(!bot){
       setTimeout(() => {
         res.reply(natterus[getRandom(0, natterus.length)]);
-      },500);
+      }, 500);
     }
   });
 
@@ -92,8 +91,8 @@ module.exports = robot => {
     const { id, createdAt, user } = message;
     const { bot } = user;
     if(!bot){
-      const time2 = createdAt.slice(0,-1);
-      const JPNhour = (Number(time2.substr(11,2)) + 9) % 24; //日本時間に変換
+      const time2 = createdAt.slice(0, -1);
+      const JPNhour = (Number(time2.substr(11, 2)) + 9) % 24; //日本時間に変換
       const JPNhourStr = `0${JPNhour}`.slice(-2);
       const JPNtime = time2.replace(/T../, ' ' + JPNhourStr);
       res.send(`${JPNtime}\nhttps://q.trap.jp/messages/${id}`);

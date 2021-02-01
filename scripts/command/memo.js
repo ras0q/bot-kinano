@@ -4,6 +4,11 @@
 require('dotenv').config();
 const request = require('request');
 const cron = require('node-cron');
+const {
+  gt_Ras,
+  gtRB_log,
+  gitea
+} = require('../src/words').IDs;
 
 const option = (url, Q = {}) => ({
   uri: url,
@@ -18,7 +23,6 @@ const format = (memo) => (
     : '\n|:404_notfound.ex-large:|'
 );
 
-const gtR_ID ='f58c72a4-14f0-423c-9259-dbb4a90ca35f';
 const clientID = process.env.SHOWCASE_CLIENT_ID;
 const url = process.env.SHOWCASE_URL+ '/memo';
 
@@ -26,9 +30,9 @@ module.exports = robot => {
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
     const { bot, name } = res.message.message.user;
     if(!bot){
-      request.get(option(`${url}/${name}?client_id=${clientID}`), (error,respond,body) => {
+      request.get(option(`${url}/${name}?client_id=${clientID}`), (error, respond, body) => {
         if(error){
-          res.send('@Ras Error at memo.js: ' + error.toString());
+          res.send(`@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
         }
         else {
           const { memo } = body;
@@ -65,7 +69,7 @@ module.exports = robot => {
       const qs = {user: name, memo};
       request.patch(option(`${url}?client_id=${clientID}`, qs), (error, respond, body) => {
         if(error){
-          res.send('@Ras Error at memo.js: ' + error.toString());
+          res.send(`@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
         }
         else {
           const { memo } = body;
@@ -77,11 +81,14 @@ module.exports = robot => {
   });
 
   cron.schedule('0 0 8,16 * * *', () => {
-    request.get(option(`${url}/Ras?client_id=${clientID}`), (error,respond,body) => {
-      if(!error){
+    request.get(option(`${url}/Ras?client_id=${clientID}`), (error, respond, body) => {
+      if(error) {
+        robot.send({channelID: gtRB_log}, `@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
+      }
+      else {
         const { memo } = body;
         if(memo){
-          robot.send({channelID: gtR_ID}, `|memo\n|-${format(memo)}|`);
+          robot.send({channelID: gt_Ras}, `|memo\n|-${format(memo)}|`);
         }
       }
     });

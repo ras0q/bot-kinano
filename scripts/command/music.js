@@ -3,6 +3,10 @@
 
 const request = require('request');
 const { getRandom } = require('../modules/random');
+const {
+  gtRB_log,
+  gitea
+} = require('../src/words').IDs;
 
 const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
 
@@ -36,12 +40,9 @@ const extractValues = text => {
 };
 
 module.exports = robot => {
-  const logID = '82b9f8ad-17d9-4597-88f1-0375247a2487';
-
   //曲追加
   robot.hear(/^%add\s+.*/i, res => {
-    const { message } = res.message;
-    const { user, plainText } = message;
+    const { user, plainText } = res.message.message;
     const { name, bot } = user;
     if(!bot){
       const { title, url } = extractValues(plainText);
@@ -51,10 +52,13 @@ module.exports = robot => {
         url
       };
       request.post(option(qs), (error, _response, _body) => {
-        if(!error){
+        if(error) {
+          res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+        }
+        else {
           const addtable = `|User|Title|URL|\n|-|-|-|\n|:@${name}:${name}|${title}|${url}|\n`;
           res.send(`『${title}』を追加したやんね！\n${addtable}`);
-          robot.send({channelID: logID},'## 曲が追加されたやんね！\n'+ addtable);
+          robot.send({channelID: gtRB_log}, '## 曲が追加されたやんね！\n'+ addtable);
         }
       });
     }
@@ -62,8 +66,7 @@ module.exports = robot => {
 
   //曲削除
   robot.hear(/^%remove\s+[0-9]+/i, res => {
-    const { message } = res.message;
-    const { user, plainText } = message;
+    const { user, plainText } = res.message.message;
     const { name, bot } = user;
     if(!bot){
       const i = plainText.replace(/^%remove\s+/i, '');
@@ -74,7 +77,7 @@ module.exports = robot => {
           return;
         }
         if (body[idx].user !== name) {
-          res.send(`${name}には曲${idx}の削除権限がないやんね！:gahaha:`);
+          res.send(`${name}には曲${idx}の削除権限がないやんね！`);
           return;
         }
         const req = {
@@ -82,11 +85,11 @@ module.exports = robot => {
           headers: {'Content-type': 'application/json'},
           json: true
         };
-        request.delete(req, (error, _response, body) => {
-          console.log(JSON.stringify(body));
-          if (error !== null) {
-            res.send(`faild to remove id ${idx} song`);
-          } else {
+        request.delete(req, (error, _response, _body) => {
+          if(error) {
+            res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+          }
+          else {
             res.send(`曲${idx}を削除したやんね！`);
           }
         });
@@ -98,15 +101,17 @@ module.exports = robot => {
   robot.hear(/^%watch$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(error === null){
+        if(error) {
+          res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+        }
+        else {
           //表作成
           const table = [
             '|No.|User|Title|',
             '|-:|:-:|-|',
             '|例|:kinano:|きなこもちもちのうた|',
             ...body.map(({ user, title }, idx) => `|${idx}|:@${user}:|${title}|`)
-          ]
-            .join('\n') + '\n';
+          ].join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
         }
       });
@@ -120,7 +125,10 @@ module.exports = robot => {
       const { plainText } = res.message.message;
       const i = plainText.replace(/^%watch\s+/i, '');
       request.get(option(), (error, response, body) => {
-        if(error === null){
+        if(error) {
+          res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+        }
+        else {
           const { user, title, url } = body[parseInt(i)];
           const table = `${tableExample}\n|${i}|:@${user}:${user}|${title}|${url}|\n`;
           res.send(`## 曲${i}はこれ！\n${table}`);
@@ -134,7 +142,10 @@ module.exports = robot => {
     if(!res.message.message.user.bot){
       const tableExample = '|No.|User|Title|URL|\n|-:|-|-|-|'; //表の項目と例
       request.get(option(), (error, response, body) => {
-        if(error === null){
+        if(error) {
+          res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+        }
+        else {
           //表作成
           const i = getRandom(0, body.length);
           const { user, title, url } = body[i];
@@ -149,7 +160,10 @@ module.exports = robot => {
   robot.hear(/^%watch\s+all$/i, res => {
     if(!res.message.message.user.bot){
       request.get(option(), (error, response, body) => {
-        if(error === null){
+        if(error) {
+          res.send(`@Ras Error at ${gitea}/music.js: ${error.toString()}`);
+        }
+        else {
           //表作成
           const table = [
             '|No.|User|Title|URL|',
