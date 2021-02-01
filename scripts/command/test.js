@@ -11,7 +11,7 @@ module.exports = robot => {
 
   robot.respond(/info/, res => {
     if(res.message.message.channelId === gtRB_ID) {
-      res.send(`\`\`\`\n${JSON.stringify(res.message)}\n\`\`\``);
+      res.send(`\`\`\`\n${JSON.stringify(res.message, null, '\t')}\n\`\`\``);
     }
   });
 
