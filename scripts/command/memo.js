@@ -96,8 +96,7 @@ module.exports = robot => {
   });
 
   cron.schedule('0 0 8,16 * * *', () => {
-    const qs = {user: 'Ras'};
-    request.get(option(qs), (error, respond, body) => {
+    request.get(option(`${url}/Ras?client_id=${clientID}`), (error,respond,body) => {
       if(!error){
         const { memo } = body;
         if(memo){
