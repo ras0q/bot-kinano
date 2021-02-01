@@ -88,7 +88,7 @@ module.exports = robot => {
       else {
         const { memo } = body;
         if(memo){
-          robot.send({channelID: gt_Ras}, `|memo\n|-${format(memo)}|`);
+          robot.send({channelID: gt_Ras}, `|memo\n|-|\n${format(memo)}|`);
         }
       }
     });
