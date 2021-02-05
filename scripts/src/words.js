@@ -113,6 +113,10 @@ const is_not_mentioned = [
   {
     msg: /@BOT_cellophane join/,
     ans: 'せろはんちゃん！よろしくね！'
+  },
+  {
+    msg: /say/,
+    ans: 'せい！'
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
