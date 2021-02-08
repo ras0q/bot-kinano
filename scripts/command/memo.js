@@ -11,7 +11,7 @@ const {
 } = require('../src/words').IDs;
 
 const option = (url, Q = {}) => ({
-  uri: url,
+  uri: `${url}?client_id=${clientID}`,
   headers: {'Content-type': 'application/json'},
   qs: Q,
   json: true
@@ -19,8 +19,14 @@ const option = (url, Q = {}) => ({
 
 const format = (memo) => (
   memo !== ''
-    ? memo.replace(/\n/gi, '|\n|')
-    : '|:404_notfound.ex-large:'
+    ? memo.replace(/\n/g, '|\n|')
+    : ':404_notfound.ex-large:'
+);
+
+const table = (memo) => (
+  '|memo|\n' +
+  '|----|\n' +
+  `|${format(memo)}|`
 );
 
 const clientID = process.env.SHOWCASE_CLIENT_ID;
@@ -28,34 +34,41 @@ const url = process.env.SHOWCASE_URL+ '/memo';
 
 module.exports = robot => {
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
-    const { bot, name } = res.message.message.user;
+    // const { bot, name } = res.message.message.user;
+    const bot = false;
+    const name = 'Ras';
     if(!bot){
-      request.get(option(`${url}/${name}?client_id=${clientID}`), (error, respond, body) => {
+      request.get(option(`${url}/${name}`), (error, respond, body) => {
         if(error){
           res.send(`@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
         }
         else {
           const { memo } = body;
-          res.send(`|memo\n|-|\n${format(memo)}|`);
-          res.send({ type: 'stamp', name: 'writing_hand' });
+          console.log(memo);
+          res.send(
+            { type: 'stamp', name: 'writing_hand' },
+            table(memo)
+          );
         }
       });
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, res => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, res => {
     const { text, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, '');
       const Q = {user: name, memo};
-      request.post(option(`${url}?client_id=${clientID}`, Q), (error, _respond, _body) => {
+      request.post(option(url, Q), (error, _respond, _body) => {
         if(error){
-          res.send('@Ras Error at memo.js: ' + error.toString());
+          res.send(`@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
         }
         else{
-          res.send(`|memo|\n|-|\n${format(memo)}|`);
-          res.send({type: 'stamp', name: 'writing_hand'});
+          res.send(
+            { type: 'stamp', name: 'writing_hand' },
+            table(memo)
+          );
         }
       });
     }
@@ -67,28 +80,30 @@ module.exports = robot => {
     if(!bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, '');
       const qs = {user: name, memo};
-      request.patch(option(`${url}?client_id=${clientID}`, qs), (error, respond, body) => {
+      request.patch(option(url, qs), (error, respond, body) => {
         if(error){
           res.send(`@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
         }
         else {
           const { memo } = body;
-          res.send(`|memo|\n|-|\n${format(memo)}|`);
-          res.send({type: 'stamp', name: 'writing_hand'});
+          res.send(
+            { type: 'stamp', name: 'writing_hand' },
+            table(memo)
+          );
         }
       });
     }
   });
 
   cron.schedule('0 0 8,16 * * *', () => {
-    request.get(option(`${url}/Ras?client_id=${clientID}`), (error, respond, body) => {
+    request.get(option(`${url}/Ras`), (error, respond, body) => {
       if(error) {
         robot.send({channelID: gtRB_log}, `@Ras Error at ${gitea}/memo.js: ${error.toString()}`);
       }
       else {
         const { memo } = body;
-        if(memo){
-          robot.send({channelID: gt_Ras}, `|memo\n|-|\n${format(memo)}|`);
+        if(memo !== ''){
+          robot.send({channelID: gt_Ras}, table(memo));
         }
       }
     });
