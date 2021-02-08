@@ -20,7 +20,7 @@ const option = (url, Q = {}) => ({
 const format = (memo) => (
   memo !== ''
     ? memo.replace(/\n/gi, '|\n|')
-    : '\n|:404_notfound.ex-large:|'
+    : '|:404_notfound.ex-large:'
 );
 
 const clientID = process.env.SHOWCASE_CLIENT_ID;
