@@ -34,9 +34,7 @@ const url = process.env.SHOWCASE_URL+ '/memo';
 
 module.exports = robot => {
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
-    // const { bot, name } = res.message.message.user;
-    const bot = false;
-    const name = 'Ras';
+    const { bot, name } = res.message.message.user;
     if(!bot){
       request.get(option(`${url}/${name}`), (error, respond, body) => {
         if(error){
