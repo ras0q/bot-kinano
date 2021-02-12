@@ -110,7 +110,7 @@ module.exports = robot => {
     const { message }  = res.message;
     const { id, user } = message;
     if(!user.bot){
-      rp(op('post'))
+      rp(op('get'))
         .then((body) => {
           const table = [
             '|No.|User|Title|',
