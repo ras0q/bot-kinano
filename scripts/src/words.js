@@ -155,6 +155,5 @@ const IDs = {
   gtRB_log: '82b9f8ad-17d9-4597-88f1-0375247a2487',
   at_Ras: '82b9f8ad-17d9-4597-88f1-0375247a2487',
   at_kinano: 'f60166fb-c153-409a-811d-272426eda32b',
-  gitea: 'https://git.trap.jp/Ras/KNKbot/src/branch/master/scripts/command'
 };
 exports.IDs = IDs;

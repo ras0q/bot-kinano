@@ -10,6 +10,7 @@
     "hubot-traq": "^1.7.2",
     "node-cron": "^2.0.3",
     "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "twitter": "^1.7.1"
   },
   "engines": {

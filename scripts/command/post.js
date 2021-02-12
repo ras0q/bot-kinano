@@ -5,7 +5,7 @@ const cron = require('node-cron');
 const { getRandom } = require('../modules/random');
 
 module.exports = robot => {
-  const recent = 1188; //最新回
+  const recent = 1200; //最新回
   const scheduling = { // time は [0, 24) の整数の配列
     Z: {
       channelId: '2937b540-2991-44ce-91dd-504dd29f01e7',

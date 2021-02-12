@@ -2,10 +2,7 @@
 //  show a now trend of twitter.
 
 const Twitter = require('twitter');
-const {
-  gtRB_log,
-  gitea
-} = require('../src/words').IDs;
+const { at_Ras } = require('../src/words').IDs;
 
 module.exports = robot => {
   const client = new Twitter({
@@ -16,15 +13,14 @@ module.exports = robot => {
   });
 
   robot.hear(/^trend$/, res => {
-    const { bot, id } = res.message.message.user;
+    const { message } = res.message;
+    const { bot, id } = message.user;
     if(!bot){
       const params = {id: 23424856};
-      client.get('trends/place.json', params, (error, tweets, _response) => {
-        if (error) {
-          robot.send(
-            {channelID: gtRB_log},
-            `@Ras\nError at ${gitea}/trends.js\n\`\`\`${error}\`\`\`\nhttps://q.trap.jp/messages/${id}`
-          );
+      client.get('trends/place.json', params, (err, tweets, _response) => {
+        if (err) {
+          console.log(err);
+          robot.send({userID: at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
         }
         else {
           const trendTableMain = Object.keys(tweets[0].trends).map((_, idx) => {
