@@ -6,11 +6,11 @@
   "description": "This is Ras's bot.",
   "dependencies": {
     "@traptitech/traq": "^3.4.6-4",
-    "dotenv": "^8.2.0",
     "hubot": "^3.3.2",
     "hubot-traq": "^1.7.2",
     "node-cron": "^2.0.3",
     "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "twitter": "^1.7.1"
   },
   "engines": {
