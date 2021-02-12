@@ -4,5 +4,3 @@ startup: |
   npm ci
 entrypoint: exec node_modules/.bin/hubot -a traq -n "$HUBOT_TRAQ_NAME" "$@"
 http_proxy: 8080
-branch:
-  refactor: null
