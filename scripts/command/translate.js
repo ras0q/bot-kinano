@@ -46,14 +46,10 @@ module.exports = robot => {
       const txt = plainText.replace(/^tratra\s+/, '');
       rp(op(txt, '', 'en'))
         .then((body) => {
-          rp(op(body.text, '', 'en'))
-            .then((body2) => {
-              res.reply(`${body2.text}\n\n(${body.text})`);
-            })
-            .catch((err) => {
-              console.log(err);
-              robot.send({userID: at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
-            });
+          return rp(op(body.text, '', 'ja'));
+        })
+        .then((body2) => {
+          res.reply(body2.text);
         })
         .catch((err) => {
           console.log(err);

@@ -75,11 +75,11 @@ module.exports = robot => {
         .then((body) => {
           if (idx >= body.length) {
             res.send('index out of range!');
-            return;
+            throw new Error('Index out of range');
           }
           if (body[idx].user !== name) {
             res.send(`${name}には曲${idx}の削除権限がないやんね！`);
-            return;
+            throw new Error(`${name} cannot remove this song.`);
           }
           const req = {
             method: 'delete',
@@ -90,14 +90,10 @@ module.exports = robot => {
           return req;
         })
         .then((req) => {
-          rp(req)
-            .then(() => {
-              res.send(`曲${idx}を削除したやんね！`);
-            })
-            .catch((err) => {
-              console.log(err);
-              robot.send({userID: at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
-            });
+          return rp(req);
+        })
+        .then(() => {
+          res.send(`曲${idx}を削除したやんね！`);
         })
         .catch((err) => {
           console.log(err);
