@@ -29,11 +29,7 @@ exports.is_mentioned = is_mentioned;
 
 const is_not_mentioned = [
   {
-    msg: /^code$/,
-    ans: 'https://git.trap.jp/Ras/KNKbot'
-  },
-  {
-    msg: /(?<![tとト])(Ras|らす|ラス)(?!(ta|た|タ))/i,
+    msg: /(Ras|らす|ラス)/i,
     ans: {
       type: 'stamp',
       name: 'rascal'
@@ -51,24 +47,32 @@ const is_not_mentioned = [
     ans: 'やんね！'
   },
   {
-    msg: /(か[あ～]|car|[っう]かな|[やす]るぞ)/,
+    msg: /(か[あ～]|car|[やす]るぞ)/,
     ans: 'いいぞいいぞ'
   },
   {
-    msg: /[い言云]ってい?る$/,
+    msg: /[い言云]ってる$/,
     ans: 'いうな！'
-  },
-  {
-    msg: /(死|:si[^:]*:)$/,
-    ans: '死ぬな！'
   },
   {
     msg: /(おなか|お腹)/,
     ans: 'ぽんぽん！'
   },
   {
-    msg: /(助けて|たすけて|tasukete)/,
+    msg: /(たすけて|tasukete)/,
     ans: readme
+  },
+  {
+    msg: /いい？$/,
+    ans: 'いいよ'
+  },
+  {
+    msg: /^よ$/,
+    ans: 'よっっ！:v:'
+  },
+  {
+    msg: /^(ぼぶ[ー～]|たっくぼぶしろしろたいてっくとらっぷ)$/,
+    ans: '@takku_bobshiroshiro_titech_trap'
   },
   {
     msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
@@ -97,26 +101,6 @@ const is_not_mentioned = [
       type: 'stamp',
       name: 'oisu-4yoko'
     }
-  },
-  {
-    msg: /いい？$/,
-    ans: 'いいよ'
-  },
-  {
-    msg: /^よ$/,
-    ans: 'よっっ！:v:'
-  },
-  {
-    msg: /^(ぼぶ[ー～]|たっくぼぶしろしろたいてっくとらっぷ)$/,
-    ans: '@takku_bobshiroshiro_titech_trap'
-  },
-  {
-    msg: /@BOT_cellophane join/,
-    ans: 'せろはんちゃん！よろしくね！'
-  },
-  {
-    msg: /say/,
-    ans: 'せい！'
   }
 ];
 exports.is_not_mentioned = is_not_mentioned;
