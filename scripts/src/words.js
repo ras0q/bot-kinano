@@ -71,10 +71,6 @@ const is_not_mentioned = [
     ans: 'よっっ！:v:'
   },
   {
-    msg: /^(ぼぶ[ー～]|たっくぼぶしろしろたいてっくとらっぷ)$/,
-    ans: '@takku_bobshiroshiro_titech_trap'
-  },
-  {
     msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))([すスｽ]|(:oisu-3[^:]*:))/i,
     ans: {
       type: 'stamp',
