@@ -28,7 +28,7 @@ const readIcal = (url) => {
       });
       const nextEventKey = sortedKeys.find(key => (now < ics[key].start));
       const { summary, start } = ics[nextEventKey];
-      const displayName =  `きなの@${summary} は${start.getMonth()+1}/${start.getDate()} ${start.getHours()}:${('0'+start.getMinutes()).slice(-2)}から！`;
+      const displayName =  `きなの@${summary}は${start.getMonth()+1}/${start.getDate()} ${start.getHours()}:${('0'+start.getMinutes()).slice(-2)}から！`;
       traqapi.editMe({ displayName });
       return null;
     })
