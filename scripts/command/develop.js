@@ -1,12 +1,12 @@
-module.exports = robot => {
-  if (process.env.NODE_ENV === 'develop'){
+if (process.env.NODE_ENV === 'develop'){
+  module.exports = robot => {
     console.log(`\n\u001b[35mDEVELOPMENT ENVIRONMENT\nMy name is ${process.env.HUBOT_TRAQ_NAME}\u001b[0m`);
 
     robot.hear(/.*/i, res => {
       devInit(res.message);
     });
-  }
-};
+  };
+}
 
 const devInit = (message) => {
   message.message = {

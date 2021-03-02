@@ -23,7 +23,7 @@ module.exports = robot => {
   //起動時メッセージ
   robot.send(
     {channelID: IDs.gtRB_log},
-    `デプロイ完了${getMofu()} (${new Date().toLocaleString()})\n`
+    `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
   //メンション付きメッセージ
