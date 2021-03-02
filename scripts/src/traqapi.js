@@ -6,6 +6,7 @@ const TOKEN = process.env.HUBOT_TRAQ_ACCESS_TOKEN;
 const api = new Apis({
   accessToken: TOKEN
 });
+exports.api = api;
 
 exports.join = channelId => {
   return api.letBotJoinChannel(BOT_ID, { channelId });
