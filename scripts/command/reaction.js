@@ -27,6 +27,9 @@ module.exports = robot => {
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
+  traqapi.getMessage('7b2b67c8-d309-4e80-b84f-a01b8d7421b3').then(body=>console.log(body));
+
+
   //メンション付きメッセージ
   is_mentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {
@@ -90,7 +93,7 @@ module.exports = robot => {
     if(type === 'BotMessageStampsUpdated' && (stampName === 'eenyade' || stampName === 'eennyade') && Math.random() > 0.8){
       traqapi.getMessage(messageId)
         .then((body) => {
-          const { channelId } = body;
+          const { channelId } = body.data;
           robot.send({channelID: channelId},
             `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
           );
