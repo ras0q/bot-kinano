@@ -6,6 +6,7 @@ const fileNames = [
   'channel',
   'chat',
   'format',
+  'ical',
   'memo',
   'music',
   'post',

@@ -41,7 +41,7 @@ module.exports = robot => {
           const { memo } = body;
           res.send(
             { type: 'stamp', name: 'writing_hand' },
-            table(memo)
+            `めも！\n${table(memo)}`
           );
         })
         .catch((err) => {
@@ -61,7 +61,7 @@ module.exports = robot => {
         .then(() => {
           res.send(
             { type: 'stamp', name: 'writing_hand' },
-            table(memo)
+            `メモをアップデートしたやんね！:Hyperblob:\n${table(memo)}`
           );
         })
         .catch((err) => {
@@ -82,7 +82,7 @@ module.exports = robot => {
           const { memo } = body;
           res.send(
             { type: 'stamp', name: 'writing_hand' },
-            table(memo)
+            `メモをアップデートしたやんね！:partyparrot_blob:\n${table(memo)}`
           );
         })
         .catch((err) => {
@@ -97,7 +97,7 @@ module.exports = robot => {
       .then((body) => {
         const { memo } = body;
         if(memo !== ''){
-          robot.send({channelID: gt_Ras}, table(memo));
+          robot.send({channelID: gt_Ras}, `めも！\n${table(memo)}`);
         }
       })
       .catch((err) => {
