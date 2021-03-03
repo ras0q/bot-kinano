@@ -22,8 +22,8 @@ const getMofu = () => {
 };
 
 const isExecuted = (arr) => {
-  return arr.find((ele) => {
-    arr[ele].userId === IDs.at_kinano;
+  return arr.find((key) => {
+    key.userId === IDs.at_kinano;
   });
 };
 
@@ -93,7 +93,6 @@ module.exports = robot => {
   // BotMessageStampsUpdated
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
-    robot.send({userID: IDs.at_Ras}, stamps);
     const { stampName, userId } = stamps.slice(-1)[0];
     if(type === 'BotMessageStampsUpdated'){
       switch (stampName) {
@@ -116,11 +115,8 @@ module.exports = robot => {
       case 'Do_it':
         traqapi.getMessage(messageId)
           .then((body) => {
-            robot.send({userID: IDs.at_Ras}, body.data);
             const { channelId, content, stamps } = body.data;
             const regexp = new RegExp('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
-            robot.send({userID: IDs.at_Ras}, regexp.test(content));
-            robot.send({userID: IDs.at_Ras}, isExecuted(stamps));
             if (regexp.test(content) && !isExecuted(stamps)) {
               traqapi.addMessageStamp(messageId, '68c4cc50-487d-44a1-ade3-0808023037b8', {count: 100})
                 .then(() => {
