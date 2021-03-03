@@ -48,7 +48,10 @@ const is_not_mentioned = [
   },
   {
     msg: /(か[あ～]|car|[やす]るぞ)/,
-    ans: 'いいぞいいぞ'
+    ans: {
+      type: 'stamp',
+      name: 'iizo'
+    }
   },
   {
     msg: /[い言云]ってる$/,
@@ -64,7 +67,10 @@ const is_not_mentioned = [
   },
   {
     msg: /いい？$/,
-    ans: 'いいよ'
+    ans: {
+      type: 'stamp',
+      name: 'iiyo'
+    }
   },
   {
     msg: /^よ$/,
