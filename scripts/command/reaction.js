@@ -97,8 +97,8 @@ module.exports = robot => {
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
-        })
+          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+        });
     }
   });
 };
