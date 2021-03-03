@@ -93,22 +93,25 @@ module.exports = robot => {
   // BotMessageStampsUpdated
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
-    const { stampName, userId } = stamps[0];
+    const { stampName, userId } = stamps.slice(-1)[0];
     if(type === 'BotMessageStampsUpdated'){
+      robot.send({userID: IDs.at_Ras}, stamps);
       switch (stampName) {
       case 'eenyade':
       case 'eennyade':
-        traqapi.getMessage(messageId)
-          .then((body) => {
-            const { channelId } = body.data;
-            robot.send({channelID: channelId},
-              `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
-            );
-          })
-          .catch((err) => {
-            console.log(err);
-            robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
-          });
+        if(Math.random() > 0.9){
+          traqapi.getMessage(messageId)
+            .then((body) => {
+              const { channelId } = body.data;
+              robot.send({channelID: channelId},
+                `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+              robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+            });
+        }
         break;
       case 'Do_it':
         traqapi.getMessage(messageId)
