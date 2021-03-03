@@ -8,6 +8,7 @@ const {
   loops,
   IDs
 } = require('../src/words');
+const traqapi = require('../src/traqapi').api;
 const { getRandom } = require('../modules/random');
 
 //もふもふ
@@ -79,6 +80,25 @@ module.exports = robot => {
       setTimeout(() => {
         res.reply(natterus[getRandom(0, natterus.length)]);
       }, 500);
+    }
+  });
+
+  // BotMessageStampsUpdated
+  robot.catchAll(res => {
+    const { type, stamps, messageId } = res.message;
+    const { stampName, userId } = stamps[0];
+    if(type === 'BotMessageStampsUpdated' && (stampName === 'eenyade' || stampName === 'eennyade') && Math.random() > 0.8){
+      traqapi.getMessage(messageId)
+        .then((body) => {
+          const { channelId } = body;
+          robot.send({channelID: channelId},
+            `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+        })
     }
   });
 };
