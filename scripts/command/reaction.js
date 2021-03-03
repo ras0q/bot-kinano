@@ -113,6 +113,7 @@ module.exports = robot => {
       case 'Do_it':
         traqapi.getMessage(messageId)
           .then((body) => {
+            robot.send({userID: IDs.at_Ras}, body.data);
             const { channelId, content, stamps } = body.data;
             const regexp = new RegExp('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
             robot.send({userID: IDs.at_Ras}, regexp.test(content));
@@ -128,6 +129,7 @@ module.exports = robot => {
             console.log(err);
             robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
           });
+        break;
       }
     }
   });
