@@ -2,6 +2,7 @@
 //  reply or send messages when BOT_kinano receives specific words.
 
 const {
+  readme,
   natterus,
   is_mentioned,
   is_not_mentioned,
@@ -18,6 +19,12 @@ const getMofu = () => {
     .map(() => String.fromCodePoint(getRandom('ぁ'.codePointAt(0), 'ん'.codePointAt(0) + 1)))
     .join('');
   return r + r;
+};
+
+const isExecuted = (arr) => {
+  return arr.find((ele) => {
+    arr[ele].userId === IDs.at_kinano;
+  });
 };
 
 module.exports = robot => {
@@ -87,18 +94,39 @@ module.exports = robot => {
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
     const { stampName, userId } = stamps[0];
-    if(type === 'BotMessageStampsUpdated' && (stampName === 'eenyade' || stampName === 'eennyade') && Math.random() > 0.8){
-      traqapi.getMessage(messageId)
-        .then((body) => {
-          const { channelId } = body.data;
-          robot.send({channelID: channelId},
-            `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
-        });
+    if(type === 'BotMessageStampsUpdated'){
+      switch (stampName) {
+      case 'eenyade':
+      case 'eennyade':
+        traqapi.getMessage(messageId)
+          .then((body) => {
+            const { channelId } = body.data;
+            robot.send({channelID: channelId},
+              `!{"type":"user","raw":"いいわけないだろ！！！","id":"${userId}"}\nhttps://q.trap.jp/messages/${messageId}`
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+            robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+          });
+        break;
+      case 'Do_it':
+        traqapi.getMessage(messageId)
+          .then((body) => {
+            const { channelId, content, stamps } = body.data;
+            const regexp = new RegExp('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
+            if (regexp.test(content) && isExecuted(stamps)) {
+              traqapi.addMessageStamp(messageId, '68c4cc50-487d-44a1-ade3-0808023037b8', {count: 100})
+                .then(() => {
+                  robot.send({channelID: channelId}, readme);
+                });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+          });
+      }
     }
   });
 };

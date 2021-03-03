@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const readme = fs.readFileSync(path.resolve(__dirname, './README.md'), 'utf8');
+exports.readme = readme;
 
 const natterus = [
   ':yaya::koreni_natteru.large:',
