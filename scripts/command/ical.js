@@ -7,6 +7,13 @@ const { at_Ras } = require('../src/words');
 const baseURL = process.env.ICAL_URL;
 
 module.exports = robot => {
+  try {
+    readIcal(baseURL);
+  }
+  catch(err) {
+    robot.send({userID: at_Ras}, `## cron error\n${err}`);
+  }
+
   cron.schedule('0 * * * *', () => {
     try {
       readIcal(baseURL);
