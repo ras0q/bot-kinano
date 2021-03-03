@@ -93,9 +93,9 @@ module.exports = robot => {
   // BotMessageStampsUpdated
   robot.catchAll(res => {
     const { type, stamps, messageId } = res.message;
+    robot.send({userID: IDs.at_Ras}, stamps);
     const { stampName, userId } = stamps.slice(-1)[0];
     if(type === 'BotMessageStampsUpdated'){
-      robot.send({userID: IDs.at_Ras}, stamps);
       switch (stampName) {
       case 'eenyade':
       case 'eennyade':
