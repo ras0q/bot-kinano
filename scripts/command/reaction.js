@@ -22,9 +22,11 @@ const getMofu = () => {
 };
 
 const isExecuted = (arr) => {
-  return arr.find((key) => {
+  const res = arr.findIndex((key) => {
     key.userId === IDs.at_kinano;
   });
+  if (res === -1) return false;
+  return true;
 };
 
 module.exports = robot => {
