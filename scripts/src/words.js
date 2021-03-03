@@ -29,7 +29,7 @@ exports.is_mentioned = is_mentioned;
 
 const is_not_mentioned = [
   {
-    msg: /(Ras|らす|ラス)/i,
+    msg: /(?<![tとト])(ras|らす|ラス)|(ras|らす|ラス)(?!(ta|た|タ))/i,
     ans: {
       type: 'stamp',
       name: 'rascal'
