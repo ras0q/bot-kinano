@@ -27,9 +27,6 @@ module.exports = robot => {
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
-  traqapi.getMessage('7b2b67c8-d309-4e80-b84f-a01b8d7421b3').then(body=>console.log(body));
-
-
   //メンション付きメッセージ
   is_mentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {
