@@ -2,10 +2,11 @@
 //  post articles to specific channels.
 
 const cron = require('node-cron');
+const Sitemapper = require('sitemapper');
 const { getRandom } = require('../modules/random');
+const { at_Ras } = require('../src/words');
 
 module.exports = robot => {
-  const recent = 1200; //最新回
   const scheduling = { // time は [0, 24) の整数の配列
     Z: {
       channelId: '2937b540-2991-44ce-91dd-504dd29f01e7',
@@ -20,9 +21,18 @@ module.exports = robot => {
       time: [5]
     }
   };
-  Object.values(scheduling).forEach(({channelId, time}) => {
-    cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * * `, () => {
-      robot.send({ channelID: channelId }, `https://trap.jp/post/${getRandom(1, recent+1)}`);
-    }, { timezone: 'Asia/Tokyo' });
-  });
+
+  const sitemap = new Sitemapper();
+  sitemap.fetch('https://trap.jp/sitemap.xml')
+    .then(({sites}) => {
+      Object.values(scheduling).forEach(({channelId, time}) => {
+        cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * * `, () => {
+          robot.send({ channelID: channelId }, sites[getRandom(0, sites.length())]);
+        }, { timezone: 'Asia/Tokyo' });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      robot.send({userID: at_Ras}, `## cron error\n${err}`);
+    });
 };

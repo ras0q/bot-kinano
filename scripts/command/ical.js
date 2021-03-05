@@ -11,7 +11,7 @@ module.exports = robot => {
     readIcal(baseURL);
   }
   catch(err) {
-    robot.send({userID: at_Ras}, `## cron error\n${err}`);
+    robot.send({userID: at_Ras}, `## error\n${err}`);
   }
 
   cron.schedule('0 * * * *', () => {
