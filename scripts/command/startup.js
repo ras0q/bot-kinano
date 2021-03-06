@@ -28,7 +28,7 @@ module.exports = robot => {
   sitemap.fetch('https://trap.jp/sitemap-posts.xml')
     .then(({sites}) => {
       Object.values(scheduling).forEach(({channelId, time}) => {
-        cron.schedule(`* ${time.map(h => h.toString()).join(',')} * * * `, () => {
+        cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * * `, () => {
           robot.send({channelID: channelId}, sites[getRandom(0, sites.length)]);
           console.log('cron end');
         }, { timezone: 'Asia/Tokyo' });
