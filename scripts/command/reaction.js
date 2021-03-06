@@ -11,15 +11,7 @@ const {
 } = require('../src/words');
 const traqapi = require('../src/traqapi').api;
 const { getRandom } = require('../modules/random');
-
-//もふもふ
-const getMofu = () => {
-  const r = new Array(2)
-    .fill(null)
-    .map(() => String.fromCodePoint(getRandom('ぁ'.codePointAt(0), 'ん'.codePointAt(0) + 1)))
-    .join('');
-  return r + r;
-};
+const { getMofu } = require('../modules/mofu2');
 
 const isExecuted = (arr) => {
   const res = arr.findIndex((key) => {
@@ -30,12 +22,6 @@ const isExecuted = (arr) => {
 };
 
 module.exports = robot => {
-  //起動時メッセージ
-  robot.send(
-    {channelID: IDs.gtRB_log},
-    `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
-  );
-
   //メンション付きメッセージ
   is_mentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {

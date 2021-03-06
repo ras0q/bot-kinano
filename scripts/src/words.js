@@ -144,3 +144,19 @@ const IDs = {
   at_kinano: 'f60166fb-c153-409a-811d-272426eda32b',
 };
 exports.IDs = IDs;
+
+const scheduling = { // time は [0, 24) の整数の配列
+  Z: {
+    channelId: '2937b540-2991-44ce-91dd-504dd29f01e7',
+    time: [8]
+  },
+  Kamijo: {
+    channelId: '2fab81dd-a750-4699-a9c5-3fc13ab9bcee',
+    time: [8, 21]
+  },
+  d_etteiu8383: {
+    channelId: '9f452f69-2bc2-40ee-a165-7e7ca251116d',
+    time: [5]
+  }
+};
+exports.scheduling = scheduling;
