@@ -25,12 +25,12 @@ module.exports = robot => {
 
   //postのcronセット
   const sitemap = new Sitemapper();
-  sitemap.fetch('https://trap.jp/sitemap.xml')
+  sitemap.fetch('https://trap.jp/sitemap-posts.xml')
     .then(({sites}) => {
-      robot.send({channelID: gtRB_log}, 'site crawling was sucseeded');
       Object.values(scheduling).forEach(({channelId, time}) => {
-        cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * * `, () => {
-          robot.send({channelID: channelId}, sites[getRandom(0, sites.length())]);
+        cron.schedule(`* ${time.map(h => h.toString()).join(',')} * * * `, () => {
+          robot.send({channelID: channelId}, sites[getRandom(0, sites.length)]);
+          console.log('cron end');
         }, { timezone: 'Asia/Tokyo' });
       });
     })
@@ -38,6 +38,7 @@ module.exports = robot => {
       console.log(err);
       robot.send({userID: at_Ras}, `## cron error\n${err}`);
     });
+
 };
 
 const devInit = (message) => {
