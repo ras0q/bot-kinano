@@ -2,14 +2,13 @@
 //  All commands will be run here.
 
 const fileNames = [
-  'develop',
+  'startup',
   'channel',
   'chat',
   'format',
   'ical',
   'memo',
   'music',
-  'post',
   'reaction',
   'test',
   'translate',

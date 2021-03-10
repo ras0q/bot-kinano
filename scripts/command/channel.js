@@ -16,7 +16,7 @@ module.exports = robot => {
         res.reply(':oisu-1::oisu-2::oisu-3::oisu-4yoko:');
       }, 500);
       setTimeout(() => {
-        res.reply('きなのの機能は以下のコマンドで見れるやんね！\n`@BOT_kinano できること`');
+        res.reply('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
       }, 2000);
     }
     catch(err) {
