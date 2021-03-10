@@ -8,6 +8,8 @@ const { getMofu } = require('../modules/mofu2');
 const { scheduling, IDs } = require('../src/words');
 const { gtRB_log, at_Ras } = IDs;
 
+let trapBlogMapper = null;
+
 module.exports = robot => {
   //dev環境
   if (process.env.NODE_ENV === 'develop'){
@@ -24,21 +26,28 @@ module.exports = robot => {
   );
 
   //postのcronセット
-  const sitemap = new Sitemapper();
-  sitemap.fetch('https://trap.jp/sitemap-posts.xml')
-    .then(({sites}) => {
-      Object.values(scheduling).forEach(({channelId, time}) => {
-        cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * * `, () => {
-          robot.send({channelID: channelId}, sites[getRandom(0, sites.length)]);
-          console.log('cron end');
-        }, { timezone: 'Asia/Tokyo' });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      robot.send({userID: at_Ras}, `## cron error\n${err}`);
-    });
+  const trapBlog = new Sitemapper({
+    url: 'https://trap.jp/sitemap-posts.xml'
+  });
+  const fetchSiteMap = async () => {
+    try {
+      const { sites } = await trapBlog.fetch();
+      trapBlogMapper = sites;
+    } catch (err) {
+      console.error(err);
+      robot.send({userID: at_Ras}, `## get blog error\n  ${err}`);
+    }
+  };
+  fetchSiteMap();
+  cron.schedule('0 0 * * *', () => {fetchSiteMap;}); // 毎日 update
 
+  [...scheduling.values()].forEach(({channelId, time}) => {
+    cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * *`, () => {
+      if (trapBlogMapper === null) return;
+      robot.send({channelID: channelId}, trapBlogMapper[getRandom(0, trapBlogMapper.length)]);
+      console.log('cron end');
+    }, { timezone: 'Asia/Tokyo' });
+  });
 };
 
 const devInit = (message) => {

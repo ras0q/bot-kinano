@@ -13,13 +13,7 @@ const traqapi = require('../src/traqapi').api;
 const { getRandom } = require('../modules/random');
 const { getMofu } = require('../modules/mofu2');
 
-const isExecuted = (arr) => {
-  const res = arr.findIndex((key) => {
-    key.userId === IDs.at_kinano;
-  });
-  if (res === -1) return false;
-  return true;
-};
+const isExecuted = users => users.some(user => user.userId === IDs.at_kinano);
 
 module.exports = robot => {
   //メンション付きメッセージ
