@@ -80,6 +80,7 @@ module.exports = robot => {
       switch (stampName) {
       case 'eenyade':
       case 'eennyade':
+      case 'eenyadesu':
         if(Math.random() > 0.9){
           traqapi.getMessage(messageId)
             .then((body) => {
