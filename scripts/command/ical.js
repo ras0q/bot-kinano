@@ -2,7 +2,7 @@ const ical = require('ical');
 const rp = require('request-promise');
 const cron = require('node-cron');
 const traqapi = require('../src/traqapi').api;
-const { at_Ras } = require('../src/words');
+const { at_Ras } = require('../src/words').IDs;
 
 const baseURL = process.env.ICAL_URL;
 

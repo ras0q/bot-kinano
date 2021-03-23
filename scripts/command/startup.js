@@ -45,7 +45,6 @@ module.exports = robot => {
     cron.schedule(`0 ${time.map(h => h.toString()).join(',')} * * *`, () => {
       if (trapBlogMapper === null) return;
       robot.send({channelID: channelId}, trapBlogMapper[getRandom(0, trapBlogMapper.length)]);
-      console.log('cron end');
     }, { timezone: 'Asia/Tokyo' });
   });
 };
