@@ -53,7 +53,7 @@ module.exports = robot => {
       };
       rp(op('post', qs))
         .then(() => {
-          const addtable = `|User|Title|URL|\n|-|-|-|\n|:@${name}:${name}|${title}|${url}|\n`;
+          const addtable = `|User|Title|\n|-|-|\n|:@${name}:${name}|${title}|\n`;
           res.send(`『${title}』を追加したやんね！\n${addtable}`);
           robot.send({channelID: gtRB_log}, '## 曲が追加されたやんね！\n'+ addtable);
         })
