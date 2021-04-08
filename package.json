@@ -1,6 +1,6 @@
 {
   "name": "rasbot",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "author": "Ras",
   "description": "This is Ras's bot.",
@@ -14,9 +14,6 @@
     "request-promise": "^4.2.6",
     "sitemapper": "^3.1.12",
     "twitter": "^1.7.1"
-  },
-  "engines": {
-    "node": "0.10.x"
   },
   "devDependencies": {
     "eslint": "^7.17.0"
