@@ -53,10 +53,9 @@ module.exports = robot => {
       };
       rp(op('post', qs))
         .then(() => {
-          const addTable = `|User|Title|\n|-|-|\n|:@${name}:${name}|${title}|\n`;
-          const addTableWithUrl = `|User|Title|URL|\n|-|-|-|\n|:@${name}:${name}|${title}|${url}|\n`;
-          res.send(`『${title}』を追加したやんね！\n${addTable}`);
-          robot.send({channelID: gtRB_log}, '## 曲が追加されたやんね！\n'+ addTableWithUrl);
+          const addTable = `|User|Title|URL|\n|-|-|-|\n|:@${name}.large:${name}|${title}|${url}|\n`;
+          res.reply(`『${title}』を追加したやんね！`);
+          robot.send({channelID: gtRB_log}, '## 曲が追加されたやんね！\n'+ addTable);
         })
         .catch((err) =>{
           console.log(err);
