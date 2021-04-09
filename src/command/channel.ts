@@ -2,11 +2,12 @@
 //  Let BOT_kinano join to or leave from a channel.
 
 import { join, leave } from '../src/traqapi';
+import { Robots } from '../src/types';
 import { IDs } from '../src/words';
 
-module.exports = (robot: any) =>{
+module.exports = (robot: Robots) =>{
   //監視対象に追加
-  robot.respond(/(いらっしゃい|join)$/i, (res: any) => {
+  robot.respond(/(いらっしゃい|join)$/i, res => {
     const { message } = res.message;
     const { channelId, id } = message;
     robot.send({userID: IDs.at_Ras}, `## join\n https://q.trap.jp/messages/${id}`);
@@ -25,7 +26,7 @@ module.exports = (robot: any) =>{
   });
 
   //監視対象から解除
-  robot.respond(/(ばいばい|バイバイ|bye)$/i, (res: any) => {
+  robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
     const { message } = res.message;
     const { channelId, id } = message;
     robot.send(

@@ -4,10 +4,11 @@
 import requestPromise from 'request-promise';
 import { getRandom } from '../utils/random';
 import { IDs } from '../src/words';
+import { Robots } from '../src/types';
 
 const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
 
-const op = (method: any, qs?: any) => ({
+const op = (method: string, qs?: unknown) => ({
   method,
   uri: url,
   qs,
@@ -35,8 +36,8 @@ const extractValues = (text: string) => {
   return values;
 };
 
-module.exports = (robot: any) =>{
-  robot.hear(/^%add\s+.*/i, (res: any) => {
+module.exports = (robot: Robots) =>{
+  robot.hear(/^%add\s+.*/i, res => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     const { bot, name } = user;
@@ -60,7 +61,7 @@ module.exports = (robot: any) =>{
     }
   });
 
-  robot.hear(/^%remove\s+[0-9]+/i, (res: any) => {
+  robot.hear(/^%remove\s+[0-9]+/i, res => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     const { name, bot } = user;
@@ -98,7 +99,7 @@ module.exports = (robot: any) =>{
     }
   });
 
-  robot.hear(/^%watch$/i, (res: any) => {
+  robot.hear(/^%watch$/i, res => {
     const { message }  = res.message;
     const { id, user } = message;
     if(!user.bot){
@@ -122,7 +123,7 @@ module.exports = (robot: any) =>{
   });
 
   //URLつき、番号指定
-  robot.hear(/^%watch\s+[0-9]+/i, (res: any) => {
+  robot.hear(/^%watch\s+[0-9]+/i, res => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     if(!user.bot){
@@ -145,7 +146,7 @@ module.exports = (robot: any) =>{
   });
 
   //URLつき、番号random
-  robot.hear(/^%watch\s+r$/i, (res: any) => {
+  robot.hear(/^%watch\s+r$/i, res => {
     const { message } = res.message;
     const { id, user } = message;
     if(!user.bot){
@@ -168,7 +169,7 @@ module.exports = (robot: any) =>{
   });
 
   //URLつき、全部
-  robot.hear(/^%watch\s+all$/i, (res: any) => {
+  robot.hear(/^%watch\s+all$/i, res => {
     const { message } = res.message;
     const { id, user } = message;
     if(!user.bot){
