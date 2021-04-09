@@ -11,7 +11,7 @@ let trapBlogMapper: any = null;
 
 module.exports = (robot: any) =>{
   //dev環境
-  if (process.env.NODE_ENV === 'develop'){
+  if (process.env.KINANO_WORK_ENV === 'develop'){
     console.log(`\n\u001b[35mDEVELOPMENT ENVIRONMENT\nMy name is ${process.env.HUBOT_TRAQ_NAME}\u001b[0m`);
     robot.hear(/.*/i, (res: any) => {
       devInit(res.message);
