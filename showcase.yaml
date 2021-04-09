@@ -1,7 +1,8 @@
 type: runtime
 startup: |
   npm install -g coffee-script
+  cp src/src/README.md scripts/src/help.md
   npm ci
-  npx tsc
+  node_modules/.bin/tsc
 entrypoint: exec node_modules/.bin/hubot -a traq -n "$HUBOT_TRAQ_NAME" "$@"
 http_proxy: 8080
