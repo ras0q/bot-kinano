@@ -1,0 +1,23 @@
+import { Apis } from '@traptitech/traq';
+
+const BOT_ID = process.env.HUBOT_TRAQ_BOT_ID;
+const TOKEN = process.env.HUBOT_TRAQ_ACCESS_TOKEN;
+
+if (!BOT_ID) {
+  throw new Error('HUBOT_TRAQ_BOT_ID should not be empty.');
+}
+if (!TOKEN) {
+  throw new Error('HUBOT_TRAQ_ACCESS_TOKEN should not be empty.');
+}
+
+export const api = new Apis({
+  accessToken: TOKEN
+});
+
+export const join = (channelId: string) => {
+  return api.letBotJoinChannel(BOT_ID, { channelId });
+};
+
+export const leave = (channelId: string) => {
+  return api.letBotLeaveChannel(BOT_ID, { channelId });
+};

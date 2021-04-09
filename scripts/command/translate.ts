@@ -1,10 +1,10 @@
 //Description:
 //  translate words.
 
-const rp = require('request-promise');
-const { at_Ras } = require('../src/words').IDs;
+import rp from 'request-promise';
+import { IDs } from '../src/words';
 
-const op = (txt, src, tar) => ({
+const op = (txt: string, src: string, tar: string) => ({
   uri: 'https://script.google.com/macros/s/AKfycby3sNNJlWubQB4q_K4xHjZnpCxaCtYzbcuPmT-r9PJGTs4ZMb0/exec',
   headers: {'Content-type': 'application/json'},
   qs: {
@@ -15,9 +15,9 @@ const op = (txt, src, tar) => ({
   json: true
 });
 
-module.exports = robot => {
+module.exports = (robot: any) => {
   //翻訳(デフォルトは日=>英)
-  robot.hear(/^tra\s+/i, res => {
+  robot.hear(/^tra\s+/i, (res: any) => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     if(!user.bot){
@@ -33,13 +33,13 @@ module.exports = robot => {
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
         });
     }
   });
 
   //逆翻訳
-  robot.hear(/^tratra\s+/i, res => {
+  robot.hear(/^tratra\s+/i, (res: any) => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     if(!user.bot){
@@ -53,7 +53,7 @@ module.exports = robot => {
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
         });
     }
   });

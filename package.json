@@ -16,9 +16,13 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "eslint": "^7.17.0"
+    "@types/node-cron": "^2.0.3",
+    "@types/request-promise": "^4.1.47",
+    "eslint": "^7.23.0",
+    "typescript": "^4.2.4"
   },
   "scripts": {
-    "lint": "eslint ./scripts --fix"
+    "lint": "eslint ./scripts --fix",
+    "start": "npm ci && tsc && ./bin/hubot"
   }
 }

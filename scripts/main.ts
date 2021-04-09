@@ -5,20 +5,17 @@ const fileNames = [
   'startup',
   'channel',
   'chat',
-  'format',
-  // 'ical',
   'memo',
   'music',
   'reaction',
   'test',
   'translate',
-  'trends'
 ];
-const commands = {};
+const commands: { [key:string]: any } = {};
 fileNames.forEach(name =>
   commands[name] = require(`./command/${name}`)
 );
 
-module.exports = robot => {
+module.exports = (robot: any) =>{
   Object.values(commands).forEach(func => func(robot));
 };

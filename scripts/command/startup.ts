@@ -1,27 +1,26 @@
 //Description:
 //  StartUp
 
-const cron = require('node-cron');
-const Sitemapper = require('sitemapper');
-const { getRandom } = require('../modules/random');
-const { getMofu } = require('../modules/mofu2');
-const { scheduling, IDs } = require('../src/words');
-const { gtRB_log, at_Ras } = IDs;
+import cron from 'node-cron';
+import Sitemapper from 'sitemapper';
+import { getRandom } from '../utils/random';
+import { getMofu } from '../utils/mofu';
+import { scheduling, IDs } from '../src/words';
 
-let trapBlogMapper = null;
+let trapBlogMapper: any = null;
 
-module.exports = robot => {
+module.exports = (robot: any) =>{
   //dev環境
   if (process.env.NODE_ENV === 'develop'){
     console.log(`\n\u001b[35mDEVELOPMENT ENVIRONMENT\nMy name is ${process.env.HUBOT_TRAQ_NAME}\u001b[0m`);
-    robot.hear(/.*/i, res => {
+    robot.hear(/.*/i, (res: any) => {
       devInit(res.message);
     });
   }
 
   //起動時メッセージ
   robot.send(
-    {channelID: gtRB_log},
+    {channelID: IDs.gtRB_log},
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 
@@ -35,7 +34,7 @@ module.exports = robot => {
       trapBlogMapper = sites;
     } catch (err) {
       console.error(err);
-      robot.send({userID: at_Ras}, `## get blog error\n  ${err}`);
+      robot.send({userID: IDs.at_Ras}, `## get blog error\n  ${err}`);
     }
   };
   fetchSiteMap();
@@ -49,7 +48,7 @@ module.exports = robot => {
   });
 };
 
-const devInit = (message) => {
+const devInit = (message: any) => {
   message.message = {
     id: '00000000-0000-0000-0000-000000000000',
     user: {

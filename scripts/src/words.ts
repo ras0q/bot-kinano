@@ -1,18 +1,17 @@
-const path = require('path');
-const fs = require('fs');
-const readme = fs.readFileSync(path.resolve(__dirname, './README.md'), 'utf8');
-exports.readme = readme;
+import path from 'path';
+import fs from 'fs';
 
-const natterus = [
+export const readme = fs.readFileSync(path.resolve(__dirname, './README.md'), 'utf8');
+
+export const natterus = [
   ':yaya::koreni_natteru.large:',
   ...new Array(4).fill(null).map((_, idx) =>
     `:koreni_natteru.ex-large${'.rotate'.repeat(idx + 1)}:`
   ),
   ...new Array(9).fill('なるな！')
 ];
-exports.natterus = natterus;
 
-const is_mentioned = [
+export const is_mentioned = [
   {
     msg: /hoge$/i,
     ans: 'huga'
@@ -26,9 +25,8 @@ const is_mentioned = [
     ans: 'きなこもち～～～～～！'
   },
 ];
-exports.is_mentioned = is_mentioned;
 
-const is_not_mentioned = [
+export const is_not_mentioned = [
   {
     msg: /(?<![tとト])(ras|らす|ラス)|(ras|らす|ラス)(?!(ta|た|タ))/i,
     ans: {
@@ -106,9 +104,8 @@ const is_not_mentioned = [
     }
   }
 ];
-exports.is_not_mentioned = is_not_mentioned;
 
-const loops = [
+export const loops = [
   {
     msg: /([おぉオォｵｫ]|(:oisu-1[^:]*:))([いぃイィｲｨｨ]|(:oisu-2[^:]*:))(?!([すスｽ]|(:oisu-3[^:]*:)))/g,
     ans: 'おい'
@@ -134,18 +131,16 @@ const loops = [
     ans: 'うんうん'
   }
 ];
-exports.loops = loops;
 
-const IDs = {
+export const IDs = {
   gt_Ras: 'f58c72a4-14f0-423c-9259-dbb4a90ca35f',
   gtR_Bot: '2a5616d5-5d69-4716-8377-1e1fb33278fe',
   gtRB_log: '82b9f8ad-17d9-4597-88f1-0375247a2487',
   at_Ras: '0fa5d740-0841-4b88-b7c8-34a68774c784',
   at_kinano: 'f60166fb-c153-409a-811d-272426eda32b',
 };
-exports.IDs = IDs;
 
-const scheduling = { // time は [0, 24) の整数の配列
+export const scheduling = { // time は [0, 24) の整数の配列
   Z: {
     channelId: '2937b540-2991-44ce-91dd-504dd29f01e7',
     time: [8]
@@ -159,4 +154,3 @@ const scheduling = { // time は [0, 24) の整数の配列
     time: [5]
   }
 };
-exports.scheduling = scheduling;

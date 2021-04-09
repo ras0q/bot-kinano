@@ -1,24 +1,17 @@
 //Description:
 //  reply or send messages when BOT_kinano receives specific words.
 
-const {
-  readme,
-  natterus,
-  is_mentioned,
-  is_not_mentioned,
-  loops,
-  IDs
-} = require('../src/words');
-const traqapi = require('../src/traqapi').api;
-const { getRandom } = require('../modules/random');
-const { getMofu } = require('../modules/mofu2');
+import { api } from '../src/traqapi';
+import { getRandom } from '../utils/random';
+import { getMofu } from '../utils/mofu';
+import * as words from '../src/words';
 
-const isExecuted = users => users.some(user => user.userId === IDs.at_kinano);
+const isExecuted = (users: any) => users.some((user: any) => user.userId === words.IDs.at_kinano);
 
-module.exports = robot => {
+module.exports = (robot: any) =>{
   //メンション付きメッセージ
-  is_mentioned.forEach(({ msg, ans }) => {
-    robot.respond(msg, res => {
+  words.is_mentioned.forEach(({ msg, ans }) => {
+    robot.respond(msg, (res: any) => {
       if(!res.message.message.user.bot){
         setTimeout(() => {
           res.reply(ans); //replyでメンション付きメッセージ
@@ -28,8 +21,8 @@ module.exports = robot => {
   });
 
   // メンション無しメッセージ
-  is_not_mentioned.forEach(({ msg, ans }) => {
-    robot.hear(msg, res => {
+  words.is_not_mentioned.forEach(({ msg, ans }) => {
+    robot.hear(msg, (res: any) => {
       if(!res.message.message.user.bot){
         setTimeout(() => {
           res.send(ans); //sendでメンション無しメッセージ
@@ -39,8 +32,8 @@ module.exports = robot => {
   });
 
   //loops
-  loops.forEach(({ msg, ans }) => {
-    robot.hear(msg, res => {
+  words.loops.forEach(({ msg, ans }) => {
+    robot.hear(msg, (res: any) => {
       const { message } = res.message;
       const { plainText, user } = message;
       if(!user.bot){
@@ -55,7 +48,7 @@ module.exports = robot => {
   });
 
   //もふもふ
-  robot.hear(/もふもふ/, res => {
+  robot.hear(/もふもふ/, (res: any) => {
     if(!res.message.message.user.bot){
       setTimeout(() => {
         res.send(getMofu());
@@ -64,16 +57,16 @@ module.exports = robot => {
   });
 
   //なってる
-  robot.hear(/なってる$/, res => {
+  robot.hear(/なってる$/, (res: any) => {
     if(!res.message.message.user.bot){
       setTimeout(() => {
-        res.reply(natterus[getRandom(0, natterus.length)]);
+        res.reply(words.natterus[getRandom(0, words.natterus.length)]);
       }, 500);
     }
   });
 
   // BotMessageStampsUpdated
-  robot.catchAll(res => {
+  robot.catchAll((res: any) => {
     const { type, stamps, messageId } = res.message;
     const { stampName, userId } = stamps.slice(-1)[0];
     if(type === 'BotMessageStampsUpdated'){
@@ -82,7 +75,7 @@ module.exports = robot => {
       case 'eennyade':
       case 'eenyadesu':
         if(Math.random() > 0.9){
-          traqapi.getMessage(messageId)
+          api.getMessage(messageId)
             .then((body) => {
               const { channelId } = body.data;
               robot.send({channelID: channelId},
@@ -91,25 +84,25 @@ module.exports = robot => {
             })
             .catch((err) => {
               console.log(err);
-              robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+              robot.send({userID: words.IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
             });
         }
         break;
       case 'Do_it':
-        traqapi.getMessage(messageId)
+        api.getMessage(messageId)
           .then((body) => {
             const { channelId, content, stamps } = body.data;
             const regexp = new RegExp('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
             if (regexp.test(content) && !isExecuted(stamps)) {
-              traqapi.addMessageStamp(messageId, '68c4cc50-487d-44a1-ade3-0808023037b8', {count: 100})
+              api.addMessageStamp(messageId, '68c4cc50-487d-44a1-ade3-0808023037b8', {count: 100})
                 .then(() => {
-                  robot.send({channelID: channelId}, readme);
+                  robot.send({channelID: channelId}, words.readme);
                 });
             }
           })
           .catch((err) => {
             console.log(err);
-            robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
+            robot.send({userID: words.IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${messageId}`);
           });
         break;
       }
