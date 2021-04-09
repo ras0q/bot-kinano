@@ -2,6 +2,7 @@
 type UUID = string
 type Time = string
 import { MessageStamp } from '@traptitech/traq';
+import Hubot from 'hubot';
 
 // 参考: https://bot-console.trap.jp/docs/bot/events
 export type TraqUser = {
@@ -142,14 +143,14 @@ export type RobotResponseActions = {
 }
 
 export type RobotHearResponse = {
-  message: MessageCreated & Pick<MessageCreated['message'], 'embedded' | 'createdAt' | 'updatedAt'>
+  message: MessageCreated & Pick<MessageCreated['message'], 'embedded' | 'createdAt' | 'updatedAt'> & Hubot.TextMessage
 } & RobotResponseActions
 export type RobotRespondResponse = RobotHearResponse
 export type RobotTopicResponse = {
-  message: ChannelTopicChanged
+  message: ChannelTopicChanged & Hubot.TopicMessage
 } & RobotResponseActions
 export type RobotCatchAllResponse = {
-  message: RobotEvents[keyof RobotEvents]
+  message: RobotEvents[keyof RobotEvents] & Hubot.CatchAllMessage
 }
 
 export declare class Robots {

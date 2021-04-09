@@ -60,8 +60,8 @@ const devInit = (message: RobotHearResponse['message']) => {
       bot: false
     },
     channelId: '00000000-0000-0000-0000-000000000000',
-    text: message.message.text,
-    plainText: message.message.plainText,
+    text: message.text,
+    plainText: message.text,
     embedded: [
       {
         raw: '@BOT_kinano',
