@@ -3,6 +3,7 @@ type UUID = string
 type Time = string
 import { MessageStamp } from '@traptitech/traq';
 
+// 参考: https://bot-console.trap.jp/docs/bot/events
 export type TraqUser = {
   id: UUID
   name: string
@@ -92,7 +93,7 @@ export type Joined = {
 }
 export type Left = Joined
 
-
+// 参考: https://github.com/sapphi-red/hubot-traq/wiki
 export declare class RobotEvents {
   ChannelCreated: {
     type: 'ChannelCreated'
