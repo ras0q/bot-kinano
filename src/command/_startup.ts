@@ -7,7 +7,7 @@ import { getRandom } from '../utils/random';
 import { getMofu } from '../utils/mofu';
 import { scheduling, IDs } from '../src/words';
 
-let trapBlogMapper: any = null;
+let trapBlogMapper: null | string[] = null;
 
 module.exports = (robot: any) =>{
   //dev環境
