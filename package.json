@@ -24,7 +24,7 @@
   },
   "scripts": {
     "lint": "eslint ./src --fix",
-    "build": "npm ci && tsc && cp src/src/README.md scripts/src/help.md",
+    "build": "npm ci && tsc && cp src/src/help.md scripts/src/help.md",
     "start": "npm run build && ./bin/hubot"
   }
 }
