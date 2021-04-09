@@ -7,8 +7,8 @@ export const natterus = [
   ':yaya::koreni_natteru.large:',
   ...new Array(4).fill(null).map((_, idx) =>
     `:koreni_natteru.ex-large${'.rotate'.repeat(idx + 1)}:`
-  ),
-  ...new Array(9).fill('なるな！')
+  ) as string[],
+  ...new Array(9).fill('なるな！') as string[]
 ];
 
 export const is_mentioned = [

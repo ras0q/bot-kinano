@@ -1,7 +1,7 @@
 import { getRandom } from './random';
 
 //もふもふ
-export const getMofu = () => {
+export const getMofu = (): string => {
   const start = 'ぁ'.codePointAt(0);
   const end = 'ん'.codePointAt(0);
   if (!(start && end)) throw new Error('codePointAt returned undefined'); //ないけどgetRandomがnumberを引数に取るので
