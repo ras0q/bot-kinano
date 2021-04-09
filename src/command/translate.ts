@@ -2,6 +2,7 @@
 //  translate words.
 
 import rp from 'request-promise';
+import { Robots } from '../src/types';
 import { IDs } from '../src/words';
 
 const op = (txt: string, src: string, tar: string) => ({
@@ -15,9 +16,9 @@ const op = (txt: string, src: string, tar: string) => ({
   json: true
 });
 
-module.exports = (robot: any) => {
+module.exports = (robot: Robots) => {
   //翻訳(デフォルトは日=>英)
-  robot.hear(/^tra\s+/i, (res: any) => {
+  robot.hear(/^tra\s+/i, res => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     if(!user.bot){
@@ -39,7 +40,7 @@ module.exports = (robot: any) => {
   });
 
   //逆翻訳
-  robot.hear(/^tratra\s+/i, (res: any) => {
+  robot.hear(/^tratra\s+/i, res => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     if(!user.bot){

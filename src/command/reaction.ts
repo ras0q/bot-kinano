@@ -5,13 +5,15 @@ import { api } from '../src/traqapi';
 import { getRandom } from '../utils/random';
 import { getMofu } from '../utils/mofu';
 import * as words from '../src/words';
+import { MessageStamp } from '@traptitech/traq';
+import { Robots } from '../src/types';
 
-const isExecuted = (users: any) => users.some((user: any) => user.userId === words.IDs.at_kinano);
+const isExecuted = (stamps: MessageStamp[]) => stamps.some(stamp => stamp.userId === words.IDs.at_kinano);
 
-module.exports = (robot: any) =>{
+module.exports = (robot: Robots) =>{
   //メンション付きメッセージ
   words.is_mentioned.forEach(({ msg, ans }) => {
-    robot.respond(msg, (res: any) => {
+    robot.respond(msg, res => {
       if(!res.message.message.user.bot){
         setTimeout(() => {
           res.reply(ans); //replyでメンション付きメッセージ
@@ -22,7 +24,7 @@ module.exports = (robot: any) =>{
 
   // メンション無しメッセージ
   words.is_not_mentioned.forEach(({ msg, ans }) => {
-    robot.hear(msg, (res: any) => {
+    robot.hear(msg, res => {
       if(!res.message.message.user.bot){
         setTimeout(() => {
           res.send(ans); //sendでメンション無しメッセージ
@@ -33,11 +35,12 @@ module.exports = (robot: any) =>{
 
   //loops
   words.loops.forEach(({ msg, ans }) => {
-    robot.hear(msg, (res: any) => {
+    robot.hear(msg, res => {
       const { message } = res.message;
       const { plainText, user } = message;
       if(!user.bot){
-        const times = plainText.match(msg).length;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const times = plainText.match(msg)!.length; // hear は msg が match するときのみ反応
         const text = ans.repeat(times);
         const ex = '！'.repeat(times);
         setTimeout(() => {
@@ -48,7 +51,7 @@ module.exports = (robot: any) =>{
   });
 
   //もふもふ
-  robot.hear(/もふもふ/, (res: any) => {
+  robot.hear(/もふもふ/, res => {
     if(!res.message.message.user.bot){
       setTimeout(() => {
         res.send(getMofu());
@@ -57,7 +60,7 @@ module.exports = (robot: any) =>{
   });
 
   //なってる
-  robot.hear(/なってる$/, (res: any) => {
+  robot.hear(/なってる$/, res => {
     if(!res.message.message.user.bot){
       setTimeout(() => {
         res.reply(words.natterus[getRandom(0, words.natterus.length)]);
@@ -66,10 +69,10 @@ module.exports = (robot: any) =>{
   });
 
   // BotMessageStampsUpdated
-  robot.catchAll((res: any) => {
-    const { type, stamps, messageId } = res.message;
-    const { stampName, userId } = stamps.slice(-1)[0];
-    if(type === 'BotMessageStampsUpdated'){
+  robot.catchAll(res => {
+    if(res.message.type === 'BotMessageStampsUpdated'){
+      const { stamps, messageId } = res.message;
+      const { stampName, userId } = stamps.slice(-1)[0];
       switch (stampName) {
       case 'eenyade':
       case 'eennyade':

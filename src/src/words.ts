@@ -26,7 +26,13 @@ export const is_mentioned = [
   },
 ];
 
-export const is_not_mentioned = [
+export const is_not_mentioned: {
+  msg: RegExp,
+  ans: string | {
+    type: 'stamp',
+    name: string
+  }
+}[] = [
   {
     msg: /(?<![tとト])(ras|らす|ラス)|(ras|らす|ラス)(?!(ta|た|タ))/i,
     ans: {

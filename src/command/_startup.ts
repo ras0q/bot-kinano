@@ -6,14 +6,15 @@ import Sitemapper from 'sitemapper';
 import { getRandom } from '../utils/random';
 import { getMofu } from '../utils/mofu';
 import { scheduling, IDs } from '../src/words';
+import { RobotHearResponse, Robots } from '../src/types';
 
 let trapBlogMapper: null | string[] = null;
 
-module.exports = (robot: any) =>{
+module.exports = (robot: Robots) => {
   //dev環境
   if (process.env.KINANO_WORK_ENV === 'develop'){
     console.log(`\n\u001b[35mDEVELOPMENT ENVIRONMENT\nMy name is ${process.env.HUBOT_TRAQ_NAME}\u001b[0m`);
-    robot.hear(/.*/i, (res: any) => {
+    robot.hear(/.*/i, res => {
       devInit(res.message);
     });
   }
@@ -48,7 +49,7 @@ module.exports = (robot: any) =>{
   });
 };
 
-const devInit = (message: any) => {
+const devInit = (message: RobotHearResponse['message']) => {
   message.message = {
     id: '00000000-0000-0000-0000-000000000000',
     user: {
@@ -59,8 +60,8 @@ const devInit = (message: any) => {
       bot: false
     },
     channelId: '00000000-0000-0000-0000-000000000000',
-    text: message.text,
-    plainText: message.text,
+    text: message.message.text,
+    plainText: message.message.plainText,
     embedded: [
       {
         raw: '@BOT_kinano',

@@ -8,8 +8,9 @@
 import requestPromise from 'request-promise';
 import { getRandom } from '../utils/random';
 import { IDs } from '../src/words';
+import { MessageCreated, Robots } from '../src/types';
 
-const op = (method: any, message: any) => ({
+const op = (method: string, message: MessageCreated['message']) => ({
   method,
   uri: 'https://www.chaplus.jp/v1/chat',
   qs: {'apikey': process.env.CHAPLUS_API_KEY},
@@ -24,10 +25,10 @@ const op = (method: any, message: any) => ({
   }
 });
 
-module.exports = (robot: any) =>{
+module.exports = (robot: Robots) =>{
   let chatChannelId = '';
 
-  robot.hear(/.+/i, (res: any) => {
+  robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, id, plainText, user } = message;
     const called = /((?<!BOT_)kinano|きなの)/i.test(plainText);
@@ -46,7 +47,7 @@ module.exports = (robot: any) =>{
   });
 
   // Update `chatChannelId`
-  robot.hear(/^:koko:$/, (res: any) => {
+  robot.hear(/^:koko:$/, res => {
     const { message } = res.message;
     const { channelId, id, user } = message;
     if(!user.bot){

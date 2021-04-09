@@ -4,8 +4,9 @@
 import requestPromise from 'request-promise';
 import * as cron from 'node-cron';
 import { IDs } from '../src/words';
+import { Robots } from '../src/types';
 
-const op = (method: any, url: string, qs?: any) => ({
+const op = (method: string, url: string, qs?: unknown) => ({
   method,
   uri: `${url}?client_id=${clientID}`,
   headers: {'Content-type': 'application/json'},
@@ -28,8 +29,8 @@ const table = (memo: string) => (
 const clientID = process.env.SHOWCASE_CLIENT_ID;
 const url = process.env.SHOWCASE_URL+ '/memo';
 
-module.exports = (robot: any) =>{
-  robot.hear(/^(me|め|メ)(mo|も|モ)$/i, (res: any) => {
+module.exports = (robot: Robots) =>{
+  robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
     const { message }  = res.message;
     const { id, user } = message;
     if(!user.bot){
@@ -48,7 +49,7 @@ module.exports = (robot: any) =>{
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, (res: any) => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, res => {
     const { message } = res.message;
     const { id, text, user } = message;
     if(!user.bot){
@@ -68,7 +69,7 @@ module.exports = (robot: any) =>{
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, (res: any) => {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, res => {
     const { message } = res.message;
     const { id, text, user } = message;
     if(!user.bot){

@@ -14,10 +14,12 @@ export const api = new Apis({
   accessToken: TOKEN
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const join = (channelId: string) => {
   return api.letBotJoinChannel(BOT_ID, { channelId });
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const leave = (channelId: string) => {
   return api.letBotLeaveChannel(BOT_ID, { channelId });
 };
