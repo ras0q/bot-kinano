@@ -36,7 +36,7 @@ module.exports = (robot: any) =>{
         .then((body) => {
           const { responses } = body;
           const i = getRandom(0, (responses).length);
-          res.reply(`${responses[i].utterance}\n`);
+          res.reply(`${responses[i].utterance}`);
         })
         .catch((err) => {
           console.log(err);

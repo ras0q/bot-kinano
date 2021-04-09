@@ -2,7 +2,7 @@
 //  All commands will be run here.
 
 const fileNames = [
-  'startup',
+  '_startup',
   'channel',
   'chat',
   'memo',

@@ -23,6 +23,6 @@
   },
   "scripts": {
     "lint": "eslint ./scripts --fix",
-    "start": "npm ci && tsc && ./bin/hubot"
+    "start": "npm ci && tsc && cp src/src/README.md scripts/src/README.md && ./bin/hubot"
   }
 }
