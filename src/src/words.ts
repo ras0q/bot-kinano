@@ -108,6 +108,10 @@ export const is_not_mentioned: {
       type: 'stamp',
       name: 'oisu-4yoko'
     }
+  },
+  {
+    msg: /あっち/,
+    ans: 'https://twitter.com/Joekun_tech/status/1376354898812366850?s=20',
   }
 ];
 
