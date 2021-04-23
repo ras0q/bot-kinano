@@ -24,7 +24,7 @@ module.exports = (robot: Robots) =>{
   robot.hear(/kinanogacha/i, res => {
     if(!res.message.message.user.bot) {
       const len = isNotMentioned.length;
-      for(let i = 0; i < getRandom(1, 11); i++) {
+      for(let i = 0; i < 10; i++) {
         const index = getRandom(0, len);
         setTimeout(() => {
           res.send(isNotMentioned[index].ans);
