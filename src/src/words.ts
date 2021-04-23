@@ -11,7 +11,7 @@ export const natterus = [
   ...new Array(9).fill('なるな！') as string[]
 ];
 
-export const is_mentioned = [
+export const isMentioned = [
   {
     msg: /hoge$/i,
     ans: 'huga'
@@ -26,7 +26,7 @@ export const is_mentioned = [
   },
 ];
 
-export const is_not_mentioned: {
+export const isNotMentioned: {
   msg: RegExp,
   ans: string | {
     type: 'stamp',

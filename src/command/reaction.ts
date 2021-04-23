@@ -12,7 +12,7 @@ const isExecuted = (stamps: MessageStamp[]) => stamps.some(stamp => stamp.userId
 
 module.exports = (robot: Robots) =>{
   //メンション付きメッセージ
-  words.is_mentioned.forEach(({ msg, ans }) => {
+  words.isMentioned.forEach(({ msg, ans }) => {
     robot.respond(msg, res => {
       if(!res.message.message.user.bot){
         setTimeout(() => {
@@ -23,7 +23,7 @@ module.exports = (robot: Robots) =>{
   });
 
   // メンション無しメッセージ
-  words.is_not_mentioned.forEach(({ msg, ans }) => {
+  words.isNotMentioned.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
       if(!res.message.message.user.bot){
         setTimeout(() => {

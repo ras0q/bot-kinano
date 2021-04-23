@@ -31,7 +31,7 @@ module.exports = (robot: Robots) =>{
   robot.hear(/.+/i, res => {
     const { message } = res.message;
     const { channelId, id, plainText, user } = message;
-    const called = /((?<!BOT_)kinano|きなの)/i.test(plainText);
+    const called = /((?<!BOT_)kinano|きなの)(?!gacha)/i.test(plainText);
     if(!user.bot && (called || chatChannelId === channelId)){
       requestPromise(op('post', message))
         .then((body) => {

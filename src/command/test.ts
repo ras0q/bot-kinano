@@ -2,7 +2,8 @@
 // work in progress.
 
 import { Robots } from '../src/types';
-import { IDs } from '../src/words';
+import { getRandom } from '../utils/random';
+import { isNotMentioned, IDs } from '../src/words';
 
 module.exports = (robot: Robots) =>{
   robot.respond(/info/, res => {
@@ -12,8 +13,23 @@ module.exports = (robot: Robots) =>{
   });
 
   robot.hear(/.+[食た]べたい$/, res => {
-    const query = res.message.message.plainText
-      .match(/.+(?=[食た]べたい)/);
-    res.reply(`https://www.kurashiru.com/search?query=${query}`);
+    const { message } = res.message;
+    const { user, plainText } = message;
+    if (!user.bot) {
+      const query = plainText.match(/.+(?=[食た]べたい)/);
+      res.reply(`https://www.kurashiru.com/search?query=${query}`);
+    }
+  });
+
+  robot.hear(/kinanogacha/i, res => {
+    if(!res.message.message.user.bot) {
+      const len = isNotMentioned.length;
+      for(let i = 0; i < getRandom(1, 11); i++) {
+        const index = getRandom(0, len);
+        setTimeout(() => {
+          res.send(isNotMentioned[index].ans);
+        }, i * 100);
+      }
+    }
   });
 };
