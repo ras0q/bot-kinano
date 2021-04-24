@@ -2,8 +2,8 @@
 // work in progress.
 
 import { Robots } from '../src/types';
-import { getRandom } from '../utils/random';
-import { isNotMentioned, IDs } from '../src/words';
+import { getMofu } from '../utils/mofu';
+import { IDs } from '../src/words';
 
 module.exports = (robot: Robots) =>{
   robot.respond(/info/, res => {
@@ -23,11 +23,9 @@ module.exports = (robot: Robots) =>{
 
   robot.hear(/kinanogacha/i, res => {
     if(!res.message.message.user.bot) {
-      const len = isNotMentioned.length;
       for(let i = 0; i < 10; i++) {
-        const index = getRandom(0, len);
         setTimeout(() => {
-          res.send(isNotMentioned[index].ans);
+          res.send(getMofu());
         }, i * 100);
       }
     }
