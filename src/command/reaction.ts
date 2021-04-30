@@ -36,8 +36,7 @@ module.exports = (robot: Robots) =>{
   //loops
   words.loops.forEach(({ msg, ans }) => {
     robot.hear(msg, res => {
-      const { message } = res.message;
-      const { plainText, user } = message;
+      const { plainText, user } = res.message.message;
       if(!user.bot){
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const times = plainText.match(msg)!.length; // hear は msg が match するときのみ反応

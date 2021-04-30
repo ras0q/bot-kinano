@@ -38,8 +38,7 @@ const extractValues = (text: string) => {
 
 module.exports = (robot: Robots) =>{
   robot.hear(/^%add\s+.*/i, res => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
+    const { id, plainText, user } = res.message.message;
     const { bot, name } = user;
     if(!bot){
       const { title, url } = extractValues(plainText);
@@ -62,8 +61,7 @@ module.exports = (robot: Robots) =>{
   });
 
   robot.hear(/^%remove\s+[0-9]+/i, res => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
+    const { id, plainText, user } = res.message.message;
     const { name, bot } = user;
     if(!bot){
       const i = plainText.replace(/^%remove\s+/i, '');
@@ -100,8 +98,7 @@ module.exports = (robot: Robots) =>{
   });
 
   robot.hear(/^%watch$/i, res => {
-    const { message }  = res.message;
-    const { id, user } = message;
+    const { id, user } = res.message.message;
     if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
@@ -124,8 +121,7 @@ module.exports = (robot: Robots) =>{
 
   //URLつき、番号指定
   robot.hear(/^%watch\s+[0-9]+/i, res => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
+    const { id, plainText, user } = res.message.message;
     if(!user.bot){
       const i = plainText.replace(/^%watch\s+/i, '');
       requestPromise(op('get'))
@@ -147,8 +143,7 @@ module.exports = (robot: Robots) =>{
 
   //URLつき、番号random
   robot.hear(/^%watch\s+r$/i, res => {
-    const { message } = res.message;
-    const { id, user } = message;
+    const { id, user } = res.message.message;
     if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
@@ -170,8 +165,7 @@ module.exports = (robot: Robots) =>{
 
   //URLつき、全部
   robot.hear(/^%watch\s+all$/i, res => {
-    const { message } = res.message;
-    const { id, user } = message;
+    const { id, user } = res.message.message;
     if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {

@@ -31,8 +31,7 @@ const url = process.env.SHOWCASE_URL+ '/memo';
 
 module.exports = (robot: Robots) =>{
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
-    const { message }  = res.message;
-    const { id, user } = message;
+    const { id, user } = res.message.message;
     if(!user.bot){
       requestPromise(op('get', `${url}/${user.name}`))
         .then((body) => {
@@ -50,8 +49,7 @@ module.exports = (robot: Robots) =>{
   });
 
   robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, res => {
-    const { message } = res.message;
-    const { id, text, user } = message;
+    const { id, text, user } = res.message.message;
     if(!user.bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, '');
       const qs = {user: user.name, memo};
@@ -70,8 +68,7 @@ module.exports = (robot: Robots) =>{
   });
 
   robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, res => {
-    const { message } = res.message;
-    const { id, text, user } = message;
+    const { id, text, user } = res.message.message;
     if(!user.bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, '');
       const qs = {user: user.name, memo};
