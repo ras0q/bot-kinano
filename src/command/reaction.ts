@@ -72,6 +72,7 @@ module.exports = (robot: Robots) =>{
   robot.catchAll(res => {
     if(res.message.type === 'BotMessageStampsUpdated'){
       const { stamps, messageId } = res.message;
+      if(!stamps) return;
       const { stampName, userId } = stamps.slice(-1)[0];
       switch (stampName) {
       case 'eenyade':
