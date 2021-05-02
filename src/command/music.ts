@@ -12,14 +12,14 @@ const op = (method: string, qs?: unknown) => ({
   method,
   uri: url,
   qs,
-  headers: {'Content-type': 'application/json'},
-  json: true
+  headers: { 'Content-type': 'application/json' },
+  json: true,
 });
 
 const extractValues = (text: string) => {
   const values = {
     title: '',
-    url: ''
+    url: '',
   };
 
   if (text.includes('|') || text.includes('\n')) {
@@ -27,7 +27,7 @@ const extractValues = (text: string) => {
   }
 
   const title_element = text.match(/\[([^[\]]*)\]\((.*)\)/);
-  if (title_element !== null){
+  if (title_element !== null) {
     values.title = title_element[1];
     values.url = title_element[2];
   } else {
@@ -36,36 +36,42 @@ const extractValues = (text: string) => {
   return values;
 };
 
-module.exports = (robot: Robots) =>{
-  robot.hear(/^%add\s+.*/i, res => {
+module.exports = (robot: Robots) => {
+  robot.hear(/^%add\s+.*/i, (res) => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     const { bot, name } = user;
-    if(!bot){
+    if (!bot) {
       const { title, url } = extractValues(plainText);
       const qs = {
         user: name,
         title,
-        url
+        url,
       };
       requestPromise(op('post', qs))
         .then(() => {
           const addTable = `|User|Title|URL|\n|-|-|-|\n|:@${name}.large:${name}|${title}|${url}|\n`;
           res.reply(`『${title}』を追加したやんね！`);
-          robot.send({channelID: IDs.gtRB_log}, '## 曲が追加されたやんね！\n'+ addTable);
+          robot.send(
+            { channelID: IDs.gtRB_log },
+            '## 曲が追加されたやんね！\n' + addTable
+          );
         })
-        .catch((err) =>{
+        .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });
 
-  robot.hear(/^%remove\s+[0-9]+/i, res => {
+  robot.hear(/^%remove\s+[0-9]+/i, (res) => {
     const { message } = res.message;
     const { id, plainText, user } = message;
     const { name, bot } = user;
-    if(!bot){
+    if (!bot) {
       const i = plainText.replace(/^%remove\s+/i, '');
       const idx = parseInt(i);
       requestPromise(op('get'))
@@ -81,8 +87,8 @@ module.exports = (robot: Robots) =>{
           const req = {
             method: 'delete',
             uri: `${url}&id=${body[idx].id}&user=${name}`,
-            headers: {'Content-type': 'application/json'},
-            json: true
+            headers: { 'Content-type': 'application/json' },
+            json: true,
           };
           return req;
         })
@@ -94,39 +100,51 @@ module.exports = (robot: Robots) =>{
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });
 
-  robot.hear(/^%watch$/i, res => {
-    const { message }  = res.message;
+  robot.hear(/^%watch$/i, (res) => {
+    const { message } = res.message;
     const { id, user } = message;
-    if(!user.bot){
+    if (!user.bot) {
       requestPromise(op('get'))
         .then((body) => {
-          const table = [
-            '|No.|User|Title|',
-            '|-:|:-:|-|',
-            '|例|:kinano:|きなこもちもちのうた|',
-            ...body.map(({ user, title }:  { user: string, title: string }, idx: number) => (
-              `|${idx}|:@${user}:|${title}|`)
-            )
-          ].join('\n') + '\n';
-          res.send(`## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`);
+          const table =
+            [
+              '|No.|User|Title|',
+              '|-:|:-:|-|',
+              '|例|:kinano:|きなこもちもちのうた|',
+              ...body.map(
+                (
+                  { user, title }: { user: string; title: string },
+                  idx: number
+                ) => `|${idx}|:@${user}:|${title}|`
+              ),
+            ].join('\n') + '\n';
+          res.send(
+            `## プレイリストやんね～\n${table}\n[](https://www.youtube.com/playlist?list=PLziwNdkdhnxiwuSjNF2k_-bvV1XojtWva)`
+          );
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });
 
   //URLつき、番号指定
-  robot.hear(/^%watch\s+[0-9]+/i, res => {
+  robot.hear(/^%watch\s+[0-9]+/i, (res) => {
     const { message } = res.message;
     const { id, plainText, user } = message;
-    if(!user.bot){
+    if (!user.bot) {
       const i = plainText.replace(/^%watch\s+/i, '');
       requestPromise(op('get'))
         .then((body) => {
@@ -134,22 +152,25 @@ module.exports = (robot: Robots) =>{
           const table = [
             '|No.|User|Title|URL|',
             '|--:|----|-----|---|',
-            `|${i}|:@${user}:${user}|${title}|${url}|`
+            `|${i}|:@${user}:${user}|${title}|${url}|`,
           ].join('\n');
           res.send(`## 曲${i}はこれ！\n${table}`);
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });
 
   //URLつき、番号random
-  robot.hear(/^%watch\s+r$/i, res => {
+  robot.hear(/^%watch\s+r$/i, (res) => {
     const { message } = res.message;
     const { id, user } = message;
-    if(!user.bot){
+    if (!user.bot) {
       requestPromise(op('get'))
         .then((body) => {
           const i = getRandom(0, body.length);
@@ -157,36 +178,50 @@ module.exports = (robot: Robots) =>{
           const table = [
             '|No.|User|Title|URL|',
             '|--:|----|-----|---|',
-            `|${i}|:@${user}:${user}|${title}|${url}|`
+            `|${i}|:@${user}:${user}|${title}|${url}|`,
           ].join('\n');
           res.send(`## きなののオススメソングはこれ！\n${table}`);
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });
 
   //URLつき、全部
-  robot.hear(/^%watch\s+all$/i, res => {
+  robot.hear(/^%watch\s+all$/i, (res) => {
     const { message } = res.message;
     const { id, user } = message;
-    if(!user.bot){
+    if (!user.bot) {
       requestPromise(op('get'))
         .then((body) => {
-          const table = [
-            '|No.|User|Title|URL|',
-            '|--:|----|-----|---|',
-            ...body.map(({ user, title, url }: { user: string, title: string, url: string }, idx: number) => (
-              `|${idx}|:@${user}:${user}|${title}|${url}|`)
-            )
-          ].join('\n') + '\n';
+          const table =
+            [
+              '|No.|User|Title|URL|',
+              '|--:|----|-----|---|',
+              ...body.map(
+                (
+                  {
+                    user,
+                    title,
+                    url,
+                  }: { user: string; title: string; url: string },
+                  idx: number
+                ) => `|${idx}|:@${user}:${user}|${title}|${url}|`
+              ),
+            ].join('\n') + '\n';
           res.send(`## プレイリストやんね～\n${table}`);
         })
         .catch((err) => {
           console.log(err);
-          robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+          robot.send(
+            { userID: IDs.at_Ras },
+            `${err}\nhttps://q.trap.jp/messages/${id}`
+          );
         });
     }
   });

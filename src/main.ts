@@ -14,11 +14,9 @@ const fileNames = [
   'translate',
 ];
 // eslint-disable-next-line no-unused-vars
-const commands: { [key:string]: (robot: Robots) => void } = {};
-fileNames.forEach(name =>
-  commands[name] = require(`./command/${name}`)
-);
+const commands: { [key: string]: (robot: Robots) => void } = {};
+fileNames.forEach((name) => (commands[name] = require(`./command/${name}`)));
 
-module.exports = (robot: Robots) =>{
-  Object.values(commands).forEach(func => func(robot));
+module.exports = (robot: Robots) => {
+  Object.values(commands).forEach((func) => func(robot));
 };

@@ -5,32 +5,39 @@ import { join, leave } from '../src/traqapi';
 import { Robots } from '../src/types';
 import { IDs } from '../src/words';
 
-module.exports = (robot: Robots) =>{
+module.exports = (robot: Robots) => {
   //監視対象に追加
-  robot.respond(/(いらっしゃい|join)$/i, res => {
+  robot.respond(/(いらっしゃい|join)$/i, (res) => {
     const { message } = res.message;
     const { channelId, id } = message;
-    robot.send({userID: IDs.at_Ras}, `## join\n https://q.trap.jp/messages/${id}`);
+    robot.send(
+      { userID: IDs.at_Ras },
+      `## join\n https://q.trap.jp/messages/${id}`
+    );
     try {
       join(channelId);
       setTimeout(() => {
         res.reply(':oisu-1::oisu-2::oisu-3::oisu-4yoko:');
       }, 500);
       setTimeout(() => {
-        res.reply('きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！');
+        res.reply(
+          'きなのの機能を見るにはこのメッセージに:Do_it:スタンプを押すやんね！'
+        );
       }, 2000);
-    }
-    catch(err) {
-      robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+    } catch (err) {
+      robot.send(
+        { userID: IDs.at_Ras },
+        `${err}\nhttps://q.trap.jp/messages/${id}`
+      );
     }
   });
 
   //監視対象から解除
-  robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
+  robot.respond(/(ばいばい|バイバイ|bye)$/i, (res) => {
     const { message } = res.message;
     const { channelId, id } = message;
     robot.send(
-      {userID: IDs.at_Ras},
+      { userID: IDs.at_Ras },
       `## leave\n https://q.trap.jp/messages/${id}`
     );
     try {
@@ -38,10 +45,11 @@ module.exports = (robot: Robots) =>{
       setTimeout(() => {
         res.reply('ばいばいやんね～、また遊んでやんね～');
       }, 500);
-    }
-    catch(err) {
-      robot.send({userID: IDs.at_Ras}, `${err}\nhttps://q.trap.jp/messages/${id}`);
+    } catch (err) {
+      robot.send(
+        { userID: IDs.at_Ras },
+        `${err}\nhttps://q.trap.jp/messages/${id}`
+      );
     }
   });
-
 };

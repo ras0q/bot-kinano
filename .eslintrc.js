@@ -1,37 +1,30 @@
 module.exports = {
-  'env': {
-    'node': true,
-    'commonjs': true,
-    'es2021': true
+  env: {
+    node: true,
+    commonjs: true,
+    es2021: true,
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   parserOptions: {
-    'ecmaVersion': 12
+    ecmaVersion: 12,
   },
-  'rules': {
-    'indent': [
+  rules: {
+    indent: ['error', 2],
+    quotes: ['error', 'single'],
+    semi: [
       'error',
-      2
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always' // 'never' なら全部省略
+      'always', // 'never' なら全部省略
     ],
     'no-unused-vars': [
       'error',
       {
-        'argsIgnorePattern': '^_' // 変数名が '_' で始まる場合は許可
-      }
-    ]
-  }
+        argsIgnorePattern: '^_', // 変数名が '_' で始まる場合は許可
+      },
+    ],
+  },
 };
