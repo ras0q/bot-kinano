@@ -32,14 +32,8 @@ module.exports = (robot: Robots) => {
   });
 
   //監視対象から解除
-<<<<<<< HEAD
-  robot.respond(/(ばいばい|バイバイ|bye)$/i, res => {
-    const { channelId, id } = res.message.message;
-=======
   robot.respond(/(ばいばい|バイバイ|bye)$/i, (res) => {
-    const { message } = res.message;
-    const { channelId, id } = message;
->>>>>>> fork-master/master
+    const { channelId, id } = res.message.message;
     robot.send(
       { userID: IDs.at_Ras },
       `## leave\n https://q.trap.jp/messages/${id}`
