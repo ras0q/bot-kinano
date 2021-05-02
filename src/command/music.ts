@@ -36,10 +36,9 @@ const extractValues = (text: string) => {
   return values;
 };
 
-module.exports = (robot: Robots) => {
-  robot.hear(/^%add\s+.*/i, (res) => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
+module.exports = (robot: Robots) =>{
+  robot.hear(/^%add\s+.*/i, res => {
+    const { id, plainText, user } = res.message.message;
     const { bot, name } = user;
     if (!bot) {
       const { title, url } = extractValues(plainText);
@@ -67,9 +66,8 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^%remove\s+[0-9]+/i, (res) => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
+  robot.hear(/^%remove\s+[0-9]+/i, res => {
+    const { id, plainText, user } = res.message.message;
     const { name, bot } = user;
     if (!bot) {
       const i = plainText.replace(/^%remove\s+/i, '');
@@ -108,10 +106,9 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^%watch$/i, (res) => {
-    const { message } = res.message;
-    const { id, user } = message;
-    if (!user.bot) {
+  robot.hear(/^%watch$/i, res => {
+    const { id, user } = res.message.message;
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const table =
@@ -141,10 +138,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、番号指定
-  robot.hear(/^%watch\s+[0-9]+/i, (res) => {
-    const { message } = res.message;
-    const { id, plainText, user } = message;
-    if (!user.bot) {
+  robot.hear(/^%watch\s+[0-9]+/i, res => {
+    const { id, plainText, user } = res.message.message;
+    if(!user.bot){
       const i = plainText.replace(/^%watch\s+/i, '');
       requestPromise(op('get'))
         .then((body) => {
@@ -167,10 +163,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、番号random
-  robot.hear(/^%watch\s+r$/i, (res) => {
-    const { message } = res.message;
-    const { id, user } = message;
-    if (!user.bot) {
+  robot.hear(/^%watch\s+r$/i, res => {
+    const { id, user } = res.message.message;
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const i = getRandom(0, body.length);
@@ -193,10 +188,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、全部
-  robot.hear(/^%watch\s+all$/i, (res) => {
-    const { message } = res.message;
-    const { id, user } = message;
-    if (!user.bot) {
+  robot.hear(/^%watch\s+all$/i, res => {
+    const { id, user } = res.message.message;
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const table =

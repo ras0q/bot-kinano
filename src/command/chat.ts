@@ -50,10 +50,9 @@ module.exports = (robot: Robots) => {
   });
 
   // Update `chatChannelId`
-  robot.hear(/^:koko:$/, (res) => {
-    const { message } = res.message;
-    const { channelId, id, user } = message;
-    if (!user.bot) {
+  robot.hear(/^:koko:$/, res => {
+    const { channelId, id, user } = res.message.message;
+    if(!user.bot){
       chatChannelId = channelId;
       res.send({ type: 'stamp', name: 'haakusita' });
       robot.send(

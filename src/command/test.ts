@@ -12,9 +12,8 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/.+[食た]べたい$/, (res) => {
-    const { message } = res.message;
-    const { user, plainText } = message;
+  robot.hear(/.+[食た]べたい$/, res => {
+    const { user, plainText } = res.message.message;
     if (!user.bot) {
       const query = plainText.match(/.+(?=[食た]べたい)/);
       res.reply(`https://www.kurashiru.com/search?query=${query}`);

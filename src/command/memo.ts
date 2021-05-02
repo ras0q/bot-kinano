@@ -22,11 +22,10 @@ const table = (memo: string) => '|memo|\n' + '|----|\n' + `|${format(memo)}|`;
 const clientID = process.env.SHOWCASE_CLIENT_ID;
 const url = process.env.SHOWCASE_URL + '/memo';
 
-module.exports = (robot: Robots) => {
-  robot.hear(/^(me|め|メ)(mo|も|モ)$/i, (res) => {
-    const { message } = res.message;
-    const { id, user } = message;
-    if (!user.bot) {
+module.exports = (robot: Robots) =>{
+  robot.hear(/^(me|め|メ)(mo|も|モ)$/i, res => {
+    const { id, user } = res.message.message;
+    if(!user.bot){
       requestPromise(op('get', `${url}/${user.name}`))
         .then((body) => {
           const { memo } = body;
@@ -45,10 +44,9 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, (res) => {
-    const { message } = res.message;
-    const { id, text, user } = message;
-    if (!user.bot) {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(=|＝)/i, res => {
+    const { id, text, user } = res.message.message;
+    if(!user.bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, '');
       const qs = { user: user.name, memo };
       requestPromise(op('post', url, qs))
@@ -68,10 +66,9 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, (res) => {
-    const { message } = res.message;
-    const { id, text, user } = message;
-    if (!user.bot) {
+  robot.hear(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, res => {
+    const { id, text, user } = res.message.message;
+    if(!user.bot){
       const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, '');
       const qs = { user: user.name, memo };
       requestPromise(op('patch', url, qs))
