@@ -68,7 +68,7 @@ const devInit = (message: RobotHearResponse['message']) => {
       name: 'Ras',
       displayName: 'らす',
       iconId: '00000000-0000-0000-0000-000000000000',
-      bot: true,
+      bot: false,
     },
     channelId: '00000000-0000-0000-0000-000000000000',
     text: message.text,
