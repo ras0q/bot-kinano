@@ -19,9 +19,9 @@ const op = (txt: string, src: string, tar: string) => ({
 
 module.exports = (robot: Robots) => {
   //翻訳(デフォルトは日=>英)
-  robot.hear(/^tra\s+/i, (res) => {
+  robot.hear(/^tra\s+/i, res => {
     const { id, plainText, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       const txt = plainText.replace(/^tra\s+/i, '');
       const langs = plainText.match(/[([]\s*(..)\s*([=-]>|→)\s*(..)\s*[)\]]/);
       const [src, tar] = langs !== null ? [langs[1], langs[3]] : ['ja', 'en'];
@@ -41,9 +41,9 @@ module.exports = (robot: Robots) => {
   });
 
   //逆翻訳
-  robot.hear(/^tratra\s+/i, (res) => {
+  robot.hear(/^tratra\s+/i, res => {
     const { id, plainText, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       const txt = plainText.replace(/^tratra\s+/, '');
       rp(op(txt, '', 'en'))
         .then((body) => {

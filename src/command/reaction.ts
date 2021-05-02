@@ -36,9 +36,9 @@ module.exports = (robot: Robots) => {
 
   //loops
   words.loops.forEach(({ msg, ans }) => {
-    robot.hear(msg, (res) => {
+    robot.hear(msg, res => {
       const { plainText, user } = res.message.message;
-      if (!user.bot) {
+      if(!user.bot){
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const times = plainText.match(msg)!.length;
         const text = ans.repeat(times);

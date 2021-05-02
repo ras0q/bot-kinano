@@ -36,8 +36,8 @@ const extractValues = (text: string) => {
   return values;
 };
 
-module.exports = (robot: Robots) => {
-  robot.hear(/^%add\s+.*/i, (res) => {
+module.exports = (robot: Robots) =>{
+  robot.hear(/^%add\s+.*/i, res => {
     const { id, plainText, user } = res.message.message;
     const { bot, name } = user;
     if (!bot) {
@@ -66,7 +66,7 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^%remove\s+[0-9]+/i, (res) => {
+  robot.hear(/^%remove\s+[0-9]+/i, res => {
     const { id, plainText, user } = res.message.message;
     const { name, bot } = user;
     if (!bot) {
@@ -106,9 +106,9 @@ module.exports = (robot: Robots) => {
     }
   });
 
-  robot.hear(/^%watch$/i, (res) => {
+  robot.hear(/^%watch$/i, res => {
     const { id, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const table =
@@ -138,9 +138,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、番号指定
-  robot.hear(/^%watch\s+[0-9]+/i, (res) => {
+  robot.hear(/^%watch\s+[0-9]+/i, res => {
     const { id, plainText, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       const i = plainText.replace(/^%watch\s+/i, '');
       requestPromise(op('get'))
         .then((body) => {
@@ -163,9 +163,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、番号random
-  robot.hear(/^%watch\s+r$/i, (res) => {
+  robot.hear(/^%watch\s+r$/i, res => {
     const { id, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const i = getRandom(0, body.length);
@@ -188,9 +188,9 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、全部
-  robot.hear(/^%watch\s+all$/i, (res) => {
+  robot.hear(/^%watch\s+all$/i, res => {
     const { id, user } = res.message.message;
-    if (!user.bot) {
+    if(!user.bot){
       requestPromise(op('get'))
         .then((body) => {
           const table =
