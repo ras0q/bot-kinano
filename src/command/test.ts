@@ -5,14 +5,14 @@ import { Robots } from '../src/types';
 import { getMofu } from '../utils/mofu';
 import { IDs } from '../src/words';
 
-module.exports = (robot: Robots) =>{
-  robot.respond(/info/, res => {
-    if(res.message.message.channelId === IDs.gtR_Bot) {
+module.exports = (robot: Robots) => {
+  robot.respond(/info/, (res) => {
+    if (res.message.message.channelId === IDs.gtR_Bot) {
       res.send(`\`\`\`\n${JSON.stringify(res.message, null, '\t')}\n\`\`\``);
     }
   });
 
-  robot.hear(/.+[食た]べたい$/, res => {
+  robot.hear(/.+[食た]べたい$/, (res) => {
     const { user, plainText } = res.message.message;
     if (!user.bot) {
       const query = plainText.match(/.+(?=[食た]べたい)/);
@@ -20,9 +20,9 @@ module.exports = (robot: Robots) =>{
     }
   });
 
-  robot.hear(/kinanogacha/i, res => {
-    if(!res.message.message.user.bot) {
-      for(let i = 0; i < 10; i++) {
+  robot.hear(/kinanogacha/i, (res) => {
+    if (!res.message.message.user.bot) {
+      for (let i = 0; i < 10; i++) {
         setTimeout(() => {
           res.send(getMofu());
         }, i * 100);

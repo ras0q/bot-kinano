@@ -11,7 +11,7 @@ if (!TOKEN) {
 }
 
 export const api = new Apis({
-  accessToken: TOKEN
+  accessToken: TOKEN,
 });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
