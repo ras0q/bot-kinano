@@ -4,6 +4,7 @@
 import { Robots } from '../src/types';
 import { getMofu } from '../utils/mofu';
 import { IDs } from '../src/words';
+import { getRandom } from '../utils/random';
 
 module.exports = (robot: Robots) => {
   robot.respond(/info/, (res) => {
@@ -27,6 +28,14 @@ module.exports = (robot: Robots) => {
           res.send(getMofu());
         }, i * 100);
       }
+    }
+  });
+
+  robot.hear(/catgacha/i, (res) => {
+    if (!res.message.message.user.bot) {
+      const n = getRandom(0, 200);
+      const cat = ':longcat_1:\n' + ':longcat_2:\n'.repeat(n) + ':longcat_3:\n';
+      res.send(cat);
     }
   });
 };
