@@ -107,7 +107,7 @@ const op = (method: string, qs?: unknown) => ({
  * @returns boolean
  */
 export const isYouTubeURL = (url: URL): boolean => {
-  return url.hostname in ['www.youtube.com', 'youtu.be'];
+  return ['www.youtube.com', 'youtu.be'].includes(url.hostname);
 };
 
 /**
