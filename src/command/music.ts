@@ -156,7 +156,7 @@ module.exports = (robot: Robots) => {
     const table = [
       '|No.|User|Title|URL|',
       '|--:|----|-----|---|',
-      `|${i}|:@${username}:${user}|${title}|${url}|`,
+      `|${i}|:@${username}:${username}|${title}|${url}|`,
     ].join('\n');
     res.send(`## きなののオススメソングはこれ！\n${table}`);
   });
