@@ -146,7 +146,7 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、番号random
-  robot.hear(/^%watch\s+r$/i, (res) => {
+  robot.hear(/^%watch\s+(-r|--random)$/i, (res) => {
     const { user } = res.message.message;
     if (user.bot) {
       return;
@@ -162,7 +162,7 @@ module.exports = (robot: Robots) => {
   });
 
   //URLつき、全部
-  robot.hear(/^%watch\s+all$/i, (res) => {
+  robot.hear(/^%watch\s+(-a|--all)$/i, (res) => {
     const { user } = res.message.message;
     if (user.bot) {
       return;
