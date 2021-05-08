@@ -158,7 +158,9 @@ export const makeParseValidUrlFunc = (musics: MusicsClosure) => (
           if (isYouTubeURL(newUrl) && isYouTubeURL(url)) {
             if (
               parseYoutubeUrl(newUrl) !== null &&
-              parseYoutubeUrl(newUrl) === parseYoutubeUrl(url)
+              // Object の比較は参照で比較されるので、string で比較する (parse 後なので string でも比較できる)
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              parseYoutubeUrl(newUrl)!.href === parseYoutubeUrl(url)!.href
             ) {
               return true;
             }
