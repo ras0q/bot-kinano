@@ -1,3 +1,5 @@
+// TODO: test を追加
+
 import requestPromise from 'request-promise';
 
 const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
