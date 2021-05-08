@@ -155,7 +155,7 @@ export const makeParseValidUrlFunc = (musics: MusicsClosure) => (
           const url = new URL(val.url);
           if (isYouTubeURL(newUrl) && isYouTubeURL(url)) {
             if (
-              parseYoutubeUrl !== null &&
+              parseYoutubeUrl(newUrl) !== null &&
               parseYoutubeUrl(newUrl) === parseYoutubeUrl(url)
             ) {
               return true;
@@ -172,6 +172,7 @@ export const makeParseValidUrlFunc = (musics: MusicsClosure) => (
           return false;
         }
       });
+
     if (sames.length > 0) {
       return {
         idx: sames[0][0],
