@@ -87,6 +87,8 @@ module.exports = (robot: Robots) => {
       res.send(`曲${idx}を削除したやんね！`);
     } catch (err: unknown) {
       if (
+        // typeof err === ... を if の条件として使いたいが、TypeScript が { message: string } とみなしてくれないので、
+        // err is { message: string } を返り値に持つ関数を即時実行して、教えてあげてる
         ((err): err is { message: string } =>
           typeof err === 'object' &&
           err !== null &&
