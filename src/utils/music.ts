@@ -69,7 +69,7 @@ export const newMusics = (): MusicsClosure => {
    * @returns musicLists
    */
   const remove = async ({ idx, user }: { idx: number; user: string }) => {
-    if (idx >= musicLists.length || idx < musicLists.length) {
+    if (idx >= musicLists.length || idx < 0) {
       throw new Error('Index out of range');
     }
     if (musicLists[idx].user !== user) {
