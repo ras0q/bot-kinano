@@ -45,9 +45,9 @@ module.exports = (robot: Robots) => {
     fetchSiteMap;
   }); // 毎日 update
 
-  [...Object.values(scheduling)].forEach(({ channelId, time }) => {
+  [...Object.values(scheduling)].forEach(({ channelId, hour }) => {
     cron.schedule(
-      `0 ${time.map((h) => h.toString()).join(',')} * * *`,
+      `0 ${hour.map((h) => h.toString()).join(',')} * * *`,
       () => {
         if (trapBlogMapper === null) return;
         robot.send(
