@@ -7,7 +7,7 @@ import { getRandom } from '../utils/random';
 
 module.exports = (robot: Robots) => {
   robot.respond(/info/, (res) => {
-    res.send(`\`\`\`\n${JSON.stringify(res.message, null, '\t')}\n\`\`\``);
+    res.send(`\`\`\`\n${JSON.stringify(res.message, null, '  ')}\n\`\`\``);
   });
 
   robot.hear(/.+[食た]べたい$/, (res) => {
