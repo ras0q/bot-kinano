@@ -3,14 +3,11 @@
 
 import { Robots } from '../src/types';
 import { getMofu } from '../utils/mofu';
-import { IDs } from '../src/words';
 import { getRandom } from '../utils/random';
 
 module.exports = (robot: Robots) => {
   robot.respond(/info/, (res) => {
-    if (res.message.message.channelId === IDs.gtR_Bot) {
-      res.send(`\`\`\`\n${JSON.stringify(res.message, null, '\t')}\n\`\`\``);
-    }
+    res.send(`\`\`\`\n${JSON.stringify(res.message, null, '\t')}\n\`\`\``);
   });
 
   robot.hear(/.+[食た]べたい$/, (res) => {
