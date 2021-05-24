@@ -28,6 +28,7 @@
   "scripts": {
     "lint:fix": "eslint --fix \"**/*.{ts,js}\" && prettier --write \"**/*.{ts,js}\"",
     "build": "tsc && cp src/src/help.md scripts/src/help.md",
-    "start": "npm ci && npm run build && ./bin/hubot"
+    "start": "npm ci && npm run build && ./bin/hubot",
+    "start:no-ci": "npm run build && ./bin/hubot"
   }
 }
