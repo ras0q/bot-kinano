@@ -8,16 +8,16 @@
 import requestPromise from 'request-promise';
 import { getRandom } from '../utils/random';
 import { IDs } from '../src/words';
-import { MessageCreated, Robots } from '../src/types';
+import { Robots } from '../src/types';
 
-const op = (method: string, message: MessageCreated['message']) => ({
+const op = (method: string, text: string, userName: string) => ({
   method,
   uri: 'https://www.chaplus.jp/v1/chat',
   qs: { apikey: process.env.CHAPLUS_API_KEY },
   headers: { 'Content-type': 'application/json' },
   json: {
-    utterance: message.plainText,
-    username: message.user.displayName,
+    utterance: text,
+    username: userName,
     agentState: {
       agentName: 'きなの',
       age: '14',
@@ -31,9 +31,10 @@ module.exports = (robot: Robots) => {
   robot.hear(/.+/i, (res) => {
     const { message } = res.message;
     const { channelId, id, plainText, user } = message;
-    const called = /((?<!BOT_)kinano|きなの)(?!gacha)/i.test(plainText);
+    const called = plainText.match(/((?<!BOT_)kinano|きなの)(?!gacha)/i);
+    const replacedText = plainText.replace(/((きなの|kinano)\s|\s(きなの|kinano))/i, ''); //前後に空白があれば「きなの」を除く
     if (!user.bot && (called || chatChannelId === channelId)) {
-      requestPromise(op('post', message))
+      requestPromise(op('post', replacedText, user.displayName))
         .then((body) => {
           const { responses } = body;
           const i = getRandom(0, responses.length);
@@ -50,9 +51,9 @@ module.exports = (robot: Robots) => {
   });
 
   // Update `chatChannelId`
-  robot.hear(/^:koko:$/, res => {
+  robot.hear(/^:koko:$/, (res) => {
     const { channelId, id, user } = res.message.message;
-    if(!user.bot){
+    if (!user.bot) {
       chatChannelId = channelId;
       res.send({ type: 'stamp', name: 'haakusita' });
       robot.send(
