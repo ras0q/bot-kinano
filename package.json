@@ -5,7 +5,7 @@
   "author": "Ras",
   "description": "This is Ras's bot.",
   "dependencies": {
-    "@traptitech/traq": "^3.4.6-4",
+    "@traptitech/traq": "^3.7.4-1",
     "hubot": "^3.3.2",
     "hubot-traq": "^1.7.2",
     "ical": "^0.8.0",

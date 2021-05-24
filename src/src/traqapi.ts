@@ -12,6 +12,7 @@ if (!TOKEN) {
 
 export const api = new Apis({
   accessToken: TOKEN,
+  isJsonMime: (s: string) => s === 'application/json', //TODO
 });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

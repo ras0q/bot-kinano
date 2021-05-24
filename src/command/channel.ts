@@ -7,14 +7,14 @@ import { IDs } from '../src/words';
 
 module.exports = (robot: Robots) => {
   //監視対象に追加
-  robot.respond(/(いらっしゃい|join)$/i, (res) => {
+  robot.respond(/(いらっしゃい|join)$/i, async (res) => {
     const { channelId, id } = res.message.message;
     robot.send(
       { userID: IDs.at_Ras },
       `## join\n https://q.trap.jp/messages/${id}`
     );
     try {
-      join(channelId);
+      await join(channelId);
       setTimeout(() => {
         res.reply(':oisu-1::oisu-2::oisu-3::oisu-4yoko:');
       }, 500);
@@ -32,14 +32,14 @@ module.exports = (robot: Robots) => {
   });
 
   //監視対象から解除
-  robot.respond(/(ばいばい|バイバイ|bye)$/i, (res) => {
+  robot.respond(/(ばいばい|バイバイ|bye)$/i, async (res) => {
     const { channelId, id } = res.message.message;
     robot.send(
       { userID: IDs.at_Ras },
       `## leave\n https://q.trap.jp/messages/${id}`
     );
     try {
-      leave(channelId);
+      await leave(channelId);
       setTimeout(() => {
         res.reply('ばいばいやんね～、また遊んでやんね～');
       }, 500);
