@@ -7,6 +7,7 @@ const fileNames = [
   '_startup',
   'channel',
   'chat',
+  'ical',
   'memo',
   'music',
   'reaction',
