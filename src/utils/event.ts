@@ -33,6 +33,7 @@ export const setTodayEvents = (robot: Robots): void => {
       );
       todayEventKeys.forEach((key, i) => {
         const { start, summary, description } = ics[key];
+        start!.setMinutes(start!.getMinutes() - 5);
         events[i] = cron.schedule(
           convertToCronTime(start!),
           () => {
@@ -56,5 +57,6 @@ const convertToCronTime = (date: Date) => {
   const h = date.getHours();
   const d = date.getDate();
   const M = date.getMonth();
+  console.log(`${m} ${h} ${d} ${M+1} *`);
   return `${m} ${h} ${d} ${M+1} *`;
 };
