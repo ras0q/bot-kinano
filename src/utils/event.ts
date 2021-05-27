@@ -57,6 +57,5 @@ const convertToCronTime = (date: Date) => {
   const h = date.getHours();
   const d = date.getDate();
   const M = date.getMonth();
-  console.log(`${m} ${h} ${d} ${M+1} *`);
   return `${m} ${h} ${d} ${M+1} *`;
 };
