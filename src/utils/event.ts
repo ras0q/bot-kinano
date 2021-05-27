@@ -33,9 +33,10 @@ export const setTodayEvents = (robot: Robots): void => {
       );
       todayEventKeys.forEach((key, i) => {
         const { start, summary, description } = ics[key];
-        start!.setMinutes(start!.getMinutes() - 5);
+        const notifyTime = start!;
+        notifyTime.setMinutes(notifyTime.getMinutes() - 5);
         events[i] = cron.schedule(
-          convertToCronTime(start!),
+          convertToCronTime(notifyTime),
           () => {
             robot.send(
               { channelID: IDs.gt_Ras },
