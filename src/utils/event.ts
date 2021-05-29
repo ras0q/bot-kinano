@@ -3,6 +3,7 @@ import requestPromise from 'request-promise';
 import cron from 'node-cron';
 import { IDs } from '../src/words';
 import { Robots } from '../src/types';
+import { convertToCronTime } from './crontime';
 
 const baseURL = process.env.ICAL_URL;
 const events: cron.ScheduledTask[] = [];
@@ -13,6 +14,7 @@ if (!baseURL) {
 
 /* eslint @typescript-eslint/no-non-null-assertion: 0 */
 export const setTodayEvents = (robot: Robots): void => {
+  console.log('Start setting today\'s events');
   for (const event of events) {
     event.destroy();
   }
@@ -51,12 +53,4 @@ export const setTodayEvents = (robot: Robots): void => {
       robot.send({ userID: IDs.at_Ras }, err);
       return err;
     });
-};
-
-const convertToCronTime = (date: Date) => {
-  const m = date.getMinutes();
-  const h = date.getHours();
-  const d = date.getDate();
-  const M = date.getMonth();
-  return `${m} ${h} ${d} ${M+1} *`;
 };

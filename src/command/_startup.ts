@@ -25,11 +25,12 @@ module.exports = (robot: Robots) => {
     { channelID: IDs.gtRB_log },
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
-  setTodayBlogs(robot);
-  setTodayEvents(robot);
 
   //cronセット
-  cron.schedule('0 0 * * *', () => {
+  const now = new Date();
+  const m = now.getMinutes();
+  const h = now.getHours();
+  cron.schedule(`${m + 1} ${h} * * *`, () => {
     setTodayBlogs(robot);
     setTodayEvents(robot);
   });

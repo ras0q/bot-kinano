@@ -13,6 +13,7 @@ const blogEvents: cron.ScheduledTask[] = [];
 let trapBlogMapper: string[] = [];
 
 export const setTodayBlogs = async (robot: Robots): Promise<void> => {
+  console.log('Start setting today\'s blogs');
   for (const event of blogEvents) {
     event.destroy();
   }
