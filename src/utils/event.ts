@@ -42,7 +42,7 @@ export const setTodayEvents = (robot: Robots): void => {
           () => {
             robot.send(
               { channelID: IDs.gt_Ras },
-              `# Next:『${summary}』\n#### ${start!.toString()}\n${description}`
+              `# ==『${summary}』==5分前やんね！\n#### ${start!.toString()}\n${description}\n@Ras`
             );
           },
           { timezone: 'Asia/Tokyo' }
