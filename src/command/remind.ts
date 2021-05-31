@@ -7,12 +7,12 @@ module.exports = (robot: Robots) => {
     const { user, plainText } = res.message.message;
     if (!user.bot) {
       const timeArr = plainText.match(/([01][0-9]|2[0-3]):([0-5][0-9])/);
+      const isNotMentionable = plainText.match(/-n/);
       if (timeArr) {
-        const text = plainText
+        const resText = plainText
           .replace(/([@＠]BOT_kinano|remind)/i, '')
           .replace(timeArr[0], '')
           .replace(/^\s+/, '');
-        const resText = `時間になったやんね！\n${text}`;
 
         const remindTime = new Date();
         const rh = Number(timeArr[1]);
@@ -34,7 +34,8 @@ module.exports = (robot: Robots) => {
         const remindEvent = cron.schedule(
           convertToCronTime(remindTime),
           () => {
-            res.reply(resText);
+            if(isNotMentionable) res.send(resText);
+            else res.reply('\n' + resText);
             remindEvent.destroy();
           },
           { timezone: 'Asia/Tokyo' }
