@@ -19,7 +19,7 @@ module.exports = (robot: Robots) => {
         const [h, m] = arr[0].split(':').map((s) => Number(s));
         const nh = remindTime.getHours();
         const nm = remindTime.getMinutes();
-        if (h < nh || (h === nh && m < nm)) {
+        if (h < nh || (h === nh && m <= nm)) {
           remindTime.setDate(remindTime.getDate() + 1);
         }
         remindTime.setHours(h);
@@ -28,7 +28,7 @@ module.exports = (robot: Robots) => {
 
         res.send({
           type: 'stamp',
-          name: ':thumbsup:',
+          name: 'blobdrum',
         });
 
         const remindEvent = cron.schedule(convertToCronTime(remindTime), () => {
