@@ -22,8 +22,9 @@
   - `%watch [-a | --all]`: URLつきのプレイリストを見せるやんね！
 
 ## :blobbass: *Remind* :blobbass:
-- `remind {text} {time}`で`time`になったら`text`をリマインドするやんね！
+- `remind {text} {time} [-n]`で`time`になったら`text`をリマインドするやんね！
 - `time`は`12:34`みたいな`hh:mm`の形で指定して欲しいやんね！
+- `-n`があればメンションなしの形でリマインドするやんね！
 
 ## :blobmicrophone: *Translation* :blobmicrophone:
 - `tra {txt} ({src}=>{tar})`: `txt`を`src`語から`tar`語に翻訳するやんね！

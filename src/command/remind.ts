@@ -10,7 +10,7 @@ module.exports = (robot: Robots) => {
       const isNotMentionable = plainText.match(/-n/);
       if (timeArr) {
         const resText = plainText
-          .replace(/([@＠]BOT_kinano|remind)/i, '')
+          .replace(/([@＠]BOT_kinano|remind|-n)/i, '')
           .replace(timeArr[0], '')
           .replace(/^\s+/, '');
 
