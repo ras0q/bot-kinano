@@ -35,14 +35,14 @@ export const setTodayEvents = (robot: Robots): void => {
       );
       todayEventKeys.forEach((key, i) => {
         const { start, summary, description } = ics[key];
-        const notifyTime = start!;
+        const notifyTime = new Date(start!.getTime());
         notifyTime.setMinutes(notifyTime.getMinutes() - 5);
         events[i] = cron.schedule(
           convertToCronTime(notifyTime),
           () => {
             robot.send(
               { channelID: IDs.gt_Ras },
-              `# ==『${summary}』==5分前やんね！\n#### ${start!.toString()}\n${description}\n@Ras`
+              `# ==『${summary}』==\n#### ${start!.toString()}\n${description}\n@Ras`
             );
           },
           { timezone: 'Asia/Tokyo' }

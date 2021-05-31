@@ -8,6 +8,7 @@ import { setTodayEvents } from '../utils/event';
 import { setSampleMessage } from '../utils/develop';
 import { IDs } from '../src/words';
 import { Robots } from '../src/types';
+import { convertToCronTime } from '../utils/crontime';
 
 module.exports = (robot: Robots) => {
   //開発環境
@@ -27,10 +28,9 @@ module.exports = (robot: Robots) => {
   );
 
   //cronセット
-  const now = new Date();
-  const m = now.getMinutes();
-  const h = now.getHours();
-  cron.schedule(`${m + 1} ${h} * * *`, () => {
+  const updateTime = new Date();
+  updateTime.setMinutes(updateTime.getMinutes() + 1);
+  cron.schedule(convertToCronTime(updateTime), () => {
     setTodayBlogs(robot);
     setTodayEvents(robot);
   });
