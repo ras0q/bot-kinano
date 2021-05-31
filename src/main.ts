@@ -10,6 +10,7 @@ const fileNames = [
   'memo',
   'music',
   'reaction',
+  'remind',
   'test',
   'translate',
 ];

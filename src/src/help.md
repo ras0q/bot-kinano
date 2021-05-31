@@ -21,6 +21,10 @@
   - `%watch [-r | --random]`: ランダムで1曲の詳細情報を見せるやんね！
   - `%watch [-a | --all]`: URLつきのプレイリストを見せるやんね！
 
+## :blobbass: *Remind* :blobbass:
+- `remind {text} {time}`で`time`になったら`text`をリマインドするやんね！
+- `time`は`12:34`みたいな`hh:mm`の形で指定して欲しいやんね！
+
 ## :blobmicrophone: *Translation* :blobmicrophone:
 - `tra {txt} ({src}=>{tar})`: `txt`を`src`語から`tar`語に翻訳するやんね！
     - `src`, `tar`は[ISO 639-1コード](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7)で指定してほしいやんね！
