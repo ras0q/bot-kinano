@@ -3,27 +3,27 @@ import cron from 'node-cron';
 import { convertToCronTime } from '../utils/crontime';
 
 module.exports = (robot: Robots) => {
-  robot.hear(/remind/, (res) => {
+  robot.hear(/remind/i, (res) => {
     const { user, plainText } = res.message.message;
     if (!user.bot) {
-      const [text, timeStr] = plainText
-        .replace(/[@＠]BOT_kinano/i, '')
-        .replace(/remind/, '')
-        .replace(/\s+/, '')
-        .split(/\s/);
-      const resText = `時間になったやんね！\n${text}`;
+      const timeArr = plainText.match(/([01][0-9]|2[0-3]):([0-5][0-9])/);
+      if (timeArr) {
+        const text = plainText
+          .replace(/([@＠]BOT_kinano|remind)/i, '')
+          .replace(timeArr[0], '')
+          .replace(/^\s+/, '');
+        const resText = `時間になったやんね！\n${text}`;
 
-      const arr = timeStr.match(/^([01][0-9]|2[0-3]):[0-5][0-9]$/);
-      const remindTime = new Date();
-      if (arr) {
-        const [h, m] = arr[0].split(':').map((s) => Number(s));
+        const remindTime = new Date();
+        const rh = Number(timeArr[1]);
+        const rm = Number(timeArr[2]);
         const nh = remindTime.getHours();
         const nm = remindTime.getMinutes();
-        if (h < nh || (h === nh && m <= nm)) {
+        if (rh < nh || (rh === nh && rm <= nm)) {
           remindTime.setDate(remindTime.getDate() + 1);
         }
-        remindTime.setHours(h);
-        remindTime.setMinutes(m);
+        remindTime.setHours(rh);
+        remindTime.setMinutes(rm);
         remindTime.setSeconds(0);
 
         res.send({
@@ -40,7 +40,7 @@ module.exports = (robot: Robots) => {
           { timezone: 'Asia/Tokyo' }
         );
       } else {
-        res.reply(`『${timeStr}』はいんばりっどな時間やんね...？`);
+        res.reply('時間がいんばりっどやんね...？');
       }
     }
   });
