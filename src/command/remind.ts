@@ -31,10 +31,14 @@ module.exports = (robot: Robots) => {
           name: 'blobdrum',
         });
 
-        const remindEvent = cron.schedule(convertToCronTime(remindTime), () => {
-          res.reply(resText);
-          remindEvent.destroy();
-        });
+        const remindEvent = cron.schedule(
+          convertToCronTime(remindTime),
+          () => {
+            res.reply(resText);
+            remindEvent.destroy();
+          },
+          { timezone: 'Asia/Tokyo' }
+        );
       } else {
         res.reply(`『${timeStr}』はいんばりっどな時間やんね...？`);
       }
