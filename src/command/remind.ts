@@ -10,7 +10,8 @@ module.exports = (robot: Robots) => {
       const isNotMentionable = plainText.match(/-n/);
       if (timeArr) {
         const resText = plainText
-          .replace(/([@＠]BOT_kinano|remind|-n)/i, '')
+          .replace(/([@＠]BOT_kinano|remind)/i, '')
+          .replace('-n', '')
           .replace(timeArr[0], '')
           .replace(/^\s+/, '');
 
@@ -28,7 +29,7 @@ module.exports = (robot: Robots) => {
 
         res.send({
           type: 'stamp',
-          name: 'blobdrum',
+          name: 'ganbaru',
         });
 
         const remindEvent = cron.schedule(
