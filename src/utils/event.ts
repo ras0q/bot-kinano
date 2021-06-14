@@ -18,6 +18,7 @@ export const setTodayEvents = (robot: Robots): void => {
   for (const event of events) {
     event.destroy();
   }
+  events.splice(0);
 
   requestPromise(baseURL)
     .then((body) => {
@@ -33,19 +34,22 @@ export const setTodayEvents = (robot: Robots): void => {
           ics[key].start!.getTime() - now > 0 &&
           ics[key].start!.getTime() - now < 1000 * 60 * 60 * 24
       );
-      todayEventKeys.forEach((key, i) => {
+      console.log(`${todayEventKeys.length} events found.`);
+      todayEventKeys.forEach((key) => {
         const { start, summary, description } = ics[key];
         const notifyTime = new Date(start!.getTime());
         notifyTime.setMinutes(notifyTime.getMinutes() - 5);
-        events[i] = cron.schedule(
-          convertToCronTime(notifyTime),
-          () => {
-            robot.send(
-              { channelID: IDs.gt_Ras },
-              `# ==『${summary}』==\n#### ${start!.toString()}\n${description}\n@Ras`
-            );
-          },
-          { timezone: 'Asia/Tokyo' }
+        events.push(
+          cron.schedule(
+            convertToCronTime(notifyTime),
+            () => {
+              robot.send(
+                { channelID: IDs.gt_Ras },
+                `# ==『${summary}』==\n#### ${start!.toString()}\n${description}\n@Ras`
+              );
+            },
+            { timezone: 'Asia/Tokyo' }
+          )
         );
       });
     })
