@@ -23,7 +23,7 @@ module.exports = (robot: Robots) => {
 
   //デプロイ時実行
   robot.send(
-    { channelID: IDs.gtRB_log },
+    { channelID: IDs['#g/t/R/B/log'] },
     `デプロイ完了${getMofu()} (${new Date().toLocaleString()})`
   );
 

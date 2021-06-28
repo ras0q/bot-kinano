@@ -43,7 +43,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });
@@ -57,7 +57,7 @@ module.exports = (robot: Robots) => {
       chatChannelId = channelId;
       res.send({ type: 'stamp', name: 'haakusita' });
       robot.send(
-        { channelID: IDs.gtRB_log },
+        { channelID: IDs['#g/t/R/B/log'] },
         `\`Chat Channel\` moved here!!\nhttps://q.trap.jp/messages/${id}`
       );
     }

@@ -10,7 +10,7 @@ module.exports = (robot: Robots) => {
   robot.respond(/(いらっしゃい|join)$/i, async (res) => {
     const { channelId, id } = res.message.message;
     robot.send(
-      { userID: IDs.at_Ras },
+      { userID: IDs['@Ras'] },
       `## join\n https://q.trap.jp/messages/${id}`
     );
     try {
@@ -25,7 +25,7 @@ module.exports = (robot: Robots) => {
       }, 2000);
     } catch (err) {
       robot.send(
-        { userID: IDs.at_Ras },
+        { userID: IDs['@Ras'] },
         `${err}\nhttps://q.trap.jp/messages/${id}`
       );
     }
@@ -35,7 +35,7 @@ module.exports = (robot: Robots) => {
   robot.respond(/(ばいばい|バイバイ|bye)$/i, async (res) => {
     const { channelId, id } = res.message.message;
     robot.send(
-      { userID: IDs.at_Ras },
+      { userID: IDs['@Ras'] },
       `## leave\n https://q.trap.jp/messages/${id}`
     );
     try {
@@ -45,7 +45,7 @@ module.exports = (robot: Robots) => {
       }, 500);
     } catch (err) {
       robot.send(
-        { userID: IDs.at_Ras },
+        { userID: IDs['@Ras'] },
         `${err}\nhttps://q.trap.jp/messages/${id}`
       );
     }

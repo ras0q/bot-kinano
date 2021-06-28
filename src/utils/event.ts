@@ -44,7 +44,7 @@ export const setTodayEvents = (robot: Robots): void => {
             convertToCronTime(notifyTime),
             () => {
               robot.send(
-                { channelID: IDs.gt_Ras },
+                { channelID: IDs['#g/t/Ras'] },
                 `# ==『${summary}』==\n#### ${start!.toString()}\n${description}\n@Ras`
               );
             },
@@ -54,7 +54,7 @@ export const setTodayEvents = (robot: Robots): void => {
       });
     })
     .catch((err) => {
-      robot.send({ userID: IDs.at_Ras }, err);
+      robot.send({ userID: IDs['@Ras'] }, err);
       return err;
     });
 };
