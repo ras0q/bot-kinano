@@ -9,7 +9,7 @@ import { MessageStamp } from '@traptitech/traq';
 import { Robots } from '../src/types';
 
 const isExecuted = (stamps: MessageStamp[]) =>
-  stamps.some((stamp) => stamp.userId === words.IDs.at_kinano);
+  stamps.some((stamp) => stamp.userId === words.IDs['@BOT_kinano']);
 
 module.exports = (robot: Robots) => {
   //メンション付きメッセージ
