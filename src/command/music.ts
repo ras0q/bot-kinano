@@ -63,13 +63,13 @@ module.exports = (robot: Robots) => {
       const addTable = `|User|Title|URL|\n|-|-|-|\n|:@${name}.large:${name}|${title}|${parsedUrl}|\n`;
       res.reply(`『${title}』を追加したやんね！`);
       robot.send(
-        { channelID: IDs.gtRB_log },
+        { channelID: IDs['#g/t/R/B/log'] },
         '## 曲が追加されたやんね！\n' + addTable
       );
     } catch (err) {
       console.log(err);
       robot.send(
-        { userID: IDs.at_Ras },
+        { userID: IDs['@Ras'] },
         `${err}\nhttps://q.trap.jp/messages/${id}`
       );
     }
@@ -102,7 +102,7 @@ module.exports = (robot: Robots) => {
       }
       console.log(err);
       robot.send(
-        { userID: IDs.at_Ras },
+        { userID: IDs['@Ras'] },
         `${err}\nhttps://q.trap.jp/messages/${id}`
       );
     }

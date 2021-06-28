@@ -33,7 +33,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });
@@ -55,7 +55,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });

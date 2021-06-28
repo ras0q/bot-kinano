@@ -37,7 +37,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });
@@ -59,7 +59,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });
@@ -82,7 +82,7 @@ module.exports = (robot: Robots) => {
         .catch((err) => {
           console.log(err);
           robot.send(
-            { userID: IDs.at_Ras },
+            { userID: IDs['@Ras'] },
             `${err}\nhttps://q.trap.jp/messages/${id}`
           );
         });
@@ -96,12 +96,12 @@ module.exports = (robot: Robots) => {
         .then((body) => {
           const { memo } = body;
           if (memo !== '') {
-            robot.send({ channelID: IDs.gt_Ras }, `めも！\n${table(memo)}`);
+            robot.send({ channelID: IDs['#g/t/R/Bot'] }, `@Ras\nめも！\n${table(memo)}`);
           }
         })
         .catch((err) => {
           console.log(err);
-          robot.send({ userID: IDs.at_Ras }, err);
+          robot.send({ userID: IDs['@Ras'] }, err);
         });
     },
     { timezone: 'Asia/Tokyo' }

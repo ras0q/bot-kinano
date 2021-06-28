@@ -91,7 +91,7 @@ module.exports = (robot: Robots) => {
               .catch((err) => {
                 console.log(err);
                 robot.send(
-                  { userID: words.IDs.at_Ras },
+                  { userID: words.IDs['@Ras'] },
                   `${err}\nhttps://q.trap.jp/messages/${messageId}`
                 );
               });
@@ -120,7 +120,7 @@ module.exports = (robot: Robots) => {
             .catch((err) => {
               console.log(err);
               robot.send(
-                { userID: words.IDs.at_Ras },
+                { userID: words.IDs['@Ras'] },
                 `${err}\nhttps://q.trap.jp/messages/${messageId}`
               );
             });

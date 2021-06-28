@@ -23,7 +23,7 @@ export const setTodayBlogs = async (robot: Robots): Promise<void> => {
     trapBlogMapper = sites;
   } catch (err) {
     console.error(err);
-    robot.send({ userID: IDs.at_Ras }, `## get blog error\n  ${err}`);
+    robot.send({ userID: IDs['@Ras'] }, `## get blog error\n  ${err}`);
   }
 
   [...Object.values(scheduling)].forEach(({ channelId, hour }, i) => {
