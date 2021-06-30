@@ -1,6 +1,6 @@
 // TODO: test を追加
 
-import requestPromise from 'request-promise';
+import * as nfetch  from 'node-fetch';
 
 const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
 
@@ -33,8 +33,8 @@ export const newMusics = (): MusicsClosure => {
    * @returns musicLists
    */
   const fetch = async () => {
-    const lists = await requestPromise(op('get'));
-    musicLists = lists;
+    const lists = await nfetch.default(url);
+    musicLists = await lists.json();
     return musicLists;
   };
 
@@ -54,13 +54,14 @@ export const newMusics = (): MusicsClosure => {
     url: string;
     title: string;
   }) => {
-    await requestPromise(
-      op('post', {
+    await nfetch.default(url, {
+      method: 'POST',
+      body: JSON.stringify({
         user,
         url,
         title,
       })
-    );
+    });
     return await fetch();
   };
 
@@ -77,12 +78,7 @@ export const newMusics = (): MusicsClosure => {
     if (musicLists[idx].user !== user) {
       throw new Error(`${user} cannnot remove this song`);
     }
-    await requestPromise({
-      method: 'delete',
-      uri: `${url}&id=${musicLists[idx].id}&user=${user}`,
-      headers: { 'Content-type': 'application/json' },
-      json: true,
-    });
+    await nfetch.default(`${url}&id=${musicLists[idx].id}&user=${user}`, {method: 'DELETE'});
     return await fetch();
   };
 
@@ -94,14 +90,6 @@ export const newMusics = (): MusicsClosure => {
     val: () => musicLists,
   };
 };
-
-const op = (method: string, qs?: unknown) => ({
-  method,
-  uri: url,
-  qs,
-  headers: { 'Content-type': 'application/json' },
-  json: true,
-});
 
 /**
  * YouTube のリンクかどうかを返す
