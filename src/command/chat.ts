@@ -5,48 +5,48 @@
 //https://www.chaplus.jp/
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 
-import requestPromise from 'request-promise';
+import fetch, { RequestInit } from 'node-fetch';
 import { getRandom } from '../utils/random';
 import { IDs } from '../src/words';
 import { Robots } from '../src/types';
 
-const op = (method: string, text: string, userName: string) => ({
-  method,
-  uri: 'https://www.chaplus.jp/v1/chat',
-  qs: { apikey: process.env.CHAPLUS_API_KEY },
-  headers: { 'Content-type': 'application/json' },
-  json: {
-    utterance: text,
-    username: userName,
-    agentState: {
-      agentName: 'きなの',
-      age: '14',
-    },
-  },
-});
+const apiKey = process.env.CHAPLUS_API_KEY;
+const baseApiUrl = `https://www.chaplus.jp/v1/chat?apikey=${apiKey}`;
 
 module.exports = (robot: Robots) => {
-  let chatChannelId = '';
+  let chatChannelId = IDs['#g/t/R/Bot'];
 
-  robot.hear(/.+/i, (res) => {
+  robot.hear(/.+/i, async (res) => {
     const { message } = res.message;
     const { channelId, id, plainText, user } = message;
     const called = plainText.match(/((?<!BOT_)kinano|きなの)(?!gacha)/i);
     const replacedText = plainText.replace(/((きなの|kinano)\s|\s(きなの|kinano))/i, ''); //前後に空白があれば「きなの」を除く
+
+    const option: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify({
+        utterance: replacedText,
+        agentState: {
+          agentName: 'きなの',
+          age: '20'
+        }
+      })
+    };
+
     if (!user.bot && (called || chatChannelId === channelId)) {
-      requestPromise(op('post', replacedText, user.displayName))
-        .then((body) => {
-          const { responses } = body;
-          const i = getRandom(0, responses.length);
-          res.reply(`${responses[i].utterance}`);
-        })
-        .catch((err) => {
-          console.log(err);
-          robot.send(
-            { userID: IDs['@Ras'] },
-            `${err}\nhttps://q.trap.jp/messages/${id}`
-          );
-        });
+      try {
+        const body = await fetch(baseApiUrl, option);
+        const { responses } = await body.json();
+        console.log(body);
+        const r = getRandom(0, responses.length);
+        res.reply(`${responses[r].utterance}`);
+      } catch (err) {
+        console.log(err);
+        robot.send(
+          { userID: IDs['@Ras'] },
+          `${err}\nhttps://q.trap.jp/messages/${id}`
+        );
+      }
     }
   });
 
