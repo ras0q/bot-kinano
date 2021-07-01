@@ -1,6 +1,6 @@
 // TODO: test を追加
 
-import * as nfetch  from 'node-fetch';
+import * as nfetch from 'node-fetch';
 
 const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
 
@@ -56,11 +56,12 @@ export const newMusics = (): MusicsClosure => {
   }) => {
     await nfetch.default(url, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         user,
         url,
         title,
-      })
+      }),
     });
     return await fetch();
   };
@@ -78,7 +79,9 @@ export const newMusics = (): MusicsClosure => {
     if (musicLists[idx].user !== user) {
       throw new Error(`${user} cannnot remove this song`);
     }
-    await nfetch.default(`${url}&id=${musicLists[idx].id}&user=${user}`, {method: 'DELETE'});
+    await nfetch.default(`${url}&id=${musicLists[idx].id}&user=${user}`, {
+      method: 'DELETE',
+    });
     return await fetch();
   };
 

@@ -31,8 +31,8 @@ export const setTodayEvents = async (robot: Robots): Promise<void> => {
     const todayEventKeys = sortedKeys.filter(
       (key) =>
         ics[key].start &&
-          ics[key].start!.getTime() - now > 0 &&
-          ics[key].start!.getTime() - now < 1000 * 60 * 60 * 24
+        ics[key].start!.getTime() - now > 0 &&
+        ics[key].start!.getTime() - now < 1000 * 60 * 60 * 24
     );
     console.log(`${todayEventKeys.length} events found.`);
     todayEventKeys.forEach((key) => {

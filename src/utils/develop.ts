@@ -1,6 +1,8 @@
 import { RobotHearResponse } from '../src/types';
 
-export const setSampleMessage = (message: RobotHearResponse['message']): void => {
+export const setSampleMessage = (
+  message: RobotHearResponse['message']
+): void => {
   message.message = {
     id: '00000000-0000-0000-0000-000000000000',
     user: {

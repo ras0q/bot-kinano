@@ -18,26 +18,25 @@ const format = (memo: string) =>
 
 const table = (memo: string) => '|memo|\n' + '|----|\n' + `|${format(memo)}|`;
 
-
 module.exports = (robot: Robots) => {
   robot.hear(/^(me|め|メ)(mo|も|モ)$/i, async (res) => {
     const { id, user } = res.message.message;
     if (!user.bot) {
       try {
         const body = await fetch(apiUrl(`/${user.name}`));
-        if(body.status !== 200) throw new Error(body.statusText);
+        if (body.status !== 200) throw new Error(body.statusText);
         const { memo } = await body.json();
         res.send(
           { type: 'stamp', name: 'writing_hand' },
           `めも！\n${table(memo)}`
         );
-      } catch(err) {
+      } catch (err) {
         console.log(err);
         robot.send(
           { userID: IDs['@Ras'] },
           `${err}\nhttps://q.trap.jp/messages/${id}`
         );
-      };
+      }
     }
   });
 
@@ -49,9 +48,9 @@ module.exports = (robot: Robots) => {
         const body = await fetch(apiUrl(''), {
           method: 'POST',
           body: JSON.stringify({ user: user.name, memo }),
-          headers: {'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json' },
         });
-        if(body.status !== 200) throw new Error(body.statusText);
+        if (body.status !== 200) throw new Error(body.statusText);
         res.send(
           { type: 'stamp', name: 'writing_hand' },
           `メモをアップデートしたやんね！:Hyperblob:\n${table(memo)}`
@@ -74,13 +73,15 @@ module.exports = (robot: Robots) => {
         const body = await fetch(apiUrl(''), {
           method: 'PATCH',
           body: JSON.stringify({ user: user.name, memo }),
-          headers: {'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json' },
         });
-        if(body.status !== 200) throw new Error(body.statusText);
+        if (body.status !== 200) throw new Error(body.statusText);
         const newMemo = await body.json();
         res.send(
           { type: 'stamp', name: 'writing_hand' },
-          `メモをアップデートしたやんね！:partyparrot_blob:\n${table(newMemo.memo)}`
+          `メモをアップデートしたやんね！:partyparrot_blob:\n${table(
+            newMemo.memo
+          )}`
         );
       } catch (err) {
         console.log(err);
@@ -97,15 +98,18 @@ module.exports = (robot: Robots) => {
     async () => {
       try {
         const body = await fetch(apiUrl('/Ras'));
-        if(body.status !== 200) throw new Error(body.statusText);
+        if (body.status !== 200) throw new Error(body.statusText);
         const { memo } = await body.json();
         if (memo !== '') {
-          robot.send({ channelID: IDs['#g/t/R/Bot'] }, `@Ras\nめも！\n${table(memo)}`);
+          robot.send(
+            { channelID: IDs['#g/t/R/Bot'] },
+            `@Ras\nめも！\n${table(memo)}`
+          );
         }
-      } catch(err) {
+      } catch (err) {
         console.log(err);
         robot.send({ userID: IDs['@Ras'] }, `${err}`);
-      };
+      }
     },
     { timezone: 'Asia/Tokyo' }
   );

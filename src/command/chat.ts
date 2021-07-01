@@ -19,7 +19,10 @@ module.exports = (robot: Robots) => {
   robot.hear(/.+/i, async (res) => {
     const { channelId, id, plainText, user } = res.message.message;
     const called = plainText.match(/((?<!BOT_)kinano|きなの)(?!gacha)/i);
-    const replacedText = plainText.replace(/((きなの|kinano)\s|\s(きなの|kinano))/i, ''); //前後に空白があれば「きなの」を除く
+    const replacedText = plainText.replace(
+      /((きなの|kinano)\s|\s(きなの|kinano))/i,
+      ''
+    ); //前後に空白があれば「きなの」を除く
 
     const option: RequestInit = {
       method: 'POST',
@@ -27,9 +30,9 @@ module.exports = (robot: Robots) => {
         utterance: replacedText,
         agentState: {
           agentName: 'きなの',
-          age: '20'
-        }
-      })
+          age: '20',
+        },
+      }),
     };
 
     if (!user.bot && (called || chatChannelId === channelId)) {
