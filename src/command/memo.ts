@@ -9,7 +9,7 @@ import fetch from 'node-fetch';
 const clientID = process.env.SHOWCASE_CLIENT_ID;
 const baseApiUrl = process.env.SHOWCASE_URL + '/memo';
 
-const apiUrl = (path?: string) => {
+const apiUrl = (path: string) => {
   return `${baseApiUrl}${path}?client_id=${clientID}`;
 };
 
@@ -46,9 +46,10 @@ module.exports = (robot: Robots) => {
     if (!user.bot) {
       try {
         const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, '');
-        const body = await fetch(apiUrl(), {
+        const body = await fetch(apiUrl(''), {
           method: 'POST',
           body: JSON.stringify({ user: user.name, memo }),
+          headers: {'Content-Type': 'application/json'},
         });
         if(body.status !== 200) throw new Error(body.statusText);
         res.send(
@@ -69,15 +70,17 @@ module.exports = (robot: Robots) => {
     const { id, text, user } = res.message.message;
     if (!user.bot) {
       try {
-        const memo = text.replace(/^(me|め|メ)(mo|も|モ)(=|＝)\s?/i, '');
-        const body = await fetch(apiUrl(), {
+        const memo = text.replace(/^(me|め|メ)(mo|も|モ)(\+|＋)\s?/i, '');
+        const body = await fetch(apiUrl(''), {
           method: 'PATCH',
           body: JSON.stringify({ user: user.name, memo }),
+          headers: {'Content-Type': 'application/json'},
         });
         if(body.status !== 200) throw new Error(body.statusText);
+        const newMemo = await body.json();
         res.send(
           { type: 'stamp', name: 'writing_hand' },
-          `メモをアップデートしたやんね！:partyparrot_blob:\n${table(memo)}`
+          `メモをアップデートしたやんね！:partyparrot_blob:\n${table(newMemo.memo)}`
         );
       } catch (err) {
         console.log(err);

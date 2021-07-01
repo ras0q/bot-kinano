@@ -17,8 +17,7 @@ module.exports = (robot: Robots) => {
   let chatChannelId = IDs['#g/t/R/Bot'];
 
   robot.hear(/.+/i, async (res) => {
-    const { message } = res.message;
-    const { channelId, id, plainText, user } = message;
+    const { channelId, id, plainText, user } = res.message.message;
     const called = plainText.match(/((?<!BOT_)kinano|きなの)(?!gacha)/i);
     const replacedText = plainText.replace(/((きなの|kinano)\s|\s(きなの|kinano))/i, ''); //前後に空白があれば「きなの」を除く
 
@@ -37,7 +36,6 @@ module.exports = (robot: Robots) => {
       try {
         const body = await fetch(baseApiUrl, option);
         const { responses } = await body.json();
-        console.log(body);
         const r = getRandom(0, responses.length);
         res.reply(`${responses[r].utterance}`);
       } catch (err) {
