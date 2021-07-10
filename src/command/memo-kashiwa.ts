@@ -3,7 +3,7 @@ import { Robots } from '../src/types';
 const memoRegexp = {
   add: /^a{3,}\s+/,
   edit: /^e{3,}\s+/,
-  finish: /^(d{3,}|e{3,})\s+/,
+  finish: /^(d{3,}|f{3,})\s+/,
   show: /^s{3}\s*/,
 };
 
