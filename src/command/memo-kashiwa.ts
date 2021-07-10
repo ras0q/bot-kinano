@@ -18,7 +18,7 @@ module.exports = (robot: Robots) => {
     const { user, plainText } = res.message.message;
     if (user.bot) return;
     const [num, txt] = plainText.replace(memoRegexp.edit, '').split(/\s+/);
-    res.send(`@BOT_kashiwade memo edit ${num}${txt}やんね！`);
+    res.send(`@BOT_kashiwade memo edit ${num} ${txt}やんね！`);
   });
 
   robot.hear(memoRegexp.finish, res => {
