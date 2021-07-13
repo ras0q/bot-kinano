@@ -23,11 +23,12 @@
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.3.0",
+    "markdownlint-cli": "^0.27.1",
     "prettier": "^2.2.1",
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "lint:fix": "eslint --fix \"**/*.{ts,js}\" && prettier --write \"**/*.{ts,js}\"",
+    "lint": "eslint --fix \"**/*.{ts,js}\" && prettier --write \"**/*.{ts,js}\" && markdownlint . --fix",
     "build": "rm -rf scripts && tsc && cp src/src/help.md scripts/src/help.md",
     "debug": "npm run build && ./bin/hubot",
     "start": "npm ci && npm run build && ./bin/hubot"

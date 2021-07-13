@@ -1,16 +1,20 @@
 # BOT_kinano
+
 traQ用Bot
 コマンドは[/src/src/README.md](src/src/README.md)参照
 
 ## Development Environment
+
 ```bash
-$ KINANO_WORK_ENV=develop
-$ npm start
+KINANO_WORK_ENV=develop
+npm start
 ```
 
 ## Architecture
+
 ファイル構成
-```
+
+```txt
 .
 ├── bin/ # 実行ディレクトリ
 ├── scripts/ # tscでコンパイルされたjsファイルがここに入る
