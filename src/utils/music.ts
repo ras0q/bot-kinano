@@ -1,42 +1,42 @@
 // TODO: test を追加
 
-import * as nfetch from 'node-fetch';
+import * as nfetch from 'node-fetch'
 
-const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`;
+const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`
 
 interface MusicElement {
-  id: number;
-  user: string;
-  url: string;
-  title: string;
+  id: number
+  user: string
+  url: string
+  title: string
 }
 
 interface MusicsClosure {
-  fetch: () => Promise<MusicElement[]>;
+  fetch: () => Promise<MusicElement[]>
   add: (
     _arg: Pick<MusicElement, 'user' | 'url' | 'title'>
-  ) => Promise<MusicElement[]>;
+  ) => Promise<MusicElement[]>
   remove: (
     _arg: Pick<MusicElement, 'user'> & { idx: number }
-  ) => Promise<MusicElement[]>;
-  val: () => MusicElement[];
+  ) => Promise<MusicElement[]>
+  val: () => MusicElement[]
 }
 
 /**
  * 音楽リストに関するクロージャを作成する関数
  */
 export const newMusics = (): MusicsClosure => {
-  let musicLists: MusicElement[] = [];
+  let musicLists: MusicElement[] = []
 
   /**
    * musicLists を更新する
    * @returns musicLists
    */
   const fetch = async () => {
-    const lists = await nfetch.default(url);
-    musicLists = await lists.json();
-    return musicLists;
-  };
+    const lists = await nfetch.default(url)
+    musicLists = await lists.json()
+    return musicLists
+  }
 
   /**
    * 曲を追加し、musicLists を更新する
@@ -48,11 +48,11 @@ export const newMusics = (): MusicsClosure => {
   const add = async ({
     user,
     url,
-    title,
+    title
   }: {
-    user: string;
-    url: string;
-    title: string;
+    user: string
+    url: string
+    title: string
   }) => {
     await nfetch.default(url, {
       method: 'POST',
@@ -60,11 +60,11 @@ export const newMusics = (): MusicsClosure => {
       body: JSON.stringify({
         user,
         url,
-        title,
-      }),
-    });
-    return await fetch();
-  };
+        title
+      })
+    })
+    return await fetch()
+  }
 
   /**
    * 曲を削除し、musicLists を更新する
@@ -74,25 +74,25 @@ export const newMusics = (): MusicsClosure => {
    */
   const remove = async ({ idx, user }: { idx: number; user: string }) => {
     if (idx >= musicLists.length || idx < 0) {
-      throw new Error('Index out of range');
+      throw new Error('Index out of range')
     }
     if (musicLists[idx].user !== user) {
-      throw new Error(`${user} cannnot remove this song`);
+      throw new Error(`${user} cannnot remove this song`)
     }
     await nfetch.default(`${url}&id=${musicLists[idx].id}&user=${user}`, {
-      method: 'DELETE',
-    });
-    return await fetch();
-  };
+      method: 'DELETE'
+    })
+    return await fetch()
+  }
 
-  fetch();
+  fetch()
   return {
     fetch,
     add,
     remove,
-    val: () => musicLists,
-  };
-};
+    val: () => musicLists
+  }
+}
 
 /**
  * YouTube のリンクかどうかを返す
@@ -100,8 +100,8 @@ export const newMusics = (): MusicsClosure => {
  * @returns boolean
  */
 export const isYouTubeURL = (url: URL): boolean => {
-  return ['www.youtube.com', 'youtu.be'].includes(url.hostname);
-};
+  return ['www.youtube.com', 'youtu.be'].includes(url.hostname)
+}
 
 /**
  * YouTube のリンクを整形し、www.youtube.com/watch?v=... を youtu.be/... の形にする
@@ -110,21 +110,21 @@ export const isYouTubeURL = (url: URL): boolean => {
  */
 export const parseYoutubeUrl = (url: URL): URL | null => {
   if (!isYouTubeURL(url)) {
-    return null;
+    return null
   }
   if (url.hostname === 'www.youtube.com') {
     if (url.pathname === '/watch') {
-      const params = url.searchParams;
+      const params = url.searchParams
       if (params.get('v') === null) {
-        return null;
+        return null
       }
-      return new URL(`https://youtu.be/${params.get('v')}`);
+      return new URL(`https://youtu.be/${params.get('v')}`)
     }
-    return null;
+    return null
   } else {
-    return new URL(`https://youtu.be${url.pathname}`);
+    return new URL(`https://youtu.be${url.pathname}`)
   }
-};
+}
 
 /**
  * 「重複がないかを調べ、ないならば少し整形する」関数を返す
@@ -136,16 +136,16 @@ export const makeParseValidUrlFunc = (musics: MusicsClosure) => (
 ):
   | string
   | {
-      idx: number;
-      val: MusicElement;
+      idx: number
+      val: MusicElement
     } => {
   try {
-    const newUrl = new URL(urlString);
+    const newUrl = new URL(urlString)
     const sames = Array.from(musics.val().entries())
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .filter(([_, val]) => {
         try {
-          const url = new URL(val.url);
+          const url = new URL(val.url)
           if (isYouTubeURL(newUrl) && isYouTubeURL(url)) {
             if (
               parseYoutubeUrl(newUrl) !== null &&
@@ -153,32 +153,32 @@ export const makeParseValidUrlFunc = (musics: MusicsClosure) => (
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               parseYoutubeUrl(newUrl)!.href === parseYoutubeUrl(url)!.href
             ) {
-              return true;
+              return true
             }
-            return false;
+            return false
           } else if (!isYouTubeURL(newUrl) && !isYouTubeURL(url)) {
             if (newUrl === url) {
-              return true;
+              return true
             }
-            return false;
+            return false
           }
-          return false;
+          return false
         } catch (err) {
-          return false;
+          return false
         }
-      });
+      })
 
     if (sames.length > 0) {
       return {
         idx: sames[0][0],
-        val: musics.val()[sames[0][0]],
-      };
+        val: musics.val()[sames[0][0]]
+      }
     }
     return isYouTubeURL(newUrl) && parseYoutubeUrl(newUrl) !== null
       ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         parseYoutubeUrl(newUrl)!.href
-      : urlString;
+      : urlString
   } catch (err) {
-    return urlString;
+    return urlString
   }
-};
+}

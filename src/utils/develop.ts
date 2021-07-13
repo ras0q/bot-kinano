@@ -1,4 +1,4 @@
-import { RobotHearResponse } from '../src/types';
+import { RobotHearResponse } from '../src/types'
 
 export const setSampleMessage = (
   message: RobotHearResponse['message']
@@ -10,7 +10,7 @@ export const setSampleMessage = (
       name: 'Ras',
       displayName: 'らす',
       iconId: '00000000-0000-0000-0000-000000000000',
-      bot: false,
+      bot: false
     },
     channelId: '00000000-0000-0000-0000-000000000000',
     text: message.text,
@@ -19,10 +19,10 @@ export const setSampleMessage = (
       {
         raw: '@BOT_kinano',
         type: 'user',
-        id: 'f60166fb-c153-409a-811d-272426eda32b',
-      },
+        id: 'f60166fb-c153-409a-811d-272426eda32b'
+      }
     ],
     createdAt: '2020-01-01T00:00:00.000000Z',
-    updatedAt: '2021-01-01T00:00:00.000000Z',
-  };
-};
+    updatedAt: '2021-01-01T00:00:00.000000Z'
+  }
+}
