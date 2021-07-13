@@ -32,11 +32,6 @@
     - きなのはマルチリンガルやんね～～～～
 - `tratra {txt}`: やまびこするやんね！やっほ～
 
-## :blobmaracas: *Memo* :blobmaracas:
-- `memo`でメモを確認できるやんね！
-- `memo= {text}`でメモをあっぷでーとできるやんね！ (全て書き換えてしまうので注意してください)
-- `memo+ {text}`でメモに`text`を追加できるやんね！ (`memo=`、`memo+`ともに`text`の前に改行を入れることを推奨します)
-
 ## :blobkeyboard: *The others* :blobkeyboard:
 - `:koko:`: きなのと:motto::motto:おしゃべりできるようになるやんね！
 - その他要望があれば#gps/times/Ras/Botまでお願いやんね！

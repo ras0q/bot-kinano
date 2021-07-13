@@ -8,7 +8,6 @@ const fileNames = [
   'channel',
   'chat',
   'memo-kashiwa',
-  'memo',
   'music',
   'reaction',
   'remind',
