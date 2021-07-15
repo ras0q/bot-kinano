@@ -6,9 +6,9 @@
 //https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
 
 import fetch, { RequestInit } from 'node-fetch'
-import { getRandom } from '../utils/random'
-import { IDs } from '../src/words'
 import { Robots } from '../src/types'
+import { IDs } from '../src/words'
+import { getRandom } from '../utils/random'
 
 const apiKey = process.env.CHAPLUS_API_KEY
 const baseApiUrl = `https://www.chaplus.jp/v1/chat?apikey=${apiKey}`
@@ -39,6 +39,12 @@ module.exports = (robot: Robots) => {
       try {
         const body = await fetch(baseApiUrl, option)
         const { responses } = await body.json()
+        if (responses === undefined) {
+          res.reply(
+            'えらーが起きちゃったやんね...\nちょっと休ませてほしいやんね...'
+          )
+          return
+        }
         const r = getRandom(0, responses.length)
         res.reply(`${responses[r].utterance}`)
       } catch (err) {
