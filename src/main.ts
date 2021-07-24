@@ -7,7 +7,7 @@ const fileNames = [
   '_startup',
   'channel',
   'chat',
-  'memo-kashiwa',
+  'kashiwa',
   'music',
   'reaction',
   'remind',
