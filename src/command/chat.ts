@@ -51,7 +51,7 @@ module.exports = (robot: Robots) => {
           )
           return
         }
-        res.reply(`${br.utterance} (score: ${br.score.slice(0, 5)})\n`)
+        res.reply(`${br.utterance} (score: ${br.score.toString().slice(0, 6)})\n`)
       }
     } catch (err) {
       console.log(err)
