@@ -52,9 +52,9 @@ module.exports = (robot: Robots) => {
           )
           return
         }
-        res.reply(`
-          ${br.utterance} (score: ${br.score.toString().slice(0, 6)}) ${br.url} ${br.imageUrl}
-        `.replace(/\n+$/, ''))
+        const { utterance, score, url, imageUrl } = br
+        const sc = score.toString().slice(0, 6)
+        res.reply(`${utterance} (score: ${sc}) ${url} ${imageUrl}`)
       }
     } catch (err) {
       console.log(err)
