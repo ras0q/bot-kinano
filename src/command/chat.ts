@@ -33,16 +33,17 @@ module.exports = (robot: Robots) => {
       body: JSON.stringify({
         api_key: apiKey,
         agent_id: agentId,
-        utterance: replacedText
+        utterance: replacedText,
+        uid: user.name
       }),
       headers: {
         'Content-Type': 'application/json'
       }
     }
 
-    if (!user.bot && (called || chatChannelId === channelId)) {
-      try {
-        const body = await fetch(baseUrl, option)
+    try {
+      const body = await fetch(baseUrl, option) // TODO: 呼ばれなくても分析のために回しておく
+      if (!user.bot && (called || chatChannelId === channelId)) {
         const { bestResponse: br } = await body.json()
         if (br === undefined) {
           res.reply(
@@ -50,14 +51,14 @@ module.exports = (robot: Robots) => {
           )
           return
         }
-        res.reply(`${br.utterance} (score: ${br.score})\n`)
-      } catch (err) {
-        console.log(err)
-        robot.send(
-          { userID: IDs['@Ras'] },
-          `${err}\nhttps://q.trap.jp/messages/${id}`
-        )
+        res.reply(`${br.utterance} (score: ${br.score.slice(0, 5)})\n`)
       }
+    } catch (err) {
+      console.log(err)
+      robot.send(
+        { userID: IDs['@Ras'] },
+        `${err}\nhttps://q.trap.jp/messages/${id}`
+      )
     }
   })
 
