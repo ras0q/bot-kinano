@@ -2,16 +2,20 @@
 //  talk with BOT_kinano naturally.
 
 //Reference:
-//https://www.chaplus.jp/
-//https://k-masashi.github.io/chaplus-api-doc/ChatAPI.html
+// https://www.notion.so/mebo-73b5b5d1ac5648a69ffe17ac0484e33f
+// https://www.notion.so/API-9d11040c878e4e1a98dd609bcefb4641
 
 import fetch, { RequestInit } from 'node-fetch'
 import { Robots } from '../src/types'
 import { IDs } from '../src/words'
-import { getRandom } from '../utils/random'
 
-const apiKey = process.env.CHAPLUS_API_KEY
-const baseApiUrl = `https://www.chaplus.jp/v1/chat?apikey=${apiKey}`
+const apiKey = process.env.MEBO_API_KEY
+const agentId = process.env.MEBO_API_AGENT_ID
+const baseUrl = process.env.MEBO_API_ENDPOINT
+
+if (!baseUrl) {
+  throw new Error('MEBO_API_ENDPOINT should not be empty.')
+}
 
 module.exports = (robot: Robots) => {
   let chatChannelId = IDs['#g/t/R/Bot']
@@ -27,26 +31,26 @@ module.exports = (robot: Robots) => {
     const option: RequestInit = {
       method: 'POST',
       body: JSON.stringify({
-        utterance: replacedText,
-        agentState: {
-          agentName: 'きなの',
-          age: '20'
-        }
-      })
+        api_key: apiKey,
+        agent_id: agentId,
+        utterance: replacedText
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
 
     if (!user.bot && (called || chatChannelId === channelId)) {
       try {
-        const body = await fetch(baseApiUrl, option)
-        const { responses } = await body.json()
-        if (responses === undefined) {
+        const body = await fetch(baseUrl, option)
+        const { bestResponse: br } = await body.json()
+        if (br === undefined) {
           res.reply(
             'えらーが起きちゃったやんね...\nちょっと休ませてほしいやんね...'
           )
           return
         }
-        const r = getRandom(0, responses.length)
-        res.reply(`${responses[r].utterance}`)
+        res.reply(`${br.utterance} (score: ${br.score})\n`)
       } catch (err) {
         console.log(err)
         robot.send(
