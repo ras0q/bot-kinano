@@ -41,7 +41,6 @@ module.exports = (robot: Robots) => {
         'Content-Type': 'application/json'
       }
     }
-    console.log(option)
 
     try {
       const body = await fetch(baseUrl, option) // TODO: 呼ばれなくても分析のために回しておく
@@ -54,10 +53,8 @@ module.exports = (robot: Robots) => {
           return
         }
         res.reply(`
-          ${br.utterance} (score: ${br.score.toString().slice(0, 6)})\n
-          ${br.url}\n
-          ${br.imageUrl}\n
-        `)
+          ${br.utterance} (score: ${br.score.toString().slice(0, 6)}) ${br.url} ${br.imageUrl}
+        `.replace(/\n+$/, ''))
       }
     } catch (err) {
       console.log(err)
