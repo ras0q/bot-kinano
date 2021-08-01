@@ -27,6 +27,7 @@ module.exports = (robot: Robots) => {
       /((きなの|kinano)\s|\s(きなの|kinano))/i,
       ''
     ) //前後に空白があれば「きなの」を除く
+    if (user.bot) return
 
     const option: RequestInit = {
       method: 'POST',
@@ -40,10 +41,11 @@ module.exports = (robot: Robots) => {
         'Content-Type': 'application/json'
       }
     }
+    console.log(option)
 
     try {
       const body = await fetch(baseUrl, option) // TODO: 呼ばれなくても分析のために回しておく
-      if (!user.bot && (called || chatChannelId === channelId)) {
+      if (called || chatChannelId === channelId) {
         const { bestResponse: br } = await body.json()
         if (br === undefined) {
           res.reply(
@@ -51,7 +53,11 @@ module.exports = (robot: Robots) => {
           )
           return
         }
-        res.reply(`${br.utterance} (score: ${br.score.toString().slice(0, 6)})\n`)
+        res.reply(`
+          ${br.utterance} (score: ${br.score.toString().slice(0, 6)})\n
+          ${br.url}\n
+          ${br.imageUrl}\n
+        `)
       }
     } catch (err) {
       console.log(err)
