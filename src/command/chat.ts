@@ -42,9 +42,9 @@ module.exports = (robot: Robots) => {
       }
     }
 
-    try {
-      const body = await fetch(baseUrl, option) // TODO: 呼ばれなくても分析のために回しておく
-      if (called || chatChannelId === channelId) {
+    if (called || chatChannelId === channelId) {
+      try {
+        const body = await fetch(baseUrl, option)
         const { bestResponse: br } = await body.json()
         if (br === undefined) {
           res.reply(
@@ -55,13 +55,13 @@ module.exports = (robot: Robots) => {
         const { utterance, score, url, imageUrl } = br
         const sc = score.toString().slice(0, 6)
         res.reply(`${utterance} (score: ${sc}) ${url} ${imageUrl}`)
+      } catch (err) {
+        console.log(err)
+        robot.send(
+          { userID: IDs['@Ras'] },
+          `${err}\nhttps://q.trap.jp/messages/${id}`
+        )
       }
-    } catch (err) {
-      console.log(err)
-      robot.send(
-        { userID: IDs['@Ras'] },
-        `${err}\nhttps://q.trap.jp/messages/${id}`
-      )
     }
   })
 
