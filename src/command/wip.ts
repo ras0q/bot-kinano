@@ -1,7 +1,9 @@
 //Description:
 // work in progress.
 
+import cron from 'node-cron'
 import { Robots } from '../src/types'
+import { IDs } from '../src/words'
 import { getMofu } from '../utils/mofu'
 import { getRandom } from '../utils/random'
 
@@ -35,4 +37,12 @@ module.exports = (robot: Robots) => {
       res.send(cat)
     }
   })
+
+  cron.schedule(
+    '0 22 * * *',
+    () => {
+      robot.send({ channelID: IDs['#g/t/Ras'] }, '@Ras 日記を書くやんね！')
+    },
+    { timezone: 'Asia/Tokyo' }
+  )
 }
