@@ -12,7 +12,7 @@ const fileNames = [
   'reaction',
   'remind',
   'translate',
-  'wip',
+  'wip'
 ]
 // eslint-disable-next-line no-unused-vars
 const commands: { [key: string]: (robot: Robots) => void } = {}
