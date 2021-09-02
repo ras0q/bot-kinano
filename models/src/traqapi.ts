@@ -25,4 +25,3 @@ export const apiPost = (channelId: string, content: string) => {
 export const apiPostDM = (userId: string, content: string) => {
   return api.postDirectMessage(userId, { content, embed: true })
 }
-
