@@ -22,7 +22,7 @@ export const join = async (res: RobotHearResponse): Promise<void> => {
       res.reply(helpMsg)
     }, 1000)
   } catch (err) {
-    postErrMsg(err, id)
+    postErrMsg(err, res)
   }
 }
 
@@ -35,6 +35,6 @@ export const leave = async (res: RobotHearResponse): Promise<void> => {
       res.reply(leaveMsg)
     }, 500)
   } catch (err) {
-    postErrMsg(err, id)
+    postErrMsg(err, res)
   }
 }
