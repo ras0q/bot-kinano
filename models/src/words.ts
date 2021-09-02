@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 
 export const readme = fs.readFileSync(
-  path.resolve(__dirname, './help.md'),
+  path.resolve(__dirname, '../../help.md'),
   'utf8'
 )
 
