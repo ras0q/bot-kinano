@@ -127,18 +127,18 @@ export declare class RobotEvents {
 export type RobotSendMessage =
   | string
   | {
-    type: 'stamp'
-    name: string
-  }
+      type: 'stamp'
+      name: string
+    }
 export type RobotCallbackData =
   | {
-    channelID: UUID
-    userId?: never
-  }
+      channelID: UUID
+      userId?: never
+    }
   | {
-    channelID?: never
-    userID: UUID
-  }
+      channelID?: never
+      userID: UUID
+    }
 
 export type RobotResponseActions = {
   send(...message: RobotSendMessage[]): void
@@ -148,8 +148,8 @@ export type RobotResponseActions = {
 
 export type RobotHearResponse = {
   message: MessageCreated &
-  Pick<MessageCreated['message'], 'embedded' | 'createdAt' | 'updatedAt'> &
-  Hubot.TextMessage
+    Pick<MessageCreated['message'], 'embedded' | 'createdAt' | 'updatedAt'> &
+    Hubot.TextMessage
 } & RobotResponseActions
 export type RobotRespondResponse = RobotHearResponse
 export type RobotTopicResponse = {
