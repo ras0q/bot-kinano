@@ -30,5 +30,8 @@ export const defaultEnvs = {
   showcase: {
     clientId: getEnv('SHOWCASE_CLIENT_ID'),
     baseUrl: getEnv('SHOWCASE_BASE_URL')
+  },
+  traq: {
+    baseUrl: getEnv('TRAQ_BASE_URL')
   }
 }
