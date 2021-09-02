@@ -1,10 +1,10 @@
 //Description:
 //  control traQplaylist.
 
-import { getRandom } from '../utils/random'
-import { IDs } from '../src/words'
+import { IDs } from '../config/id'
 import { Robots } from '../src/types'
 import { makeParseValidUrlFunc, newMusics } from '../utils/music'
+import { getRandom } from '../utils/random'
 
 /**
  * 音楽リストに関するクロージャ

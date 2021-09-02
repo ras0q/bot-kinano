@@ -1,16 +1,14 @@
 import ical from 'ical'
 import cron from 'node-cron'
 import fetch from 'node-fetch'
+import { defaultEnvs } from '../config/env'
+import { IDs } from '../config/id'
 import { Robots } from '../src/types'
-import { IDs } from '../src/words'
 import { convertToCronTime } from './crontime'
 
-const baseURL = process.env.ICAL_URL
-const events: cron.ScheduledTask[] = []
+const { baseUrl } = defaultEnvs.ical
 
-if (!baseURL) {
-  throw new Error('ICAL_URL should not be empty.')
-}
+const events: cron.ScheduledTask[] = []
 
 /* eslint @typescript-eslint/no-non-null-assertion: 0 */
 export const setTodayEvents = async (robot: Robots): Promise<void> => {
@@ -22,7 +20,7 @@ export const setTodayEvents = async (robot: Robots): Promise<void> => {
   events.splice(0)
 
   try {
-    const body = await fetch(baseURL)
+    const body = await fetch(baseUrl)
     const ics = ical.parseICS(await body.text())
     const sortedKeys = Object.keys(ics).sort((a, b) => {
       if (ics[a].start! < ics[b].start!) return -1

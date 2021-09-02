@@ -3,7 +3,7 @@
 
 import { join, leave } from '../src/traqapi'
 import { Robots } from '../src/types'
-import { IDs } from '../src/words'
+import { IDs } from '../config/id'
 
 module.exports = (robot: Robots) => {
   //監視対象に追加

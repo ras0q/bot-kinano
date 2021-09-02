@@ -1,8 +1,11 @@
 // TODO: test を追加
 
 import * as nfetch from 'node-fetch'
+import { defaultEnvs } from '../config/env'
 
-const url = `${process.env.SHOWCASE_URL}/song?client_id=${process.env.SHOWCASE_CLIENT_ID}`
+const { baseUrl, clientId } = defaultEnvs.showcase
+
+const url = `${baseUrl}/song?client_id=${clientId}`
 
 interface MusicElement {
   id: number

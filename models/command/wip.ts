@@ -2,8 +2,8 @@
 // work in progress.
 
 import cron from 'node-cron'
+import { IDs } from '../config/id'
 import { Robots } from '../src/types'
-import { IDs } from '../src/words'
 import { getMofu } from '../utils/mofu'
 import { getRandom } from '../utils/random'
 

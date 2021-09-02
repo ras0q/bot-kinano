@@ -6,16 +6,11 @@
 // https://www.notion.so/API-9d11040c878e4e1a98dd609bcefb4641
 
 import fetch, { RequestInit } from 'node-fetch'
+import { defaultEnvs } from '../config/env'
+import { IDs } from '../config/id'
 import { Robots } from '../src/types'
-import { IDs } from '../src/words'
 
-const apiKey = process.env.MEBO_API_KEY
-const agentId = process.env.MEBO_API_AGENT_ID
-const baseUrl = process.env.MEBO_API_ENDPOINT
-
-if (!baseUrl) {
-  throw new Error('MEBO_API_ENDPOINT should not be empty.')
-}
+const { apiKey, agentId, baseUrl } = defaultEnvs.mebo
 
 module.exports = (robot: Robots) => {
   let chatChannelId = IDs['#g/t/R/Bot']

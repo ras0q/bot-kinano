@@ -1,5 +1,5 @@
-import { Robots } from '../src/types'
 import cron from 'node-cron'
+import { Robots } from '../src/types'
 import { convertToCronTime } from '../utils/crontime'
 
 module.exports = (robot: Robots) => {

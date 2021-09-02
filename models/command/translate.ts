@@ -2,12 +2,14 @@
 //  translate words.
 
 import fetch from 'node-fetch'
+import { defaultEnvs } from '../config/env'
+import { IDs } from '../config/id'
 import { Robots } from '../src/types'
-import { IDs } from '../src/words'
 
-const baseApiUrl = `${process.env.GAS_TRA_URL}`
+const { baseUrl } = defaultEnvs.gas
+
 const apiUrl = (txt: string, src: string, tar: string) =>
-  new URL(`${baseApiUrl}?text="${txt}"&source=${src}&target=${tar}`)
+  new URL(`${baseUrl}?text="${txt}"&source=${src}&target=${tar}`)
 
 module.exports = (robot: Robots) => {
   //翻訳(デフォルトは日=>英)

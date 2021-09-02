@@ -7,9 +7,10 @@ import { Robots } from '../src/types'
 import * as words from '../src/words'
 import { getMofu } from '../utils/mofu'
 import { getRandom } from '../utils/random'
+import { IDs } from '../config/id'
 
 const isExecuted = (stamps: MessageStamp[]) =>
-  stamps.some((stamp) => stamp.userId === words.IDs['@BOT_kinano'])
+  stamps.some((stamp) => stamp.userId === IDs['@BOT_kinano'])
 
 module.exports = (robot: Robots) => {
   //メンション付きメッセージ
@@ -91,7 +92,7 @@ module.exports = (robot: Robots) => {
               .catch((err) => {
                 console.log(err)
                 robot.send(
-                  { userID: words.IDs['@Ras'] },
+                  { userID: IDs['@Ras'] },
                   `${err}\nhttps://q.trap.jp/messages/${messageId}`
                 )
               })
@@ -120,7 +121,7 @@ module.exports = (robot: Robots) => {
             .catch((err) => {
               console.log(err)
               robot.send(
-                { userID: words.IDs['@Ras'] },
+                { userID: IDs['@Ras'] },
                 `${err}\nhttps://q.trap.jp/messages/${messageId}`
               )
             })
