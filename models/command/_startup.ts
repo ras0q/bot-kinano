@@ -16,10 +16,7 @@ const { workEnv } = defaultEnvs.local
 module.exports = (robot: Robots) => {
   //開発環境
   if (workEnv === 'develop') {
-    console.log(`
-\u001b[35mDEVELOPMENT ENVIRONMENT
-My name is ${workEnv}\u001b[0m
-`)
+    console.log('\u001b[35mDEVELOPMENT ENVIRONMENT\u001b[0m')
     robot.hear(/./, (res) => {
       setSampleMessage(res.message)
     })
