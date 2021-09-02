@@ -17,10 +17,10 @@ export const defaultEnvs = {
     traqAccessToken: getEnv('HUBOT_TRAQ_ACCESS_TOKEN')
   },
   ical: {
-    baseUrl: getEnv('')
+    baseUrl: getEnv('ICAL_BASE_URL')
   },
   local: {
-    workEnv: getEnv('LOCAL_WORK_ENV')
+    workEnv: getEnv('KINANO_WORK_ENV')
   },
   mebo: {
     apiKey: getEnv('MEBO_API_KEY'),
