@@ -74,10 +74,6 @@ export const isNotMentioned: {
     ans: 'ぽんぽん！'
   },
   {
-    msg: /(たすけて|tasukete)/,
-    ans: readme
-  },
-  {
     msg: /いい？$/,
     ans: {
       type: 'stamp',
