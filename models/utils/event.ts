@@ -39,7 +39,7 @@ export const setTodayEvents = async (robot: Robots): Promise<void> => {
     todayEventKeys.forEach((key) => {
       const { start, summary, description } = ics[key]
       const notifyTime = new Date(start!.getTime())
-      notifyTime.setMinutes(notifyTime.getMinutes() - 5)
+      notifyTime.setHours(notifyTime.getHours() - 1)
       events.push(
         cron.schedule(
           convertToCronTime(notifyTime),
