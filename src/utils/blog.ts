@@ -2,7 +2,7 @@ import cron from 'node-cron'
 import Sitemapper from 'sitemapper'
 import { Robots } from '../src/types'
 import { IDs, scheduling } from '../src/words'
-import { getRandom } from '../utils/random'
+import { getRandom } from './random'
 
 const trapBlog = new Sitemapper({
   url: 'https://trap.jp/sitemap-posts.xml'
