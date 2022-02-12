@@ -1,6 +1,7 @@
 /node_modules
 .hubot_history
 *.env
+.eslintcache
 
 # コンパイル用ディレクトリ
 scripts
