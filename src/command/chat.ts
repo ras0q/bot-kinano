@@ -52,9 +52,8 @@ module.exports = (robot: Robots) => {
           )
           return
         }
-        const { utterance, score, url, imageUrl } = br
-        const sc = score.toString().slice(0, 6)
-        res.reply(`${utterance} (score: ${sc}) ${url} ${imageUrl}`)
+        const { utterance, url, imageUrl } = br
+        res.send(`${utterance} ${url} ${imageUrl}`)
       } catch (err) {
         console.log(err)
         robot.send(
