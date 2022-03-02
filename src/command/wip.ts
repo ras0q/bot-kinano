@@ -45,16 +45,16 @@ module.exports = (robot: Robots) => {
   const kinanoLike = new RegExp(`(${idan})(${adan})(${odan})`, 'gi')
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
-      const found = res.message.message.text.match(kinanoLike)
-      res.send(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        found!
-          .filter((v) => {
-            return !v.match(/(きなの|kinano)/i)
-          })
-          .map((v) => `「${v}」`)
-          .join('と') + 'と「きなの」で韻が踏めるやんね:sunglasses:'
-      )
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const found = res.message.message.text.match(kinanoLike)!.filter((v) => {
+        return !v.match(/(きなの|kinano)/i)
+      })
+      if (found.length > 0) {
+        res.send(
+          found.map((v) => `「${v}」`).join('と') +
+            'と「きなの」で韻が踏めるやんね:sunglasses:'
+        )
+      }
     }
   })
 }
