@@ -35,4 +35,19 @@ module.exports = (robot: Robots) => {
       res.send(cat)
     }
   })
+
+  const idan = 'いきぎしじちぢにひびぴみりゐイキギシジチヂニヒビピミリ'
+  const adan = 'あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ'
+  const odan = 'おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ'
+  const kinanoLike = new RegExp(`[${idan}][${adan}][${odan}]`, 'g')
+  robot.hear(kinanoLike, (res) => {
+    if (!res.message.message.user.bot) {
+      const found = res.message.message.text.match(kinanoLike)
+      res.send(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        found!.map((v) => `「${v}」`).join('と') +
+          'と「きなの」で韻が踏めるやんね:sunglasses:'
+      )
+    }
+  })
 }
