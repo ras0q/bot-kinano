@@ -45,8 +45,12 @@ module.exports = (robot: Robots) => {
       const found = res.message.message.text.match(kinanoLike)
       res.send(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        found!.map((v) => `「${v}」`).join('と') +
-          'と「きなの」で韻が踏めるやんね:sunglasses:'
+        found!
+          .filter((v) => {
+            return v !== 'きなの'
+          })
+          .map((v) => `「${v}」`)
+          .join('と') + 'と「きなの」で韻が踏めるやんね:sunglasses:'
       )
     }
   })
