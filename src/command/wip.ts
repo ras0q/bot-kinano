@@ -36,10 +36,13 @@ module.exports = (robot: Robots) => {
     }
   })
 
-  const idan = 'いきぎしじちぢにひびぴみりゐイキギシジチヂニヒビピミリ'
-  const adan = 'あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ'
-  const odan = 'おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ'
-  const kinanoLike = new RegExp(`[${idan}][${adan}][${odan}]`, 'g')
+  const idan =
+    '[いきぎしじちぢにひびぴみりゐイキギシジチヂニヒビピミリ]|[^aiueo]?i'
+  const adan =
+    'あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ|[^aiueo]?a'
+  const odan =
+    'おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ|[^aiueo]?o'
+  const kinanoLike = new RegExp(`(${idan})(${adan})(${odan})`, 'gi')
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
       const found = res.message.message.text.match(kinanoLike)
