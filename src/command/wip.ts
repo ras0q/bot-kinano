@@ -39,9 +39,9 @@ module.exports = (robot: Robots) => {
   const idan =
     '[いきぎしじちぢにひびぴみりゐイキギシジチヂニヒビピミリ]|[^aiueo]?i'
   const adan =
-    'あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ|[^aiueo]?a'
+    '[あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ]|[^aiueo]?a'
   const odan =
-    'おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ|[^aiueo]?o'
+    '[おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ]|[^aiueo]?o'
   const kinanoLike = new RegExp(`(${idan})(${adan})(${odan})`, 'gi')
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
@@ -50,7 +50,7 @@ module.exports = (robot: Robots) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         found!
           .filter((v) => {
-            return v !== 'きなの'
+            return !v.match(/(きなの|kinano)/i)
           })
           .map((v) => `「${v}」`)
           .join('と') + 'と「きなの」で韻が踏めるやんね:sunglasses:'
