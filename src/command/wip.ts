@@ -46,7 +46,7 @@ module.exports = (robot: Robots) => {
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const found = res.message.message.text.replace(kinanoLike, '「$&」')
+      const found = res.message.message.text.replace(kinanoLike, 'きなの')
       res.send(found)
     }
   })
