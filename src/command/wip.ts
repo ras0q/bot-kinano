@@ -46,8 +46,12 @@ module.exports = (robot: Robots) => {
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const found = res.message.message.text.replace(kinanoLike, '「$&」')
-      res.send(found)
+      const found = res.message.message.text
+        .match(kinanoLike)!
+        .filter((v) => v !== 'きなの')
+      if (found.length > 0) {
+        res.send(found.join('\n') + '\n' + 'きなの')
+      }
     }
   })
 }
