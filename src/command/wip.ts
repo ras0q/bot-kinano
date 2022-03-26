@@ -45,17 +45,12 @@ module.exports = (robot: Robots) => {
   const kinanoLike = new RegExp(`(${idan})(${adan})(${odan})`, 'gi')
   robot.hear(kinanoLike, (res) => {
     if (!res.message.message.user.bot) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const found = res.message.message.text.match(kinanoLike)!.length
+      const found = res.message.message.text.match(kinanoLike)
 
-      if (found < 2) return
+      if (!found) return
+      if (found.length < 2) return
 
-      for (let i = 0; i < found; i++) {
-        res.send({
-          type: 'stamp',
-          name: 'kinano'
-        })
-      }
+      res.send(found.join('\n'))
     }
   })
 }
