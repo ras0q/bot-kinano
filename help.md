@@ -15,21 +15,6 @@
 
 (以下監視対象チャンネル限定機能, `[ ]`は指定コマンド)
 
-## :blobguitar: _Playlist_ :blobguitar:
-
-- `%add {musicname}`: プレイリストに曲`musicname`を追加できるやんね！
-- `%remove {number}`: プレイリストから曲`number`を削除できるやんね！
-- `%watch`: プレイリストを見せるやんね！
-  - `%watch {num}`: 曲`num`の詳細情報を見せるやんね！
-  - `%watch [-r | --random]`: ランダムで 1 曲の詳細情報を見せるやんね！
-  - `%watch [-a | --all]`: URL つきのプレイリストを見せるやんね！
-
-## :blobbass: _Remind_ :blobbass:
-
-- `remind {text} {time} [-n]`で`time`になったら`text`をリマインドするやんね！
-- `time`は`12:34`みたいな`hh:mm`の形で指定して欲しいやんね！
-- `-n`があればメンションなしの形でリマインドするやんね！
-
 ## :blobmicrophone: _Translation_ :blobmicrophone:
 
 - `tra {txt} ({src}=>{tar})`: `txt`を`src`語から`tar`語に翻訳するやんね！
