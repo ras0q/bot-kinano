@@ -39,7 +39,7 @@ export const setTodayEvents = async (robot: Robots): Promise<void> => {
     todayEventKeys.forEach((key) => {
       const { start, summary, description } = ics[key]
       const notifyTime = new Date(start!.getTime())
-      notifyTime.setHours(notifyTime.getHours() - 1)
+      notifyTime.setHours(notifyTime.getHours() - 2 + 9) // FIXME: なぜかtimezoneがTokyoにならない
       events.push(
         cron.schedule(
           convertToCronTime(notifyTime),
