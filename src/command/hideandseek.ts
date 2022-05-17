@@ -39,7 +39,7 @@ module.exports = (robot: Robots) => {
     }
   })
 
-  robot.respond(/^みつけた.*#gps\/times\/.+/, (res) => {
+  robot.respond(/みつけた.*#gps\/times\/.+/, (res) => {
     const { user, embedded } = res.message.message
     if (user.bot) return
 
@@ -63,7 +63,7 @@ module.exports = (robot: Robots) => {
     }
   })
 
-  robot.respond(/^負けました/, async (res) => {
+  robot.respond(/負けました/, async (res) => {
     const ch = await getChannel(hideandseekChannelId)
     hideandseekChannelId = ''
     res.reply(
