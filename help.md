@@ -24,5 +24,15 @@
 
 ## :blobkeyboard: _The others_ :blobkeyboard:
 
-- `:koko:`: きなのと:motto::motto:おしゃべりできるようになるやんね！
-- その他要望があれば#gps/times/Ras/Bot までお願いやんね！
+- `:koko:` : きなのと:motto::motto:おしゃべりできるようになるやんね！
+- `info` : メッセージの詳細情報を調べるやんね！
+- `お肉食べたい` : きなのがレシピを提案するやんね！
+- `kinanogacha` : 回してからのお楽しみやんね...
+- `catgacha` : 回してからのお楽しみやんね...
+- 「きなの」と上手く韻を踏むとノリノリで返すやんね！
+- 指定した時刻にとらっぷ？の記事を流すことができるやんね！今はこの 4 つのチャンネルに流してるやんね！君のたいむずにも追加したかったら:@Ras:に頼むやんね～
+  - #gps/times/Z
+  - #gps/times/Kamijo
+  - #gps/times/d_etteiu8383
+  - #gps/times/tqk
+- その他要望があれば:@Ras:までお願いやんね！
