@@ -34,6 +34,8 @@ module.exports = (robot: Robots) => {
         'たいむずのどこかに:kinano:スタンプを押してきたやんね！\n' +
           '見つけたら`@BOT_kinano みつけた {{チャンネル名}}`と送ってほしいやんね！'
       )
+
+      return
     }
   })
 
