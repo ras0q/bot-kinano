@@ -28,7 +28,10 @@ module.exports = (robot: Robots) => {
       const ch = await getChannel(channelId)
       if (ch.archived) continue
 
-      const lastMessage = await getLastMessage(channelId)
+      const lastMessageArr = await getLastMessage(channelId)
+      if (lastMessageArr.length === 0) continue
+
+      const lastMessage = lastMessageArr[0]
       hideandseekChannelId = lastMessage.channelId
       hideandseekMessageId = lastMessage.id
       pushKinanoStamp(lastMessage.id)

@@ -35,9 +35,9 @@ export const getTimes = async (): Promise<string[]> => {
   return times.children
 }
 
-export const getLastMessage = async (channelId: string): Promise<Message> => {
+export const getLastMessage = async (channelId: string): Promise<Message[]> => {
   const messages = await api.getMessages(channelId, 1)
-  return messages.data[0]
+  return messages.data
 }
 
 export const pushKinanoStamp = (messageId: string): void => {
