@@ -43,3 +43,7 @@ export const getLastMessage = async (channelId: string): Promise<Message> => {
 export const pushKinanoStamp = (messageId: string): void => {
   api.addMessageStamp(messageId, '9fecbaa1-64b6-4d15-be5b-9521736cd0f0')
 }
+
+export const removeKinanoStamp = (messageId: string): void => {
+  api.removeMessageStamp(messageId, '9fecbaa1-64b6-4d15-be5b-9521736cd0f0')
+}

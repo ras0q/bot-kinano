@@ -5,13 +5,15 @@ import {
   getChannel,
   getLastMessage,
   getTimes,
-  pushKinanoStamp
+  pushKinanoStamp,
+  removeKinanoStamp
 } from '../src/traqapi'
 import { Robots } from '../src/types'
 import shuffle from '../utils/random'
 
 module.exports = (robot: Robots) => {
   let hideandseekChannelId = ''
+  let hideandseekMessageId = ''
 
   robot.respond(/かくれんぼしよう/, async (res) => {
     if (res.message.message.user.bot) return
@@ -27,7 +29,8 @@ module.exports = (robot: Robots) => {
       if (ch.archived) continue
 
       const lastMessage = await getLastMessage(channelId)
-      hideandseekChannelId = lastMessage.id
+      hideandseekChannelId = lastMessage.channelId
+      hideandseekMessageId = lastMessage.id
       pushKinanoStamp(lastMessage.id)
 
       res.send(
@@ -55,11 +58,16 @@ module.exports = (robot: Robots) => {
     }
 
     if (channelEmbedded[0].id === hideandseekChannelId) {
-      hideandseekChannelId = ''
       res.reply(
         '正解やんね:tada.ex-large.zoom.zoom: ぴんぽんぴんぽ～ん\n' +
-          'もう1回かくれんぼをするには`@BOT_kinano かくれんぼしよう`と送ってほしいやんね！'
+          'スタンプは10秒後にきなのが消しておくやんね！\n' +
+          'もう1回かくれんぼをするには`@BOT_kinano かくれんぼしよう`と送ってほしいやんね！\n'
       )
+      setTimeout(() => {
+        removeKinanoStamp(hideandseekMessageId)
+        hideandseekChannelId = ''
+        hideandseekMessageId = ''
+      }, 10000)
     } else {
       res.reply(
         '残念！まだまだ探すやんね！\n' +
@@ -76,9 +84,15 @@ module.exports = (robot: Robots) => {
     }
 
     const ch = await getChannel(hideandseekChannelId)
-    hideandseekChannelId = ''
     res.reply(
-      'きなのの勝ちやんね！\n' + `正解は#gps/times/${ch.name}でした！やんね！`
+      'きなのの勝ちやんね！\n' +
+        `正解は#gps/times/${ch.name}でした！やんね！\n` +
+        'スタンプは10秒後にきなのが消しておくやんね！'
     )
+    setTimeout(() => {
+      removeKinanoStamp(hideandseekMessageId)
+      hideandseekChannelId = ''
+      hideandseekMessageId = ''
+    }, 10000)
   })
 }
