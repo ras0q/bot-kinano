@@ -15,6 +15,11 @@
 
 (以下監視対象チャンネル限定機能, `[ ]`は指定コマンド)
 
+## :blob_lurk: _Hide and seek_ :blob_lurk:
+
+きなのとかくれんぼができるやんね！
+`@BOT_kinano かくれんぼしよう`で今すぐ始めるやんね
+
 ## :blobmicrophone: _Translation_ :blobmicrophone:
 
 - `tra {txt} ({src}=>{tar})`: `txt`を`src`語から`tar`語に翻訳するやんね！
