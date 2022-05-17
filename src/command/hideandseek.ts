@@ -43,6 +43,11 @@ module.exports = (robot: Robots) => {
     const { user, embedded } = res.message.message
     if (user.bot) return
 
+    if (hideandseekChannelId === '') {
+      res.reply('今はかくれんぼしてないやんね！')
+      return
+    }
+
     const channelEmbedded = embedded.filter((v) => v.type === 'channel')
     if (channelEmbedded.length !== 1) {
       res.reply('チャンネル名は1個だけ指定してほしいやんね～')
@@ -64,6 +69,12 @@ module.exports = (robot: Robots) => {
   })
 
   robot.respond(/負けました/, async (res) => {
+    if (res.message.message.user.bot) return
+    if (hideandseekChannelId === '') {
+      res.reply('今はかくれんぼしてないやんね！')
+      return
+    }
+
     const ch = await getChannel(hideandseekChannelId)
     hideandseekChannelId = ''
     res.reply(
