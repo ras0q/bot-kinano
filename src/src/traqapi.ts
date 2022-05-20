@@ -40,6 +40,23 @@ export const getChannels = async (parentID?: string): Promise<string[]> => {
   }
 }
 
+export const getChannelPath = async (channelId: string): Promise<string> => {
+  const _channels = await api.getChannels()
+  const channels = _channels.data.public
+  const channel = channels.find((v) => v.id === channelId)
+
+  const getPathRecursive = (ch: Channel): string => {
+    if (ch.parentId) {
+      const parent = channels.find((v) => v.id === ch.parentId)
+      return parent ? getPathRecursive(parent) + '/' + ch.name : ''
+    } else {
+      return '#' + ch.name
+    }
+  }
+
+  return channel ? getPathRecursive(channel) : ''
+}
+
 export const getLastMessage = async (channelId: string): Promise<Message[]> => {
   const messages = await api.getMessages(channelId, 1)
   return messages.data

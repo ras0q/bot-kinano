@@ -4,6 +4,7 @@
 import { Message } from '@traptitech/traq'
 import {
   getChannel,
+  getChannelPath,
   getChannels,
   getLastMessage,
   pushKinanoStamp,
@@ -79,10 +80,10 @@ module.exports = (robot: Robots) => {
       setTimeout(async () => {
         if (!isInProgress()) return
 
-        const ch = await getChannel(hideandseekChannelId)
+        const path = await getChannelPath(hideandseekChannelId)
         res.reply(
           '制限時間終了やんね！\n' +
-            `正解は#gps/times/${ch.name}でした！やんね！\n` +
+            `正解は${path}でした！やんね！\n` +
             'スタンプは10秒後にきなのが消しておくやんね！'
         )
         setTimeout(setEnd, 1000 * 10)
@@ -136,10 +137,10 @@ module.exports = (robot: Robots) => {
       return
     }
 
-    const ch = await getChannel(hideandseekChannelId)
+    const path = await getChannelPath(hideandseekChannelId)
     res.reply(
       'きなのの勝ちやんね！\n' +
-        `正解は#gps/times/${ch.name}でした！やんね！\n` +
+        `正解は${path}でした！やんね！\n` +
         'スタンプは10秒後にきなのが消しておくやんね！'
     )
     setTimeout(setEnd, 1000 * 10)
