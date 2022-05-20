@@ -21,6 +21,11 @@ export type TraqChannel = {
   createdAt: Time
   updatedAt: Time
 }
+export type Embedded = {
+  raw: string
+  type: string
+  id: UUID
+}[]
 
 export type MessageCreated = {
   eventTime: Time
@@ -30,11 +35,7 @@ export type MessageCreated = {
     channelId: UUID
     text: string
     plainText: string
-    embedded: {
-      raw: string
-      type: string
-      id: UUID
-    }[]
+    embedded: Embedded
     createdAt: Time
     updatedAt: Time
   }

@@ -1,6 +1,7 @@
 //Description:
 // hide and seek
 
+import { Message } from '@traptitech/traq'
 import {
   getChannel,
   getChannels,
@@ -8,7 +9,7 @@ import {
   pushKinanoStamp,
   removeKinanoStamp
 } from '../src/traqapi'
-import { Robots } from '../src/types'
+import { Embedded, Robots } from '../src/types'
 import shuffle from '../utils/random'
 
 module.exports = (robot: Robots) => {
@@ -16,17 +17,45 @@ module.exports = (robot: Robots) => {
   let hideandseekMessageId = ''
   let hideandseekAnswerChannelId = ''
 
+  const isInProgress = () => hideandseekChannelId !== ''
+
+  const isAnswerChannelId = (channelId: string) =>
+    channelId === hideandseekAnswerChannelId
+
+  const isSingleChannelSpecified = (embedded: Embedded) =>
+    embedded.filter((v) => v.type === 'channel').length === 1
+
+  const isCorrectAnswer = (channelId: string) =>
+    channelId === hideandseekChannelId
+
+  const setStart = (lastMessage: Message, messageChannelId: string) => {
+    hideandseekChannelId = lastMessage.channelId
+    hideandseekMessageId = lastMessage.id
+    hideandseekAnswerChannelId = messageChannelId
+    pushKinanoStamp(lastMessage.id)
+  }
+
+  const setEnd = () => {
+    hideandseekChannelId = ''
+    hideandseekMessageId = ''
+    hideandseekAnswerChannelId = ''
+    removeKinanoStamp(hideandseekMessageId)
+  }
+
   robot.respond(/かくれんぼしよう/, async (res) => {
     const { message } = res.message
     const { user, plainText } = message
 
-    if (user.bot) return
-    if (hideandseekChannelId) {
+    if (user.bot) {
+      return
+    } else if (isInProgress()) {
       res.reply('かくれんぼが進行中やんね！一緒に探すやんね！')
       return
     }
 
-    const _channels = plainText.includes('hard')
+    const isHardMode = plainText.includes('hard')
+
+    const _channels = isHardMode
       ? await getChannels()
       : await getChannels('8ed62c7d-3f4b-41c8-a446-29edeebc36c3') // get childlen of #gps/times
     const channels = shuffle(_channels)
@@ -38,20 +67,17 @@ module.exports = (robot: Robots) => {
       const lastMessageArr = await getLastMessage(channelId)
       if (lastMessageArr.length === 0) continue
 
-      const lastMessage = lastMessageArr[0]
-      hideandseekChannelId = lastMessage.channelId
-      hideandseekMessageId = lastMessage.id
-      hideandseekAnswerChannelId = message.channelId
-      pushKinanoStamp(lastMessage.id)
+      setStart(lastMessageArr[0], message.channelId)
 
+      const channelStr = isHardMode ? 'チャンネル' : 'たいむず'
       res.send(
-        'どこかのチャンネルに:kinano:スタンプを押してきたやんね！\n' +
+        `どこかの${channelStr}に:kinano:スタンプを押してきたやんね！\n` +
           '見つけたら`@BOT_kinano みつけた {{チャンネル名}}`と送ってほしいやんね！\n' +
           '制限時間は10分やんね！よーいすたーと！！！'
       )
 
       setTimeout(async () => {
-        if (hideandseekChannelId === '') return
+        if (!isInProgress()) return
 
         const ch = await getChannel(hideandseekChannelId)
         res.reply(
@@ -59,68 +85,53 @@ module.exports = (robot: Robots) => {
             `正解は#gps/times/${ch.name}でした！やんね！\n` +
             'スタンプは10秒後にきなのが消しておくやんね！'
         )
-        setTimeout(() => {
-          removeKinanoStamp(hideandseekMessageId)
-          hideandseekChannelId = ''
-          hideandseekMessageId = ''
-          hideandseekAnswerChannelId = ''
-        }, 10000)
+        setTimeout(setEnd, 1000 * 10)
       }, 1000 * 60 * 10)
 
       return
     }
   })
 
-  robot.respond(/みつけた.*#gps\/times\/.+/, (res) => {
+  robot.respond(/みつけた.*#/, (res) => {
     const { channelId, user, embedded } = res.message.message
-    if (user.bot) return
 
-    if (hideandseekChannelId === '') {
+    if (user.bot) {
+      return
+    } else if (!isInProgress()) {
       res.reply('今はかくれんぼしてないやんね！')
       return
-    }
-
-    if (hideandseekAnswerChannelId !== channelId) {
+    } else if (!isAnswerChannelId(channelId)) {
       res.reply('かくれんぼを開始したチャンネルで回答してほしいやんね！')
       return
-    }
-
-    const channelEmbedded = embedded.filter((v) => v.type === 'channel')
-    if (channelEmbedded.length !== 1) {
+    } else if (!isSingleChannelSpecified(embedded)) {
       res.reply('チャンネル名は1個だけ指定してほしいやんね～')
       return
     }
 
-    if (channelEmbedded[0].id === hideandseekChannelId) {
+    if (isCorrectAnswer(embedded[0].id)) {
       res.reply(
         '正解やんね:tada.ex-large.zoom.zoom: ぴんぽんぴんぽ～ん\n' +
           'スタンプは10秒後にきなのが消しておくやんね！\n' +
           'もう1回かくれんぼをするには`@BOT_kinano かくれんぼしよう`と送ってほしいやんね！\n'
       )
-      setTimeout(() => {
-        removeKinanoStamp(hideandseekMessageId)
-        hideandseekChannelId = ''
-        hideandseekMessageId = ''
-        hideandseekAnswerChannelId = ''
-      }, 10000)
+      setTimeout(setEnd, 10000)
     } else {
       res.reply(
         '残念！まだまだ探すやんね！\n' +
-          '諦める場合は`@BOT_kinano 負けました`と送るやんね'
+          '諦める場合は`@BOT_kinano 負けました`と送るやんね～'
       )
     }
   })
 
   robot.respond(/負けました/, async (res) => {
     const { channelId, user } = res.message.message
-    if (user.bot) return
 
-    if (hideandseekChannelId === '') {
+    if (user.bot) {
+      return
+    } else if (!isInProgress()) {
       res.reply('今はかくれんぼしてないやんね！')
       return
-    }
-
-    if (hideandseekAnswerChannelId !== channelId) {
+    } else if (!isAnswerChannelId(channelId)) {
       res.reply('かくれんぼを開始したチャンネルで降参してほしいやんね！')
       return
     }
@@ -131,11 +142,6 @@ module.exports = (robot: Robots) => {
         `正解は#gps/times/${ch.name}でした！やんね！\n` +
         'スタンプは10秒後にきなのが消しておくやんね！'
     )
-    setTimeout(() => {
-      removeKinanoStamp(hideandseekMessageId)
-      hideandseekChannelId = ''
-      hideandseekMessageId = ''
-      hideandseekAnswerChannelId = ''
-    }, 10000)
+    setTimeout(setEnd, 1000 * 10)
   })
 }
