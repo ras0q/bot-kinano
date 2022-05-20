@@ -14,6 +14,7 @@ import shuffle from '../utils/random'
 module.exports = (robot: Robots) => {
   let hideandseekChannelId = ''
   let hideandseekMessageId = ''
+  let hideandseekAnswerChannelId = ''
 
   robot.respond(/かくれんぼしよう/, async (res) => {
     const { message } = res.message
@@ -40,6 +41,7 @@ module.exports = (robot: Robots) => {
       const lastMessage = lastMessageArr[0]
       hideandseekChannelId = lastMessage.channelId
       hideandseekMessageId = lastMessage.id
+      hideandseekAnswerChannelId = message.channelId
       pushKinanoStamp(lastMessage.id)
 
       res.send(
@@ -61,6 +63,7 @@ module.exports = (robot: Robots) => {
           removeKinanoStamp(hideandseekMessageId)
           hideandseekChannelId = ''
           hideandseekMessageId = ''
+          hideandseekAnswerChannelId = ''
         }, 10000)
       }, 1000 * 60 * 10)
 
@@ -69,11 +72,16 @@ module.exports = (robot: Robots) => {
   })
 
   robot.respond(/みつけた.*#gps\/times\/.+/, (res) => {
-    const { user, embedded } = res.message.message
+    const { channelId, user, embedded } = res.message.message
     if (user.bot) return
 
     if (hideandseekChannelId === '') {
       res.reply('今はかくれんぼしてないやんね！')
+      return
+    }
+
+    if (hideandseekAnswerChannelId !== channelId) {
+      res.reply('かくれんぼを開始したチャンネルで回答してほしいやんね！')
       return
     }
 
@@ -93,6 +101,7 @@ module.exports = (robot: Robots) => {
         removeKinanoStamp(hideandseekMessageId)
         hideandseekChannelId = ''
         hideandseekMessageId = ''
+        hideandseekAnswerChannelId = ''
       }, 10000)
     } else {
       res.reply(
@@ -103,9 +112,16 @@ module.exports = (robot: Robots) => {
   })
 
   robot.respond(/負けました/, async (res) => {
-    if (res.message.message.user.bot) return
+    const { channelId, user } = res.message.message
+    if (user.bot) return
+
     if (hideandseekChannelId === '') {
       res.reply('今はかくれんぼしてないやんね！')
+      return
+    }
+
+    if (hideandseekAnswerChannelId !== channelId) {
+      res.reply('かくれんぼを開始したチャンネルで降参してほしいやんね！')
       return
     }
 
@@ -119,6 +135,7 @@ module.exports = (robot: Robots) => {
       removeKinanoStamp(hideandseekMessageId)
       hideandseekChannelId = ''
       hideandseekMessageId = ''
+      hideandseekAnswerChannelId = ''
     }, 10000)
   })
 }
