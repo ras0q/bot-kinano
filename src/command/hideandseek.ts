@@ -23,8 +23,8 @@ module.exports = (robot: Robots) => {
   const isAnswerChannelId = (channelId: string) =>
     channelId === hideandseekAnswerChannelId
 
-  const isSingleChannelSpecified = (embedded: Embedded) =>
-    embedded.filter((v) => v.type === 'channel').length === 1
+  const embeddedChannelIds = (embedded: Embedded) =>
+    embedded.filter((v) => v.type === 'channel').map((v) => v.id)
 
   const isCorrectAnswer = (channelId: string) =>
     channelId === hideandseekChannelId
@@ -95,6 +95,7 @@ module.exports = (robot: Robots) => {
 
   robot.respond(/みつけた.*#/, (res) => {
     const { channelId, user, embedded } = res.message.message
+    const channelIds = embeddedChannelIds(embedded)
 
     if (user.bot) {
       return
@@ -104,12 +105,12 @@ module.exports = (robot: Robots) => {
     } else if (!isAnswerChannelId(channelId)) {
       res.reply('かくれんぼを開始したチャンネルで回答してほしいやんね！')
       return
-    } else if (!isSingleChannelSpecified(embedded)) {
+    } else if (channelIds.length !== 1) {
       res.reply('チャンネル名は1個だけ指定してほしいやんね～')
       return
     }
 
-    if (isCorrectAnswer(embedded[0].id)) {
+    if (isCorrectAnswer(channelIds[0])) {
       res.reply(
         '正解やんね:tada.ex-large.zoom.zoom: ぴんぽんぴんぽ～ん\n' +
           'スタンプは10秒後にきなのが消しておくやんね！\n' +
