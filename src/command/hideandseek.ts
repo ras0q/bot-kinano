@@ -17,6 +17,7 @@ module.exports = (robot: Robots) => {
   let hideandseekChannelId = ''
   let hideandseekMessageId = ''
   let hideandseekAnswerChannelId = ''
+  let timerId: NodeJS.Timeout
 
   const isInProgress = () => hideandseekChannelId !== ''
 
@@ -77,7 +78,7 @@ module.exports = (robot: Robots) => {
           '制限時間は10分やんね！よーいすたーと！！！'
       )
 
-      setTimeout(async () => {
+      timerId = setTimeout(async () => {
         if (!isInProgress()) return
 
         const path = await getChannelPath(hideandseekChannelId)
@@ -110,6 +111,8 @@ module.exports = (robot: Robots) => {
       return
     }
 
+    clearTimeout(timerId)
+
     if (isCorrectAnswer(channelIds[0])) {
       res.reply(
         '正解やんね:tada.ex-large.zoom.zoom: ぴんぽんぴんぽ～ん\n' +
@@ -137,6 +140,8 @@ module.exports = (robot: Robots) => {
       res.reply('かくれんぼを開始したチャンネルで降参してほしいやんね！')
       return
     }
+
+    clearTimeout(timerId)
 
     const path = await getChannelPath(hideandseekChannelId)
     res.reply(
