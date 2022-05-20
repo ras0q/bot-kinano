@@ -30,17 +30,17 @@ module.exports = (robot: Robots) => {
     channelId === hideandseekChannelId
 
   const setStart = (lastMessage: Message, messageChannelId: string) => {
+    pushKinanoStamp(lastMessage.id)
     hideandseekChannelId = lastMessage.channelId
     hideandseekMessageId = lastMessage.id
     hideandseekAnswerChannelId = messageChannelId
-    pushKinanoStamp(lastMessage.id)
   }
 
   const setEnd = () => {
+    removeKinanoStamp(hideandseekMessageId)
     hideandseekChannelId = ''
     hideandseekMessageId = ''
     hideandseekAnswerChannelId = ''
-    removeKinanoStamp(hideandseekMessageId)
   }
 
   robot.respond(/かくれんぼしよう/, async (res) => {
