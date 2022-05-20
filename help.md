@@ -18,7 +18,8 @@
 ## :blob_lurk: _Hide and seek_ :blob_lurk:
 
 きなのとかくれんぼができるやんね！
-`@BOT_kinano かくれんぼしよう`で今すぐ始めるやんね
+`@BOT_kinano かくれんぼしよう`で今すぐ始めるやんね！
+`hard`を付けるとハードモードでかくれんぼができるやんね！
 
 ## :blobmicrophone: _Translation_ :blobmicrophone:
 

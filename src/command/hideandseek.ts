@@ -3,8 +3,8 @@
 
 import {
   getChannel,
+  getChannels,
   getLastMessage,
-  getTimes,
   pushKinanoStamp,
   removeKinanoStamp
 } from '../src/traqapi'
@@ -16,15 +16,21 @@ module.exports = (robot: Robots) => {
   let hideandseekMessageId = ''
 
   robot.respond(/かくれんぼしよう/, async (res) => {
-    if (res.message.message.user.bot) return
+    const { message } = res.message
+    const { user, plainText } = message
+
+    if (user.bot) return
     if (hideandseekChannelId) {
       res.reply('かくれんぼが進行中やんね！一緒に探すやんね！')
       return
     }
 
-    const _times = await getTimes()
-    const times = shuffle(_times)
-    for (const channelId of times) {
+    const _channels = plainText.includes('hard')
+      ? await getChannels()
+      : await getChannels('8ed62c7d-3f4b-41c8-a446-29edeebc36c3') // get childlen of #gps/times
+    const channels = shuffle(_channels)
+
+    for (const channelId of channels) {
       const ch = await getChannel(channelId)
       if (ch.archived) continue
 
@@ -37,9 +43,26 @@ module.exports = (robot: Robots) => {
       pushKinanoStamp(lastMessage.id)
 
       res.send(
-        'たいむずのどこかに:kinano:スタンプを押してきたやんね！\n' +
-          '見つけたら`@BOT_kinano みつけた {{チャンネル名}}`と送ってほしいやんね！'
+        'どこかのチャンネルに:kinano:スタンプを押してきたやんね！\n' +
+          '見つけたら`@BOT_kinano みつけた {{チャンネル名}}`と送ってほしいやんね！\n' +
+          '制限時間は10分やんね！よーいすたーと！！！'
       )
+
+      setTimeout(async () => {
+        if (hideandseekChannelId === '') return
+
+        const ch = await getChannel(hideandseekChannelId)
+        res.reply(
+          '制限時間終了やんね！\n' +
+            `正解は#gps/times/${ch.name}でした！やんね！\n` +
+            'スタンプは10秒後にきなのが消しておくやんね！'
+        )
+        setTimeout(() => {
+          removeKinanoStamp(hideandseekMessageId)
+          hideandseekChannelId = ''
+          hideandseekMessageId = ''
+        }, 10000)
+      }, 1000 * 60 * 10)
 
       return
     }

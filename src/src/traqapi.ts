@@ -30,9 +30,14 @@ export const getChannel = async (channelId: string): Promise<Channel> => {
   return channel.data
 }
 
-export const getTimes = async (): Promise<string[]> => {
-  const times = await getChannel('8ed62c7d-3f4b-41c8-a446-29edeebc36c3')
-  return times.children
+export const getChannels = async (parentID?: string): Promise<string[]> => {
+  if (parentID) {
+    const parent = await getChannel(parentID)
+    return parent.children
+  } else {
+    const channels = await api.getChannels()
+    return channels.data.public.map((v) => v.id)
+  }
 }
 
 export const getLastMessage = async (channelId: string): Promise<Message[]> => {
