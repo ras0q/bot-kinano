@@ -113,7 +113,7 @@ module.exports = (robot: Robots) => {
 
     if (isCorrectAnswer(channelIds[0])) {
       clearTimeout(timerId)
-        
+
       res.reply(
         '正解やんね:tada.ex-large.zoom.zoom: ぴんぽんぴんぽ～ん\n' +
           'スタンプは10秒後にきなのが消しておくやんね！\n' +
