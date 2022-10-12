@@ -119,6 +119,13 @@ export const isNotMentioned: {
   {
     msg: /^や、/,
     ans: 'や、'
+  },
+  {
+    msg: /(思|おも)って?たら/,
+    ans: {
+      type: 'stamp',
+      name: 'koume'
+    }
   }
 ]
 
