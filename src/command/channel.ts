@@ -9,10 +9,6 @@ module.exports = (robot: Robots) => {
   //監視対象に追加
   robot.respond(/(いらっしゃい|join)$/i, async (res) => {
     const { channelId, id } = res.message.message
-    robot.send(
-      { userID: IDs['@Ras'] },
-      `## join\n https://q.trap.jp/messages/${id}`
-    )
     try {
       await join(channelId)
       setTimeout(() => {
@@ -34,10 +30,6 @@ module.exports = (robot: Robots) => {
   //監視対象から解除
   robot.respond(/(ばいばい|バイバイ|bye)$/i, async (res) => {
     const { channelId, id } = res.message.message
-    robot.send(
-      { userID: IDs['@Ras'] },
-      `## leave\n https://q.trap.jp/messages/${id}`
-    )
     try {
       await leave(channelId)
       setTimeout(() => {
