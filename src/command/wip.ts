@@ -53,4 +53,14 @@ module.exports = (robot: Robots) => {
       res.send(found.join('\n'))
     }
   })
+
+  robot.hear(/:mag(_right)?[^:]*:/, (res) => {
+    const { user, plainText } = res.message.message
+    if (!user.bot) {
+      const query = plainText
+        .replace(/:mag(_right)?[^:]*:?/g, '')
+        .replace(/\s/g, '+')
+      res.reply(`https://www.google.com/search?q=${query}`)
+    }
+  })
 }
