@@ -36,22 +36,6 @@ module.exports = (robot: Robots) => {
     }
   })
 
-  const idan =
-    '[いきぎしじちぢにひびぴみりゐイキギシジチヂニヒビピミリ]|[^aiueo]?i'
-  const adan =
-    '[あかがさざただなはばぱまやらわアカガサザタダナハバパマヤラワ]|[^aiueo]?a'
-  const odan =
-    '[おこごそぞとどのほぼぽもよろをオコゴソゾトドノホボポモヨロヲ]|[^aiueo]?o'
-  const kinanoLike = new RegExp(`(${idan})(${adan})(${odan})`, 'gi')
-  robot.hear(kinanoLike, (res) => {
-    if (!res.message.message.user.bot) {
-      const found = res.message.message.text.match(kinanoLike)
-
-      if (!found) return
-      if (found.length < 2) return
-
-      res.send(found.join('\n'))
-    }
   })
 
   robot.hear(/:mag(_right)?[^:]*:/, (res) => {
