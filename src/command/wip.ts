@@ -36,8 +36,6 @@ module.exports = (robot: Robots) => {
     }
   })
 
-  })
-
   robot.hear(/:mag(_right)?[^:]*:/, (res) => {
     const { user, plainText } = res.message.message
     if (!user.bot) {
